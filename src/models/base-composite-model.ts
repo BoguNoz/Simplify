@@ -1,5 +1,5 @@
-import BaseFieldModel from "@core/models/base-field-model.ts";
-import {BaseRenderFn} from "@core/events/render.ts";
+import BaseFieldModel from "@core/models/base-field-model";
+import {BaseRenderFn} from "@core/events/render";
 
 export default interface BaseCompositeModel {
     id: string;

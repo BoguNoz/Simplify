@@ -1,17 +1,16 @@
-import BaseFieldModel from "@core/models/base-field-model.ts";
-import FormFieldTypesEnum from "@core/enums/base-field-type-enum.ts";
-import {Input} from "@core/components/ui/input.tsx";
-import {Checkbox} from "@core/components/ui/checkbox.tsx";
-import {Switch} from "@core/components/ui/switch.tsx";
-import {Button} from "@core/components/ui/button.tsx";
+import BaseFieldModel from "@core/models/base-field-model";
+import FormFieldTypesEnum from "@core/enums/base-field-type-enum";
+import {Input} from "@core/components/ui/input";
+import {Checkbox} from "@core/components/ui/checkbox";
+import {Switch} from "@core/components/ui/switch";
+import {Button} from "@core/components/ui/button";
 import React from "react";
-import BaseSelectorField from "@core/components/layout/partilas/BaseSelectorField.tsx";
-import {Toggle} from "@core/components/ui/toggle.tsx";
-import BaseFieldTypeEnum from "@core/enums/base-field-type-enum.ts";
+import BaseSelectorField from "@core/components/layout/partilas/BaseSelectorField";
+import {Toggle} from "@core/components/ui/toggle";
+import BaseFieldTypeEnum from "@core/enums/base-field-type-enum";
 import {observer} from "mobx-react-lite";
-import {Spinner} from "@core/components/ui/spiner.tsx";
+import {Spinner} from "@core/components/ui/spiner";
 import {IconExclamationCircle} from "@tabler/icons-react";
-
 
 interface BaseFieldProps {
     field: BaseFieldModel

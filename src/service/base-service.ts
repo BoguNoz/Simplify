@@ -1,4 +1,4 @@
-import BaseResponseTypeEnum from "../enums/base-response-type-enum.ts";
+import BaseResponseTypeEnum from "@core/enums/base-response-type-enum";
 
 export interface RequestOptions extends RequestInit {
     responseType?: BaseResponseTypeEnum;

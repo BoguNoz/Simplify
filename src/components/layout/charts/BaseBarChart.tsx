@@ -1,5 +1,5 @@
 import {observer} from "mobx-react-lite";
-import {BaseBarCharAggregateTypeEnum, BaseBarChartModeEnum} from "../../../enums/charts/base-bar-chart-enums";
+import {BaseBarCharAggregateTypeEnum, BaseBarChartModeEnum} from "@core/enums/charts/base-bar-chart-enums";
 import {useMemo} from "react";
 import ReactECharts from "echarts-for-react";
 
@@ -28,7 +28,7 @@ const BaseBarChart: React.FC<BaseHistogramChartProps> = observer(({data, mode, b
         return res;
     }, [data]);
 
-    const { xLabels, yLabels, seriesData, xAxisLabel } = useMemo(() => {
+    const { xLabels, seriesData } = useMemo(() => {
         if (mode === BaseBarChartModeEnum.Histogram) {
             const values = points.map((p) => p.value);
             if (values.length === 0) {
@@ -36,7 +36,7 @@ const BaseBarChart: React.FC<BaseHistogramChartProps> = observer(({data, mode, b
             }
             const min = Math.min(...values);
             const max = Math.max(...values);
-            const nbins = Math.max(1, Math.min(200, bins));
+            const nbins = Math.max(1, Math.min(200, bins || 4));
             const binWidth = (max - min) / nbins || 1;
             const counts = new Array(nbins).fill(0);
             const sums = new Array(nbins).fill(0);
@@ -74,7 +74,7 @@ const BaseBarChart: React.FC<BaseHistogramChartProps> = observer(({data, mode, b
             }
             const keys = Array.from(map.keys()).sort((a, b) => a - b);
             let chosenKeys = keys;
-            if (keys.length > maxCategories) {
+            if (keys.length > maxCategories!) {
                 chosenKeys = Array.from(map.entries())
                     .sort(([, a], [, b]) => b.sum - a.sum)
                     .slice(0, maxCategories)

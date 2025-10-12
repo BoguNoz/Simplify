@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 import React from "react";
-import BaseFieldModel from "../../../models/base-field-model.ts";
-import BaseField from "../BaseField.tsx";
+import BaseFieldModel from "@core/models/base-field-model";
+import BaseField from "../BaseField";
 
 interface BaseSingleChoiceFormFieldProps {
     field: BaseFieldModel

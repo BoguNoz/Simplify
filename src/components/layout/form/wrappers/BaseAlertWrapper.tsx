@@ -1,5 +1,5 @@
 import {ReactNode, useMemo} from "react";
-import {Alert, AlertDescription, AlertTitle} from "../../../ui/alert.tsx";
+import {Alert, AlertDescription, AlertTitle} from "@core/components/ui/alert";
 import {
     AlertCircle,
     AlertTriangle,
@@ -7,14 +7,14 @@ import {
     CircleOff,
     Link,
 } from "lucide-react";
-import {ValidatorResponse} from "../../../../events/validator.ts";
-import BaseValidatorBox from "./BaseValidatorBox.tsx";
-import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "../../../ui/collapsible.tsx";
-import {Button} from "../../../ui/button.tsx";
-import {isNullEmptyFalseOrUndefined} from "../../../../lib/utils.ts";
+import {ValidatorResponse} from "@core/events/validator";
+import BaseValidatorBox from "./BaseValidatorBox";
+import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@core/components/ui/collapsible";
+import {Button} from "@core/components/ui/button";
+import {isNullEmptyFalseOrUndefined} from "@core/lib/utils";
 import {observer} from "mobx-react-lite";
-import BaseFieldModel from "../../../../models/base-field-model.ts";
-import BaseFieldTypeEnum from "../../../../enums/base-field-type-enum.ts";
+import BaseFieldModel from "@core/models/base-field-model";
+import BaseFieldTypeEnum from "@core/enums/base-field-type-enum";
 
 interface BaseAlertWrapperProps {
     field: BaseFieldModel;

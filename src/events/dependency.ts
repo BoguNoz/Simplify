@@ -1,5 +1,5 @@
 import {BaseStore} from "../stores/base-store";
-import {isNullEmptyFalseOrUndefined} from "@core/lib/utils.ts";
+import {isNullEmptyFalseOrUndefined} from "@core/lib/utils";
 
 export type BaseDependencyFn = (target: string, master: string, store: BaseStore) => void | Promise<void>;
 

@@ -1,4 +1,4 @@
-import {BaseStore} from "@core/stores/base-store.ts";
-import {BaseCompositeStore} from "@core/stores/base-composite-store.ts";
+import {BaseStore} from "@core/stores/base-store";
+import {BaseCompositeStore} from "@core/stores/base-composite-store";
 
 export type BaseRenderFn = (store: BaseCompositeStore, fieldStore: BaseStore, value?: any) => boolean;

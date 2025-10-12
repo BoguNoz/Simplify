@@ -1,7 +1,7 @@
-import BaseFieldModel from "../../../models/base-field-model.ts";
+import BaseFieldModel from "@core/models/base-field-model";
 import React, {useEffect, useState} from "react";
 import {observer} from "mobx-react-lite";
-import {Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue} from "../../ui/select.tsx";
+import {Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue} from "@core/components/ui/select";
 interface SelectorFieldProps {
     field: BaseFieldModel
     onChange: (value: any) => void;

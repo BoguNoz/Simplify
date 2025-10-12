@@ -1,11 +1,11 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
-import BaseAlertWrapper from "@core/components/layout/form/wrappers/BaseAlertWrapper.tsx";
-import BaseFieldTypeEnum from "../../../enums/base-field-type-enum.ts";
-import BaseSingleChoiceFormField from "@core/components/layout/form/BaseSingleChoiceFormField.tsx";
-import BaseInputFormField from "@core/components/layout/form/BaseInputFormField.tsx";
-import BaseButtonFormField from "@core/components/layout/form/BaseButtonFormField.tsx";
-import {BaseStore} from "../../../stores/base-store.ts";
+import BaseAlertWrapper from "@core/components/layout/form/wrappers/BaseAlertWrapper";
+import BaseFieldTypeEnum from "@core/enums/base-field-type-enum";
+import BaseSingleChoiceFormField from "@core/components/layout/form/BaseSingleChoiceFormField";
+import BaseInputFormField from "@core/components/layout/form/BaseInputFormField";
+import BaseButtonFormField from "@core/components/layout/form/BaseButtonFormField";
+import {BaseStore} from "@core/stores/base-store";
 
 interface BaseFormFieldProps {
     fieldId: string;

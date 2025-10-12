@@ -1,6 +1,6 @@
-import {BaseStore} from "@core/stores/base-store.ts";
-import {lang} from "@core/text/utils/lang.ts";
-import {isNullEmptyFalseOrUndefined} from "@core/lib/utils.ts";
+import {BaseStore} from "@core/stores/base-store";
+import {lang} from "@core/text/utils/lang";
+import {isNullEmptyFalseOrUndefined} from "@core/lib/utils";
 
 const text = lang();
 

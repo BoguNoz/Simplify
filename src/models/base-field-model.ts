@@ -1,8 +1,7 @@
-import {BaseDependencyModel} from "@core/models/base-dependency-model.ts";
-import BaseFieldTypesEnum from "@core/enums/base-field-type-enum.ts";
-import {BaseValidatorFn} from "@core/events/validator.ts";
-import {BaseOperationFn} from "@core/events/operation.ts";
-
+import {BaseDependencyModel} from "@core/models/base-dependency-model";
+import BaseFieldTypesEnum from "@core/enums/base-field-type-enum";
+import {BaseValidatorFn} from "@core/events/validator";
+import {BaseOperationFn} from "@core/events/operation";
 
 export default interface BaseFieldModel {
     id: string;

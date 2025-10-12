@@ -1,10 +1,10 @@
-import BaseFieldModel from "@core/models/base-field-model.ts";
-import {BaseOperationFn} from "@core/events/operation.ts";
+import BaseFieldModel from "@core/models/base-field-model";
+import {BaseOperationFn} from "@core/events/operation";
 import {reaction, runInAction} from "mobx";
-import {BaseValidatorFn, ValidatorResponse} from "@core/events/validator.ts";
-import {BaseDependencyFn} from "@core/events/dependency.ts";
-import {isNullEmptyFalseOrUndefined} from "@core/lib/utils.ts";
-import BaseFieldTypesEnum from "@core/enums/base-field-type-enum.ts";
+import {BaseValidatorFn, ValidatorResponse} from "@core/events/validator";
+import {BaseDependencyFn} from "@core/events/dependency";
+import {isNullEmptyFalseOrUndefined} from "@core/lib/utils";
+import BaseFieldTypesEnum from "@core/enums/base-field-type-enum";
 
 export class BaseStore {
     fields: Record<string, BaseFieldModel> = {};

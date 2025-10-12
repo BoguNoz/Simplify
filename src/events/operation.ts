@@ -1,4 +1,4 @@
-import {BaseStore} from "@core/stores/base-store.ts";
+import {BaseStore} from "@core/stores/base-store";
 
 export type BaseOperationFn = (target: any, store: BaseStore, value?: any,) => void | Promise<void>;
 

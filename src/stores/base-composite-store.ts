@@ -1,5 +1,5 @@
-import BaseCompositeModel from "@core/models/base-composite-model.ts";
-import {BaseStore} from "@core/stores/base-store.ts";
+import BaseCompositeModel from "@core/models/base-composite-model";
+import {BaseStore} from "@core/stores/base-store";
 import {observable, runInAction} from "mobx";
 
 export class BaseCompositeStore {

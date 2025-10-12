@@ -1,4 +1,4 @@
-import {BaseDependencyFn} from "@core/events/dependency.ts";
+import {BaseDependencyFn} from "@core/events/dependency";
 
 export interface BaseDependencyModel {
     fieldId: string;

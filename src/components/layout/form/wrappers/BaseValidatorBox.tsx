@@ -1,4 +1,4 @@
-import { ValidatorResponse } from "../../../../events/validator.ts";
+import { ValidatorResponse } from "@core/events/validator";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-regular-svg-icons";
 import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";

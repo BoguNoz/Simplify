@@ -1,6 +1,6 @@
 import { toast } from "sonner";
-import { lang } from "../../text/utils/lang.ts";
-import { lf } from "../storage.ts";
+import { lang } from "@core/text/utils/lang";
+import { lf } from "../storage";
 
 const text = lang();
 

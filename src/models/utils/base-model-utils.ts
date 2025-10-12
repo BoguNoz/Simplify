@@ -1,5 +1,5 @@
-import BaseFieldModel from "../base-field-model.ts";
-import BaseFieldTypesEnum from "../../enums/base-field-type-enum.ts";
+import BaseFieldModel from "../base-field-model";
+import BaseFieldTypesEnum from "@core/enums/base-field-type-enum";
 
 
 type KeyMirror<T extends string> = {
