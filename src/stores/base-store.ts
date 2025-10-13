@@ -81,19 +81,43 @@ export class BaseStore {
      * Executes the data source function assigned to the field and returns the resulting value.
      * 
      * @param {string} id - The ID of the field. 
-     * @returns {Promise<any>} A promise resolving to the field's data source value,
+     * @param {any[]} args - Data source function arguments.
+     * 
+     * @returns {Promise<any>} A promise resolving to the field's data source value.
      */
-    getDataSource = async (id: string): Promise<any> => await this.fields[id].dataSource();
+    getDataSource = async (id: string, ...args: any[]): Promise<any> => await this.fields[id].dataSource(...args);
 
     /**
+     * Invokes field deconstructor function defined for a field.
      * 
-     * @param id 
-     * @returns 
+     * @remarks
+     * Executes the deconstructor function assigned to the field. 
+     * Funcion should not be invoke unnecessary. 
+     * 
+     * @param {string} id - The ID of the field.
+     * @param {any[]} args - Deconstructor function arguments.
      */
-    invokeDeconstructor = async (id: string) => await this.fields[id].deconstructor();
+    invokeDeconstructor = async (id: string, ...args: any[]): Promise<void> => await this.fields[id].deconstructor(...args);
 
+    /**
+     * Returns the current value of a field.
+     * 
+     * @param id - The ID of the field.
+     * 
+     * @returns {any} The field's current assigned value. 
+     */
     getFieldValue = (id: string): any => this.fields[id]?.value;
 
+    /**
+     * Sets a field's value and executes all associated functions.
+     * 
+     * @remarks
+     * The setter also invokes asynchronous operations associated with the field.
+     * Use `await` when calling this method if subsequent logic depends on thier completion.
+     * 
+     * @param id - The ID of the field.
+     * @param value - The new value to assign.
+     */
     setFieldValue = async (id: string, value: any): Promise<void> => {
         const field = this.fields[id];
 
@@ -111,6 +135,16 @@ export class BaseStore {
         }
     };
 
+    /**
+     * Sets an additional (auxiliary) value for a field.
+     * 
+     * @remarks
+     * Safe way for setting additional value for a field.
+     * 
+     * @param {string} id - The ID of the field.
+     * @param {string} addit - The name of the additional property.
+     * @param {any} value - The value to assign.
+     */
     setFieldAdditValue = (id: string, addit: string, value: any): void => {
         const field = this.fields[id];
 
@@ -119,6 +153,16 @@ export class BaseStore {
         }
     }
 
+    /**
+     * Updates the field's state flags such as `error` or `processing`.
+     * 
+     * @remarks
+     * Calling this method without specifying flags will reset the field status to its default state.
+     * 
+     * @param {string} id - The ID of the field.
+     * @param {boolean} [error=false] - Whether the field is in error state.
+     * @param {boolean} [processing=false] - Whether the field is in processing state.
+     */
     setFieldState = (id: string, error: boolean = false, processing: boolean = false): void => {
         const field = this.fields[id];
         field.state = {
@@ -127,11 +171,26 @@ export class BaseStore {
         }
     }
 
+    /**
+     * Sets whether the field is editable or not.
+     * 
+     * @param id - The ID of the field.
+     * @param isEditable - Whether the field is editable or not.
+     */
     setFiledEditability = (id: string, isEditable: boolean): void => {
         const field = this.fields[id];
         field.isDisabled = !isEditable;
     }
 
+    /**
+     * Adds new validators to a field, avoiding duplicates.
+     * 
+     * @remarks
+     * For safty reasons this function should not be coled to modify validator assigned to 
+     * 
+     * @param id - The ID of the field.
+     * @param validators - The list of validator functions to add.
+     */
     addValidators = (id: string, validators: BaseValidatorFn[]): void => {
         const field = this.fields[id];
 
