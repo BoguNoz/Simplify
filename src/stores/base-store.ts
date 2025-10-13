@@ -6,12 +6,25 @@ import {BaseDependencyFn} from "@core/events/dependency";
 import {isNullEmptyFalseOrUndefined} from "@core/lib/utils";
 import BaseFieldTypesEnum from "@core/enums/base-field-type-enum";
 
+/**
+ * The BaseStore implements a reactive signal-like mechanism using MobX observables and reactions. 
+ * Each field acts as a signal source, and changes automatically propagate through defined dependencies and operations.
+ */
 export class BaseStore {
     fields: Record<string, BaseFieldModel> = {};
     operations: Record<string, BaseOperationFn[]> = {};
     reverseDeps: Record<string, Record<string, BaseDependencyFn[]>> = {};
 
-    initializeFields = async (fields: BaseFieldModel[]) => {
+    /**
+     * Initializes all fields based on their configuration.
+     * 
+     * @remarks
+     * Sets up field data sources, validators, operations, and dependencies.
+     * Also registers reactions to automatically update dependent fields when values change.
+     * 
+     * @param {BaseFieldModel[]} fields - List of fields configurations.
+     */
+    initializeFields = async (fields: BaseFieldModel[]): Promise<void> => {
         for (const field of fields) {
             this.fields[field.id] = field;
             this.reverseDeps[field.id] = {};
@@ -42,6 +55,15 @@ export class BaseStore {
         });
     }
 
+    /**
+     * Invokes all dependency functions @type {BaseDependencyFn} subscribed to the changed field.
+     * 
+     * @remarks
+     * Dependency functions are registered during field initialization and are triggered
+     * whenever the corresponding field value changes.
+     * 
+     * @param {string} changedId - The ID of the field whose value has changed.
+     */
     updateDependents = async (changedId: string): Promise<void> => {
         const dependents = this.reverseDeps[changedId] || [];
 
@@ -52,7 +74,23 @@ export class BaseStore {
         });
     }
 
-    getDataSource = async (id: string) => await this.fields[id].dataSource();
+    /**
+     * Retrives data from the data source function defined for a field.
+     * 
+     * @remarks
+     * Executes the data source function assigned to the field and returns the resulting value.
+     * 
+     * @param {string} id - The ID of the field. 
+     * @returns {Promise<any>} A promise resolving to the field's data source value,
+     */
+    getDataSource = async (id: string): Promise<any> => await this.fields[id].dataSource();
+
+    /**
+     * 
+     * @param id 
+     * @returns 
+     */
+    invokeDeconstructor = async (id: string) => await this.fields[id].deconstructor();
 
     getFieldValue = (id: string): any => this.fields[id]?.value;
 
