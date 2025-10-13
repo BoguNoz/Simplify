@@ -174,8 +174,8 @@ export class BaseStore {
     /**
      * Sets whether the field is editable or not.
      * 
-     * @param id - The ID of the field.
-     * @param isEditable - Whether the field is editable or not.
+     * @param {string} id - The ID of the field.
+     * @param {boolean} isEditable - Whether the field is editable or not.
      */
     setFiledEditability = (id: string, isEditable: boolean): void => {
         const field = this.fields[id];
@@ -186,10 +186,10 @@ export class BaseStore {
      * Adds new validators to a field, avoiding duplicates.
      * 
      * @remarks
-     * For safty reasons this function should not be coled to modify validator assigned to 
+     * For safety reasons, avoid calling this method to dynamically alter validator list assigned to a field.
      * 
-     * @param id - The ID of the field.
-     * @param validators - The list of validator functions to add.
+     * @param {string} id - The ID of the field.
+     * @param {BaseValidatorFn[]} validators - The list of validator functions to add.
      */
     addValidators = (id: string, validators: BaseValidatorFn[]): void => {
         const field = this.fields[id];
@@ -201,6 +201,16 @@ export class BaseStore {
         field.validatorsFn = [...(field.validatorsFn || []), ...newValidators];
     };
 
+    /**
+     * Runs validation for a specific field.
+     *
+     * @param {string} id - The ID of the field.
+     *
+     * @remarks
+     * Validation will occur, when field is not disabled and render.
+     *
+     * @returns {ValidatorResponse[]} The list of validation results.
+     */
     validateField = (id: string): ValidatorResponse[] => {
         const field = this.fields[id];
 
@@ -220,6 +230,12 @@ export class BaseStore {
         return [{ isValid: true, isWarning: false, message: "" }] as ValidatorResponse[];
     };
 
+    /** Validates a specific list of fields.
+    *
+    * @param {string[]} ids - The IDs of the fields to validate.
+     *
+    * @returns {Promise<boolean>} True if all fields are valid, otherwise false.
+    */
     validateSpecifyFields = async (ids: string[]): Promise<boolean> => {
         let result = true
         for (const id of ids) {
