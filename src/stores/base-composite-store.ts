@@ -7,6 +7,14 @@ export class BaseCompositeStore {
     stores: Record<string, BaseStore> = {};
     renderedComposites = observable.map<string, boolean>();
 
+    /**
+     * Initializes all composites based on their configuration.
+     *
+     * @remarks 
+     * Sets up renders functions.
+     *  
+     * @param {BaseCompositeModel[]} composites - List of composites configurations
+     */
     initializeComposite = (composites: BaseCompositeModel[]): void =>  {
         composites.forEach((composite: BaseCompositeModel) => {
             this.composites[composite.id] = composite;

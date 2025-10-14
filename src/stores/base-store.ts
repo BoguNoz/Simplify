@@ -3,7 +3,7 @@ import {BaseOperationFn} from "@core/events/operation";
 import {reaction, runInAction} from "mobx";
 import {BaseValidatorFn, ValidatorResponse} from "@core/events/validator";
 import {BaseDependencyFn} from "@core/events/dependency";
-import {isNullEmptyFalseOrUndefined} from "@core/lib/utils";
+import {isNullEmptyFalseOrUndefined, isNullEmptyOrUndefined} from "@core/lib/utils";
 import BaseFieldTypesEnum from "@core/enums/base-field-type-enum";
 
 /**
@@ -207,14 +207,16 @@ export class BaseStore {
      * @param {string} id - The ID of the field.
      *
      * @remarks
-     * Validation will occur, when field is not disabled and render.
+     * Validation will occur, when field is not disabled and render 
+     * or value is not null or undefined.
      *
      * @returns {ValidatorResponse[]} The list of validation results.
      */
     validateField = (id: string): ValidatorResponse[] => {
         const field = this.fields[id];
 
-        if (field.isDisabled || !field.render) return [{ isValid: true, isWarning: false, message: "" }] as ValidatorResponse[];
+        if (field.isDisabled || !field.render || isNullOrUndefined(field.value)) 
+            return [{ isValid: true, isWarning: false, message: "" }] as ValidatorResponse[];
 
         const results = [];
         for (const fn of field.validatorsFn) {

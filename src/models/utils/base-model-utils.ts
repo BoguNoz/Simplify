@@ -26,7 +26,7 @@ export function createFieldPlaceholders<
             isRequired: false,
             render: true,
             fieldType: BaseFieldTypesEnum.Input,
-            value: "",
+            value: undefined,
             validatorsFn: [],
             operations: [],
             addit: null,
