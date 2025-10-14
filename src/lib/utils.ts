@@ -10,7 +10,7 @@ export const isNullOrUndefined = (value: any): boolean => {
 }
 
 export const isNullEmptyFalseOrUndefined = (value: any): boolean => {
-  return isNullEmptyOrUndefined(value) || value === false || value === "";
+  return isNullOrUndefined(value) || value === false || value === "";
 }
 
 export const downloadBlob = (blob: Blob, filename: string) => {

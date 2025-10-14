@@ -35,7 +35,7 @@ export class BaseCompositeStore {
     }
 
     /**
-     * Returns the render state of a composite.
+     * Returns the render state of the composite.
      *
      * @param {string} id - The ID of the composite.
      * @returns {boolean} `true` if the composite should be rendered otherwise `false`.
@@ -44,6 +44,16 @@ export class BaseCompositeStore {
         return this.renderedComposites.get(id)!;
     }
 
+    /**
+     * Sets the render state of a composite.
+     *
+     * @remarks
+     * If the `state` parameter is not specified, the composite's {@link BaseCompositeModel.renderFn `renderFn`}
+     * will be used to determine whether the composite should be rendered.
+     *
+     * @param {string} id - The ID of the composite.
+     * @param {boolean} [state] - The desired render state. If omitted, the state is determined automatically.
+     */
     setRendering = (id: string, state?: boolean): void => {
         runInAction(() => {
             if (isNullOrUndefined(state)) {
@@ -52,17 +62,27 @@ export class BaseCompositeStore {
             else {
                 this.composites[id].render = state!;
             }
-            this.renderedComposites.set(id, his.composites[id].render);
+            this.renderedComposites.set(id, this.composites[id].render);
         });
     }
 
+    /**
+     * Registers a store for the specified composite.
+     *
+     * @param {string} id - The ID of the composite.
+     * @param {BaseStore} store - The store instance to register.
+     */
     registerStore = (id: string, store: BaseStore): void => {
         this.stores[id] = store;
     }
 
-    getStore = (id: string): BaseStore => {
-        return this.stores[id];
-    }
+    /**
+     * Retrieves the store associated with the specified composite.
+     *
+     * @param {string} id - The ID of the composite.
+     * @returns {BaseStore} The store instance linked to the composite.
+     */
+    getStore = (id: string): BaseStore => this.stores[id];
 }
 
 

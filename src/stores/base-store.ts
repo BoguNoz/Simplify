@@ -3,7 +3,7 @@ import {BaseOperationFn} from "@core/events/operation";
 import {reaction, runInAction} from "mobx";
 import {BaseValidatorFn, ValidatorResponse} from "@core/events/validator";
 import {BaseDependencyFn} from "@core/events/dependency";
-import {isNullEmptyFalseOrUndefined, isNullEmptyOrUndefined} from "@core/lib/utils";
+import {isNullEmptyFalseOrUndefined, isNullOrUndefined} from "@core/lib/utils";
 import BaseFieldTypesEnum from "@core/enums/base-field-type-enum";
 
 /**
@@ -61,6 +61,7 @@ export class BaseStore {
      * @remarks
      * Dependency functions are registered during field initialization and are triggered
      * whenever the corresponding field value changes.
+     * All dependency function arguments are automatically injected.
      * 
      * @param {string} changedId - The ID of the field whose value has changed.
      */
