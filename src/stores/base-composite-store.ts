@@ -1,3 +1,4 @@
+import { isNullOrUndefined } from "@core/lib/utils";
 import BaseCompositeModel from "@core/models/base-composite-model";
 import {BaseStore} from "@core/stores/base-store";
 import {observable, runInAction} from "mobx";
@@ -11,7 +12,7 @@ export class BaseCompositeStore {
      * Initializes all composites based on their configuration.
      *
      * @remarks 
-     * Sets up renders functions.
+     * Determines whether each composite should be rendered base on composite render field.
      *  
      * @param {BaseCompositeModel[]} composites - List of composites configurations
      */
@@ -22,20 +23,36 @@ export class BaseCompositeStore {
         })
     }
 
+    /**
+     * Invokes initialization of fields within a composite.
+     * 
+     * @param {string} id - The ID of he composite.
+     */
     initializeFields = async (id: string): Promise<void> => {
         const composite = this.composites[id];
         const store = this.stores[id];
         await store.initializeFields(composite.fields);
     }
 
-    renderComposite = (id: string, fieldStore: BaseStore): boolean => {
+    /**
+     * Returns the render state of a composite.
+     *
+     * @param {string} id - The ID of the composite.
+     * @returns {boolean} `true` if the composite should be rendered otherwise `false`.
+     */
+    renderComposite = (id: string): boolean => {
         return this.renderedComposites.get(id)!;
     }
 
-    setRendering = (id: string, state: boolean): void => {
+    setRendering = (id: string, state?: boolean): void => {
         runInAction(() => {
-            this.composites[id].render = state;
-            this.renderedComposites.set(id, state);
+            if (isNullOrUndefined(state)) {
+                this.composites[id].render = this.composites[id].renderFn(this, this.stores[id]);
+            }
+            else {
+                this.composites[id].render = state!;
+            }
+            this.renderedComposites.set(id, his.composites[id].render);
         });
     }
 
