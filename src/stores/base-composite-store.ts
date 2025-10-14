@@ -3,7 +3,46 @@ import BaseCompositeModel from "@core/models/base-composite-model";
 import {BaseStore} from "@core/stores/base-store";
 import {observable, runInAction} from "mobx";
 
-export class BaseCompositeStore {
+/**
+ * Abstract base class that manages a collection of composites and their corresponding field stores.
+ *
+ * @remarks
+ * The {@link BaseCompositeStore} acts as a coordinator between multiple {@link BaseStore} instances,
+ * handling initialization, rendering logic, and registration of composites.
+ * Each composite represents a logical group of fields that can be conditionally rendered
+ * and validated as a unit.
+ *
+ * @example
+ * ```ts
+ * // Example base implementation:
+ * export class CompositeStore extends BaseCompositeStore {
+ *     composites: Record<string, BaseCompositeModel> = {};
+ *     stores: Record<string, BaseStore> = {}
+ *
+ *     constructor() {
+ *         super();
+ *
+ *         makeObservable(this, {
+ *             composites: observable,
+ *             stores: observable,
+ *             renderedComposites: observable,
+ *
+ *             initializeFields: action,
+ *             initializeComposite: action,
+ *             registerStore: action,
+ *             getStore: action,
+ *             setRendering: action,
+ *             renderComposite: action,
+ *         });
+ *     }
+ * }
+ * ```
+ *
+ * @abstract
+ * @see BaseStore
+ * @see BaseCompositeModel
+ */
+export abstract class BaseCompositeStore {
     composites: Record<string, BaseCompositeModel> = {};
     stores: Record<string, BaseStore> = {};
     renderedComposites = observable.map<string, boolean>();

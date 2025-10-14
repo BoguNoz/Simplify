@@ -7,10 +7,50 @@ import {isNullEmptyFalseOrUndefined, isNullOrUndefined} from "@core/lib/utils";
 import BaseFieldTypesEnum from "@core/enums/base-field-type-enum";
 
 /**
- * The BaseStore implements a reactive signal-like mechanism using MobX observables and reactions. 
- * Each field acts as a signal source, and changes automatically propagate through defined dependencies and operations.
+ * Abstract base class that provides a reactive, signal-like state management layer using MobX.
+ *
+ * @remarks
+ * Each field within the store acts as a reactive signal source.
+ * When a field's value changes, all related operations and dependency functions are automatically triggered.
+ * This enables dynamic form behavior, field validation, and dependency propagation with minimal boilerplate.
+ *
+ * The class serves as the foundation for custom store implementations handling form state,
+ * validation, data sources, and inter-field logic.
+ *
+ * @example
+ * ```ts
+ * // Example base implementation:
+ * class FieldStore extends BaseStore {
+ *     override fields: Record<string, BaseFieldModel> = {};
+ *     override operations: Record<string, BaseOperationFn[]> = {};
+ *
+ *     constructor() {
+ *         super();
+ *
+ *         makeObservable(this, {
+ *             fields: observable,
+ *             operations: observable,
+ *             reverseDeps: observable,
+ *
+ *             initializeFields: action,
+ *             updateDependents: action,
+ *             setFieldValue: action,
+ *             setFieldAdditValue: action,
+ *             setFieldState: action,
+ *             addValidators: action,
+ *             setFiledEditability: action,
+ *         });
+ *     }
+ *§}
+ * ```
+ *
+ * @abstract
+ * @see BaseFieldModel
+ * @see BaseDependencyFn
+ * @see BaseValidatorFn
+ * @see BaseOperationFn
  */
-export class BaseStore {
+export abstract class BaseStore {
     fields: Record<string, BaseFieldModel> = {};
     operations: Record<string, BaseOperationFn[]> = {};
     reverseDeps: Record<string, Record<string, BaseDependencyFn[]>> = {};
