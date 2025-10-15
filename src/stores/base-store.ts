@@ -169,7 +169,7 @@ export abstract class BaseStore {
         const ops = this.operations[id] || [];
 
         for (const fn of ops) {
-            const result = fn(value, this);
+            const result = fn();
             if (result instanceof Promise) {
                 await result;
             }

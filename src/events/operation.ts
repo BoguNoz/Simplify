@@ -4,15 +4,14 @@ import {BaseStore} from "@core/stores/base-store";
  * Represents a field operation function executed when a field’s value changes.
  *
  * @remarks
- * All function arguments are automatically injected by the store during field updates.  
  * Operations may be triggered multiple times, so avoid performing heavy computations inside them.
  * 
  * @example
  *  ```ts
  * // Example usage in field repository:
  *  repositoryFields.testField.operations = [
- *      exampleOperation()
- *  ]
+ *      exampleOperation(testRegisteredFields.targetId, fieldStore, "value"),
+ *  ];
  * ```
  * 
  * @param {any} target - The target value or field affected by the operation.
@@ -21,8 +20,26 @@ import {BaseStore} from "@core/stores/base-store";
  *
  * @returns Either nothing (`void`) or a `Promise<void>` for asynchronous operations.
  */
-export type BaseOperationFn = (target: any, store: BaseStore, value?: any,) => void | Promise<void>;
+export type BaseOperationFn = (target?: any, store?: BaseStore, value?: any,) => void | Promise<void>;
 
+/**
+ * Toggles the visibility (`render` property) of one or more fields.
+ *
+ * @example
+ * ```ts
+ * // Example usage in field repository:
+ *  repositoryFields.testField.operations = [
+ *      exampleOperation([testRegisteredFields.targetId], fieldStore),
+ *  ];
+ * ``` 
+ * 
+ * @param {string[]} targetIds - The IDs of the fields whose visibility should be toggled.
+ * @param {BaseStore} store - The store instance containing the target fields.
+ *
+ * @returns {BaseOperationFn} A function that performs the toggling operation.
+ *
+ * @see BaseOperationFn
+ */
 export const toggleRendering = (targetIds: string[], store: BaseStore, value: any): BaseOperationFn => {
     return () => {
         targetIds.forEach((id) => {
@@ -34,6 +51,24 @@ export const toggleRendering = (targetIds: string[], store: BaseStore, value: an
     }
 }
 
+/**
+ * Sets the value of a target field.
+ *
+ * @example
+ * ```ts
+ * // Example usage in field repository:
+ *  repositoryFields.testField.operations = [
+ *      exampleOperation(testRegisteredFields.targetId, fieldStore),
+ *  ];
+ * ``` 
+ * 
+ * @param {string[]} targetIds - The IDs of the fields whose visibility should be toggled.
+ * @param {BaseStore} store - The store instance containing the target fields.
+ *
+ * @returns {BaseOperationFn} A function that performs the toggling operation.
+ * 
+ * @see BaseOperationFn
+ */
 export const setFieldValue = (targetId: string, store: BaseStore, value: any): BaseOperationFn => {
     return () => {
         store.setFieldValue(targetId, value);

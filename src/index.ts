@@ -55,8 +55,6 @@ export * from "@core/components/ui/tooltip"
 
 // #region enums/charts
 export * from "@core/enums/charts/base-bar-chart-enums"
-export * from "@core/enums/charts/base-chart-theme-enum"
-export * from "@core/enums/charts/base-palettes-enum"
 // #endregion enums/charts
 
 // #region enums
