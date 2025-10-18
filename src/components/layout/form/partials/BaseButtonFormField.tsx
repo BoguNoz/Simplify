@@ -1,7 +1,7 @@
 import React from "react";
 import { observer } from "mobx-react-lite";
 import BaseFieldModel from "@core/models/base-field-model";
-import BaseField from "../BaseField";
+import BaseField from "../../BaseField";
 
 interface BaseButtonFormFieldProps {
     field: BaseFieldModel

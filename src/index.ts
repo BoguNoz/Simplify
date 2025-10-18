@@ -9,11 +9,14 @@ export * from "@core/components/layout/form/wrappers/BaseAlertWrapper"
 export * from "@core/components/layout/form/wrappers/BaseValidatorBox"
 // #endregion components/layout/form/wrappers
 
+// #region components/layout/form/partials
+export * from "@core/components/layout/form/partials/BaseButtonFormField"
+export * from "@core/components/layout/form/partials/BaseInputFormField"
+export * from "@core/components/layout/form/partials/BaseSingleChoiceFormField"
+// #endregion components/layout/form/partials
+
 // #region components/layout/form
-export * from "@core/components/layout/form/BaseButtonFormField"
 export * from "@core/components/layout/form/BaseFormField"
-export * from "@core/components/layout/form/BaseInputFormField"
-export * from "@core/components/layout/form/BaseSingleChoiceFormField"
 // #endregion components/layout/form
 
 // #region components/layout/partials
