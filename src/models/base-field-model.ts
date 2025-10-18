@@ -25,6 +25,9 @@ export default interface BaseFieldModel {
 
     /**
      * Current value of the field.
+     *
+     * @remarks
+     * The initial value should be set by datasource function.
      */
     value: any;
 

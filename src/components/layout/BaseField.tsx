@@ -11,6 +11,7 @@ import BaseFieldTypeEnum from "@core/enums/base-field-type-enum";
 import {observer} from "mobx-react-lite";
 import {Spinner} from "@core/components/ui/spiner";
 import {IconExclamationCircle} from "@tabler/icons-react";
+import BaseButtonWithConfirmation from "@core/components/layout/partilas/BaseButtonWithConfirmation";
 
 interface BaseFieldProps {
     field: BaseFieldModel
@@ -82,12 +83,12 @@ const BaseField: React.FC<BaseFieldProps> = observer(({ field, value, handleChan
             );
         case FormFieldTypesEnum.Select:
             return (
-            <BaseSelectorField
-                field={field}
-                onChange={e => {handleChange(field.id, e)}}
-                onBlur={() => handleBlur(field.id)}
-                hardDisable={isDisable}
-            />
+                <BaseSelectorField
+                    field={field}
+                    onChange={e => {handleChange(field.id, e)}}
+                    onBlur={() => handleBlur(field.id)}
+                    hardDisable={isDisable}
+                />
             );
         case FormFieldTypesEnum.Button:
             return (
@@ -109,6 +110,22 @@ const BaseField: React.FC<BaseFieldProps> = observer(({ field, value, handleChan
                     >
                         {field.label}
                     </Button>
+                </div>
+            )
+        case FormFieldTypesEnum.ButtonWithConfirmation:
+            return (
+                <div className={field.style}>
+                    <BaseButtonWithConfirmation
+                        field={field}
+                        timeout={field.addit!.timeout}
+                        infoDescription={field.addit!.infoDescription}
+                        confirmButtonLabel={field.addit!.confirmButtonLabel}
+                        declineButtonLabel={field.addit!.declineButtonLabel}
+                        handleChange={c => {handleChange(field.id, c)}}
+                        handleBlur={() => handleBlur(field.id)}
+                        hardDisable={isDisable}
+                        onConfirm={() => field.addit!.handleConfirm()}
+                    />
                 </div>
             )
         case FormFieldTypesEnum.Toggle:
