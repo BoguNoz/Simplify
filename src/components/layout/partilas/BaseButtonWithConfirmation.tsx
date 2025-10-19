@@ -71,7 +71,7 @@ const BaseButtonWithConfirmation: React.FC<BaseButtonWithConfirmationProps> = ob
         }
     }, [confirming, timer]);
 
-    if (!confirming) {
+    if (!confirming || isDisabled) {
         return (
             <div onClick={() => setConfirming(true)} className="cursor-pointer">
                 <Button
@@ -87,26 +87,28 @@ const BaseButtonWithConfirmation: React.FC<BaseButtonWithConfirmationProps> = ob
         );
     }
 
-    return (
-        <div
-            className={`absolute bottom-4 left-4 right-4 rounded-md px-3 py-2 flex items-center justify-between gap-4 shadow
+    if (!isDisabled) {
+        return (
+            <div
+                className={`absolute bottom-4 left-4 right-4 rounded-md px-3 py-2 flex items-center justify-between gap-4 shadow
                 transform origin-right transition-transform duration-[600ms] ease-in-out
                 ${confirming ? "scale-x-100 opacity-100 pointer-events-auto" : "scale-x-0 opacity-0 pointer-events-none"}
                 animate-in fade-in zoom-in-95`}
-        >
-            <p className="text-sm font-light whitespace-nowrap">
-                {field.addit!.infoDescription || ""}
-            </p>
-            <div className="flex gap-2">
-                <Button className="font-light" variant="secondary" size="sm" onClick={() => field.addit!.handleConfirm()}>
-                    {field.addit!.confirmButtonLabel || "YES"}
-                </Button>
-                <Button className="font-light" variant="secondary" size="sm" onClick={() => setConfirming(false)}>
-                    {field.addit!.declineButtonLabel || "NO"}
-                </Button>
+            >
+                <p className="text-sm font-light whitespace-nowrap">
+                    {field.addit!.infoDescription || ""}
+                </p>
+                <div className="flex gap-2">
+                    <Button className="font-light" variant="secondary" size="sm" onClick={() => field.addit!.handleConfirm()}>
+                        {field.addit!.confirmButtonLabel || "YES"}
+                    </Button>
+                    <Button className="font-light" variant="secondary" size="sm" onClick={() => setConfirming(false)}>
+                        {field.addit!.declineButtonLabel || "NO"}
+                    </Button>
+                </div>
             </div>
-        </div>
-    )
+        )
+    }
 });
 
 export default BaseButtonWithConfirmation;

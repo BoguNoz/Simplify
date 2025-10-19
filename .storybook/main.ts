@@ -1,26 +1,13 @@
-import type { StorybookConfig } from "@storybook/react-vite";
+import type { StorybookConfig } from '@storybook/react-vite';
 
 const config: StorybookConfig = {
-  stories: ["../src/**/*.stories.@(ts|tsx|mdx)", "../src/**/*.stories.@(js|jsx)"],
-  addons: [
-    "@storybook/addon-essentials",
-    "@storybook/addon-a11y",
+  "stories": [
+    "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"
   ],
-  framework: {
-    name: "@storybook/react-vite",
-    options: {},
-  },
-  staticDirs: ["../public"],
-  viteFinal: async (config) => {
-    config.resolve = config.resolve || {};
-    config.resolve.alias = {
-      ...(config.resolve.alias || {}),
-      "@core": "/src",
-    };
-
-
-    return config;
-  },
+  "addons": [],
+  "framework": {
+    "name": "@storybook/react-vite",
+    "options": {}
+  }
 };
-
 export default config;

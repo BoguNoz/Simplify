@@ -29,7 +29,7 @@ export function createFieldPlaceholders<
             value: undefined,
             validatorsFn: [],
             operations: [],
-            addit: null,
+            addit: {},
             dependencies: [],
             placeholder: "",
             style: "",
@@ -61,6 +61,20 @@ export function formWrapper<T extends string>(
             ...(field.addit ?? {}),
             isBorderless: true,
             isLabelActive: true,
+        };
+    });
+    return fields;
+}
+
+export function chartWrapper<T extends string>(
+    fields: Record<T, Partial<BaseFieldModel>>
+): Record<T, Partial<BaseFieldModel>> {
+    (Object.keys(fields) as T[]).forEach(key => {
+        const field = fields[key];
+        field.addit = {
+            ...(field.addit ?? {}),
+            palette: [],
+            labels: [""]
         };
     });
     return fields;
