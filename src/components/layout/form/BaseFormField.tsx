@@ -32,7 +32,6 @@ const BaseFormField: React.FC<BaseFormFieldProps> = observer(({ fieldId, store, 
             <div className="m-5">
                 <BaseButtonFormField
                     field={field}
-                    value={field.value}
                     handleChange={handleChange}
                     handleBlur={handleBlur}
                 />
@@ -54,14 +53,12 @@ const BaseFormField: React.FC<BaseFormFieldProps> = observer(({ fieldId, store, 
                     field.fieldType === BaseFieldTypeEnum.CheckBox ? (
                         <BaseSingleChoiceFormField
                             field={field}
-                            value={field.value}
                             handleChange={handleChange}
                             handleBlur={handleBlur}
                         />
                     ) : (
                         <BaseInputFormField
                             field={field}
-                            value={field.value}
                             handleChange={handleChange}
                             handleBlur={handleBlur}
                             isValid={isValid}

@@ -12,26 +12,11 @@ import {Button} from "@core/components/ui/button";
  * @see BaseButtonWithConfirmationProps.hardDisable
  */
 interface BaseButtonWithConfirmationProps {
-    /**
-     * Field model that provides field configuration.
-     */
     field: BaseFieldModel;
 
-    /**
-     * Triggered when the main button value changes.
-     */
     handleChange: (fieldId: string, value: any) => void;
-    /**
-     * Triggered when the main button loses focus.
-     */
     handleBlur: (fieldId: string) => void;
 
-    /**
-     * Forces the button into a permanently disabled state, regardless of field configuration.
-     *
-     * @remarks
-     * Optimally use field configuration.
-     */
     hardDisable?: boolean;
 }
 

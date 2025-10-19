@@ -77,14 +77,6 @@ export default interface BaseFieldModel {
     description: string;
 
     /**
-     * Placeholder text shown when the field is empty.
-     *
-     * @remarks
-     * Implemented by Input type fields.
-     */
-    placeholder: string;
-
-    /**
      * Custom CSS style or class applied to the field.
      */
     style: string;

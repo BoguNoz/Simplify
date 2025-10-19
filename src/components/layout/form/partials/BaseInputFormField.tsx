@@ -5,7 +5,6 @@ import BaseField from "../../BaseField";
 
 interface BaseInputFormFieldProps {
     field: BaseFieldModel
-    value: any;
     isValid: boolean;
     hardDisable?: boolean;
 
@@ -13,7 +12,7 @@ interface BaseInputFormFieldProps {
     handleChange: (fieldId: string, value: any) => void;
 }
 
-const BaseInputFormField: React.FC<BaseInputFormFieldProps> = observer(({ field, value, handleChange, handleBlur, isValid, hardDisable }) => {
+const BaseInputFormField: React.FC<BaseInputFormFieldProps> = observer(({ field, handleChange, handleBlur, isValid, hardDisable }) => {
     return (
         <div>
             {field.addit!.isLabelActive &&
@@ -21,7 +20,6 @@ const BaseInputFormField: React.FC<BaseInputFormFieldProps> = observer(({ field,
             }
             <BaseField
                 field={field}
-                value={value}
                 handleChange={handleChange}
                 handleBlur={handleBlur}
                 hardDisable={hardDisable}

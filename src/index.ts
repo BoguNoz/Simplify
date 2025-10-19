@@ -20,7 +20,14 @@ export * from "@core/components/layout/form/BaseFormField"
 // #endregion components/layout/form
 
 // #region components/layout/partials
-export * from "@core/components/layout/partilas/BaseSelectorField"
+export * from "@core/components/layout/partilas/BaseButton"
+export * from "@core/components/layout/partilas/BaseButtonWithConfirmation"
+export * from "@core/components/layout/partilas/BaseCheckbox"
+export * from "@core/components/layout/partilas/BaseFileInput"
+export * from "@core/components/layout/partilas/BaseInput"
+export * from "@core/components/layout/partilas/BaseSelector"
+export * from "@core/components/layout/partilas/BaseSwitch"
+export * from "@core/components/layout/partilas/BaseToggle"
 // #endregion components/layout/partials
 
 // #region components/layout/

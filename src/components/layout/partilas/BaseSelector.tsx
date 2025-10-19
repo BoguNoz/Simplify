@@ -6,14 +6,18 @@ import {Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectVal
 interface SelectorFieldProps {
     field: BaseFieldModel
 
-    onChange: (value: any) => void;
-    onBlur: () => void;
+    handleChange: (value: any) => void;
+    handleBlur: () => void;
 
     hardDisable?: boolean;
 }
 
-const BaseSelectorField: React.FC<SelectorFieldProps> = observer(({ field, onChange, onBlur, hardDisable }) => {
-    const [options, setOptions] = useState<string[]>([]);
+const BaseSelector: React.FC<SelectorFieldProps> = observer((props) => {
+    const [options, setOptions] = useState<Record<string, string>>({});
+
+    const {field, handleChange, handleBlur, hardDisable} = props;
+
+    const isDisabled = hardDisable || field.isDisabled;
 
     useEffect(() => {
         const fetchKeys = async () => {
@@ -29,29 +33,25 @@ const BaseSelectorField: React.FC<SelectorFieldProps> = observer(({ field, onCha
     }, [field.dataSource, field.deconstructor]);
 
     return (
-        <Select onValueChange={onChange}>
+        <Select onValueChange={handleChange}>
             <SelectTrigger
                 className={field.style + " w-[500px]"}
-                onBlur={onBlur}
+                onBlur={handleBlur}
                 disabled={field.isDisabled || hardDisable}
             >
                 <SelectValue placeholder={field.label} />
             </SelectTrigger>
             <SelectContent>
                 <SelectGroup>
-                    {options.map((opt) => {
-                        const rowLabel = opt.split('-')
-                        const fieldLabel = rowLabel.slice(1).join('-').slice(0, -4);
-                        return (
-                            <SelectItem key={opt} value={opt}>
-                                {fieldLabel}
-                            </SelectItem>
-                        );
-                    })}
+                    {Object.entries(options).map(([key, value]) => (
+                        <SelectItem key={key} value={key}>
+                            {value}
+                        </SelectItem>
+                    ))}
                 </SelectGroup>
             </SelectContent>
         </Select>
     );
 });
 
-export default BaseSelectorField;
+export default BaseSelector;
