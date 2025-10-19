@@ -7,41 +7,15 @@ import {Button} from "@core/components/ui/button";
  * Props for the {@link BaseButtonWithConfirmation} component.
  *
  * @see BaseButtonWithConfirmationProps.field
- * @see BaseButtonWithConfirmationProps.timeout
- * @see BaseButtonWithConfirmationProps.infoDescription
- * @see BaseButtonWithConfirmationProps.confirmButtonLabel
- * @see BaseButtonWithConfirmationProps.declineButtonLabel
  * @see BaseButtonWithConfirmationProps.handleChange
  * @see BaseButtonWithConfirmationProps.handleBlur
- * @see BaseButtonWithConfirmationProps.onConfirm
- * @see BaseButtonWithConfirmationProps.onConfirm
+ * @see BaseButtonWithConfirmationProps.hardDisable
  */
 interface BaseButtonWithConfirmationProps {
     /**
      * Field model that provides field configuration.
      */
     field: BaseFieldModel;
-
-    /**
-     * Optional timeout (in milliseconds) before confirmation state resets automatically.
-     * Defaults to `5000` ms.
-     */
-    timeout?: number;
-    /**
-     * Optional description text displayed during confirmation state.
-     */
-    infoDescription?: string;
-
-    /**
-     * Optional label for the confirmation button.
-     * Defaults to `YES`.
-     */
-    confirmButtonLabel?: string;
-    /**
-     * Optional Label for the decline (cancel) button.
-     * Defaults to `NO`.
-     */
-    declineButtonLabel?: string;
 
     /**
      * Triggered when the main button value changes.
@@ -51,10 +25,6 @@ interface BaseButtonWithConfirmationProps {
      * Triggered when the main button loses focus.
      */
     handleBlur: (fieldId: string) => void;
-    /**
-     * Callback invoked when the confirmation button is pressed.
-     */
-    onConfirm: () => void
 
     /**
      * Forces the button into a permanently disabled state, regardless of field configuration.
@@ -75,14 +45,11 @@ interface BaseButtonWithConfirmationProps {
  *
  * @example
  * ```tsx
- * <BaseButtonWithConfirmation
- *   field={deleteField}
- *   infoDescription="Are you sure you want to delete this record?"
- *   confirmButtonLabel="Yes, delete"
- *   declineButtonLabel="Cancel"
- *   handleChange={(id, value) => formStore.setFieldValue(id, value)}
- *   handleBlur={(id) => formStore.validateField(id)}
- *   onConfirm={() => handleDelete()}
+ *  <BaseButtonWithConfirmation
+ *      field={field}
+ *      handleChange={c => {handleChange(field.id, c)}}
+ *      handleBlur={() => handleBlur(field.id)}
+ *      hardDisable={isDisable}
  * />
  * ```
  *
@@ -90,11 +57,11 @@ interface BaseButtonWithConfirmationProps {
  * @see BaseFieldModel
  */
 const BaseButtonWithConfirmation: React.FC<BaseButtonWithConfirmationProps> = observer((props) => {
-    const { field, hardDisable, timeout, infoDescription, confirmButtonLabel, declineButtonLabel, handleChange, handleBlur, onConfirm } = props;
+    const { field, hardDisable, handleChange, handleBlur } = props;
 
     const [confirming, setConfirming] = useState(false);
 
-    const timer = timeout || 5000;
+    const timer = field.addit!.timeout || 5000;
     const isDisabled = hardDisable || field.isDisabled;
 
     useEffect(() => {
@@ -128,14 +95,14 @@ const BaseButtonWithConfirmation: React.FC<BaseButtonWithConfirmationProps> = ob
                 animate-in fade-in zoom-in-95`}
         >
             <p className="text-sm font-light whitespace-nowrap">
-                {infoDescription || ""}
+                {field.addit!.infoDescription || ""}
             </p>
             <div className="flex gap-2">
-                <Button className="font-light" variant="secondary" size="sm" onClick={() => onConfirm()}>
-                    {confirmButtonLabel || "YES"}
+                <Button className="font-light" variant="secondary" size="sm" onClick={() => field.addit!.handleConfirm()}>
+                    {field.addit!.confirmButtonLabel || "YES"}
                 </Button>
                 <Button className="font-light" variant="secondary" size="sm" onClick={() => setConfirming(false)}>
-                    {declineButtonLabel || "NO"}
+                    {field.addit!.declineButtonLabel || "NO"}
                 </Button>
             </div>
         </div>

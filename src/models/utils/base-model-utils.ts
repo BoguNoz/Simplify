@@ -51,3 +51,17 @@ export function buildFields<T extends string>(
 ): BaseFieldModel[] {
     return Object.values(configs) as BaseFieldModel[];
 }
+
+export function formWrapper<T extends string>(
+    fields: Record<T, Partial<BaseFieldModel>>
+): Record<T, Partial<BaseFieldModel>> {
+    (Object.keys(fields) as T[]).forEach(key => {
+        const field = fields[key];
+        field.addit = {
+            ...(field.addit ?? {}),
+            isBorderless: true,
+            isLabelActive: true,
+        };
+    });
+    return fields;
+}

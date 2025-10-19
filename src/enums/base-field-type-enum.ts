@@ -17,6 +17,7 @@ enum BaseFieldTypesEnum {
      * repositoryFields.confButton.addit!.infoDescription = "Are you absolutely sure?";
      * repositoryFields.confButton.addit!.confirmButtonLabel = "Yes";
      * repositoryFields.confButton.addit!.declineButtonLabel = "No";
+     * repositoryFields.confButton.addit!.field.addit!.handleConfirm = () => {}
      * // ... rest of base field configuration
      * ```
      *

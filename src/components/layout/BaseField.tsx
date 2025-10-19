@@ -117,14 +117,9 @@ const BaseField: React.FC<BaseFieldProps> = observer(({ field, value, handleChan
                 <div className={field.style}>
                     <BaseButtonWithConfirmation
                         field={field}
-                        timeout={field.addit!.timeout}
-                        infoDescription={field.addit!.infoDescription}
-                        confirmButtonLabel={field.addit!.confirmButtonLabel}
-                        declineButtonLabel={field.addit!.declineButtonLabel}
                         handleChange={c => {handleChange(field.id, c)}}
                         handleBlur={() => handleBlur(field.id)}
                         hardDisable={isDisable}
-                        onConfirm={() => field.addit!.handleConfirm()}
                     />
                 </div>
             )
