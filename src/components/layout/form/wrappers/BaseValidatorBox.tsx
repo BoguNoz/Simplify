@@ -3,12 +3,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleXmark } from "@fortawesome/free-regular-svg-icons";
 import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
 import {observer} from "mobx-react-lite";
+import React from "react";
 
 interface BaseValidatorBoxProps {
     validationResult: ValidatorResponse[];
 }
 
-const BaseValidatorBox: React.FC<BaseValidatorBoxProps> = observer(({ validationResult }) => {
+const BaseValidatorBox: React.FC<BaseValidatorBoxProps> = observer((props) => {
+    const { validationResult } = props;
+
     const warnings = validationResult.filter(v => v.isWarning);
     const firstError = validationResult.find(v => !v.isWarning);
 
