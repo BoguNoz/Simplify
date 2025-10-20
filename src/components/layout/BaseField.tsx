@@ -5,12 +5,12 @@ import BaseSelector from "@core/components/layout/partilas/BaseSelector";
 import BaseFieldTypeEnum from "@core/enums/base-field-type-enum";
 import {observer} from "mobx-react-lite";
 import BaseButtonWithConfirmation from "@core/components/layout/partilas/BaseButtonWithConfirmation";
-import {BaseButton} from "@core/components/layout/partilas/BaseButton";
 import BaseToggle from "@core/components/layout/partilas/BaseToggle";
 import BaseCheckbox from "@core/components/layout/partilas/BaseCheckbox";
 import BaseFileInput from "@core/components/layout/partilas/BaseFileInput";
 import BaseSwitch from "@core/components/layout/partilas/BaseSwitch";
 import BaseInput from "@core/components/layout/partilas/BaseInput";
+import BaseButton from "@core/components/layout/partilas/BaseButton";
 
 interface BaseFieldProps {
     field: BaseFieldModel

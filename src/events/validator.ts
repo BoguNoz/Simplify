@@ -53,6 +53,7 @@ export type ValidatorResponse = {
  *
  * @returns {ValidatorResponse} The validation result object.
  *
+ * @see BaseStore
  */
 export type BaseValidatorFn = (store: BaseStore, value: any, id: string) => ValidatorResponse;
 

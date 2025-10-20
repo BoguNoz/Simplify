@@ -1,5 +1,6 @@
 import BaseFieldModel from "@core/models/base-field-model";
 import {BaseRenderFn} from "@core/events/render";
+import {BaseSectionModel} from "@core/models/base-section-model";
 
 /**
  * Represents a composite model that groups related fields and defines its rendering behavior.
@@ -48,7 +49,7 @@ export default interface BaseCompositeModel {
      * Cleanup function that executes when the composite is destroyed or unmounted.
      *
      * @remarks
-     * To call a deconstructor function use {@link invokeCopositeDeconstructor}.
+     * To call a deconstructor function use {@link invokeCompositeDeconstructor}.
      *
      */
     deconstructor: (...args: any[]) => void;

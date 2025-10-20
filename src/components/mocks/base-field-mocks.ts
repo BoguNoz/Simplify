@@ -1,6 +1,7 @@
 import {buildFields, createFieldPlaceholders, formWrapper} from "@core/models/utils/base-model-utils";
 import {lang} from "@core/text/utils/lang";
 import BaseFieldTypesEnum from "@core/enums/base-field-type-enum";
+import {Send} from "lucide-react";
 
 // #region Initialization
 export const mockBaseRegisteredFields = {
@@ -25,10 +26,7 @@ mockFormFields.baseButton.fieldType = BaseFieldTypesEnum.Button;
 
 // #region BaseButtonWithConfirm
 mockFormFields.baseButtonWithConfirm.fieldType = BaseFieldTypesEnum.ButtonWithConfirmation;
-mockFormFields.baseButtonWithConfirm.addit!.timeout = 5000;
-mockFormFields.baseButtonWithConfirm.addit!.infoDescription = text.mock.baseButtonWithConfirmInfoDescription;
-mockFormFields.baseButtonWithConfirm.addit!.confirmButtonLabel = text.mock.baseButtonWithConfirmConfirmButtonLabel;
-mockFormFields.baseButtonWithConfirm.addit!.declineButtonLabel = text.mock.baseButtonWithConfirmDeclineButtonLabel;
+mockFormFields.baseButtonWithConfirm.icon = Send;
 // #endregion BaseButtonWithConfirm
 
 // #region BaseCheckbox

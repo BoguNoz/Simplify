@@ -27,13 +27,13 @@ import {observable, runInAction} from "mobx";
  *             stores: observable,
  *             renderedComposites: observable,
  *
- *             initializecomposite: action,
+ *             initializeComposite: action,
  *             initializeFields: action,
  *             renderComposite: action,
  *             setRendering: action,
  *             registerStore: action,
  *             getStore: action,
- *             invokeCopositeDeconstructor: action,
+ *             invokeCompositeDeconstructor: action,
  *         });
  *     }
  * }
@@ -145,8 +145,8 @@ export abstract class BaseCompositeStore {
      *
      * @see invokeDeconstructor
      */
-    invokeCopositeDeconstructor = async (id: string, free: boolean, ...args: any[]) => {
-        if (!Object.hasOwn(this.composites, id)){
+    invokeCompositeDeconstructor = async (id: string, free: boolean, ...args: any[]) => {
+        if (!Object.keys(this.composites).includes(id)) {
             return;
         }
         

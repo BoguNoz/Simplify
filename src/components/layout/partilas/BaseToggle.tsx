@@ -17,10 +17,10 @@ interface BaseToggleProps {
  *
  * @remarks
  * This component uses the {@link BaseFieldModel} to control its state, appearance, and behavior.
- * 
  * The toggle state is synced with `field.value`. The `handleChange` callback is called
  * whenever the toggle is toggled, and `handleBlur` is called when it loses focus.
  *
+ * If `hardDisable` is set to `true`, the select will be disabled regardless of the field state.
  *
  * @see BaseFieldModel
  * @see BaseToggleProps

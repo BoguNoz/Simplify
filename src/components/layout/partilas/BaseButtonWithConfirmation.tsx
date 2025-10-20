@@ -1,16 +1,11 @@
 import BaseFieldModel from "@core/models/base-field-model";
 import {observer} from "mobx-react-lite";
-import React, {useEffect, useMemo, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Button} from "@core/components/ui/button";
+import {Check, X} from "lucide-react";
+import {isNullOrUndefined} from "@core/lib/utils";
 
-/**
- * Props for the {@link BaseButtonWithConfirmation} component.
- *
- * @see BaseButtonWithConfirmationProps.field
- * @see BaseButtonWithConfirmationProps.handleChange
- * @see BaseButtonWithConfirmationProps.handleBlur
- * @see BaseButtonWithConfirmationProps.hardDisable
- */
+
 interface BaseButtonWithConfirmationProps {
     field: BaseFieldModel;
 
@@ -21,33 +16,27 @@ interface BaseButtonWithConfirmationProps {
 }
 
 /**
- * A reusable button component that requires user confirmation before executing an action.
+ * Reusable button component that requires user confirmation before executing an action.
  *
  * @remarks
+ * This button uses {@link BaseFieldModel} to control its state, appearance, and behavior.
  * The `BaseButtonWithConfirmation` temporarily switches into a confirmation state when clicked.
  * During this state, it displays confirmation and decline buttons instead of the main button label.
  * If the user does not confirm within the given timeout, the button automatically resets.
  *
- * @example
- * ```tsx
- *  <BaseButtonWithConfirmation
- *      field={field}
- *      handleChange={c => {handleChange(field.id, c)}}
- *      handleBlur={() => handleBlur(field.id)}
- *      hardDisable={isDisable}
- * />
- * ```
+ * If `hardDisable` is set to `true`, the select will be disabled regardless of the field state.
  *
- * @param props - Component props.
  * @see BaseFieldModel
+ * @see BaseButtonWithConfirmationProps
  */
 const BaseButtonWithConfirmation: React.FC<BaseButtonWithConfirmationProps> = observer((props) => {
     const { field, hardDisable, handleChange, handleBlur } = props;
 
     const [confirming, setConfirming] = useState(false);
 
-    const timer = field.addit!.timeout || 5000;
+    const timer = 5000;
     const isDisabled = hardDisable || field.isDisabled;
+    const iconButton = !isNullOrUndefined(field.icon);
 
     useEffect(() => {
         if (confirming) {
@@ -63,10 +52,10 @@ const BaseButtonWithConfirmation: React.FC<BaseButtonWithConfirmationProps> = ob
                     className={field.style}
                     disabled={isDisabled}
                     variant={field.variant}
-                    onClick={c => handleChange(field.id, c)}
+                    size={iconButton ? "icon" : "default"}
                     onBlur={() => handleBlur(field.id)}
                 >
-                    {field.label}
+                    {field.icon ? <field.icon /> : field.label}
                 </Button>
             </div>
         );
@@ -74,21 +63,13 @@ const BaseButtonWithConfirmation: React.FC<BaseButtonWithConfirmationProps> = ob
 
     if (!isDisabled) {
         return (
-            <div
-                className={`absolute bottom-4 left-4 right-4 rounded-md px-3 py-2 flex items-center justify-between gap-4 shadow
-                transform origin-right transition-transform duration-[600ms] ease-in-out
-                ${confirming ? "scale-x-100 opacity-100 pointer-events-auto" : "scale-x-0 opacity-0 pointer-events-none"}
-                animate-in fade-in zoom-in-95`}
-            >
-                <p className="text-sm font-light whitespace-nowrap">
-                    {field.addit!.infoDescription || ""}
-                </p>
+            <div>
                 <div className="flex gap-2">
-                    <Button className="font-light" variant="secondary" size="sm" onClick={() => field.addit!.handleConfirm()}>
-                        {field.addit!.confirmButtonLabel || "YES"}
+                    <Button variant={field.variant} size="icon" onClick={c => handleChange(field.id, c)}>
+                        <Check className="text-green-300" />
                     </Button>
-                    <Button className="font-light" variant="secondary" size="sm" onClick={() => setConfirming(false)}>
-                        {field.addit!.declineButtonLabel || "NO"}
+                    <Button variant={field.variant} size="icon" onClick={() => setConfirming(false)}>
+                        <X className="text-red-300" />
                     </Button>
                 </div>
             </div>

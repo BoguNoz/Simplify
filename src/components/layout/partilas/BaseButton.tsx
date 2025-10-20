@@ -4,6 +4,7 @@ import {Spinner} from "@core/components/ui/spiner";
 import {IconExclamationCircle} from "@tabler/icons-react";
 import {Button} from "@core/components/ui/button";
 import React from "react";
+import {isNullOrUndefined} from "@core/lib/utils";
 
 interface BaseButtonProps {
     field: BaseFieldModel;
@@ -15,7 +16,7 @@ interface BaseButtonProps {
 }
 
 /**
- * A base button component integrated with the reactive field model.
+ * Base button component integrated with the reactive field model.
  *
  * @remarks
  * This button uses {@link BaseFieldModel} to control its state, appearance, and behavior.
@@ -30,6 +31,7 @@ const BaseButton: React.FC<BaseButtonProps> = observer((props) => {
     const {field, handleChange, handleBlur, hardDisable} = props;
 
     const isDisabled = hardDisable || field.isDisabled;
+    const iconButton = !isNullOrUndefined(field.icon);
 
     return (
         <div className="flex justify-end">
@@ -43,13 +45,13 @@ const BaseButton: React.FC<BaseButtonProps> = observer((props) => {
             )}
             <Button
                 className={field.style}
-                size={field.addit!.size}
+                size={iconButton ? "icon" : "default"}
                 disabled={isDisabled}
                 variant={field.variant}
                 onClick={c => handleChange(field.id, c)}
                 onBlur={() => handleBlur(field.id)}
             >
-                {field.label}
+                {field.icon ? <field.icon /> : field.label}
             </Button>
         </div>
     )

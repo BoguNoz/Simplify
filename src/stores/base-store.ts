@@ -117,7 +117,7 @@ export abstract class BaseStore {
     }
 
     /**
-     * Retrives data from the data source function defined for a field.
+     * Retrieves data from the data source function defined for a field.
      * 
      * @remarks
      * Executes the data source function assigned to the field and returns the resulting value.
@@ -147,7 +147,7 @@ export abstract class BaseStore {
      * @param {...any[]} args - Optional arguments passed to the deconstructor function.
      */
     invokeDeconstructor = async (id: string, free: boolean, ...args: any[]): Promise<void> => {
-        if (!Object.hasOwn(this.fields, id)){
+        if (!Object.keys(this.fields).includes(id)) {
             return;
         }
 

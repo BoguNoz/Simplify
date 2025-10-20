@@ -17,15 +17,16 @@ interface BaseInputProps {
  *
  * @remarks
  * This component uses the {@link BaseFieldModel} to control its state, appearance, and behavior.
- * 
- * Input is assigned to `field.value`. The `handleChange` callback is called
+ * Input is stored in the `field.value`. The `handleChange` callback is called
  * whenever the checkbox is toggled, and `handleBlur` is called when it loses focus.
  * 
  * If `hardDisable` is set to `true`, the input will be disabled regardless of the field state.
- * 
  *
+ * Important this field can use additional parameter placeholder to declare input placeholder!
  *
+ * @see BaseInputProps
  * @see BaseFieldModel
+ * @see BaseFieldModel.addit
  */
 
 const BaseInput: React.FC<BaseInputProps> = observer((props) => {

@@ -19,6 +19,8 @@ import {BaseStore} from "@core/stores/base-store";
  * @param {any} [value] - Optional value passed to the operation.
  *
  * @returns Either nothing (`void`) or a `Promise<void>` for asynchronous operations.
+ *
+ * @see BaseStore
  */
 export type BaseOperationFn = (target?: any, store?: BaseStore, value?: any,) => void | Promise<void>;
 

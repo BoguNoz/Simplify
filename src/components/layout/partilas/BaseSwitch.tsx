@@ -21,6 +21,7 @@ interface BaseSwitchProps {
  * The switch state is synced with `field.value`. The `handleChange` callback is called
  * whenever the toggle is toggled, and `handleBlur` is called when it loses focus.
  *
+ * If `hardDisable` is set to `true`, the select will be disabled regardless of the field state.
  *
  * @see BaseFieldModel
  * @see BaseSwitchProps
