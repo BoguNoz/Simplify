@@ -11,6 +11,24 @@ export default interface BaseCompositeModel {
     id: string;
 
     /**
+     * A list of field configurations that belong to this composite.
+     *
+     * @remarks
+     * Each field is initialized and managed through the composite's associated {@link BaseStore}.
+     */
+    fields: BaseFieldModel[];
+
+    /**
+     * A record of sections in the composite.
+     * 
+     * @remarks
+     * Sections are used to group related fields into logical or visual parts of the composite.
+     * 
+     * @see BaseSectionModel
+     */
+    sections: BaseSectionModel[];
+
+    /**
      * A function used to determine whether the composite should be rendered.
      *
      * @remarks
@@ -27,10 +45,11 @@ export default interface BaseCompositeModel {
     render: boolean;
 
     /**
-     * A list of field configurations that belong to this composite.
+     * Cleanup function that executes when the composite is destroyed or unmounted.
      *
      * @remarks
-     * Each field is initialized and managed through the composite's associated {@link BaseStore}.
+     * To call a deconstructor function use {@link invokeCopositeDeconstructor}.
+     *
      */
-    fields: BaseFieldModel[];
+    deconstructor: (...args: any[]) => void;
 }

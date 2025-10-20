@@ -22,6 +22,24 @@ interface BaseFieldProps {
     hardTyping?: BaseFieldTypeEnum;
 }
 
+/**
+ * A polymorphic field component that dynamically renders the appropriate input type
+ * based on the {@link BaseFieldModel} configuration.
+ *
+ * @remarks
+ * This component supports all base field types defined in {@link FormFieldTypesEnum}.
+ *
+ * The component automatically passes the reactive field state (`isDisabled`, `value`, `label`, etc.)
+ * and invokes the provided `handleChange` and `handleBlur` callbacks.
+ *
+ * The `hardDisable` prop allows external forcing of the disabled state, overriding the field's own state.
+ * The `hardTyping` prop allows overriding the field type for special cases.
+ *
+ *
+ * @see BaseFieldModel
+ * @see FormFieldTypesEnum
+ * @see BaseFieldProps
+ */
 const BaseField: React.FC<BaseFieldProps> = observer(({ field, handleChange, handleBlur, hardDisable, hardTyping }) => {
     const isDisable = field.isDisabled || hardDisable;
     const type = hardTyping || field.fieldType

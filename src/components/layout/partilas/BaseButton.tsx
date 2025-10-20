@@ -5,8 +5,6 @@ import {IconExclamationCircle} from "@tabler/icons-react";
 import {Button} from "@core/components/ui/button";
 import React from "react";
 
-// TODO Documentation
-
 interface BaseButtonProps {
     field: BaseFieldModel;
 
@@ -16,7 +14,19 @@ interface BaseButtonProps {
     hardDisable?: boolean;
 }
 
-export const BaseButton: React.FC<BaseButtonProps> = observer((props) => {
+/**
+ * A base button component integrated with the reactive field model.
+ *
+ * @remarks
+ * This button uses {@link BaseFieldModel} to control its state, appearance, and behavior.
+ * The component also displays a spinner during processing and an error icon when the field is in an error state.
+ * 
+ * If `hardDisable` is set to `true`, the button will be disabled regardless of the field state.
+ *
+ * @see BaseFieldModel
+ * @see BaseButtonProps
+ */
+const BaseButton: React.FC<BaseButtonProps> = observer((props) => {
     const {field, handleChange, handleBlur, hardDisable} = props;
 
     const isDisabled = hardDisable || field.isDisabled;
@@ -43,4 +53,6 @@ export const BaseButton: React.FC<BaseButtonProps> = observer((props) => {
             </Button>
         </div>
     )
-})
+});
+
+export default BaseButton;

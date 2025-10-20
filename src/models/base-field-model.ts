@@ -96,7 +96,7 @@ export default interface BaseFieldModel {
      * Validators may be called multiple times, so they should perform only lightweight operations.
      * For more complex logic or side effects, use operation functions instead.
      */
-    validatorsFn: BaseValidatorFn[];
+    validators: BaseValidatorFn[];
 
     /**
      * List of operation functions executed when the field value changes.

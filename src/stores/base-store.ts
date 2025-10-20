@@ -34,6 +34,7 @@ import BaseFieldTypesEnum from "@core/enums/base-field-type-enum";
  *
  *             initializeFields: action,
  *             updateDependents: action,
+ *             invokeDeconstructor: action,
  *             setFieldValue: action,
  *             setFieldAdditValue: action,
  *             setFieldState: action,
@@ -74,8 +75,8 @@ export abstract class BaseStore {
                 this.fields[field.id].value = value;
             }
 
-            if (field.validatorsFn?.length) {
-                this.addValidators(field.id, field.validatorsFn);
+            if (field.validators?.length) {
+                this.addValidators(field.id, field.validators);
             }
             if (field.operations?.length) {
                 this.operations[field.id] = [...field.operations];
@@ -128,17 +129,34 @@ export abstract class BaseStore {
      */
     getDataSource = async (id: string, ...args: any[]): Promise<any> => await this.fields[id].dataSource(...args);
 
-    /**
-     * Invokes field deconstructor function defined for a field.
-     * 
+   /**
+     * Invokes the deconstructor function defined for the specified field.
+     *
      * @remarks
-     * Executes the deconstructor function assigned to the field. 
-     * Funcion should not be invoke unnecessary. 
+     * This method executes the field’s custom `deconstructor` function, allowing cleanup
+     * or resource release related to the field.
      * 
-     * @param {string} id - The ID of the field.
-     * @param {any[]} args - Deconstructor function arguments.
+     * Use this method carefully — deconstructors should only be called when the field
+     * is being permanently disposed or reset.
+     *
+     * If the `free` parameter is set to `true`, the field will also be removed
+     * from the store after its deconstructor is executed.
+     *
+     * @param {string} id - The ID of the field to deconstruct.
+     * @param {boolean} free - Whether the field should be removed from the store after deconstruction.
+     * @param {...any[]} args - Optional arguments passed to the deconstructor function.
      */
-    invokeDeconstructor = async (id: string, ...args: any[]): Promise<void> => await this.fields[id].deconstructor(...args);
+    invokeDeconstructor = async (id: string, free: boolean, ...args: any[]): Promise<void> => {
+        if (!Object.hasOwn(this.fields, id)){
+            return;
+        }
+
+        await this.fields[id].deconstructor(...args);
+        if (free) {
+            delete this.fields[id];
+        }   
+    }
+
 
     /**
      * Returns the current value of a field.
@@ -236,10 +254,10 @@ export abstract class BaseStore {
         const field = this.fields[id];
 
         const newValidators = validators.filter(v =>
-            !field.validatorsFn?.includes(v)
+            !field.validators?.includes(v)
         );
 
-        field.validatorsFn = [...(field.validatorsFn || []), ...newValidators];
+        field.validators = [...(field.validators || []), ...newValidators];
     };
 
     /**
@@ -260,7 +278,7 @@ export abstract class BaseStore {
             return [{ isValid: true, isWarning: false, message: "" }] as ValidatorResponse[];
 
         const results = [];
-        for (const fn of field.validatorsFn) {
+        for (const fn of field.validators) {
             const result = fn(this, field.value, id);
             if (!result.isValid) {
                 results.push(result);

@@ -3,8 +3,6 @@ import {observer} from "mobx-react-lite";
 import React from "react";
 import {Switch} from "@core/components/ui/switch";
 
-// TODO Documentation
-
 interface BaseSwitchProps {
     field: BaseFieldModel;
 
@@ -14,6 +12,19 @@ interface BaseSwitchProps {
     hardDisable?: boolean;
 }
 
+/**
+ * A base switch component integrated with the reactive field model.
+ *
+ * @remarks
+ * This component uses the {@link BaseFieldModel} to control its state, appearance, and behavior.
+ * 
+ * The switch state is synced with `field.value`. The `handleChange` callback is called
+ * whenever the toggle is toggled, and `handleBlur` is called when it loses focus.
+ *
+ *
+ * @see BaseFieldModel
+ * @see BaseSwitchProps
+ */
 const BaseSwitch: React.FC<BaseSwitchProps> = observer((props) => {
     const {field, handleChange, handleBlur, hardDisable} = props;
 

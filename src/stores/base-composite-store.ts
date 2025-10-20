@@ -27,12 +27,13 @@ import {observable, runInAction} from "mobx";
  *             stores: observable,
  *             renderedComposites: observable,
  *
+ *             initializecomposite: action,
  *             initializeFields: action,
- *             initializeComposite: action,
+ *             renderComposite: action,
+ *             setRendering: action,
  *             registerStore: action,
  *             getStore: action,
- *             setRendering: action,
- *             renderComposite: action,
+ *             invokeCopositeDeconstructor: action,
  *         });
  *     }
  * }
@@ -122,6 +123,46 @@ export abstract class BaseCompositeStore {
      * @returns {BaseStore} The store instance linked to the composite.
      */
     getStore = (id: string): BaseStore => this.stores[id];
+
+    /**
+     * Invokes the deconstructor for a specific composite and all of its fields.
+     * 
+     * @remarks
+     * This method first executes the composite's own `deconstructor` function,
+     * and then recursively calls the `invokeDeconstructor` method on each field
+     * belonging to the composite.
+     * 
+     * If the `free` parameter is set to `true`, both the composite and its fields
+     * are removed from their respective stores after deconstruction.
+     * 
+     * If any of the composite's fields require arguments for their deconstructors,
+     * make sure to invoke those field deconstructors manually beforehand.
+     * 
+     * 
+     * @param {string} id - The ID of the composite to deconstruct.
+     * @param {boolean} free - Whether the composite and its fields should be removed from the store after deconstruction.
+     * @param {...any[]} args - Optional arguments passed to the composite's deconstructor.
+     *
+     * @see invokeDeconstructor
+     */
+    invokeCopositeDeconstructor = async (id: string, free: boolean, ...args: any[]) => {
+        if (!Object.hasOwn(this.composites, id)){
+            return;
+        }
+        
+        const composite = this.composites[id];
+        await composite.deconstructor(args);
+
+        const fieldStore = this.getStore(id);
+        for (const f of composite.fields) {
+            await fieldStore.invokeDeconstructor(f.id, free);
+        }
+
+        if (free) {
+            delete this.composites[id];
+        }
+        
+    }
 }
 
 

@@ -3,8 +3,6 @@ import {observer} from "mobx-react-lite";
 import React from "react";
 import {Input} from "@core/components/ui/input";
 
-// TODO Documentation
-
 interface BaseInputProps {
     field: BaseFieldModel;
 
@@ -13,6 +11,22 @@ interface BaseInputProps {
 
     hardDisable?: boolean;
 }
+
+/**
+ * A base checkbox component integrated with the reactive field model.
+ *
+ * @remarks
+ * This component uses the {@link BaseFieldModel} to control its state, appearance, and behavior.
+ * 
+ * Input is assigned to `field.value`. The `handleChange` callback is called
+ * whenever the checkbox is toggled, and `handleBlur` is called when it loses focus.
+ * 
+ * If `hardDisable` is set to `true`, the input will be disabled regardless of the field state.
+ * 
+ *
+ *
+ * @see BaseFieldModel
+ */
 
 const BaseInput: React.FC<BaseInputProps> = observer((props) => {
     const {field, handleChange, handleBlur, hardDisable} = props;

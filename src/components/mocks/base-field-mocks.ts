@@ -31,9 +31,9 @@ mockFormFields.baseButtonWithConfirm.addit!.confirmButtonLabel = text.mock.baseB
 mockFormFields.baseButtonWithConfirm.addit!.declineButtonLabel = text.mock.baseButtonWithConfirmDeclineButtonLabel;
 // #endregion BaseButtonWithConfirm
 
-// #region BaseButton
+// #region BaseCheckbox
 mockFormFields.baseCheckbox.fieldType = BaseFieldTypesEnum.CheckBox;
-// #endregion BaseButton
+// #endregion BaseCheckbox
 
 // #region BaseFileInput
 mockFormFields.baseFileInput.fieldType = BaseFieldTypesEnum.FileInput;
@@ -46,7 +46,6 @@ mockFormFields.baseInput.addit!.placeholder = text.mock.baseInputPlaceholder;
 
 // #region BaseSelector
 mockFormFields.baseSelector.fieldType = BaseFieldTypesEnum.Select;
-mockFormFields.baseSelector.addit!.placeholder = text.mock.baseInputPlaceholder;
 mockFormFields.baseSelector.dataSource = () => {
     return text.mock.baseSelectorOptions;
 }
