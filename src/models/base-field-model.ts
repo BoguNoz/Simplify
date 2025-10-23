@@ -70,12 +70,7 @@ export default interface BaseFieldModel {
     /**
      * Field label displayed in the UI.
      */
-    label: string;
-
-    /**
-     * Filed icon displayed in yhe UI
-     */
-    icon: ElementType;
+    label: string | ElementType;
 
     /**
      * Additional description text.
@@ -89,11 +84,8 @@ export default interface BaseFieldModel {
 
     /**
      * Visual variant or theme configuration for the field.
-     *
-     * @remarks
-     * Typically used to control the appearance of base components, e.g., variants in shadcn/ui.
      */
-    variant: any;
+    variant: "default" | "outline" | "ghost" | "destructive" | "secondary" | "link";
 
     /**
      * List of validator functions executed when validating the field.

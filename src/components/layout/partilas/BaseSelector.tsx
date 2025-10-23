@@ -22,6 +22,7 @@ interface SelectorFieldProps {
  *
  * If `hardDisable` is set to `true`, the select will be disabled regardless of the field state.
  *
+ * Possible variants `default`, `secondary`.
  *
  * @see BaseFieldModel
  * @see SelectorFieldProps
@@ -33,6 +34,10 @@ const BaseSelector: React.FC<SelectorFieldProps> = observer((props) => {
     const {field, handleChange, handleBlur, hardDisable} = props;
 
     const isDisabled = hardDisable || field.isDisabled;
+
+    // #region Variants
+    const isDefault = field.variant === "default";
+    // #endregion Variants
 
     useEffect(() => {
         const fetchKeys = async () => {
@@ -48,24 +53,31 @@ const BaseSelector: React.FC<SelectorFieldProps> = observer((props) => {
     }, [field.dataSource, field.deconstructor]);
 
     return (
-        <Select onValueChange={handleChange}>
-            <SelectTrigger
-                className={field.style + " w-[500px]"}
-                onBlur={handleBlur}
-                disabled={field.isDisabled || hardDisable}
-            >
-                <SelectValue placeholder={field.label} />
-            </SelectTrigger>
-            <SelectContent>
-                <SelectGroup>
-                    {Object.entries(options).map(([key, value]) => (
-                        <SelectItem key={key} value={key}>
-                            {value}
-                        </SelectItem>
-                    ))}
-                </SelectGroup>
-            </SelectContent>
-        </Select>
+        <div>
+            <Select onValueChange={handleChange}>
+                <SelectTrigger
+                    className={field.style + " w-[500px]"}
+                    onBlur={handleBlur}
+                    disabled={field.isDisabled || hardDisable}
+                >
+                    <SelectValue placeholder={field.label as string} />
+                </SelectTrigger>
+                <SelectContent>
+                    <SelectGroup>
+                        {Object.entries(options).map(([key, value]) => (
+                            <SelectItem key={key} value={key}>
+                                {value}
+                            </SelectItem>
+                        ))}
+                    </SelectGroup>
+                </SelectContent>
+                {isDefault && (
+                    <p className="text-sm text-gray-400 font-light whitespace-normal break-word p-1">
+                        {field.description}
+                    </p>
+                )}
+            </Select>
+        </div>
     );
 });
 

@@ -12,7 +12,8 @@ interface BaseButtonFormFieldProps {
 
 const BaseButtonFormField: React.FC<BaseButtonFormFieldProps> = observer(({ field, handleBlur, handleChange }) => {
     return (
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
+
             <BaseField
                 field={field}
                 handleChange={handleChange}

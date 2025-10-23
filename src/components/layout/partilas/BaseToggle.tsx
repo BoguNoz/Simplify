@@ -22,6 +22,8 @@ interface BaseToggleProps {
  *
  * If `hardDisable` is set to `true`, the select will be disabled regardless of the field state.
  *
+ * Possible variants `ghost`
+ *
  * @see BaseFieldModel
  * @see BaseToggleProps
  */
@@ -39,7 +41,9 @@ const BaseToggle: React.FC<BaseToggleProps> = observer((props) => {
                 onChange={e => handleChange(field.id, e)}
                 onPressedChange={(pressed) => handleChange(field.id, pressed)}
             >
-                <label className="font-light">{field.label}</label>
+                <label className="font-light">
+                    <>{field.label}</>
+                </label>
             </Toggle>
         </div>
     )

@@ -31,9 +31,8 @@ export function createFieldPlaceholders<
             operations: [],
             addit: {},
             dependencies: [],
-            icon: null,
             style: "",
-            variant: "",
+            variant: "default",
             state: {
                 error: false,
                 processing: false,

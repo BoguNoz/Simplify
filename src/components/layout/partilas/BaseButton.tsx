@@ -24,6 +24,8 @@ interface BaseButtonProps {
  * 
  * If `hardDisable` is set to `true`, the button will be disabled regardless of the field state.
  *
+ * Possible variants `default`, `outline`, `ghost`, `destructive`, `secondary`, `link`
+ *
  * @see BaseFieldModel
  * @see BaseButtonProps
  */
@@ -31,7 +33,7 @@ const BaseButton: React.FC<BaseButtonProps> = observer((props) => {
     const {field, handleChange, handleBlur, hardDisable} = props;
 
     const isDisabled = hardDisable || field.isDisabled;
-    const iconButton = !isNullOrUndefined(field.icon);
+    const isIcon = typeof field.label !== "string";
 
     return (
         <div className="flex justify-end">
@@ -45,13 +47,13 @@ const BaseButton: React.FC<BaseButtonProps> = observer((props) => {
             )}
             <Button
                 className={field.style}
-                size={iconButton ? "icon" : "default"}
+                size={isIcon ? "icon" : "default"}
                 disabled={isDisabled}
                 variant={field.variant}
                 onClick={c => handleChange(field.id, c)}
                 onBlur={() => handleBlur(field.id)}
             >
-                {field.icon ? <field.icon /> : field.label}
+                <>{isIcon ? <field.label /> : field.label}</>
             </Button>
         </div>
     )

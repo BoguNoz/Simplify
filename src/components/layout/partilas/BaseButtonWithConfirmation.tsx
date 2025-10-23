@@ -26,6 +26,8 @@ interface BaseButtonWithConfirmationProps {
  *
  * If `hardDisable` is set to `true`, the select will be disabled regardless of the field state.
  *
+ * Possible variants `default`, `outline`, `ghost`, `destructive`, `secondary`, `link`
+ *
  * @see BaseFieldModel
  * @see BaseButtonWithConfirmationProps
  */
@@ -36,7 +38,7 @@ const BaseButtonWithConfirmation: React.FC<BaseButtonWithConfirmationProps> = ob
 
     const timer = 5000;
     const isDisabled = hardDisable || field.isDisabled;
-    const iconButton = !isNullOrUndefined(field.icon);
+    const isIcon = typeof field.label !== "string";
 
     useEffect(() => {
         if (confirming) {
@@ -52,10 +54,10 @@ const BaseButtonWithConfirmation: React.FC<BaseButtonWithConfirmationProps> = ob
                     className={field.style}
                     disabled={isDisabled}
                     variant={field.variant}
-                    size={iconButton ? "icon" : "default"}
+                    size={isIcon ? "icon" : "default"}
                     onBlur={() => handleBlur(field.id)}
                 >
-                    {field.icon ? <field.icon /> : field.label}
+                   <>{isIcon ? <field.label /> : field.label}</>
                 </Button>
             </div>
         );

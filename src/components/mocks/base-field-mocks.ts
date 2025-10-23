@@ -26,7 +26,6 @@ mockFormFields.baseButton.fieldType = BaseFieldTypesEnum.Button;
 
 // #region BaseButtonWithConfirm
 mockFormFields.baseButtonWithConfirm.fieldType = BaseFieldTypesEnum.ButtonWithConfirmation;
-mockFormFields.baseButtonWithConfirm.icon = Send;
 // #endregion BaseButtonWithConfirm
 
 // #region BaseCheckbox

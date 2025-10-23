@@ -24,6 +24,8 @@ interface BaseInputProps {
  *
  * Important this field can use additional parameter placeholder to declare input placeholder!
  *
+ * Possible variants `default`, `ghost`
+ *
  * @see BaseInputProps
  * @see BaseFieldModel
  * @see BaseFieldModel.addit
@@ -34,8 +36,18 @@ const BaseInput: React.FC<BaseInputProps> = observer((props) => {
 
     const isDisabled = hardDisable || field.isDisabled;
 
+    // #region Variants
+    const isGhost = field.variant === "ghost";
+    const isDefault = field.variant === "default";
+    // #endregion Variants
+
     return (
         <div>
+            {!isGhost &&
+                <label className="text-sm font-medium block mb-2 p-1">
+                    <>{field.label}</>
+                </label>
+            }
             <Input
                 className={field.style}
                 disabled={isDisabled}
@@ -45,6 +57,11 @@ const BaseInput: React.FC<BaseInputProps> = observer((props) => {
                 onChange={e => handleChange(field.id, e.target.value)}
                 onBlur={() => handleBlur(field.id)}
             />
+            {isDefault && (
+                <p className="text-sm text-gray-400 font-light whitespace-normal break-word p-1">
+                    {field.description}
+                </p>
+            )}
         </div>
     )
 });
