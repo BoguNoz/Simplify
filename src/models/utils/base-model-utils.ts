@@ -25,6 +25,7 @@ export function createFieldPlaceholders<
             isDisabled: false,
             isRequired: false,
             render: true,
+            excluded: false,
             fieldType: BaseFieldTypesEnum.Input,
             value: undefined,
             validators: [],
@@ -49,20 +50,6 @@ export function buildFields<T extends string>(
     configs: Record<T, Partial<BaseFieldModel>>
 ): BaseFieldModel[] {
     return Object.values(configs) as BaseFieldModel[];
-}
-
-export function formWrapper<T extends string>(
-    fields: Record<T, Partial<BaseFieldModel>>
-): Record<T, Partial<BaseFieldModel>> {
-    (Object.keys(fields) as T[]).forEach(key => {
-        const field = fields[key];
-        field.addit = {
-            ...(field.addit ?? {}),
-            isBorderless: true,
-            isLabelActive: true,
-        };
-    });
-    return fields;
 }
 
 export function chartWrapper<T extends string>(

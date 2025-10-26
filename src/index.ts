@@ -5,7 +5,6 @@ export * from "@core/components/layout/charts/BaseMultiLineChart"
 // #endregion components/layout/charts
 
 // #region components/layout/form/wrappers
-export * from "@core/components/layout/form/wrappers/BaseAlertWrapper"
 export * from "@core/components/layout/form/wrappers/BaseValidatorBox"
 // #endregion components/layout/form/wrappers
 

@@ -1,10 +1,11 @@
 import BaseFieldModel from "@core/models/base-field-model";
 import {BaseOperationFn} from "@core/events/operation";
 import {reaction, runInAction} from "mobx";
-import {BaseValidatorFn, ValidatorResponse} from "@core/events/validator";
+import {BaseValidatorFn, isEmpty, ValidatorResponse} from "@core/events/validator";
 import {BaseDependencyFn} from "@core/events/dependency";
 import {isNullEmptyFalseOrUndefined, isNullOrUndefined} from "@core/lib/utils";
 import BaseFieldTypesEnum from "@core/enums/base-field-type-enum";
+import BaseFieldTypeEnum from "@core/enums/base-field-type-enum";
 
 /**
  * Abstract base class that provides a reactive, signal-like state management layer using MobX.
@@ -42,7 +43,9 @@ import BaseFieldTypesEnum from "@core/enums/base-field-type-enum";
  *             setFiledEditability: action,
  *         });
  *     }
- *§}
+ *}
+ *
+ * export const fieldStore = new FieldStore();
  * ```
  *
  * @abstract
@@ -60,8 +63,10 @@ export abstract class BaseStore {
      * Initializes all fields based on their configuration.
      * 
      * @remarks
-     * Sets up field data sources, validators, operations, and dependencies.
-     * Also registers reactions to automatically update dependent fields when values change.
+     * - Sets up field data sources, validators, operations, and dependencies.
+     * - Registers reactions to automatically update dependent fields when values change.
+     * - For required fields, an isEmpty validator is added automatically.
+     * - Fields of type `Button`, `ButtonWithConfirmation`, and `Toggle` are their excluded flag set as `true` as default.
      * 
      * @param {BaseFieldModel[]} fields - List of fields configurations.
      */
@@ -75,9 +80,21 @@ export abstract class BaseStore {
                 this.fields[field.id].value = value;
             }
 
+            if (field.fieldType === BaseFieldTypeEnum.Button
+                || field.fieldType ===  BaseFieldTypeEnum.ButtonWithConfirmation
+                || field.fieldType === BaseFieldTypeEnum.Toggle
+            ) {
+                this.fields[field.id].excluded = true;
+            }
+
             if (field.validators?.length) {
                 this.addValidators(field.id, field.validators);
             }
+
+            if (field.isRequired) {
+                this.addValidators(field.id, [isEmpty]);
+            }
+
             if (field.operations?.length) {
                 this.operations[field.id] = [...field.operations];
             }
@@ -267,14 +284,14 @@ export abstract class BaseStore {
      *
      * @remarks
      * Validation will occur, when field is not disabled and render 
-     * or value is not null or undefined.
+     * or value is not null or undefined or field is not excluded.
      *
      * @returns {ValidatorResponse[]} The list of validation results.
      */
     validateField = (id: string): ValidatorResponse[] => {
         const field = this.fields[id];
 
-        if (field.isDisabled || !field.render || isNullOrUndefined(field.value)) 
+        if (field.isDisabled || !field.render || isNullOrUndefined(field.value) || field.excluded)
             return [{ isValid: true, isWarning: false, message: "" }] as ValidatorResponse[];
 
         const results = [];

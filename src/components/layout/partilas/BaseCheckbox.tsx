@@ -50,13 +50,15 @@ const BaseCheckbox = observer((props: BaseCheckboxProps) => {
                     </p>
                 </div>
             )}
-            <Checkbox
-                className={field.style}
-                disabled={isDisabled}
-                checked={field.value}
-                onCheckedChange={c => handleChange(field.id, c)}
-                onBlur={() => handleBlur(field.id)}
-            />
+            <div className="mr-5 mt-2">
+                <Checkbox
+                    className={field.style}
+                    disabled={isDisabled}
+                    checked={field.value}
+                    onCheckedChange={c => handleChange(field.id, c)}
+                    onBlur={() => handleBlur(field.id)}
+                />
+            </div>
             {isOutline &&
                 <label className="font-medium text-sm p-3 block">
                     <>

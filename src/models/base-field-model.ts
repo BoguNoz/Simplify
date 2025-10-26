@@ -68,6 +68,14 @@ export default interface BaseFieldModel {
     render: boolean;
 
     /**
+     * Determines whether the filed should be excluded from actions.
+     *
+     * @remarks
+     *  Determines whether field will be validated in default.
+     */
+    excluded: boolean;
+
+    /**
      * Field label displayed in the UI.
      */
     label: string | ElementType;

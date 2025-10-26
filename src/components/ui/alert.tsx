@@ -8,7 +8,7 @@ const alertVariants = cva(
         variants: {
             variant: {
                 primary: "border bg-card text-card-foreground",
-                ghost: "border-0 bg-muted text-muted-foreground",
+                ghost: "border-0",
                 secondary: "border-0 bg-card text-card-foreground",
             },
             status: {
@@ -37,13 +37,12 @@ const alertVariants = cva(
                 variant: "secondary",
                 status: "warning",
                 className:
-                    "border-yellow-200 bg-yellow-50 text-yellow-500 [&>svg]:text-current *:data-[slot=alert-description]:text-yellow-500",
+                    "border-yellow-200 text-yellow-500 [&>svg]:text-current *:data-[slot=alert-description]:text-yellow-500",
             },
             {
                 variant: "ghost",
                 status: "warning",
-                className:
-                    "[&>svg]:text-yellow-500 [&_[data-slot=alert-description]]:text-yellow-500 [&_[data-slot=alert-description]_input]:text-foreground",
+                className: "[&>svg]:text-current *:data-[slot=alert-description]:text-yellow-500",
             },
 
             // SUCCESS
@@ -51,19 +50,18 @@ const alertVariants = cva(
                 variant: "primary",
                 status: "success",
                 className:
-                    "border-indigo-200 bg-indigo-50 text-indigo-500 [&>svg]:text-current [&_[data-slot=alert-title]_p]:text-indigo-400",
+                    "border-indigo-200 bg-indigo-5 text-indigo-500 [&>svg]:text-current [&_[data-slot=alert-title]_p]:text-indigo-400",
             },
             {
                 variant: "secondary",
                 status: "success",
                 className:
-                    "border-indigo-200 bg-indigo-50 text-indigo-500 [&>svg]:text-current [&_[data-slot=alert-title]_p]:text-indigo-400",
+                    "border-indigo-200 text-indigo-500 [&>svg]:text-current [&_[data-slot=alert-title]_p]:text-indigo-400",
             },
             {
                 variant: "ghost",
                 status: "success",
-                className:
-                    "[&>svg]:text-indigo-500 [&_[data-slot=alert-description]_input]:text-foreground",
+                className: "text-indigo-500 [&>svg]:text-current [&_[data-slot=alert-title]_p]:text-indigo-400",
             },
 
             // DESTRUCTIVE
@@ -77,13 +75,12 @@ const alertVariants = cva(
                 variant: "secondary",
                 status: "destructive",
                 className:
-                    "border-red-200 bg-red-50 text-destructive [&>svg]:text-current *:data-[slot=alert-description]:text-destructive/90",
+                    "border-red-200 text-destructive [&>svg]:text-current *:data-[slot=alert-description]:text-destructive/90",
             },
             {
                 variant: "ghost",
                 status: "destructive",
-                className:
-                    "text-destructive [&>svg]:text-destructive [&_[data-slot=alert-description]]:text-destructive [&_[data-slot=alert-description]_input]:text-foreground",
+                className: "text-destructive [&>svg]:text-current *:data-[slot=alert-description]:text-destructive/90",
             },
 
             // DISABLED
@@ -102,8 +99,7 @@ const alertVariants = cva(
             {
                 variant: "ghost",
                 status: "disabled",
-                className:
-                    "text-gray-500 [&>svg]:text-current *:data-[slot=alert-description]:text-gray-500/90",
+                className: "",
             },
         ]
     }

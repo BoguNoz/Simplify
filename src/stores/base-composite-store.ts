@@ -37,6 +37,8 @@ import {observable, runInAction} from "mobx";
  *         });
  *     }
  * }
+ *
+ * export const compositeStore = new CompositeStore();
  * ```
  *
  * @abstract

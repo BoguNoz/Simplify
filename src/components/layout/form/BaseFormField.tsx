@@ -35,24 +35,29 @@ const BaseFormField: React.FC<BaseFormFieldProps> = observer((props) => {
     })
 
     const isValid = validationResult.every(r => r.isValid);
-
-    const isSuccess = isValid && !isNullEmptyFalseOrUndefined(field.value);
+    const isDisabled = field.isDisabled || hardDisable;
     const isWarning = !isValid && validationResult.every(r => r.isWarning);
-    const isDisabled = field.isDisabled;
 
     const status = () => {
-        if (isSuccess)
-            return "success";
-        if (isWarning)
-            return "warning";
-        if (!isValid && !isWarning)
-            return "destructive";
-        if (isDisabled)
+        if (isDisabled) {
             return "disabled";
+        }
+        else if (!isValid && !isWarning) {
+            return "destructive";
+        }
+        else if (isWarning) {
+            return "warning";
+        }
+        else if (field.isRequired) {
+            return "success";
+        }
+
         return "default";
     };
 
     const variant = () => {
+        if (field.excluded)
+            return "ghost";
         if (field.variant === "default")
             return "primary";
         if (field.variant === "secondary")
@@ -63,14 +68,21 @@ const BaseFormField: React.FC<BaseFormFieldProps> = observer((props) => {
     };
 
     const getSymbol = () => {
-        if (field.isDisabled && field.fieldType != BaseFieldTypeEnum.Button)
-            return <CircleOff/>;
-        if (!isValid && !isWarning && !field.isDisabled )
-            return <AlertCircle/>;
-        if (isValid && field.isRequired && !field.isDisabled)
-            return <CheckCircle/>;
-        if (!isValid && isWarning && !field.isDisabled)
-            return <AlertTriangle/>;
+        if (field.variant === "ghost" || field.excluded) {
+            return <></>
+        }
+        else if (isDisabled) {
+            return <CircleOff className="w-4 h-4"/>
+        }
+        else if (!isValid && !isWarning) {
+            return <AlertCircle className="w-4 h-4"/>
+        }
+        else if (!isValid) {
+            return <AlertTriangle className="w-4 h-4"/>
+        }
+        else if (isValid && field.isRequired) {
+            return <CheckCircle className="w-4 h-4"/>;
+        }
     };
 
     const dependenciesFields =
@@ -88,9 +100,11 @@ const BaseFormField: React.FC<BaseFormFieldProps> = observer((props) => {
             <Alert
                 variant={variant()}
                 status={status()}
-                className={field.style}
+                className="relative"
             >
-                {getSymbol()}
+                <div className="absolute top-2 right-2">
+                    {getSymbol()}
+                </div>
                 <AlertTitle  className="flex flex-col gap-1 w-full">
                     <BaseField
                         field={field}
@@ -102,9 +116,11 @@ const BaseFormField: React.FC<BaseFormFieldProps> = observer((props) => {
                 </AlertTitle>
                 <AlertDescription>
                     <div className="flex flex-col gap-1">
-                        <BaseValidatorBox
-                            validationResult={validationResult}
-                        />
+                        {!field.isDisabled && !isValid &&
+                            <BaseValidatorBox
+                                validationResult={validationResult}
+                            />
+                        }
                         { isDependenciesSectionVisible && (
                             <Collapsible>
                                 <CollapsibleTrigger asChild>

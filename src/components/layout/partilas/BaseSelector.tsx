@@ -53,7 +53,7 @@ const BaseSelector: React.FC<SelectorFieldProps> = observer((props) => {
     }, [field.dataSource, field.deconstructor]);
 
     return (
-        <div>
+        <div className="p-3">
             <Select onValueChange={handleChange}>
                 <SelectTrigger
                     className={field.style + " w-[500px]"}

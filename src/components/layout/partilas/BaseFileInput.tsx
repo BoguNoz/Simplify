@@ -39,7 +39,7 @@ const BaseFileInput: React.FC<BaseFileInputProps> = observer((props) => {
     // #endregion Variants
 
     return (
-        <div>
+        <div className="p-3">
             {!isGhost &&
                 <label className="text-sm font-medium block mb-2 p-1">
                     <>{field.label}</>

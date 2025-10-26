@@ -1,7 +1,6 @@
 import type {Meta, StoryObj} from "@storybook/react";
 import {action} from "storybook/actions";
 import {mockBaseRegisteredFields, mockFields} from "@core/components/mocks/base-field-mocks";
-import baseField from "@core/components/layout/BaseField";
 import BaseButton from "../BaseButton";
 import {Send} from "lucide-react";
 
@@ -95,7 +94,7 @@ export const icon: Story = {
         ...Default.args,
         field: {
             ...field,
-            icon: Send,
+            label: Send,
         },
     },
 };
