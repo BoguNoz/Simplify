@@ -38,7 +38,7 @@ const BaseInput: React.FC<BaseInputProps> = observer((props) => {
 
     // #region Variants
     const isGhost = field.variant === "ghost";
-    const isDefault = field.variant === "default";
+    const isPrimary = field.variant === "default" || field.variant === "secondary";
     // #endregion Variants
 
     return (
@@ -57,7 +57,7 @@ const BaseInput: React.FC<BaseInputProps> = observer((props) => {
                 onChange={e => handleChange(field.id, e.target.value)}
                 onBlur={() => handleBlur(field.id)}
             />
-            {isDefault && (
+            {isPrimary && (
                 <p className="text-sm text-gray-400 font-light whitespace-normal break-word p-1">
                     {field.description}
                 </p>

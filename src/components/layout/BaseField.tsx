@@ -40,7 +40,9 @@ interface BaseFieldProps {
  * @see FormFieldTypesEnum
  * @see BaseFieldProps
  */
-const BaseField: React.FC<BaseFieldProps> = observer(({ field, handleChange, handleBlur, hardDisable, hardTyping }) => {
+const BaseField: React.FC<BaseFieldProps> = observer((props) => {
+    const {field, handleChange, handleBlur, hardDisable, hardTyping} = props;
+
     const isDisable = field.isDisabled || hardDisable;
     const type = hardTyping || field.fieldType
 

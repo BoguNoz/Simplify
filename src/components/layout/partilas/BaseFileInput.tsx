@@ -35,7 +35,7 @@ const BaseFileInput: React.FC<BaseFileInputProps> = observer((props) => {
 
     // #region Variants
     const isGhost = field.variant === "ghost";
-    const isDefault = field.variant === "default";
+    const isPrimary = field.variant === "default" || field.variant === "secondary";
     // #endregion Variants
 
     return (
@@ -51,7 +51,7 @@ const BaseFileInput: React.FC<BaseFileInputProps> = observer((props) => {
                 type="file"
                 onChange={e => handleChange(field.id, e.target.files?.[0] ?? "")}
             />
-            {isDefault && (
+            {isPrimary && (
                 <p className="text-sm text-gray-400 font-light whitespace-normal break-word p-1">
                     {field.description}
                 </p>

@@ -22,7 +22,7 @@ interface SelectorFieldProps {
  *
  * If `hardDisable` is set to `true`, the select will be disabled regardless of the field state.
  *
- * Possible variants `default`, `secondary`.
+ * Possible variants `default`, `ghost`.
  *
  * @see BaseFieldModel
  * @see SelectorFieldProps
@@ -36,7 +36,7 @@ const BaseSelector: React.FC<SelectorFieldProps> = observer((props) => {
     const isDisabled = hardDisable || field.isDisabled;
 
     // #region Variants
-    const isDefault = field.variant === "default";
+    const isPrimary = field.variant === "default" || field.variant === "secondary";
     // #endregion Variants
 
     useEffect(() => {
@@ -71,7 +71,7 @@ const BaseSelector: React.FC<SelectorFieldProps> = observer((props) => {
                         ))}
                     </SelectGroup>
                 </SelectContent>
-                {isDefault && (
+                {isPrimary && (
                     <p className="text-sm text-gray-400 font-light whitespace-normal break-word p-1">
                         {field.description}
                     </p>

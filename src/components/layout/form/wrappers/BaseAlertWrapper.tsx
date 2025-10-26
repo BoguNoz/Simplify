@@ -28,40 +28,47 @@ interface BaseAlertWrapperProps {
 }
 
 
-const BaseAlertWrapper: React.FC<BaseAlertWrapperProps> = observer(({field, children, isValid, validationResult, dependencies, dependenciesLabel}) => {
-
+const BaseAlertWrapper: React.FC<BaseAlertWrapperProps> = observer((props) => {
+    const {field, children, isValid, validationResult, dependencies, dependenciesLabel} = props;
 
     // #region BaseVariables
-    const isSuccess = isValid && !isNullEmptyFalseOrUndefined(field.value);;
+    const isSuccess = isValid && !isNullEmptyFalseOrUndefined(field.value);
     const isWarning = !isValid && validationResult.every(r => r.isWarning);
+    const isDisabled = field.isDisabled;
     const errorMessages = validationResult.map(validationResult => validationResult.message);
+
+    const status = () => {
+        if (isSuccess)
+            return "success";
+        if (isWarning)
+            return "warning";
+        if (!isValid && !isWarning)
+            return "destructive";
+        if (isDisabled)
+            return "disabled";
+        return "default";
+    };
+
+    const variant = () => {
+        if (field.variant === "default")
+            return "primary";
+        if (field.variant === "secondary")
+            return "secondary";
+        if (field.variant === "ghost")
+            return "ghost";
+        return "ghost";
+    };
     // #endregion BaseVariables
 
-    // #region MemoVariables
-    const dependenciesLabelFinal = useMemo(() => dependenciesLabel ?? "Dependencies", [dependenciesLabel]);
+    const dependenciesLabelFinal =  dependenciesLabel ?? "Dependencies";
 
-    const variant = useMemo(() => {
-        const borderless = field.addit?.isBorderless;
-
-        if (field.isDisabled) return borderless ? "softDisabled" : "disabled";
-        if (isValid) return isSuccess ? (borderless ? "softSuccess" : "success") : "default";
-        if (isWarning) return borderless ? "softWarning" : "warning";
-        return borderless ? "softDestructive" : "destructive";
-
-    } ,[field, isValid, isWarning, isSuccess]);
-
-    const bordered = useMemo(() => !field.addit!.isBorderless, [field])
-
-    const dependenciesFields = useMemo(() => (
+    const dependenciesFields =
         dependencies.map(dep => (
             <CollapsibleContent key={dep}>
                 <label className="ml-6 mb-1 block">{dep}</label>
             </CollapsibleContent>
-        ))
-    ), [dependencies]);
-    // #endregion MemoVariables
+        ));
 
-    // #region NonStaticVariables
     const getSymbol = () => {
         if (field.isDisabled && field.fieldType != BaseFieldTypeEnum.Button)
             return <CircleOff/>;
@@ -74,12 +81,11 @@ const BaseAlertWrapper: React.FC<BaseAlertWrapperProps> = observer(({field, chil
     };
 
     const isDependenciesSectionVisible = field.isDisabled && field.fieldType != BaseFieldTypeEnum.Button;
-    // #rendegion NonStaticVariables
 
     return (
         <Alert
-            variant={variant}
-            bordered={bordered}
+            variant={variant()}
+            status={status()}
             className={field.style}
         >
             {getSymbol()}

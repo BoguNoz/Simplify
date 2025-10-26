@@ -23,7 +23,7 @@ interface BaseSwitchProps {
  *
  * If `hardDisable` is set to `true`, the select will be disabled regardless of the field state.
  *
- * Possible variants `default`, `ghost`, `secondary`.
+ * Possible variants `default`, `ghost`, `outline`.
  *
  * @see BaseFieldModel
  * @see BaseSwitchProps
@@ -34,13 +34,13 @@ const BaseSwitch: React.FC<BaseSwitchProps> = observer((props) => {
     const isDisabled = hardDisable || field.isDisabled;
 
     // #region Variants
-    const isDefault = field.variant === "default";
-    const isSecondary = field.variant === "secondary";
+    const isPrimary = field.variant === "default" || field.variant === "secondary";
+    const isOutline = field.variant === "outline";
     // #endregion Variants
 
     return (
         <div className="flex items-center justify-between p-3">
-            {isDefault && (
+            {isPrimary && (
                 <div className="space-y-0.5 min-w-0">
                     <label className="text-sm font-medium leading-none">
                         <>{field.label}</>
@@ -57,7 +57,7 @@ const BaseSwitch: React.FC<BaseSwitchProps> = observer((props) => {
                 onCheckedChange={c => handleChange(field.id, c)}
                 onBlur={() => handleBlur(field.id)}
             />
-            {isSecondary &&
+            {isOutline &&
                 <label className="font-medium text-sm p-3 block">
                     <>
                         {field.label}
