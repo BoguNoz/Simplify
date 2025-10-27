@@ -2,6 +2,8 @@ import BaseFieldModel from "@core/models/base-field-model";
 import {observer} from "mobx-react-lite";
 import React from "react";
 import {Input} from "@core/components/ui/input";
+import {Tooltip, TooltipContent, TooltipTrigger} from "@core/components/ui/tooltip";
+import {isNullEmptyFalseOrUndefined} from "@core/lib/utils";
 
 interface BaseInputProps {
     field: BaseFieldModel;
@@ -20,7 +22,7 @@ interface BaseInputProps {
  * - Input is stored in the `field.value`. The `handleChange` callback is called whenever the checkbox is toggled, and `handleBlur` is called when it loses focus.
  * - If `hardDisable` is set to `true`, the input will be disabled regardless of the field state.
  * - Important this field can use additional parameter placeholder to declare input placeholder!
- * - Possible variants `default`, `ghost`
+ * - Possible variants `default`, `ghost`, `outline`.
  *
  * @see BaseInputProps
  * @see BaseFieldModel
@@ -35,14 +37,25 @@ const BaseInput: React.FC<BaseInputProps> = observer((props) => {
     // #region Variants
     const isGhost = field.variant === "ghost";
     const isPrimary = field.variant === "default" || field.variant === "secondary";
+    const isOutline = field.variant === "outline";
     // #endregion Variants
 
     return (
         <div>
             {!isGhost &&
-                <label className="text-sm font-medium block mb-2 p-1">
-                    <>{field.label}</>
-                </label>
+                <Tooltip>
+                    <TooltipTrigger>
+                        <label className="text-sm font-medium block mb-2 p-1">
+                            <>{field.label}</>
+                        </label>
+                    </TooltipTrigger>
+                    {!isNullEmptyFalseOrUndefined(field.description) &&
+                        isOutline && (
+                            <TooltipContent>
+                                <label>{field.description}</label>
+                            </TooltipContent>
+                        )}
+                </Tooltip>
             }
             <Input
                 className={field.style}

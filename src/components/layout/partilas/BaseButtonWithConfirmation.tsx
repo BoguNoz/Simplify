@@ -3,6 +3,10 @@ import {observer} from "mobx-react-lite";
 import React, {useEffect, useState} from "react";
 import {Button} from "@core/components/ui/button";
 import {Check, X} from "lucide-react";
+import {Tooltip, TooltipContent, TooltipTrigger} from "@core/components/ui/tooltip";
+import {Spinner} from "@core/components/ui/spiner";
+import {IconExclamationCircle} from "@tabler/icons-react";
+import {isNullEmptyFalseOrUndefined} from "@core/lib/utils";
 
 
 interface BaseButtonWithConfirmationProps {
@@ -19,10 +23,10 @@ interface BaseButtonWithConfirmationProps {
  *
  * @remarks
  * - This button uses {@link BaseFieldModel} to control its state, appearance, and behavior.
+ * - If field description is specified it will show as a tooltip.
  * - The `BaseButtonWithConfirmation` temporarily switches into a confirmation state when clicked.
  * During this state, it displays confirmation and decline buttons instead of the main button label.
  * If the user does not confirm within the given timeout, the button automatically resets.
- *
  * - If `hardDisable` is set to `true`, the select will be disabled regardless of the field state.
  * - Possible variants `default`, `outline`, `ghost`, `destructive`, `secondary`, `link`
  *
@@ -48,15 +52,24 @@ const BaseButtonWithConfirmation: React.FC<BaseButtonWithConfirmationProps> = ob
     if (!confirming || isDisabled) {
         return (
             <div onClick={() => setConfirming(true)} className="cursor-pointer">
-                <Button
-                    className={field.style}
-                    disabled={isDisabled}
-                    variant={field.variant}
-                    size={isIcon ? "icon" : "default"}
-                    onBlur={() => handleBlur(field.id)}
-                >
-                   <>{isIcon ? <field.label /> : field.label}</>
-                </Button>
+                <Tooltip>
+                    <TooltipTrigger>
+                        <Button
+                            className={field.style}
+                            disabled={isDisabled}
+                            variant={field.variant}
+                            size={isIcon ? "icon" : "default"}
+                            onBlur={() => handleBlur(field.id)}
+                        >
+                            <>{isIcon ? <field.label /> : field.label}</>
+                        </Button>
+                    </TooltipTrigger>
+                    {!isNullEmptyFalseOrUndefined(field.description) &&
+                        <TooltipContent>
+                            <label>{field.description}</label>
+                        </TooltipContent>
+                    }
+                </Tooltip>
             </div>
         );
     }

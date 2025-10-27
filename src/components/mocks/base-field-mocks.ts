@@ -33,7 +33,7 @@ fields.baseButtonWithConfirm.isRequired = true;
 
 // #region BaseCheckbox
 fields.baseCheckbox.fieldType = BaseFieldTypesEnum.CheckBox;
-fields.baseCheckbox.isRequired = true;
+fields.baseCheckbox.variant = "outline";
 // #endregion BaseCheckbox
 
 // #region BaseFileInput

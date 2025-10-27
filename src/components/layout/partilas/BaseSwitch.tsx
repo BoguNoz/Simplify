@@ -2,6 +2,8 @@ import BaseFieldModel from "@core/models/base-field-model";
 import {observer} from "mobx-react-lite";
 import React from "react";
 import {Switch} from "@core/components/ui/switch";
+import {Tooltip, TooltipContent, TooltipTrigger} from "@core/components/ui/tooltip";
+import {isNullEmptyFalseOrUndefined} from "@core/lib/utils";
 
 interface BaseSwitchProps {
     field: BaseFieldModel;
@@ -46,7 +48,7 @@ const BaseSwitch: React.FC<BaseSwitchProps> = observer((props) => {
                     </p>
                 </div>
             )}
-            <div className="mr-5 mt-2">
+            <div className="mr-3 mt-1.5">
                 <Switch
                     className={field.style}
                     disabled={isDisabled}
@@ -55,12 +57,22 @@ const BaseSwitch: React.FC<BaseSwitchProps> = observer((props) => {
                     onBlur={() => handleBlur(field.id)}
                 />
             </div>
-            {isOutline &&
-                <label className="font-medium text-sm p-3 block">
-                    <>
-                        {field.label}
-                    </>
-                </label>}
+            {isOutline && (
+                <Tooltip>
+                    <TooltipTrigger>
+                        <label className="font-medium text-sm p-3 block">
+                            <>
+                                {field.label}
+                            </>
+                        </label>
+                    </TooltipTrigger>
+                    {!isNullEmptyFalseOrUndefined(field.description) &&
+                        <TooltipContent>
+                            <label>{field.description}</label>
+                        </TooltipContent>
+                    }
+                </Tooltip>
+            )}
         </div>
     )
 });

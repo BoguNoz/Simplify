@@ -24,7 +24,7 @@ interface BaseFormFieldProps {
  * which overlays validation messages and state for the field.
  * 
  * @remarks
- * - Posible variants `default`, `secondary`, `ghost`.
+ * - Possible variants `default`, `secondary`, `ghost`, `outline`.
  * 
  * @see BaseFormFieldProps
  */
@@ -67,7 +67,7 @@ const BaseFormField: React.FC<BaseFormFieldProps> = observer((props) => {
             return "ghost";
         if (field.variant === "default")
             return "primary";
-        if (field.variant === "secondary")
+        if (field.variant === "secondary" || field.variant === "outline")
             return "secondary";
         if (field.variant === "ghost")
             return "ghost";

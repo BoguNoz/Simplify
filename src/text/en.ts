@@ -20,7 +20,7 @@ export default {
     },
     mock: {
         baseButtonLabel: "Base Button",
-        baseButtonDescription: "A reusable component that displays a button or a component that looks like a button.",
+        // baseButtonDescription: "A reusable component that displays a button or a component that looks like a button.",
 
         baseButtonWithConfirmLabel: "Base Button with Confirm",
         baseButtonWithConfirmDescription: "A reusable button that requires user confirmation before executing an action. " +

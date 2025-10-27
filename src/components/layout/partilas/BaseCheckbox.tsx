@@ -2,6 +2,8 @@ import BaseFieldModel from "@core/models/base-field-model";
 import {observer} from "mobx-react-lite";
 import {Checkbox} from "@core/components/ui/checkbox";
 import React from "react";
+import {Tooltip, TooltipContent, TooltipTrigger} from "@core/components/ui/tooltip";
+import {isNullEmptyFalseOrUndefined} from "@core/lib/utils";
 
 interface BaseCheckboxProps {
     field: BaseFieldModel;
@@ -46,7 +48,7 @@ const BaseCheckbox = observer((props: BaseCheckboxProps) => {
                     </p>
                 </div>
             )}
-            <div className="mr-5 mt-2">
+            <div className="mr-3">
                 <Checkbox
                     className={field.style}
                     disabled={isDisabled}
@@ -55,12 +57,22 @@ const BaseCheckbox = observer((props: BaseCheckboxProps) => {
                     onBlur={() => handleBlur(field.id)}
                 />
             </div>
-            {isOutline &&
-                <label className="font-medium text-sm p-3 block">
-                    <>
-                        {field.label}
-                    </>
-                </label>}
+            {isOutline && (
+                <Tooltip>
+                    <TooltipTrigger>
+                        <label className="font-medium text-sm p-3 block">
+                            <>
+                                {field.label}
+                            </>
+                        </label>
+                    </TooltipTrigger>
+                    {!isNullEmptyFalseOrUndefined(field.description) &&
+                        <TooltipContent>
+                            <label>{field.description}</label>
+                        </TooltipContent>
+                    }
+                </Tooltip>
+            )}
         </div>
     )
 });

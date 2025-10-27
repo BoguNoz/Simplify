@@ -4,6 +4,8 @@ import {Spinner} from "@core/components/ui/spiner";
 import {IconExclamationCircle} from "@tabler/icons-react";
 import {Button} from "@core/components/ui/button";
 import React from "react";
+import {Tooltip, TooltipContent, TooltipTrigger} from "@core/components/ui/tooltip";
+import {isNullEmptyFalseOrUndefined} from "@core/lib/utils";
 
 interface BaseButtonProps {
     field: BaseFieldModel;
@@ -19,6 +21,7 @@ interface BaseButtonProps {
  *
  * @remarks
  * - This button uses {@link BaseFieldModel} to control its state, appearance, and behavior.
+ * - If field description is specified it will show as a tooltip.
  * - Component displays a spinner during processing and an error icon when the field is in an error state.
  * - If `hardDisable` is set to `true`, the button will be disabled regardless of the field state.
  * - Possible variants `default`, `outline`, `ghost`, `destructive`, `secondary`, `link`
@@ -34,24 +37,33 @@ const BaseButton: React.FC<BaseButtonProps> = observer((props) => {
 
     return (
         <div className="flex justify-end">
-            <Spinner
-                className={"mr-1 " + (field.style || "text-gray-300")}
-                show={field.state.processing || false}
-                size="small"
-            />
-            {field.state.error && (
-                <IconExclamationCircle className="text-destructive w-[20px] h-[20px] mr-2 mt-2 font-light" />
-            )}
-            <Button
-                className={field.style}
-                size={isIcon ? "icon" : "default"}
-                disabled={isDisabled}
-                variant={field.variant}
-                onClick={c => handleChange(field.id, c)}
-                onBlur={() => handleBlur(field.id)}
-            >
-                <>{isIcon ? <field.label /> : field.label}</>
-            </Button>
+            <Tooltip>
+                <TooltipTrigger>
+                    <Spinner
+                        className={"mr-1 " + (field.style || "text-gray-300")}
+                        show={field.state.processing || false}
+                        size="small"
+                    />
+                    {field.state.error && (
+                        <IconExclamationCircle className="text-destructive w-[20px] h-[20px] mr-2 mt-2 font-light" />
+                    )}
+                    <Button
+                        className={field.style}
+                        size={isIcon ? "icon" : "default"}
+                        disabled={isDisabled}
+                        variant={field.variant}
+                        onClick={c => handleChange(field.id, c)}
+                        onBlur={() => handleBlur(field.id)}
+                    >
+                        <>{isIcon ? <field.label /> : field.label}</>
+                    </Button>
+                </TooltipTrigger>
+                {!isNullEmptyFalseOrUndefined(field.description) &&
+                    <TooltipContent>
+                        <label>{field.description}</label>
+                    </TooltipContent>
+                }
+            </Tooltip>
         </div>
     )
 });
