@@ -3,7 +3,6 @@ import {observer} from "mobx-react-lite";
 import React, {useEffect, useState} from "react";
 import {Button} from "@core/components/ui/button";
 import {Check, X} from "lucide-react";
-import {isNullOrUndefined} from "@core/lib/utils";
 
 
 interface BaseButtonWithConfirmationProps {
@@ -19,14 +18,13 @@ interface BaseButtonWithConfirmationProps {
  * Reusable button component that requires user confirmation before executing an action.
  *
  * @remarks
- * This button uses {@link BaseFieldModel} to control its state, appearance, and behavior.
- * The `BaseButtonWithConfirmation` temporarily switches into a confirmation state when clicked.
+ * - This button uses {@link BaseFieldModel} to control its state, appearance, and behavior.
+ * - The `BaseButtonWithConfirmation` temporarily switches into a confirmation state when clicked.
  * During this state, it displays confirmation and decline buttons instead of the main button label.
  * If the user does not confirm within the given timeout, the button automatically resets.
  *
- * If `hardDisable` is set to `true`, the select will be disabled regardless of the field state.
- *
- * Possible variants `default`, `outline`, `ghost`, `destructive`, `secondary`, `link`
+ * - If `hardDisable` is set to `true`, the select will be disabled regardless of the field state.
+ * - Possible variants `default`, `outline`, `ghost`, `destructive`, `secondary`, `link`
  *
  * @see BaseFieldModel
  * @see BaseButtonWithConfirmationProps

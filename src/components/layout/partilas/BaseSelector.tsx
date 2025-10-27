@@ -16,13 +16,10 @@ interface SelectorFieldProps {
  * A base selector (dropdown) component integrated with the reactive field model.
  *
  * @remarks
- * This component uses the {@link BaseFieldModel} to control its state, options, and behavior.
- * The available options are fetched dynamically from the field's `dataSource` function.
- * `handleChange` is called when the user selects a value, and `handleBlur` is called on blur.
- *
- * If `hardDisable` is set to `true`, the select will be disabled regardless of the field state.
- *
- * Possible variants `default`, `ghost`.
+ * - This component uses the {@link BaseFieldModel} to control its state, options, and behavior.
+ * - The available options are fetched dynamically from the field's `dataSource` function `handleChange` is called when the user selects a value, and `handleBlur` is called on blur.
+ * - If `hardDisable` is set to `true`, the select will be disabled regardless of the field state.
+ * - Possible variants `default`, `ghost`.
  *
  * @see BaseFieldModel
  * @see SelectorFieldProps

@@ -16,13 +16,10 @@ interface BaseFileInputProps {
  * A base file input component integrated with the reactive field model.
  *
  * @remarks
- * This component uses the {@link BaseFieldModel} to control its state, appearance, and behavior.
- * The selected file is stored in the `field.value`. The `handleChange` callback is called
- * whenever the checkbox is toggled.
- * 
- * If `hardDisable` is set to `true`, the file input will be disabled regardless of the field state.
- *
- * Possible variants `default`, `ghost`, `secondary`.
+ * - This component uses the {@link BaseFieldModel} to control its state, appearance, and behavior.
+ * - The selected file is stored in the `field.value`. The `handleChange` callback is called whenever the checkbox is toggled. 
+ * - If `hardDisable` is set to `true`, the file input will be disabled regardless of the field state.
+ * - Possible variants `default`, `ghost`.
  *
  * @see BaseFieldModel
  * @see BaseFileInputProps

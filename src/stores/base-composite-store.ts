@@ -40,10 +40,21 @@ import {observable, runInAction} from "mobx";
  *
  * export const compositeStore = new CompositeStore();
  * ```
+ * 
+ * ```ts
+ * // Example store initialization 
+ * compositeStore.registerStore(compositeId, store);
+ * await compositeStore.initializeFields(compositeId);
+ * ```
  *
  * @abstract
- * @see BaseStore
- * @see BaseCompositeModel
+ * @see BaseCompositeStore.initializeComposite
+ * @see BaseCompositeStore.initializeFields
+ * @see BaseCompositeStore.renderComposite
+ * @see BaseCompositeStore.setRendering
+ * @see BaseCompositeStore.registerStore
+ * @see BaseCompositeStore.getStore
+ * @see BaseCompositeStore.invokeCompositeDeconstructor
  */
 export abstract class BaseCompositeStore {
     composites: Record<string, BaseCompositeModel> = {};
@@ -130,14 +141,14 @@ export abstract class BaseCompositeStore {
      * Invokes the deconstructor for a specific composite and all of its fields.
      * 
      * @remarks
-     * This method first executes the composite's own `deconstructor` function,
+     * - This method first executes the composite's own `deconstructor` function,
      * and then recursively calls the `invokeDeconstructor` method on each field
      * belonging to the composite.
      * 
-     * If the `free` parameter is set to `true`, both the composite and its fields
+     * - If the `free` parameter is set to `true`, both the composite and its fields
      * are removed from their respective stores after deconstruction.
      * 
-     * If any of the composite's fields require arguments for their deconstructors,
+     * - If any of the composite's fields require arguments for their deconstructors,
      * make sure to invoke those field deconstructors manually beforehand.
      * 
      * 

@@ -16,14 +16,10 @@ interface BaseSwitchProps {
  * A base switch component integrated with the reactive field model.
  *
  * @remarks
- * This component uses the {@link BaseFieldModel} to control its state, appearance, and behavior.
- * 
- * The switch state is synced with `field.value`. The `handleChange` callback is called
- * whenever the toggle is toggled, and `handleBlur` is called when it loses focus.
- *
- * If `hardDisable` is set to `true`, the select will be disabled regardless of the field state.
- *
- * Possible variants `default`, `ghost`, `outline`.
+ * - This component uses the {@link BaseFieldModel} to control its state, appearance, and behavior.
+ * - The switch state is synced with `field.value`. The `handleChange` callback is called whenever the toggle is toggled, and `handleBlur` is called when it loses focus.
+ * - If `hardDisable` is set to `true`, the select will be disabled regardless of the field state.
+ * - Possible variants `default`, `ghost`, `outline`.
  *
  * @see BaseFieldModel
  * @see BaseSwitchProps

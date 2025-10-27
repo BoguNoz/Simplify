@@ -11,11 +11,11 @@ import BaseFieldTypeEnum from "@core/enums/base-field-type-enum";
  * Abstract base class that provides a reactive, signal-like state management layer using MobX.
  *
  * @remarks
- * Each field within the store acts as a reactive signal source.
+ * - Each field within the store acts as a reactive signal source.
  * When a field's value changes, all related operations and dependency functions are automatically triggered.
  * This enables dynamic form behavior, field validation, and dependency propagation with minimal boilerplate.
  *
- * The class serves as the foundation for custom store implementations handling form state,
+ * - The class serves as the foundation for custom store implementations handling form state,
  * validation, data sources, and inter-field logic.
  *
  * @example
@@ -47,12 +47,25 @@ import BaseFieldTypeEnum from "@core/enums/base-field-type-enum";
  *
  * export const fieldStore = new FieldStore();
  * ```
+ * 
+ * ```ts
+ * // Example store initialization 
+ * await fieldStore.initializeFields(fields);
+ * ```
  *
  * @abstract
- * @see BaseFieldModel
- * @see BaseDependencyFn
- * @see BaseValidatorFn
- * @see BaseOperationFn
+ * @see BaseStore.initializeFields
+ * @see BaseStore.updateDependents
+ * @see BaseStore.getDataSource
+ * @see BaseStore.invokeDeconstructor
+ * @see BaseStore.getFieldValue
+ * @see BaseStore.setFieldValue
+ * @see BaseStore.setFieldAdditValue
+ * @see BaseStore.setFieldState
+ * @see BaseStore.setFiledEditability
+ * @see BaseStore.addValidators
+ * @see BaseStore.validateField
+ * @see BaseStore.validateSpecifyFields
  */
 export abstract class BaseStore {
     fields: Record<string, BaseFieldModel> = {};
@@ -117,9 +130,8 @@ export abstract class BaseStore {
      * Invokes all dependency functions @type {BaseDependencyFn} subscribed to the changed field.
      * 
      * @remarks
-     * Dependency functions are registered during field initialization and are triggered
-     * whenever the corresponding field value changes.
-     * All dependency function arguments are automatically injected.
+     * - Dependency functions are registered during field initialization and are triggered whenever the corresponding field value changes.
+     * - All dependency function arguments are automatically injected.
      * 
      * @param {string} changedId - The ID of the field whose value has changed.
      */
@@ -150,14 +162,11 @@ export abstract class BaseStore {
      * Invokes the deconstructor function defined for the specified field.
      *
      * @remarks
-     * This method executes the field’s custom `deconstructor` function, allowing cleanup
-     * or resource release related to the field.
+     * - This method executes the field’s custom `deconstructor` function, allowing cleanup or resource release related to the field.
      * 
-     * Use this method carefully — deconstructors should only be called when the field
-     * is being permanently disposed or reset.
+     * - Use this method carefully. Deconstructors should only be called when the field is being permanently disposed or reset.
      *
-     * If the `free` parameter is set to `true`, the field will also be removed
-     * from the store after its deconstructor is executed.
+     * - If the `free` parameter is set to `true`, the field will also be removed from the store after its deconstructor is executed.
      *
      * @param {string} id - The ID of the field to deconstruct.
      * @param {boolean} free - Whether the field should be removed from the store after deconstruction.

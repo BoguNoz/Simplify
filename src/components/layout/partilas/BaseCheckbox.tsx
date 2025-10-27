@@ -16,14 +16,10 @@ interface BaseCheckboxProps {
  * A base checkbox component integrated with the reactive field model.
  *
  * @remarks
- * This component uses the {@link BaseFieldModel} to control its state, appearance, and behavior.
- * 
- * The checkbox state is synced with `field.value`. The `handleChange` callback is called
- * whenever the checkbox is toggled, and `handleBlur` is called when it loses focus.
- * 
- * If `hardDisable` is set to `true`, the checkbox will be disabled regardless of the field state.
- *
- * Possible variants `default`, `ghost`, `outline`.
+ * - This component uses the {@link BaseFieldModel} to control its state, appearance, and behavior.
+ * - The checkbox state is synced with `field.value`. The `handleChange` callback is called whenever the checkbox is toggled, and `handleBlur` is called when it loses focus.
+ * - If `hardDisable` is set to `true`, the checkbox will be disabled regardless of the field state.
+ * - Possible variants `default`, `ghost`, `outline`.
  *
  * @see BaseFieldModel
  * @see BaseCheckboxProps

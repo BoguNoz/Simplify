@@ -27,18 +27,19 @@ interface BaseFieldProps {
  * based on the {@link BaseFieldModel} configuration.
  *
  * @remarks
- * This component supports all base field types defined in {@link FormFieldTypesEnum}.
+ * - This component supports all base field types defined in {@link FormFieldTypesEnum}.
+ * - The `hardDisable` prop allows external forcing of the disabled state, overriding the field's own state.
+ * - The `hardTyping` prop allows overriding the field type for special cases.
  *
- * The component automatically passes the reactive field state (`isDisabled`, `value`, `label`, etc.)
- * and invokes the provided `handleChange` and `handleBlur` callbacks.
- *
- * The `hardDisable` prop allows external forcing of the disabled state, overriding the field's own state.
- * The `hardTyping` prop allows overriding the field type for special cases.
- *
- *
- * @see BaseFieldModel
- * @see FormFieldTypesEnum
  * @see BaseFieldProps
+ * @see BaseButton
+ * @see BaseButtonWithConfirmation
+ * @see BaseCheckbox
+ * @see BaseFileInput
+ * @see BaseInput
+ * @see BaseSelector
+ * @see BaseSwitch
+ * @see BaseToggle
  */
 const BaseField: React.FC<BaseFieldProps> = observer((props) => {
     const {field, handleChange, handleBlur, hardDisable, hardTyping} = props;

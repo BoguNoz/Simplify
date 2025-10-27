@@ -4,7 +4,6 @@ import {Spinner} from "@core/components/ui/spiner";
 import {IconExclamationCircle} from "@tabler/icons-react";
 import {Button} from "@core/components/ui/button";
 import React from "react";
-import {isNullOrUndefined} from "@core/lib/utils";
 
 interface BaseButtonProps {
     field: BaseFieldModel;
@@ -19,12 +18,10 @@ interface BaseButtonProps {
  * Base button component integrated with the reactive field model.
  *
  * @remarks
- * This button uses {@link BaseFieldModel} to control its state, appearance, and behavior.
- * The component also displays a spinner during processing and an error icon when the field is in an error state.
- * 
- * If `hardDisable` is set to `true`, the button will be disabled regardless of the field state.
- *
- * Possible variants `default`, `outline`, `ghost`, `destructive`, `secondary`, `link`
+ * - This button uses {@link BaseFieldModel} to control its state, appearance, and behavior.
+ * - Component displays a spinner during processing and an error icon when the field is in an error state.
+ * - If `hardDisable` is set to `true`, the button will be disabled regardless of the field state.
+ * - Possible variants `default`, `outline`, `ghost`, `destructive`, `secondary`, `link`
  *
  * @see BaseFieldModel
  * @see BaseButtonProps

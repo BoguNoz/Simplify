@@ -3,12 +3,10 @@ import { observer } from "mobx-react-lite";
 import {BaseStore} from "@core/stores/base-store";
 import BaseFieldTypeEnum from "@core/enums/base-field-type-enum";
 import {Alert, AlertDescription, AlertTitle} from "@core/components/ui/alert";
-import {isNullEmptyFalseOrUndefined} from "@core/lib/utils";
 import BaseField from "@core/components/layout/BaseField";
 import {AlertCircle, AlertTriangle, CheckCircle, CircleOff, Link} from "lucide-react";
 import BaseValidatorBox from "@core/components/layout/form/wrappers/BaseValidatorBox";
 import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@core/components/ui/collapsible";
-import {Button} from "@core/components/ui/button";
 
 interface BaseFormFieldProps {
     fieldId: string;
@@ -21,6 +19,15 @@ interface BaseFormFieldProps {
     hardTyping?: BaseFieldTypeEnum;
 }
 
+/**
+ * A form wrapper for the polymorphic field component {@link BaseField},
+ * which overlays validation messages and state for the field.
+ * 
+ * @remarks
+ * - Posible variants `default`, `secondary`, `ghost`.
+ * 
+ * @see BaseFormFieldProps
+ */
 const BaseFormField: React.FC<BaseFormFieldProps> = observer((props) => {
     const {fieldId, store, handleChange, handleBlur, hardDisable, hardTyping} = props;
 

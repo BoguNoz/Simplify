@@ -47,13 +47,6 @@ enum BaseFieldTypesEnum {
      * @see createFieldPlaceholders
      */
     Toggle,
-
-    LineChart,
-    BarChart,
-    PieChart,
-    HeatmapChart,
-    Tile,
-    MultiLineTimeChart,
 }
 
 export default BaseFieldTypesEnum;
