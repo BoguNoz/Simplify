@@ -69,7 +69,7 @@ const BaseFormField: React.FC<BaseFormFieldProps> = observer((props) => {
             return "primary";
         if (field.variant === "secondary" || field.variant === "outline")
             return "secondary";
-        if (field.variant === "ghost")
+        if (field.variant === "ghost" || field.variant === "link")
             return "ghost";
         return "ghost";
     };

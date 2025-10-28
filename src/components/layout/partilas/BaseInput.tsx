@@ -4,6 +4,7 @@ import React from "react";
 import {Input} from "@core/components/ui/input";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@core/components/ui/tooltip";
 import {isNullEmptyFalseOrUndefined} from "@core/lib/utils";
+import {Info} from "lucide-react";
 
 interface BaseInputProps {
     field: BaseFieldModel;
@@ -22,7 +23,7 @@ interface BaseInputProps {
  * - Input is stored in the `field.value`. The `handleChange` callback is called whenever the checkbox is toggled, and `handleBlur` is called when it loses focus.
  * - If `hardDisable` is set to `true`, the input will be disabled regardless of the field state.
  * - Important this field can use additional parameter placeholder to declare input placeholder!
- * - Possible variants `default`, `ghost`, `outline`.
+ * - Possible variants `default`, `ghost`, `outline`, `link`.
  *
  * @see BaseInputProps
  * @see BaseFieldModel
@@ -38,14 +39,17 @@ const BaseInput: React.FC<BaseInputProps> = observer((props) => {
     const isGhost = field.variant === "ghost";
     const isPrimary = field.variant === "default" || field.variant === "secondary";
     const isOutline = field.variant === "outline";
+    const isLink = field.variant === "link";
     // #endregion Variants
+
+    const labelStyles = isOutline ? "text-sm font-medium block mb-1 ml-1 p-1" : "text-sm font-medium block mb-2 p-1"
 
     return (
         <div>
-            {!isGhost &&
+            {!isGhost && !isLink &&
                 <Tooltip>
                     <TooltipTrigger>
-                        <label className="text-sm font-medium block mb-2 p-1">
+                        <label className={labelStyles}>
                             <>{field.label}</>
                         </label>
                     </TooltipTrigger>
@@ -57,15 +61,29 @@ const BaseInput: React.FC<BaseInputProps> = observer((props) => {
                         )}
                 </Tooltip>
             }
-            <Input
-                className={field.style}
-                disabled={isDisabled}
-                type="text"
-                value={field.value}
-                placeholder={field.addit!.placeholder ?? ""}
-                onChange={e => handleChange(field.id, e.target.value)}
-                onBlur={() => handleBlur(field.id)}
-            />
+            <div className="flex items-center gap-2">
+                <Input
+                    className={field.style}
+                    disabled={isDisabled}
+                    type="text"
+                    value={field.value}
+                    placeholder={field.addit!.placeholder ?? ""}
+                    onChange={e => handleChange(field.id, e.target.value)}
+                    onBlur={() => handleBlur(field.id)}
+                />
+                {isLink &&
+                    <Tooltip>
+                        <TooltipTrigger>
+                            <label className={labelStyles}>
+                                <Info className="w-5 h-5 mt-2"/>
+                            </label>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                            <label>{field.description}</label>
+                        </TooltipContent>
+                    </Tooltip>
+                }
+            </div>
             {isPrimary && (
                 <p className="text-sm text-gray-400 font-light whitespace-normal break-word p-1">
                     {field.description}
