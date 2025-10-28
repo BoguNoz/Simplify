@@ -43,7 +43,7 @@ export type ValidatorResponse = {
  * ```
  * ```ts
  * // Example usage in repository:
- * repositoryFields.testField.validatorsFn = [testValidator]
+ * repositoryFields.testField.validators = [testValidator]
  * ```
  * 
  * 
@@ -53,6 +53,7 @@ export type ValidatorResponse = {
  *
  * @returns {ValidatorResponse} The validation result object.
  *
+ * @see BaseStore
  */
 export type BaseValidatorFn = (store: BaseStore, value: any, id: string) => ValidatorResponse;
 
@@ -66,7 +67,7 @@ export type BaseValidatorFn = (store: BaseStore, value: any, id: string) => Vali
  * @example
  * ```ts
  * // Example usage in repository:
- * repositoryFields.testField.validatorsFn = [isEmpty]
+ * repositoryFields.testField.validators = [isEmpty]
  * ```
  * 
  * @see BaseValidatorFn
@@ -98,7 +99,7 @@ export const isEmpty = (store: BaseStore, value: any, id: string): ValidatorResp
  * @example
  * ```ts
  * // Example usage in repository:
- * repositoryFields.testField.validatorsFn = [isPositive]
+ * repositoryFields.testField.validators = [isPositive]
  * ```
  *  @see BaseValidatorFn
  */
@@ -127,7 +128,7 @@ export const isPositive = (store: BaseStore, value: any, id: string) => {
  * @example
  * ```ts
  * // Example usage in repository:
- * repositoryFields.testField.validatorsFn = [isIntager]
+ * repositoryFields.testField.validators = [isIntager]
  * ```
  * 
  *  @see BaseValidatorFn
@@ -152,7 +153,7 @@ export const isInteger = (store: BaseStore, value: any, id: string) => {
  * @example
  * ```ts
  * // Example usage in repository:
- * repositoryFields.testField.validatorsFn = [isNumber]
+ * repositoryFields.testField.validators = [isNumber]
  * ```
  * 
  *  @see BaseValidatorFn
@@ -176,7 +177,7 @@ export const isNumber = (store: BaseStore, value: any, id: string) => {
  * @example
  * ```ts
  * // Example usage in repository:
- * repositoryFields.testField.validatorsFn = [isGreaterThenZero]
+ * repositoryFields.testField.validators = [isGreaterThenZero]
  * ```
  * 
  *  @see BaseValidatorFn

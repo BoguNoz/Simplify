@@ -14,9 +14,11 @@ export function createCompositesPlaceholders<
 
         acc[key] = {
             id: registeredFields[key],
+            fields: [],
+            sections: [],
             renderFn: undefined,
             render: false,
-            fields: [],
+            deconstructor: () => {},
         };
 
         return acc;

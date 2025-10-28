@@ -1,20 +1,21 @@
 import BaseFieldModel from "@core/models/base-field-model";
 import {BaseOperationFn} from "@core/events/operation";
 import {reaction, runInAction} from "mobx";
-import {BaseValidatorFn, ValidatorResponse} from "@core/events/validator";
+import {BaseValidatorFn, isEmpty, ValidatorResponse} from "@core/events/validator";
 import {BaseDependencyFn} from "@core/events/dependency";
 import {isNullEmptyFalseOrUndefined, isNullOrUndefined} from "@core/lib/utils";
 import BaseFieldTypesEnum from "@core/enums/base-field-type-enum";
+import BaseFieldTypeEnum from "@core/enums/base-field-type-enum";
 
 /**
  * Abstract base class that provides a reactive, signal-like state management layer using MobX.
  *
  * @remarks
- * Each field within the store acts as a reactive signal source.
+ * - Each field within the store acts as a reactive signal source.
  * When a field's value changes, all related operations and dependency functions are automatically triggered.
  * This enables dynamic form behavior, field validation, and dependency propagation with minimal boilerplate.
  *
- * The class serves as the foundation for custom store implementations handling form state,
+ * - The class serves as the foundation for custom store implementations handling form state,
  * validation, data sources, and inter-field logic.
  *
  * @example
@@ -34,6 +35,7 @@ import BaseFieldTypesEnum from "@core/enums/base-field-type-enum";
  *
  *             initializeFields: action,
  *             updateDependents: action,
+ *             invokeDeconstructor: action,
  *             setFieldValue: action,
  *             setFieldAdditValue: action,
  *             setFieldState: action,
@@ -41,14 +43,29 @@ import BaseFieldTypesEnum from "@core/enums/base-field-type-enum";
  *             setFiledEditability: action,
  *         });
  *     }
- *§}
+ *}
+ *
+ * export const fieldStore = new FieldStore();
+ * ```
+ * 
+ * ```ts
+ * // Example store initialization 
+ * await fieldStore.initializeFields(fields);
  * ```
  *
  * @abstract
- * @see BaseFieldModel
- * @see BaseDependencyFn
- * @see BaseValidatorFn
- * @see BaseOperationFn
+ * @see BaseStore.initializeFields
+ * @see BaseStore.updateDependents
+ * @see BaseStore.getDataSource
+ * @see BaseStore.invokeDeconstructor
+ * @see BaseStore.getFieldValue
+ * @see BaseStore.setFieldValue
+ * @see BaseStore.setFieldAdditValue
+ * @see BaseStore.setFieldState
+ * @see BaseStore.setFiledEditability
+ * @see BaseStore.addValidators
+ * @see BaseStore.validateField
+ * @see BaseStore.validateSpecifyFields
  */
 export abstract class BaseStore {
     fields: Record<string, BaseFieldModel> = {};
@@ -59,8 +76,10 @@ export abstract class BaseStore {
      * Initializes all fields based on their configuration.
      * 
      * @remarks
-     * Sets up field data sources, validators, operations, and dependencies.
-     * Also registers reactions to automatically update dependent fields when values change.
+     * - Sets up field data sources, validators, operations, and dependencies.
+     * - Registers reactions to automatically update dependent fields when values change.
+     * - For required fields, an isEmpty validator is added automatically.
+     * - Fields of type `Button`, `ButtonWithConfirmation`, and `Toggle` are their excluded flag set as `true` as default.
      * 
      * @param {BaseFieldModel[]} fields - List of fields configurations.
      */
@@ -74,9 +93,21 @@ export abstract class BaseStore {
                 this.fields[field.id].value = value;
             }
 
-            if (field.validatorsFn?.length) {
-                this.addValidators(field.id, field.validatorsFn);
+            if (field.fieldType === BaseFieldTypeEnum.Button
+                || field.fieldType ===  BaseFieldTypeEnum.ButtonWithConfirmation
+                || field.fieldType === BaseFieldTypeEnum.Toggle
+            ) {
+                this.fields[field.id].excluded = true;
             }
+
+            if (field.validators?.length) {
+                this.addValidators(field.id, field.validators);
+            }
+
+            if (field.isRequired) {
+                this.addValidators(field.id, [isEmpty]);
+            }
+
             if (field.operations?.length) {
                 this.operations[field.id] = [...field.operations];
             }
@@ -99,9 +130,8 @@ export abstract class BaseStore {
      * Invokes all dependency functions @type {BaseDependencyFn} subscribed to the changed field.
      * 
      * @remarks
-     * Dependency functions are registered during field initialization and are triggered
-     * whenever the corresponding field value changes.
-     * All dependency function arguments are automatically injected.
+     * - Dependency functions are registered during field initialization and are triggered whenever the corresponding field value changes.
+     * - All dependency function arguments are automatically injected.
      * 
      * @param {string} changedId - The ID of the field whose value has changed.
      */
@@ -116,7 +146,7 @@ export abstract class BaseStore {
     }
 
     /**
-     * Retrives data from the data source function defined for a field.
+     * Retrieves data from the data source function defined for a field.
      * 
      * @remarks
      * Executes the data source function assigned to the field and returns the resulting value.
@@ -128,17 +158,31 @@ export abstract class BaseStore {
      */
     getDataSource = async (id: string, ...args: any[]): Promise<any> => await this.fields[id].dataSource(...args);
 
-    /**
-     * Invokes field deconstructor function defined for a field.
-     * 
+   /**
+     * Invokes the deconstructor function defined for the specified field.
+     *
      * @remarks
-     * Executes the deconstructor function assigned to the field. 
-     * Funcion should not be invoke unnecessary. 
+     * - This method executes the field’s custom `deconstructor` function, allowing cleanup or resource release related to the field.
      * 
-     * @param {string} id - The ID of the field.
-     * @param {any[]} args - Deconstructor function arguments.
+     * - Use this method carefully. Deconstructors should only be called when the field is being permanently disposed or reset.
+     *
+     * - If the `free` parameter is set to `true`, the field will also be removed from the store after its deconstructor is executed.
+     *
+     * @param {string} id - The ID of the field to deconstruct.
+     * @param {boolean} free - Whether the field should be removed from the store after deconstruction.
+     * @param {...any[]} args - Optional arguments passed to the deconstructor function.
      */
-    invokeDeconstructor = async (id: string, ...args: any[]): Promise<void> => await this.fields[id].deconstructor(...args);
+    invokeDeconstructor = async (id: string, free: boolean, ...args: any[]): Promise<void> => {
+        if (!Object.keys(this.fields).includes(id)) {
+            return;
+        }
+
+        await this.fields[id].deconstructor(...args);
+        if (free) {
+            delete this.fields[id];
+        }   
+    }
+
 
     /**
      * Returns the current value of a field.
@@ -236,10 +280,10 @@ export abstract class BaseStore {
         const field = this.fields[id];
 
         const newValidators = validators.filter(v =>
-            !field.validatorsFn?.includes(v)
+            !field.validators?.includes(v)
         );
 
-        field.validatorsFn = [...(field.validatorsFn || []), ...newValidators];
+        field.validators = [...(field.validators || []), ...newValidators];
     };
 
     /**
@@ -249,18 +293,18 @@ export abstract class BaseStore {
      *
      * @remarks
      * Validation will occur, when field is not disabled and render 
-     * or value is not null or undefined.
+     * or value is not null or undefined or field is not excluded.
      *
      * @returns {ValidatorResponse[]} The list of validation results.
      */
     validateField = (id: string): ValidatorResponse[] => {
         const field = this.fields[id];
 
-        if (field.isDisabled || !field.render || isNullOrUndefined(field.value)) 
+        if (field.isDisabled || !field.render || isNullOrUndefined(field.value) || field.excluded)
             return [{ isValid: true, isWarning: false, message: "" }] as ValidatorResponse[];
 
         const results = [];
-        for (const fn of field.validatorsFn) {
+        for (const fn of field.validators) {
             const result = fn(this, field.value, id);
             if (!result.isValid) {
                 results.push(result);

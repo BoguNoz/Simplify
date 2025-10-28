@@ -20,6 +20,8 @@ import {isNullEmptyFalseOrUndefined} from "@core/lib/utils";
  * ```
  *
  * @returns Either nothing (`void`) or a `Promise<void>` for asynchronous operations.
+ *
+ * @see BaseStore
  */
 export type BaseDependencyFn = (target: string, master: string, store: BaseStore) => void | Promise<void>;
 

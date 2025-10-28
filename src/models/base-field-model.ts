@@ -2,6 +2,7 @@ import {BaseDependencyModel} from "@core/models/base-dependency-model";
 import BaseFieldTypesEnum from "@core/enums/base-field-type-enum";
 import {BaseValidatorFn} from "@core/events/validator";
 import {BaseOperationFn} from "@core/events/operation";
+import {ElementType} from "react";
 
 /**
  * Represents a single reactive field within the store.
@@ -25,6 +26,9 @@ export default interface BaseFieldModel {
 
     /**
      * Current value of the field.
+     *
+     * @remarks
+     * The initial value should be set by datasource function.
      */
     value: any;
 
@@ -64,22 +68,22 @@ export default interface BaseFieldModel {
     render: boolean;
 
     /**
+     * Determines whether the filed should be excluded from actions.
+     *
+     * @remarks
+     *  Determines whether field will be validated in default.
+     */
+    excluded: boolean;
+
+    /**
      * Field label displayed in the UI.
      */
-    label: string;
+    label: string | ElementType;
 
     /**
      * Additional description text.
      */
     description: string;
-
-    /**
-     * Placeholder text shown when the field is empty.
-     *
-     * @remarks
-     * Implemented by Input type fields.
-     */
-    placeholder: string;
 
     /**
      * Custom CSS style or class applied to the field.
@@ -88,34 +92,31 @@ export default interface BaseFieldModel {
 
     /**
      * Visual variant or theme configuration for the field.
-     *
-     * @remarks
-     * Typically used to control the appearance of base components, e.g., variants in shadcn/ui.
      */
-    variant: any;
+    variant: "default" | "outline" | "ghost" | "destructive" | "secondary" | "link";
 
     /**
      * List of validator functions executed when validating the field.
      *
      * @remarks
-     * Validators may be called multiple times, so they should perform only lightweight operations.
-     * For more complex logic or side effects, use operation functions instead.
+     * For more complex explanation see {@link BaseValidatorFn}
      */
-    validatorsFn: BaseValidatorFn[];
+    validators: BaseValidatorFn[];
 
     /**
      * List of operation functions executed when the field value changes.
      *
      * @remarks
-     * For performance reasons, ensure that operations do not perform complex computations unnecessarily.
+     * For more complex explanation see {@link BaseOperationFn}.
      */
-    operations?: BaseOperationFn[];
+    operations: BaseOperationFn[];
 
     /**
      * List of dependencies defining relationships between fields.
      *
      * @remarks
-     * Each {@link BaseDependencyFn} has its arguments automatically injected by the store when the function is coled.
+     * For more complex explanation see {@link BaseDependencyFn}.
+     *
      */
     dependencies: BaseDependencyModel[];
 

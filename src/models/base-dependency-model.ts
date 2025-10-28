@@ -6,6 +6,7 @@ import {BaseDependencyFn} from "@core/events/dependency";
  * @remarks
  * Dependencies define which fields react to changes in other fields,
  * and specify which {@link BaseDependencyFn} functions should be triggered.
+ * BaseDependencyFn has its arguments automatically injected by the store when the function is coled.
  */
 export interface BaseDependencyModel {
     /**

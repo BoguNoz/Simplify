@@ -4,6 +4,36 @@ export interface RequestOptions extends RequestInit {
     responseType?: BaseResponseTypeEnum;
 }
 
+/**
+ * Creates a strongly-typed HTTP client for performing API requests.
+ *
+ * @remarks
+ * This utility wraps the native `fetch` API and supports multiple response types
+ * through the {@link BaseResponseTypeEnum}. It automatically merges default headers
+ * with any provided ones and handles error responses by throwing exceptions.
+ *
+ * @example
+ * ```ts
+ * const apiClient = createServiceClient("https://api.example.com");
+ *
+ * // Example: Fetch JSON data
+ * const data = await apiClient<MyDataType>("/users", {
+ *   method: "GET",
+ *   responseType: BaseResponseTypeEnum.Json,
+ * });
+ *
+ * // Example: Download binary file
+ * const fileBuffer = await apiClient<ArrayBuffer>("/file", {
+ *   method: "GET",
+ *   responseType: BaseResponseTypeEnum.ArrayBuffer,
+ * });
+ * ```
+ *
+ * @param {string} baseUrl - The base URL for all API requests (e.g., `"https://api.example.com"`).
+ * @returns A reusable `sendRequest` function that performs HTTP calls relative to the provided `baseUrl`.
+ *
+ * @see BaseResponseTypeEnum
+ */
 export const createServiceClient = (baseUrl: string) => {
     return async function sendRequest<T>(
         endpoint: string,

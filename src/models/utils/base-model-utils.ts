@@ -25,20 +25,20 @@ export function createFieldPlaceholders<
             isDisabled: false,
             isRequired: false,
             render: true,
+            excluded: false,
             fieldType: BaseFieldTypesEnum.Input,
             value: undefined,
-            validatorsFn: [],
+            validators: [],
             operations: [],
-            addit: null,
+            addit: {},
             dependencies: [],
-            placeholder: "",
             style: "",
-            variant: "",
+            variant: "default",
             state: {
                 error: false,
                 processing: false,
             },
-            dataSource: () => "",
+            dataSource: () => undefined,
             deconstructor: () => {},
         };
 
@@ -50,4 +50,18 @@ export function buildFields<T extends string>(
     configs: Record<T, Partial<BaseFieldModel>>
 ): BaseFieldModel[] {
     return Object.values(configs) as BaseFieldModel[];
+}
+
+export function chartWrapper<T extends string>(
+    fields: Record<T, Partial<BaseFieldModel>>
+): Record<T, Partial<BaseFieldModel>> {
+    (Object.keys(fields) as T[]).forEach(key => {
+        const field = fields[key];
+        field.addit = {
+            ...(field.addit ?? {}),
+            palette: [],
+            labels: [""]
+        };
+    });
+    return fields;
 }

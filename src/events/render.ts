@@ -20,5 +20,6 @@ import {BaseCompositeStore} from "@core/stores/base-composite-store";
  *
  * @returns {boolean} `true` if the composite should be rendered; otherwise, `false`.
  *
+ * @see BaseStore
  */
 export type BaseRenderFn = (store: BaseCompositeStore, fieldStore: BaseStore) => boolean;
