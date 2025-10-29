@@ -66,7 +66,7 @@ const BaseInput: React.FC<BaseInputProps> = observer((props) => {
                     className={field.style}
                     disabled={isDisabled}
                     type="text"
-                    value={field.value}
+                    value={field.value ?? ""}
                     placeholder={field.addit!.placeholder ?? ""}
                     onChange={e => handleChange(field.id, e.target.value)}
                     onBlur={() => handleBlur(field.id)}
