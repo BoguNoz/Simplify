@@ -31,23 +31,9 @@ const BaseCheckbox = observer((props: BaseCheckboxProps) => {
 
     const isDisabled = hardDisable || field.isDisabled;
 
-    // #region Variants
-    const isPrimary = field.variant === "default" || field.variant === "secondary";
-    const isOutline = field.variant === "outline";
-    // #endregion Variants
-
     return (
         <div className="flex items-center justify-between p-3">
-            {isPrimary && (
-                <div className="space-y-0.5 min-w-0">
-                    <label className="text-sm font-medium leading-none">
-                        <>{field.label}</>
-                    </label>
-                    <p className="text-sm text-gray-400 font-light whitespace-normal break-words mr-10 block">
-                        {field.description}
-                    </p>
-                </div>
-            )}
+            <BaseCheckboxHeader field={field} />
             <div className="mr-3">
                 <Checkbox
                     className={field.style}
@@ -57,24 +43,45 @@ const BaseCheckbox = observer((props: BaseCheckboxProps) => {
                     onBlur={() => handleBlur(field.id)}
                 />
             </div>
-            {isOutline && (
-                <Tooltip>
-                    <TooltipTrigger>
-                        <label className="font-medium text-sm p-3 block">
-                            <>
-                                {field.label}
-                            </>
-                        </label>
-                    </TooltipTrigger>
-                    {!isNullEmptyFalseOrUndefined(field.description) &&
-                        <TooltipContent>
-                            <label>{field.description}</label>
-                        </TooltipContent>
-                    }
-                </Tooltip>
-            )}
+            <BaseCheckboxFooter field={field} />
         </div>
     )
+});
+
+const BaseCheckboxHeader = observer(({ field }: { field: BaseFieldModel }) => {
+    if (field.variant !== "default" && field.variant !== "secondary") return null;
+
+    return (
+        <div className="space-y-0.5 min-w-0">
+            <label className="text-sm font-medium leading-none">
+                <>{field.label}</>
+            </label>
+            <p className="text-sm text-gray-400 font-light whitespace-normal break-words mr-10 block">
+                {field.description}
+            </p>
+        </div>
+    );
+});
+
+const BaseCheckboxFooter = observer(({ field }: { field: BaseFieldModel }) => {
+    if (field.variant !== "outline") return null;
+
+    return (
+        <Tooltip>
+            <TooltipTrigger>
+                <label className="font-medium text-sm p-3 block">
+                    <>
+                        {field.label}
+                    </>
+                </label>
+            </TooltipTrigger>
+            {!isNullEmptyFalseOrUndefined(field.description) &&
+                <TooltipContent>
+                    <label>{field.description}</label>
+                </TooltipContent>
+            }
+        </Tooltip>
+    );
 });
 
 export default BaseCheckbox;

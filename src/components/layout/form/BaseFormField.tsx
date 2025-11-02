@@ -7,6 +7,7 @@ import BaseField from "@core/components/layout/BaseField";
 import {AlertCircle, AlertTriangle, CheckCircle, CircleOff, Link} from "lucide-react";
 import BaseValidatorBox from "@core/components/layout/form/wrappers/BaseValidatorBox";
 import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@core/components/ui/collapsible";
+import BaseFieldModel from "@core/models/base-field-model";
 
 interface BaseFormFieldProps {
     fieldId: string;

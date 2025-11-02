@@ -33,32 +33,9 @@ const BaseFileInput: React.FC<BaseFileInputProps> = observer((props) => {
 
     const isDisabled = hardDisable || field.isDisabled;
 
-    // #region Variants
-    const isGhost = field.variant === "ghost";
-    const isPrimary = field.variant === "default" || field.variant === "secondary";
-    const isOutline = field.variant === "outline";
-    const isLink = field.variant === "link";
-    // #endregion Variants
-
-    const labelStyles = isOutline ? "text-sm font-medium block mb-1 ml-1 p-1" : "text-sm font-medium block mb-2 p-1"
-
     return (
         <div className="p-3">
-            {!isGhost && !isLink &&
-                <Tooltip>
-                    <TooltipTrigger>
-                        <label className={labelStyles}>
-                            <>{field.label}</>
-                        </label>
-                    </TooltipTrigger>
-                    {!isNullEmptyFalseOrUndefined(field.description) &&
-                        isOutline && (
-                        <TooltipContent>
-                            <label>{field.description}</label>
-                        </TooltipContent>
-                    )}
-                </Tooltip>
-            }
+            <BaseFileInputHeader field={field} />
             <div className="flex items-center gap-2">
                 <Input
                     className={field.style}
@@ -66,26 +43,67 @@ const BaseFileInput: React.FC<BaseFileInputProps> = observer((props) => {
                     type="file"
                     onChange={e => handleChange(field.id, e.target.files?.[0] ?? "")}
                 />
-                {isLink &&
-                    <Tooltip>
-                        <TooltipTrigger>
-                            <label className={labelStyles}>
-                                <Info className="w-5 h-5 mt-2"/>
-                            </label>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                            <label>{field.description}</label>
-                        </TooltipContent>
-                    </Tooltip>
-                }
+                <BaseFileInputLink field={field} />
             </div>
-            {isPrimary && (
-                <p className="text-sm text-gray-400 font-light whitespace-normal break-word p-1">
-                    {field.description}
-                </p>
-            )}
+            <BaseFileInputFooter field={field} />
         </div>
     )
+});
+
+const BaseFileInputHeader = observer(({ field }: { field: BaseFieldModel }) => {
+
+    const isGhost = field.variant === "ghost";
+    const isOutline = field.variant === "outline";
+    const isLink = field.variant === "link";
+
+    if (isGhost || isLink) return null;
+
+    const labelStyles = isOutline ?
+        "text-sm font-medium block mb-1 ml-1 p-1" :
+        "text-sm font-medium block mb-2 p-1"
+
+    return (
+        <Tooltip>
+            <TooltipTrigger>
+                <label className={labelStyles}>
+                    <>{field.label}</>
+                </label>
+            </TooltipTrigger>
+            {!isNullEmptyFalseOrUndefined(field.description) &&
+                isOutline && (
+                    <TooltipContent>
+                        <label>{field.description}</label>
+                    </TooltipContent>
+                )}
+        </Tooltip>
+    );
+});
+
+const BaseFileInputLink = observer(({ field }: { field: BaseFieldModel }) => {
+    if (field.variant !== "link") return null;
+
+    return (
+        <Tooltip>
+            <TooltipTrigger>
+                <label>
+                    <Info className="w-5 h-5 mt-2"/>
+                </label>
+            </TooltipTrigger>
+            <TooltipContent>
+                <label>{field.description}</label>
+            </TooltipContent>
+        </Tooltip>
+    );
+});
+
+const BaseFileInputFooter = observer(({ field }: { field: BaseFieldModel }) => {
+    if (field.variant !== "default" && field.variant !== "secondary") return null;
+
+    return (
+        <p className="text-sm text-gray-400 font-light whitespace-normal break-word p-1">
+            {field.description}
+        </p>
+    );
 });
 
 export default BaseFileInput;
