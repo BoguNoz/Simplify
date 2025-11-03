@@ -34,7 +34,7 @@ const BaseFileInput: React.FC<BaseFileInputProps> = observer((props) => {
 
     return (
         <div className="p-3">
-            <BaseFileInputHeader field={field} />
+            <Header field={field} />
             <div className="flex items-center gap-2">
                 <Input
                     className={field.style}
@@ -42,14 +42,14 @@ const BaseFileInput: React.FC<BaseFileInputProps> = observer((props) => {
                     type="file"
                     onChange={e => handleChange(field.id, e.target.files?.[0] ?? "")}
                 />
-                <BaseFileInputLink field={field} />
+                <InfoLink field={field} />
             </div>
-            <BaseFileInputFooter field={field} />
+            <Footer field={field} />
         </div>
     )
 });
 
-const BaseFileInputHeader = observer(({ field }: { field: BaseFieldModel }) => {
+const Header = observer(({ field }: { field: BaseFieldModel }) => {
     const isGhost = field.variant === "ghost";
     const isOutline = field.variant === "outline";
     const isLink = field.variant === "link";
@@ -77,7 +77,7 @@ const BaseFileInputHeader = observer(({ field }: { field: BaseFieldModel }) => {
     );
 });
 
-const BaseFileInputLink = observer(({ field }: { field: BaseFieldModel }) => {
+const InfoLink = observer(({ field }: { field: BaseFieldModel }) => {
     if (field.variant !== "link") return null;
 
     return (
@@ -94,7 +94,7 @@ const BaseFileInputLink = observer(({ field }: { field: BaseFieldModel }) => {
     );
 });
 
-const BaseFileInputFooter = observer(({ field }: { field: BaseFieldModel }) => {
+const Footer = observer(({ field }: { field: BaseFieldModel }) => {
     if (field.variant !== "default" && field.variant !== "secondary") return null;
 
     return (
