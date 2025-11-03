@@ -9,7 +9,7 @@ import {isNullEmptyFalseOrUndefined} from "@core/lib/utils";
  * @param {BaseStore} store - The store instance containing both fields.
  *
  * @remarks
- * All function arguments are automatically injected by the store during dependency execution by default {@link updateDependents}.
+ * - All function arguments are automatically injected by the store during dependency execution by default {@link updateDependents}.
  *
  * @example
  * ```ts
@@ -37,8 +37,8 @@ export type BaseDependencyFn = (target: string, master: string, store: BaseStore
  * ```
  *
  * @remarks
- * Commonly used to control editability based on another field’s state.
- * All function arguments are automatically injected by the store.
+ * - Commonly used to control editability based on another field’s state.
+ * - All function arguments are automatically injected by the store.
  * 
  * @see BaseDependencyFn 
  */
@@ -62,8 +62,8 @@ export const ifFieldEditability = async (target: string, master: string, store: 
  * ```
  *
  * @remarks
- * Inverse behavior of {@link ifFieldEditability}.
- * All function arguments are automatically injected by the store.
+ * - Inverse behavior of {@link ifFieldEditability}.
+ * - All function arguments are automatically injected by the store.
  * 
  * @see BaseDependencyFn
  */
@@ -86,8 +86,8 @@ export const ifFieldNoEditability = async (target: string, master: string, store
  * ```
  *
  * @remarks
- * Typically used to enforce conditional validation requirements.
- * All function arguments are automatically injected by the store.
+ * - Typically used to enforce conditional validation requirements.
+ * - All function arguments are automatically injected by the store.
  * 
  * @see BaseDependencyFn
  */
@@ -110,8 +110,8 @@ export const ifFieldRequire = async (target: string, master: string, store: Base
  * ```
  *
  * @remarks
- * The field will be rendered only if the master field’s value is not null, empty, false, or undefined.
- * All function arguments are automatically injected by the store.
+ * - The field will be rendered only if the master field’s value is not null, empty, false, or undefined.
+ * - All function arguments are automatically injected by the store.
  * 
  * @see BaseDependencyFn
  */

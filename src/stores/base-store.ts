@@ -224,12 +224,15 @@ export abstract class BaseStore {
      * @param {string} id - The ID of the field.
      *
      * @remarks
-     * Validation will occur, when field is not disabled and render
+     * - Validation will occur, when field is not disabled and render
      * or value is not null or undefined or field is not excluded.
      *
      * @returns {ValidatorResponse[]} The list of validation results.
      */
     public validateField = (id: string): ValidatorResponse[] => {
+        //TODO Zmienić sposób działania metody. Metoda nadal zwraca to co zwraca,
+        // ale dodatkowo ustawia state
+
         const field = this.fields[id];
 
         if (field.isDisabled || !field.render || isNullOrUndefined(field.value) || field.excluded)
@@ -279,7 +282,7 @@ export abstract class BaseStore {
      * Retrieves data from the data source function defined for a field.
      *
      * @remarks
-     * Executes the data source function assigned to the field and returns the resulting value.
+     * - Executes the data source function assigned to the field and returns the resulting value.
      *
      * @param {string} id - The ID of the field.
      * @param {any[]} args - Data source function arguments.
@@ -292,7 +295,7 @@ export abstract class BaseStore {
      * Adds new validators to a field, avoiding duplicates.
      *
      * @remarks
-     * For safety reasons, avoid calling this method to dynamically alter validator list assigned to a field.
+     * - For safety reasons, avoid calling this method to dynamically alter validator list assigned to a field.
      *
      * @param {string} id - The ID of the field.
      * @param {BaseValidatorFn[]} validators - The list of validator functions to add.
@@ -329,7 +332,7 @@ export abstract class BaseStore {
 
 
     // #region Logic
-    private _setFieldValue = async (id: string, value: any): Promise<void> => {
+    protected _setFieldValue = async (id: string, value: any): Promise<void> => {
         const field = this.fields[id];
 
         runInAction(() => {
@@ -346,7 +349,7 @@ export abstract class BaseStore {
         }
     };
 
-    private _setFieldAdditValue = (id: string, addit: string, value: any): void => {
+    protected _setFieldAdditValue = (id: string, addit: string, value: any): void => {
         const field = this.fields[id];
 
         if (field.addit) {
@@ -354,7 +357,7 @@ export abstract class BaseStore {
         }
     }
 
-    private _setFieldState = (id: string, error: boolean = false, processing: boolean = false): void => {
+    protected _setFieldState = (id: string, error: boolean = false, processing: boolean = false): void => {
         const field = this.fields[id];
         field.state = {
             error: error,
@@ -362,12 +365,12 @@ export abstract class BaseStore {
         }
     }
 
-    private _setFiledEditability = (id: string, isEditable: boolean): void => {
+    protected _setFiledEditability = (id: string, isEditable: boolean): void => {
         const field = this.fields[id];
         field.isDisabled = !isEditable;
     }
 
-    private _invokeDeconstructor = async (id: string, free: boolean, ...args: any[]): Promise<void> => {
+    protected _invokeDeconstructor = async (id: string, free: boolean, ...args: any[]): Promise<void> => {
         if (!Object.keys(this.fields).includes(id)) {
             return;
         }

@@ -31,7 +31,7 @@ interface BaseInputProps {
  */
 const BaseInput: React.FC<BaseInputProps> = observer((props) => {
     const {field, handleChange, handleBlur, hardDisable} = props;
-
+    
     const isDisabled = hardDisable || field.isDisabled;
 
     return (
@@ -55,7 +55,6 @@ const BaseInput: React.FC<BaseInputProps> = observer((props) => {
 });
 
 const BaseInputHeader = observer(({ field }: { field: BaseFieldModel }) => {
-
     const isGhost = field.variant === "ghost";
     const isOutline = field.variant === "outline";
     const isLink = field.variant === "link";

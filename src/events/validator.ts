@@ -28,9 +28,9 @@ export type ValidatorResponse = {
  * Represents a validator function that checks a field’s value.
  *
  * @remarks  
- * All function arguments are automatically injected by the store during field validation.
- * Validators should be lightweight and synchronous when possible.  
- * For complex logic or async workflows, use operations instead.
+ * - All function arguments are automatically injected by the store during field validation.
+ * - Validators should be lightweight and synchronous when possible.  
+ * - For complex logic or async workflows, use operations instead.
  * 
  * @example
  * ```ts
@@ -61,8 +61,8 @@ export type BaseValidatorFn = (store: BaseStore, value: any, id: string) => Vali
  * Validates that a field is not empty.
  *
  * @remarks
- * All function arguments are automatically injected by the store during field validation.
- * Automatically applied to all required fields by the store.  
+ * - All function arguments are automatically injected by the store during field validation.
+ * - Automatically applied to all required fields by the store.  
  *
  * @example
  * ```ts
@@ -94,7 +94,7 @@ export const isEmpty = (store: BaseStore, value: any, id: string): ValidatorResp
  * Validates that a field is positive.
  *
  * @remarks
- * All function arguments are automatically injected by the store during field validation.
+ * - All function arguments are automatically injected by the store during field validation.
  *
  * @example
  * ```ts
@@ -148,7 +148,7 @@ export const isInteger = (store: BaseStore, value: any, id: string) => {
  * Validates that a field is number.
  *
  * @remarks
- * All function arguments are automatically injected by the store during field validation.
+ * - All function arguments are automatically injected by the store during field validation.
  *
  * @example
  * ```ts
@@ -172,7 +172,7 @@ export const isNumber = (store: BaseStore, value: any, id: string) => {
  * Validates that a field is greater then zero.
  *
  * @remarks
- * All function arguments are automatically injected by the store during field validation.
+ * - All function arguments are automatically injected by the store during field validation.
  *
  * @example
  * ```ts

@@ -35,12 +35,15 @@ export default interface BaseFieldModel {
     /**
      * Represents the field's current processing and validation state.
      */
-    state: {
+    state: { // TODO Rozszerzyć model i przenieść go do osobnego pliku 
         /** Whether the field is currently in an error state. */
         error: boolean;
 
         /** Whether the field is currently processing an async operation. */
         processing: boolean;
+
+        //TODO Powyrsze stany jako pole state: "error", "warning", "processing", "valid"
+        // pamięta o zmianie działania Base buttona 
     }
 
     /**

@@ -9,6 +9,7 @@ interface BaseValidatorBoxProps {
     validationResult: ValidatorResponse[];
 }
 
+// TODO Do przeniesienia do pliku BaseFormField
 const BaseValidatorBox: React.FC<BaseValidatorBoxProps> = observer((props) => {
     const { validationResult } = props;
 

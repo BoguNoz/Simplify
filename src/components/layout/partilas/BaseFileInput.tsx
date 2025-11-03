@@ -27,7 +27,6 @@ interface BaseFileInputProps {
  * @see BaseFieldModel
  * @see BaseFileInputProps
  */
-
 const BaseFileInput: React.FC<BaseFileInputProps> = observer((props) => {
     const {field, handleChange, hardDisable} = props;
 
@@ -51,7 +50,6 @@ const BaseFileInput: React.FC<BaseFileInputProps> = observer((props) => {
 });
 
 const BaseFileInputHeader = observer(({ field }: { field: BaseFieldModel }) => {
-
     const isGhost = field.variant === "ghost";
     const isOutline = field.variant === "outline";
     const isLink = field.variant === "link";

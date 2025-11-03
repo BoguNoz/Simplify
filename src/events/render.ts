@@ -5,8 +5,8 @@ import {BaseCompositeStore} from "@core/stores/base-composite-store";
  * Represents a render condition function for a composite.
  *
  * @remarks
- * Defines a rule that determines whether a composite should be displayed.  
- * It is automatically invoked by the store when rendering state is evaluated, and.
+ * - Defines a rule that determines whether a composite should be displayed.  
+ * - It is automatically invoked by the store when rendering state is evaluated, and
  * all function arguments are automatically injected by the store {@link setRendering}.
  *
  * @example

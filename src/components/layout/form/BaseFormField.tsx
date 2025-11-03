@@ -36,7 +36,10 @@ const BaseFormField: React.FC<BaseFormFieldProps> = observer((props) => {
     if (!field || !field.render) return null;
 
     // #region Variables
+    // TODO Mozna unikną  tego przez zmiane statusu przy walidacji pola.
     const validationResult = store.validateField(fieldId);
+
+    // TODO Do przeniesienia do nowej sekscji
     const dependencies = field.dependencies.map(dep => {
         const field = store.fields[dep.fieldId];
         return field.label as string;

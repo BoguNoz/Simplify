@@ -4,7 +4,7 @@ import {BaseStore} from "@core/stores/base-store";
  * Represents a field operation function executed when a field’s value changes.
  *
  * @remarks
- * Operations may be triggered multiple times, so avoid performing heavy computations inside them.
+ * - Operations may be triggered multiple times, so avoid performing heavy computations inside them.
  * 
  * @example
  *  ```ts
