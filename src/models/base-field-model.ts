@@ -111,7 +111,6 @@ export default interface BaseFieldModel {
      *
      * @remarks
      * For more complex explanation see {@link BaseDependencyFn}.
-     *
      */
     dependencies: BaseDependencyModel[];
 
@@ -132,7 +131,6 @@ export default interface BaseFieldModel {
      *
      * @remarks
      * To call a deconstructor function use {@link invokeDeconstructor}.
-     *
      */
     deconstructor: (...args: any[]) => void;
 

@@ -50,7 +50,6 @@ export default interface BaseCompositeModel {
      *
      * @remarks
      * To call a deconstructor function use {@link invokeCompositeDeconstructor}.
-     *
      */
     deconstructor: (...args: any[]) => void;
 }

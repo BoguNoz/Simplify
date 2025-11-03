@@ -50,7 +50,6 @@ export class ChangeRegistry {
      * });
      * ```
      */
-
     registerChange = (fn: () => void | Promise<void>): void => {
         this.queue.push(fn);
         this.scheduleFlush();
