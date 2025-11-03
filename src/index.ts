@@ -76,9 +76,7 @@ export * from "@core/models/utils/base-composite-model-utils"
 
 // #region models
 export * from "@core/models/base-composite-model"
-export * from "@core/models/base-dependency-model"
 export * from "@core/models/base-field-model"
-export * from "@core/models/base-section-model"
 // #rendegion models
 
 // #region service

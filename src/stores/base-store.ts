@@ -114,20 +114,18 @@ export abstract class BaseStore {
     }
 
     /**
-     * Updates the field's state flags such as `error` or `processing`.
+     * Updates the field's state.
      *
      * @remarks
-     * - Calling this method without specifying flags will reset the field status to its default state.
      * - To change behavior of this method override {@link _setFieldState} private method
      *
      * @param {string} id - The ID of the field.
-     * @param {boolean} [error=false] - Whether the field is in error state.
-     * @param {boolean} [processing=false] - Whether the field is in processing state.
+     * @param status - The new status of the field.
      *
      * @readonly
      */
-    public readonly setFieldState = (id: string, error: boolean = false, processing: boolean = false): void => {
-        this._registry.registerChange(() => this._setFieldState(id, error, processing));
+    public readonly setFieldState = (id: string, status: "error" | "valid" | "warning" | "pending"): void => {
+        this._registry.registerChange(() => this._setFieldState(id, status));
     }
 
     /**
@@ -226,17 +224,17 @@ export abstract class BaseStore {
      * @remarks
      * - Validation will occur, when field is not disabled and render
      * or value is not null or undefined or field is not excluded.
+     * - Validation state is safe to the field `state`.
      *
      * @returns {ValidatorResponse[]} The list of validation results.
      */
     public validateField = (id: string): ValidatorResponse[] => {
-        //TODO Zmienić sposób działania metody. Metoda nadal zwraca to co zwraca,
-        // ale dodatkowo ustawia state
-
         const field = this.fields[id];
 
-        if (field.isDisabled || !field.render || isNullOrUndefined(field.value) || field.excluded)
+        if (field.isDisabled || !field.render || isNullOrUndefined(field.value) || field.excluded) {
+            field.state.status = "valid";
             return [{ isValid: true, isWarning: false, message: "" }] as ValidatorResponse[];
+        }
 
         const results = [];
         for (const fn of field.validators) {
@@ -246,9 +244,15 @@ export abstract class BaseStore {
             }
         }
 
+        field.state.validationResult = results;
         if (results.length > 0) {
+            field.state.status = results.some(v => v.isWarning) ? "warning" : "error";
+
+
             return results;
         }
+        field.state.status = "valid";
+
         return [{ isValid: true, isWarning: false, message: "" }] as ValidatorResponse[];
     };
 
@@ -357,11 +361,11 @@ export abstract class BaseStore {
         }
     }
 
-    protected _setFieldState = (id: string, error: boolean = false, processing: boolean = false): void => {
+    protected _setFieldState = (id: string, status: "error" | "valid" | "warning" | "pending"): void => {
         const field = this.fields[id];
         field.state = {
-            error: error,
-            processing: processing,
+            status: status,
+            validationResult: [],
         }
     }
 

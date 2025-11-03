@@ -1,7 +1,7 @@
 import BaseFieldModel from "@core/models/base-field-model";
 import {observer} from "mobx-react-lite";
 import {Spinner} from "@core/components/ui/spiner";
-import {IconExclamationCircle} from "@tabler/icons-react";
+import {IconAlertTriangle, IconExclamationCircle} from "@tabler/icons-react";
 import {Button} from "@core/components/ui/button";
 import React from "react";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@core/components/ui/tooltip";
@@ -39,24 +39,19 @@ const BaseButton: React.FC<BaseButtonProps> = observer((props) => {
         <div className="flex justify-end">
             <Tooltip>
                 <TooltipTrigger>
-                    <Spinner
-                        className={"mr-1 " + (field.style || "text-gray-300")}
-                        show={field.state.processing || false}
-                        size="small"
-                    />
-                    {field.state.error && (
-                        <IconExclamationCircle className="text-destructive w-[20px] h-[20px] mr-2 mt-2 font-light" />
-                    )}
-                    <Button
-                        className={field.style}
-                        size={isIcon ? "icon" : "default"}
-                        disabled={isDisabled}
-                        variant={field.variant}
-                        onClick={c => handleChange(field.id, c)}
-                        onBlur={() => handleBlur(field.id)}
-                    >
-                        <>{isIcon ? <field.label /> : field.label}</>
-                    </Button>
+                    <div className="inline-flex items-center">
+                        <BaseButtonStatus field={field} />
+                        <Button
+                            className={field.style}
+                            size={isIcon ? "icon" : "default"}
+                            disabled={isDisabled}
+                            variant={field.variant}
+                            onClick={c => handleChange(field.id, c)}
+                            onBlur={() => handleBlur(field.id)}
+                        >
+                            <>{isIcon ? <field.label /> : field.label}</>
+                        </Button>
+                    </div>
                 </TooltipTrigger>
                 {!isNullEmptyFalseOrUndefined(field.description) &&
                     <TooltipContent>
@@ -66,6 +61,25 @@ const BaseButton: React.FC<BaseButtonProps> = observer((props) => {
             </Tooltip>
         </div>
     )
+});
+
+const BaseButtonStatus = observer(({ field }: { field: BaseFieldModel }) => {
+
+    return (
+       <>
+           <Spinner
+               className={"mr-1 " + (field.style || "text-gray-300")}
+               show={field.state.status === "pending" || false}
+               size="small"
+           />
+           {field.state.status === "error" && (
+               <IconExclamationCircle className="text-destructive w-[20px] h-[20px] mr-2 mt-2 font-light mb-2" />
+           )}
+           {field.state.status === "warning" && (
+               <IconAlertTriangle className="text-yellow-500 w-[20px] h-[20px] mr-2 mt-2 font-light mb-2" />
+           )}
+       </>
+    );
 });
 
 export default BaseButton;

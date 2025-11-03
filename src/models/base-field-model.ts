@@ -1,8 +1,9 @@
-import {BaseDependencyModel} from "@core/models/base-dependency-model";
+import {BaseDependencyModel} from "@core/models/partials/base-dependency-model";
 import BaseFieldTypesEnum from "@core/enums/base-field-type-enum";
 import {BaseValidatorFn} from "@core/events/validator";
 import {BaseOperationFn} from "@core/events/operation";
 import {ElementType} from "react";
+import {BaseStatusModel} from "@core/models/partials/base-status-model";
 
 /**
  * Represents a single reactive field within the store.
@@ -35,16 +36,7 @@ export default interface BaseFieldModel {
     /**
      * Represents the field's current processing and validation state.
      */
-    state: { // TODO Rozszerzyć model i przenieść go do osobnego pliku 
-        /** Whether the field is currently in an error state. */
-        error: boolean;
-
-        /** Whether the field is currently processing an async operation. */
-        processing: boolean;
-
-        //TODO Powyrsze stany jako pole state: "error", "warning", "processing", "valid"
-        // pamięta o zmianie działania Base buttona 
-    }
+    state: BaseStatusModel;
 
     /**
      * Indicates whether the field is disabled (non-editable).

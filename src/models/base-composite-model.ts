@@ -1,6 +1,6 @@
 import BaseFieldModel from "@core/models/base-field-model";
 import {BaseRenderFn} from "@core/events/render";
-import {BaseSectionModel} from "@core/models/base-section-model";
+import {BaseSectionModel} from "@core/models/partials/base-section-model";
 
 /**
  * Represents a composite model that groups related fields and defines its rendering behavior.
