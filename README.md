@@ -23,7 +23,7 @@ Here’s a simple example of defining a form with fields and a dependency. The s
 
 ```ts
 registeredFields = {
-    firstName = "firstNmae",
+    firstName = "firstName",
     age = "age",
     isAdult = "isAdult",
 }
@@ -32,7 +32,7 @@ const fields = createFieldPlaceholders(registeredFields, text.form);
 
 field.firstName.fieldType = BaseFieldTypesEnum.Input;
 
-filed.age.fieldType = BaseFieldTypesEnum.Input;
+field.age.fieldType = BaseFieldTypesEnum.Input;
 
 field.isAdult.fieldType = BaseFieldTypesEnum.CheckBox;
 field.isAdult.dependencies = [
@@ -51,7 +51,7 @@ You can also attach validation or other operations to a field, which are automat
 
 ```ts
 // Simple intager validator
-filed.age.validators = [isInteger]
+field.age.validators = [isInteger]
 ```
 
 The examples above only scratch the surface — Simplify provides a wide range of advanced capabilities for building fully dynamic, reactive UIs.
@@ -68,6 +68,7 @@ Because Simplify uses MobX’s core mechanisms, updates happen synchronously and
 When any piece of data changes, MobX triggers only the necessary re-renders, so your form stays consistent in real time. 
 The declarative schema is parsed into this reactive state at initialization, meaning you rarely write imperative code. 
 As a result, your app logic lives alongside your data definitions (not tangled in UI code), echoing the idea of separating logic and UI to reduce complexity.
+
 
 
 
