@@ -1,7 +1,7 @@
 # Simplify
 
 Simplify is a reactive, data-driven UI engine built on MobX, enabling rapid form and component composition using declarative field configurations and dependency logic.
-It abstracts away manual UI wiring: you describe your form in plain data (e.g. JSON or a JavaScript object) and Simplify generates the UI.
+It abstracts away manual UI wiring: you describe your form in plain data as a repository object and Simplify generates the UI.
 
 Simplify is built on MobX, so it offers full reactivity: any change in the underlying data instantly updates the UI. 
 For example, if one field depends on another (say, a “Can Vote?” checkbox appears only when age >= 18).
@@ -68,6 +68,7 @@ Because Simplify uses MobX’s core mechanisms, updates happen synchronously and
 When any piece of data changes, MobX triggers only the necessary re-renders, so your form stays consistent in real time. 
 The declarative schema is parsed into this reactive state at initialization, meaning you rarely write imperative code. 
 As a result, your app logic lives alongside your data definitions (not tangled in UI code), echoing the idea of separating logic and UI to reduce complexity.
+
 
 
 
