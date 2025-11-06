@@ -11,10 +11,11 @@ In other words, whenever the data changes, the appropriate parts of the UI updat
 
 
 ## Key Features
-- **Declarative Schemas:** Define your entire form or component layout in JSON/JS configuration, not in imperative code. Simplify reads this schema and instantiates fields and components accordingly.
+- **Declarative Schemas:** Define your entire form or component layout in one simple configuration, not in imperative code. Simplify reads this schema and instantiates fields and components accordingly.
 - **Reactive State Management:** Built on MobX, so your UI stays up-to-date with minimal code. As noted by RisingStack, MobX “allows React components to update automatically when the data they depend on changes”. Simplify leverages this for real-time updates (cf. “MobX-powered reactivity”).
-- **Dependency Logic:** Fields can depend on each other or on computed values. You can specify conditions or computed expressions in the schema, and Simplify will use MobX reactions to re-compute those fields automatically.
-- **Minimal Boilerplate:** No need for manual event handlers or state wiring. Simplify’s “JSON-first” engine means you focus on what the form is, not how it works internally. This leads to “Less Code, Fewer Bugs” because the data model and UI are loosely coupled.
+- **Dependency Logic:** Fields can declare dependencies on others. For example, a field can include a `visibleWhen` or `dependsOn` rule so it only appears when certain conditions are met. Simplify listens to those dependencies reactively and updates the form automatically.
+- **Rapid Composition:** You can quickly assemble complex forms by merging or reusing field configurations. Simplify handles the layout and data flow, letting you focus on high-level design.
+- **Minimal Boilerplate:** No need for manual event handlers or state wiring. Simplify’s like “JSON-first” engine means you focus on what the form is, not how it works internally. This leads to “Less Code, Fewer Bugs” because the data model and UI are loosely coupled.
 
 
 ## Usage Example
@@ -40,7 +41,7 @@ field.isAdult.dependencies = [
           const field = store.fields[target];
           const value = store.getFieldValue(master);
 
-          field.isDisabled = value < 18;
+          field.render = value < 18;
     ] },
 ]
 
@@ -53,8 +54,8 @@ You can also attach validation or other operations to a field, which are automat
 // Simple intager validator
 field.age.validators = [isInteger]
 ```
-
-The examples above only scratch the surface — Simplify provides a wide range of advanced capabilities for building fully dynamic, reactive UIs.
+In this example, we define two simple fields (First Name and Age) and a dependent checkbox (Is Adult). Simplify automatically generates the corresponding UI. Thanks to MobX reactivity, when the Age field goes above 18, the Is Adult checkbox appears (and hides otherwise) without any additional code. This demonstrates how declarative configs and automatic dependency logic work together to keep the UI in sync.
+The examples above only scratch the surface. Simplify provides a wide range of advanced capabilities for building fully dynamic, reactive UIs.
 
 
 
@@ -68,6 +69,7 @@ Because Simplify uses MobX’s core mechanisms, updates happen synchronously and
 When any piece of data changes, MobX triggers only the necessary re-renders, so your form stays consistent in real time. 
 The declarative schema is parsed into this reactive state at initialization, meaning you rarely write imperative code. 
 As a result, your app logic lives alongside your data definitions (not tangled in UI code), echoing the idea of separating logic and UI to reduce complexity.
+
 
 
 
