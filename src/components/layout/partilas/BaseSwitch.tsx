@@ -33,7 +33,7 @@ const BaseSwitch: React.FC<BaseSwitchProps> = observer((props) => {
 
     return (
         <div className="flex items-center justify-between p-3">
-           <BaseSwitchHeader field={field} />
+           <Header field={field} />
             <div className="mr-3 mt-1.5">
                 <Switch
                     className={field.style}
@@ -43,12 +43,12 @@ const BaseSwitch: React.FC<BaseSwitchProps> = observer((props) => {
                     onBlur={() => handleBlur(field.id)}
                 />
             </div>
-            <BaseInputFooter field={field} />
+            <Footer field={field} />
         </div>
     )
 });
 
-const BaseSwitchHeader = observer(({ field }: { field: BaseFieldModel }) => {
+const Header = observer(({ field }: { field: BaseFieldModel }) => {
     if (field.variant !== "default" && field.variant !== "secondary") return null;
 
     return (
@@ -63,7 +63,7 @@ const BaseSwitchHeader = observer(({ field }: { field: BaseFieldModel }) => {
     );
 });
 
-const BaseInputFooter = observer(({ field }: { field: BaseFieldModel }) => {
+const Footer = observer(({ field }: { field: BaseFieldModel }) => {
     if (field.variant !== "outline") return null;
 
     return (

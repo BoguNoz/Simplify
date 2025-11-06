@@ -4,49 +4,49 @@ enum BaseFieldTypesEnum {
      * @see createFieldPlaceholders
      * @see BaseButton
      */
-    Button,
+    Button = "button",
     
     /**
      * @see BaseButtonWithConfirmation
      * @see createFieldPlaceholders
      */
-    ButtonWithConfirmation,
+    ButtonWithConfirmation = "buttonWithConfirmation",
 
     /**
      * @see BaseCheckbox
      * @see createFieldPlaceholders
      */
-    CheckBox,
+    CheckBox = "checkBox",
 
     /**
      * @see BaseFileInput
      * @see createFieldPlaceholders
      */
-    FileInput,
+    FileInput = "fileInput",
 
     /**
      * @see BaseInput
      * @see createFieldPlaceholders
      */
-    Input,
+    Input = "input",
 
     /**
      * @see BaseSelector
      * @see createFieldPlaceholders
      */
-    Select,
+    Select= "select",
 
     /**
      * @see BaseSwitch
      * @see createFieldPlaceholders
      */
-    Switch,
+    Switch = "switch",
 
     /**
      * @see BaseToggle
      * @see createFieldPlaceholders
      */
-    Toggle,
+    Toggle = "toggle",
 }
 
 export default BaseFieldTypesEnum;

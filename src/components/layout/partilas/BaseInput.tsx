@@ -36,7 +36,7 @@ const BaseInput: React.FC<BaseInputProps> = observer((props) => {
 
     return (
         <div>
-            <BaseInputHeader field={field} />
+            <Header field={field} />
             <div className="flex items-center gap-2">
                 <Input
                     className={field.style}
@@ -47,14 +47,14 @@ const BaseInput: React.FC<BaseInputProps> = observer((props) => {
                     onChange={e => handleChange(field.id, e.target.value)}
                     onBlur={() => handleBlur(field.id)}
                 />
-                <BaseInputLink field={field} />
+                <InfoLink field={field} />
             </div>
-          <BaseInputFooter field={field} />
+          <Footer field={field} />
         </div>
     )
 });
 
-const BaseInputHeader = observer(({ field }: { field: BaseFieldModel }) => {
+const Header = observer(({ field }: { field: BaseFieldModel }) => {
     const isGhost = field.variant === "ghost";
     const isOutline = field.variant === "outline";
     const isLink = field.variant === "link";
@@ -82,7 +82,7 @@ const BaseInputHeader = observer(({ field }: { field: BaseFieldModel }) => {
     );
 });
 
-const BaseInputLink = observer(({ field }: { field: BaseFieldModel }) => {
+const InfoLink = observer(({ field }: { field: BaseFieldModel }) => {
     if (field.variant !== "link") return null;
     
     return (
@@ -99,7 +99,7 @@ const BaseInputLink = observer(({ field }: { field: BaseFieldModel }) => {
     );
 });
 
-const BaseInputFooter = observer(({ field }: { field: BaseFieldModel }) => {
+const Footer = observer(({ field }: { field: BaseFieldModel }) => {
     if (field.variant !== "default" && field.variant !== "secondary") return null;
 
     return (

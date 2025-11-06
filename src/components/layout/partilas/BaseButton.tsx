@@ -40,7 +40,7 @@ const BaseButton: React.FC<BaseButtonProps> = observer((props) => {
             <Tooltip>
                 <TooltipTrigger>
                     <div className="inline-flex items-center">
-                        <BaseButtonStatus field={field} />
+                        <ProccesStatus field={field} />
                         <Button
                             className={field.style}
                             size={isIcon ? "icon" : "default"}
@@ -63,7 +63,7 @@ const BaseButton: React.FC<BaseButtonProps> = observer((props) => {
     )
 });
 
-const BaseButtonStatus = observer(({ field }: { field: BaseFieldModel }) => {
+const ProccesStatus = observer(({ field }: { field: BaseFieldModel }) => {
 
     return (
        <>

@@ -79,7 +79,7 @@ const BaseFormField: React.FC<BaseFormFieldProps> = observer((props) => {
                 className="relative"
             >
                 <div className="absolute top-2 right-2">
-                   <BaseFormFieldSymbol field={field} hardDisable={hardDisable} />
+                   <InfoSymbol field={field} hardDisable={hardDisable} />
                 </div>
                 <AlertTitle  className="flex flex-col gap-1 w-full">
                     <BaseField
@@ -92,8 +92,8 @@ const BaseFormField: React.FC<BaseFormFieldProps> = observer((props) => {
                 </AlertTitle>
                 <AlertDescription>
                     <div className="flex flex-col gap-1">
-                       <BaseFormFieldValidatorBox field={field}/>
-                       <BaseFormFieldDependencies field={field} store={store} />
+                       <ValidatorBox field={field}/>
+                       <Dependencies field={field} store={store} />
                     </div>
                 </AlertDescription>
             </Alert>
@@ -101,7 +101,7 @@ const BaseFormField: React.FC<BaseFormFieldProps> = observer((props) => {
     );
 });
 
-const BaseFormFieldSymbol = observer(({ field, hardDisable }: { field: BaseFieldModel, hardDisable?: boolean}) => {
+const InfoSymbol = observer(({ field, hardDisable }: { field: BaseFieldModel, hardDisable?: boolean}) => {
     const fieldStatus = field.state.status;
 
     if (field.variant === "ghost" || field.excluded) {
@@ -121,7 +121,7 @@ const BaseFormFieldSymbol = observer(({ field, hardDisable }: { field: BaseField
     }
 });
 
-const BaseFormFieldDependencies = observer(({ field, store }: { field: BaseFieldModel, store: BaseStore }) => {
+const Dependencies = observer(({ field, store }: { field: BaseFieldModel, store: BaseStore }) => {
     if (!field.isDisabled || field.fieldType === BaseFieldTypeEnum.Button) return null;
 
     const dependencies = field.dependencies.map(dep => {
@@ -147,7 +147,7 @@ const BaseFormFieldDependencies = observer(({ field, store }: { field: BaseField
     );
 });
 
-const BaseFormFieldValidatorBox = observer(({ field }: { field: BaseFieldModel}) => {
+const ValidatorBox = observer(({ field }: { field: BaseFieldModel}) => {
     if (field.isDisabled || field.state.status === "valid") return null;
 
     const warnings = field.state.validationResult.filter(v => v.isWarning);

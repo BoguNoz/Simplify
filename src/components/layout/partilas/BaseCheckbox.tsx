@@ -33,7 +33,7 @@ const BaseCheckbox = observer((props: BaseCheckboxProps) => {
 
     return (
         <div className="flex items-center justify-between p-3">
-            <BaseCheckboxHeader field={field} />
+            <Header field={field} />
             <div className="mr-3">
                 <Checkbox
                     className={field.style}
@@ -43,12 +43,12 @@ const BaseCheckbox = observer((props: BaseCheckboxProps) => {
                     onBlur={() => handleBlur(field.id)}
                 />
             </div>
-            <BaseCheckboxFooter field={field} />
+            <Footer field={field} />
         </div>
     )
 });
 
-const BaseCheckboxHeader = observer(({ field }: { field: BaseFieldModel }) => {
+const Header = observer(({ field }: { field: BaseFieldModel }) => {
     if (field.variant !== "default" && field.variant !== "secondary") return null;
 
     return (
@@ -63,7 +63,7 @@ const BaseCheckboxHeader = observer(({ field }: { field: BaseFieldModel }) => {
     );
 });
 
-const BaseCheckboxFooter = observer(({ field }: { field: BaseFieldModel }) => {
+const Footer = observer(({ field }: { field: BaseFieldModel }) => {
     if (field.variant !== "outline") return null;
 
     return (
