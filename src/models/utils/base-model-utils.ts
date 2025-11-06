@@ -35,8 +35,8 @@ export function createFieldPlaceholders<
             style: "",
             variant: "default",
             state: {
-                error: false,
-                processing: false,
+                status: "valid",
+                validationResult: [],
             },
             dataSource: () => undefined,
             deconstructor: () => {},

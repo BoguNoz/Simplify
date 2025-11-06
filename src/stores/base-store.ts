@@ -4,9 +4,9 @@ import {reaction, runInAction} from "mobx";
 import {BaseValidatorFn, isEmpty, ValidatorResponse} from "@core/events/validator";
 import {BaseDependencyFn} from "@core/events/dependency";
 import {isNullEmptyFalseOrUndefined, isNullOrUndefined} from "@core/lib/utils";
-import BaseFieldTypesEnum from "@core/enums/base-field-type-enum";
-import BaseFieldTypeEnum from "@core/enums/base-field-type-enum";
 import {ChangeRegistry} from "@core/engine/change-registry";
+import BaseFieldTypeEnum from "@core/enums/base-field-type-enum";
+import BaseFieldTypesEnum from "@core/enums/base-field-type-enum";
 
 /**
  * Abstract base class that provides a reactive, signal-like state management layer using MobX.
@@ -40,7 +40,7 @@ import {ChangeRegistry} from "@core/engine/change-registry";
  *             setFieldAdditValue: action,
  *             setFieldState: action,
  *             addValidators: action,
- *             setFiledEditability: action,
+ *             setFieldEditability: action,
  *         });
  *     }
  *}
@@ -61,7 +61,7 @@ import {ChangeRegistry} from "@core/engine/change-registry";
  * @see BaseStore.setFieldValue
  * @see BaseStore.setFieldAdditValue
  * @see BaseStore.setFieldState
- * @see BaseStore.setFiledEditability
+ * @see BaseStore.setFieldEditability
  * @see BaseStore.addValidators
  * @see BaseStore.validateField
  * @see BaseStore.validateSpecifyFields
@@ -114,35 +114,33 @@ export abstract class BaseStore {
     }
 
     /**
-     * Updates the field's state flags such as `error` or `processing`.
+     * Updates the field's state.
      *
      * @remarks
-     * - Calling this method without specifying flags will reset the field status to its default state.
      * - To change behavior of this method override {@link _setFieldState} private method
      *
      * @param {string} id - The ID of the field.
-     * @param {boolean} [error=false] - Whether the field is in error state.
-     * @param {boolean} [processing=false] - Whether the field is in processing state.
+     * @param status - The new status of the field.
      *
      * @readonly
      */
-    public readonly setFieldState = (id: string, error: boolean = false, processing: boolean = false): void => {
-        this._registry.registerChange(() => this._setFieldState(id, error, processing));
+    public readonly setFieldState = (id: string, status: "error" | "valid" | "warning" | "pending"): void => {
+        this._registry.registerChange(() => this._setFieldState(id, status));
     }
 
     /**
      * Sets whether the field is editable or not.
      *
      * @remarks
-     * - To change behavior of this method override {@link _setFiledEditability} private method
+     * - To change behavior of this method override {@link _setFieldEditability} private method
      *
      * @param {string} id - The ID of the field.
      * @param {boolean} isEditable - Whether the field is editable or not.
      *
      * @readonly
      */
-    public readonly setFiledEditability = (id: string, isEditable: boolean): void => {
-        this._registry.registerChange(() => this._setFiledEditability(id, isEditable));
+    public readonly setFieldEditability = (id: string, isEditable: boolean): void => {
+        this._registry.registerChange(() => this._setFieldEditability(id, isEditable));
     }
 
     /**
@@ -181,7 +179,7 @@ export abstract class BaseStore {
             this.reverseDeps[field.id] = {};
 
             const value = await this.getDataSource(field.id);
-            if (!isNullEmptyFalseOrUndefined(value) && field.fieldType != BaseFieldTypesEnum.Select) {
+            if (!isNullEmptyFalseOrUndefined(value) && field.fieldType !== BaseFieldTypesEnum.Select) {
                 this.fields[field.id].value = value;
             }
 
@@ -224,16 +222,19 @@ export abstract class BaseStore {
      * @param {string} id - The ID of the field.
      *
      * @remarks
-     * Validation will occur, when field is not disabled and render
+     * - Validation will occur, when field is not disabled and render
      * or value is not null or undefined or field is not excluded.
+     * - Validation state is safe to the field `state`.
      *
      * @returns {ValidatorResponse[]} The list of validation results.
      */
     public validateField = (id: string): ValidatorResponse[] => {
         const field = this.fields[id];
 
-        if (field.isDisabled || !field.render || isNullOrUndefined(field.value) || field.excluded)
+        if (field.isDisabled || !field.render || isNullOrUndefined(field.value) || field.excluded) {
+            field.state.status = "valid";
             return [{ isValid: true, isWarning: false, message: "" }] as ValidatorResponse[];
+        }
 
         const results = [];
         for (const fn of field.validators) {
@@ -243,9 +244,15 @@ export abstract class BaseStore {
             }
         }
 
+        field.state.validationResult = results;
         if (results.length > 0) {
+            field.state.status = results.some(v => v.isWarning) ? "warning" : "error";
+
+
             return results;
         }
+        field.state.status = "valid";
+
         return [{ isValid: true, isWarning: false, message: "" }] as ValidatorResponse[];
     };
 
@@ -279,7 +286,7 @@ export abstract class BaseStore {
      * Retrieves data from the data source function defined for a field.
      *
      * @remarks
-     * Executes the data source function assigned to the field and returns the resulting value.
+     * - Executes the data source function assigned to the field and returns the resulting value.
      *
      * @param {string} id - The ID of the field.
      * @param {any[]} args - Data source function arguments.
@@ -292,7 +299,7 @@ export abstract class BaseStore {
      * Adds new validators to a field, avoiding duplicates.
      *
      * @remarks
-     * For safety reasons, avoid calling this method to dynamically alter validator list assigned to a field.
+     * - For safety reasons, avoid calling this method to dynamically alter validator list assigned to a field.
      *
      * @param {string} id - The ID of the field.
      * @param {BaseValidatorFn[]} validators - The list of validator functions to add.
@@ -329,7 +336,7 @@ export abstract class BaseStore {
 
 
     // #region Logic
-    private _setFieldValue = async (id: string, value: any): Promise<void> => {
+    protected _setFieldValue = async (id: string, value: any): Promise<void> => {
         const field = this.fields[id];
 
         runInAction(() => {
@@ -346,7 +353,7 @@ export abstract class BaseStore {
         }
     };
 
-    private _setFieldAdditValue = (id: string, addit: string, value: any): void => {
+    protected _setFieldAdditValue = (id: string, addit: string, value: any): void => {
         const field = this.fields[id];
 
         if (field.addit) {
@@ -354,20 +361,20 @@ export abstract class BaseStore {
         }
     }
 
-    private _setFieldState = (id: string, error: boolean = false, processing: boolean = false): void => {
+    protected _setFieldState = (id: string, status: "error" | "valid" | "warning" | "pending"): void => {
         const field = this.fields[id];
         field.state = {
-            error: error,
-            processing: processing,
+            status: status,
+            validationResult: [],
         }
     }
 
-    private _setFiledEditability = (id: string, isEditable: boolean): void => {
+    protected _setFieldEditability = (id: string, isEditable: boolean): void => {
         const field = this.fields[id];
         field.isDisabled = !isEditable;
     }
 
-    private _invokeDeconstructor = async (id: string, free: boolean, ...args: any[]): Promise<void> => {
+    protected _invokeDeconstructor = async (id: string, free: boolean, ...args: any[]): Promise<void> => {
         if (!Object.keys(this.fields).includes(id)) {
             return;
         }

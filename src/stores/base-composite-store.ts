@@ -65,7 +65,7 @@ export abstract class BaseCompositeStore {
      * Initializes all composites based on their configuration.
      *
      * @remarks 
-     * Determines whether each composite should be rendered base on composite render field.
+     * - Determines whether each composite should be rendered base on composite render field.
      *  
      * @param {BaseCompositeModel[]} composites - List of composites configurations
      */
@@ -101,7 +101,7 @@ export abstract class BaseCompositeStore {
      * Sets the render state of a composite.
      *
      * @remarks
-     * If the `state` parameter is not specified, the composite's {@link BaseCompositeModel.renderFn `renderFn`}
+     * - If the `state` parameter is not specified, the composite's {@link BaseCompositeModel.renderFn `renderFn`}
      * will be used to determine whether the composite should be rendered.
      *
      * @param {string} id - The ID of the composite.

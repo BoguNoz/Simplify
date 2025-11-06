@@ -1,6 +1,11 @@
 import type {Meta, StoryObj} from "@storybook/react";
 import {action} from "storybook/actions";
-import {mockBaseRegisteredFields, mockFields} from "@core/components/mocks/base-field-mocks";
+import {
+    mockBaseRegisteredFields,
+    mockFields,
+    mockHandleBlur,
+    mockHandleChange
+} from "@core/components/mocks/base-field-mocks";
 import BaseButton from "../BaseButton";
 import {Send} from "lucide-react";
 
@@ -21,8 +26,8 @@ const field = mockFields.find(bf => bf.id === mockBaseRegisteredFields.baseButto
 export const Default: Story = {
     args: {
         field: field,
-        handleChange: action("handleChange"),
-        handleBlur: action("handleBlur"),
+        handleChange: mockHandleChange,
+        handleBlur: mockHandleBlur,
         hardDisable: false,
     },
 };
