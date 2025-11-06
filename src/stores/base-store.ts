@@ -4,9 +4,9 @@ import {reaction, runInAction} from "mobx";
 import {BaseValidatorFn, isEmpty, ValidatorResponse} from "@core/events/validator";
 import {BaseDependencyFn} from "@core/events/dependency";
 import {isNullEmptyFalseOrUndefined, isNullOrUndefined} from "@core/lib/utils";
-import BaseFieldTypesEnum from "@core/enums/base-field-type-enum";
-import BaseFieldTypeEnum from "@core/enums/base-field-type-enum";
 import {ChangeRegistry} from "@core/engine/change-registry";
+import BaseFieldTypeEnum from "@core/enums/base-field-type-enum";
+import BaseFieldTypesEnum from "@core/enums/base-field-type-enum";
 
 /**
  * Abstract base class that provides a reactive, signal-like state management layer using MobX.
@@ -40,7 +40,7 @@ import {ChangeRegistry} from "@core/engine/change-registry";
  *             setFieldAdditValue: action,
  *             setFieldState: action,
  *             addValidators: action,
- *             setFiledEditability: action,
+ *             setFieldEditability: action,
  *         });
  *     }
  *}
@@ -61,7 +61,7 @@ import {ChangeRegistry} from "@core/engine/change-registry";
  * @see BaseStore.setFieldValue
  * @see BaseStore.setFieldAdditValue
  * @see BaseStore.setFieldState
- * @see BaseStore.setFiledEditability
+ * @see BaseStore.setFieldEditability
  * @see BaseStore.addValidators
  * @see BaseStore.validateField
  * @see BaseStore.validateSpecifyFields
@@ -132,15 +132,15 @@ export abstract class BaseStore {
      * Sets whether the field is editable or not.
      *
      * @remarks
-     * - To change behavior of this method override {@link _setFiledEditability} private method
+     * - To change behavior of this method override {@link _setFieldEditability} private method
      *
      * @param {string} id - The ID of the field.
      * @param {boolean} isEditable - Whether the field is editable or not.
      *
      * @readonly
      */
-    public readonly setFiledEditability = (id: string, isEditable: boolean): void => {
-        this._registry.registerChange(() => this._setFiledEditability(id, isEditable));
+    public readonly setFieldEditability = (id: string, isEditable: boolean): void => {
+        this._registry.registerChange(() => this._setFieldEditability(id, isEditable));
     }
 
     /**
@@ -179,7 +179,7 @@ export abstract class BaseStore {
             this.reverseDeps[field.id] = {};
 
             const value = await this.getDataSource(field.id);
-            if (!isNullEmptyFalseOrUndefined(value) && field.fieldType != BaseFieldTypesEnum.Select) {
+            if (!isNullEmptyFalseOrUndefined(value) && field.fieldType !== BaseFieldTypesEnum.Select) {
                 this.fields[field.id].value = value;
             }
 
@@ -369,7 +369,7 @@ export abstract class BaseStore {
         }
     }
 
-    protected _setFiledEditability = (id: string, isEditable: boolean): void => {
+    protected _setFieldEditability = (id: string, isEditable: boolean): void => {
         const field = this.fields[id];
         field.isDisabled = !isEditable;
     }
