@@ -79,5 +79,6 @@ export const mockHandleBlur = async (fieldId: string) => {
 
 export const mockHandleChange = async (fieldId: string, value: any) => {
     await mockStore.setFieldValue(fieldId, value);
+    mockStore.validateField(fieldId); 
 };
 // #endregion FormMocks

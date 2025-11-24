@@ -68,7 +68,7 @@ export function createFieldPlaceholders<
             style: "",
             variant: "default",
             state: {
-                status: "valid",
+                status: "unknown",
                 validationResult: [],
             },
             dataSource: () => undefined,

@@ -231,7 +231,7 @@ export abstract class BaseStore {
     public validateField = (id: string): ValidatorResponse[] => {
         const field = this.fields[id];
 
-        if (field.isDisabled || !field.render || isNullOrUndefined(field.value) || field.excluded) {
+        if (field.isDisabled || !field.render || field.excluded) {
             field.state.status = "valid";
             return [{ isValid: true, isWarning: false, message: "" }] as ValidatorResponse[];
         }

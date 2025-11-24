@@ -22,7 +22,7 @@ class MockStore extends BaseStore {
             setFieldAdditValue: action,
             setFieldState: action,
             addValidators: action,
-            setFiledEditability: action,
+            setFieldEditability: action,
         });
     }
 }
