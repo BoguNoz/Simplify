@@ -9,7 +9,6 @@ import BaseCompositeModel from "@core/models/base-composite-model";
  * A higher-order component (HOC) that wraps a React component with MobX's `observer`
  * and automatically initializes its related composite store on mount.
  *
- *
  * ### Required Props
  * When using this wrapper, the wrapped component **must receive the following props**:
  *
@@ -20,8 +19,9 @@ import BaseCompositeModel from "@core/models/base-composite-model";
  These props are used to properly register and initialize the composite structure.
  *
  * @remarks
- * This wrapper executes composite initialization only once, when the component
+ * - This wrapper executes composite initialization only once, when the component
  * is first mounted. It extracts the required parameters from the component's props.
+ * - This wrapper menages component rendering using composite `renderFn`
  *
  * @param {React.FC<any>} Component - The React component to be wrapped.
  * @returns {React.FC<any>} The wrapped, MobX-observed component with automatic initialization logic.
@@ -29,8 +29,14 @@ import BaseCompositeModel from "@core/models/base-composite-model";
 const composite = (Component) => {
     const Wrapped = (props) => {
 
+        const storeRef = useRef<BaseCompositeStore | null>(null);
+        const idRef = useRef<string>("");
+
         useEffect(() => {
             const { compositeId, compositeStore, store } = props;
+            
+            idRef.current = compositeId;
+            storeRef.current = compositeStore
 
             const initialization = async (id: string, cStore: BaseCompositeStore, fStore: BaseStore) => {
                 await baseContainerInitializationSetup(id, cStore, fStore)
@@ -38,6 +44,10 @@ const composite = (Component) => {
 
             initialization(compositeId, compositeStore, store);
         }, []);
+
+        if (storeRef.current?.renderComposite(idRef.current)) {
+            return <></>;
+        }
 
         return <Component {...props} />
     }
