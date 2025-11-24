@@ -42,6 +42,9 @@ const BaseFormField: React.FC<BaseFormFieldProps> = observer((props) => {
     const isWarning = field.state.status === "warning";
 
     const status = () => {
+        if (field.excluded || field.state.status === "unknown") {
+            return "default";
+        }
         if (isDisabled) {
             return "disabled";
         }
@@ -116,7 +119,7 @@ const InfoSymbol = observer(({ field, hardDisable }: { field: BaseFieldModel, ha
     else if (fieldStatus === "warning") {
         return <AlertTriangle className="w-4 h-4"/>
     }
-    else if (fieldStatus === "valid" && field.isRequired) {
+    else if (field.isRequired) {
         return <CheckCircle className="w-4 h-4"/>;
     }
 });
