@@ -41,7 +41,8 @@ export default interface BaseCompositeModel {
      * Indicates whether the composite is currently rendered.
      *
      * @remarks
-     * This value is managed by the store and can be overridden manually using {@link setRendering}.
+     * - This value is managed by the store and can be overridden manually using {@link setRendering}.
+     * - This property should only be set by using store function. 
      */
     render: boolean;
 
