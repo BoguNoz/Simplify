@@ -15,12 +15,11 @@ export default interface BaseCompositeModel {
      * Indicates whether the composite is a *partial composite*.
      *
      * @remarks
-     * -  **Partial composite** is initialized, and store registered, by parent composite.
      * - A **partial composite** is a specialized composite that exists as a
      *   fragment of a larger parent composite.
      * - Partial composites are used to break down complex UI structures into smaller,
      *   reusable segments.
-     * - Partial composites **cannot contain child composites**. They may contain only fields.
+     * - Partial composites **should not contain child composites**. They may contain only fields.
      * - Typically used for grouping logical parts of a form without representing a standalone component.
      */
     isPartial: boolean;

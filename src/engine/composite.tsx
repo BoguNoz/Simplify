@@ -3,7 +3,6 @@ import {useEffect} from "react";
 import {baseContainerInitializationSetup} from "@core/stores/utils/composite-store-utils";
 import {BaseCompositeStore} from "@core/stores/base-composite-store";
 import {BaseStore} from "@core/stores/base-store";
-import BaseCompositeModel from "@core/models/base-composite-model";
 
 /**
  * A higher-order component (HOC) that wraps a React component with MobX's `observer`
