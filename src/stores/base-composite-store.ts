@@ -73,13 +73,6 @@ export abstract class BaseCompositeStore {
         composites.forEach((composite: BaseCompositeModel) => {
             this.composites[composite.id] = composite;
             this.renderedComposites.set(composite.id, composite.render);
-
-            if (composite.isPartial) {
-                return;
-            }
-            composite.partials.forEach((partial: BaseCompositeModel) => {
-                this.initializeComposite(partial);
-            })
         })
     }
 
@@ -134,11 +127,6 @@ export abstract class BaseCompositeStore {
      */
     registerStore = (id: string, store: BaseStore): void => {
         this.stores[id] = store;
-
-        const composite = this.composites[id];
-        composite.partials.forEach((partial: BaseCompositeModel) => {
-            this.registerStore(partial.id, store);
-        })
     }
 
     /**
