@@ -35,7 +35,9 @@ const BaseFormField: React.FC<BaseFormFieldProps> = observer((props) => {
     const {fieldId, store, handleChange, handleBlur, hardDisable, hardTyping} = props;
 
     const field = store.fields[fieldId];
-    if (!field || !field.render) return null;
+    if (!field || !field.render) {
+        return null
+    };
 
     const isValid = field.state.status === "valid";
     const isDisabled = field.isDisabled || hardDisable;
