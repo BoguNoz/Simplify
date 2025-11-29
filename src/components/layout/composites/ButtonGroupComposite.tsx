@@ -6,6 +6,8 @@ import {ButtonGroup} from "@core/components/ui/button-group";
 import {observer} from "mobx-react-lite";
 import BaseField from "@core/components/layout/BaseField";
 import BaseFieldTypesEnum from "@core/enums/base-field-type-enum";
+import {Button} from "@core/components/ui/button";
+import BaseStatusButton from "@core/components/layout/partilas/BaseStatusButton";
 
 interface ButtonGroupCompositeProps {
     compositeId: string;
@@ -88,13 +90,16 @@ const Item = observer(({ fieldId, store, handleBlur, handleChange }:
    {fieldId: string, store: BaseStore, handleBlur?: (fieldId: string) => void, handleChange?: (fieldId: string, value: any) => void }) => {
 
     return (
-        <BaseField
-            fieldId={fieldId}
-            store={store}
-            handleBlur={handleBlur}
-            handleChange={handleChange}
-            hardTyping={BaseFieldTypesEnum.Button}
-        />
+        <Button asChild>
+            <BaseField
+                fieldId={fieldId}
+                store={store}
+                handleBlur={handleBlur}
+                handleChange={handleChange}
+                hardTyping={BaseFieldTypesEnum.Button}
+            />
+        </Button>
+
     );
 });
 

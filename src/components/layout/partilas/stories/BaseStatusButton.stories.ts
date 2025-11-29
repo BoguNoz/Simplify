@@ -3,19 +3,19 @@ import {
     mockBaseRegisteredFields,
     mockFields,
 } from "@core/components/mocks/base-field-mocks";
-import BaseButton from "../BaseButton";
+import BaseStatusButton from "../BaseStatusButton";
 import {Send} from "lucide-react";
 
-const meta: Meta<typeof BaseButton> = {
-    title: "partials/BaseButton",
-    component: BaseButton,
+const meta: Meta<typeof BaseStatusButton> = {
+    title: "partials/BaseStatusButton",
+    component: BaseStatusButton,
     parameters: {
         layout: "centered",
     },
 };
 export default meta;
 
-type Story = StoryObj<typeof BaseButton>;
+type Story = StoryObj<typeof BaseStatusButton>;
 
 const field = mockFields.find(bf => bf.id === mockBaseRegisteredFields.baseButton)!;
 

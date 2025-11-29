@@ -21,10 +21,10 @@ const text = lang();
 const fields = createFieldPlaceholders(mockBaseRegisteredFields, text.mock);
 // #endregion Initialization
 
-// #region BaseButton
-fields.baseButton.fieldType = BaseFieldTypesEnum.Button;
+// #region BaseStatusButton
+fields.baseButton.fieldType = BaseFieldTypesEnum.StatusButton;
 fields.baseButton.isRequired = true;
-// #endregion BaseButton
+// #endregion BaseStatusButton
 
 // #region BaseButtonWithConfirm
 fields.baseButtonWithConfirm.fieldType = BaseFieldTypesEnum.ButtonWithConfirmation;

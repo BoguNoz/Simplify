@@ -4,7 +4,13 @@ enum BaseFieldTypesEnum {
      * @see createFieldPlaceholders
      * @see BaseButton
      */
-    Button = "button",
+    StatusButton = "button",
+
+    /**
+     * @see BaseRawButton
+     * @see createFieldPlaceholders
+     */
+    Button = "rawButton",
     
     /**
      * @see BaseButtonWithConfirmation

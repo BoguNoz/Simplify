@@ -3,7 +3,7 @@ export * from "@core/components/layout/composites/ButtonGroupComposite"
 // #endregion components/layout/composites
 
 // #region components/layout/partials
-export * from "@core/components/layout/partilas/BaseButton"
+export * from "@core/components/layout/partilas/BaseStatusButton"
 export * from "@core/components/layout/partilas/BaseButtonWithConfirmation"
 export * from "@core/components/layout/partilas/BaseCheckbox"
 export * from "@core/components/layout/partilas/BaseFileInput"

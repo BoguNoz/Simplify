@@ -9,8 +9,9 @@ import BaseCheckbox from "@core/components/layout/partilas/BaseCheckbox";
 import BaseFileInput from "@core/components/layout/partilas/BaseFileInput";
 import BaseSwitch from "@core/components/layout/partilas/BaseSwitch";
 import BaseInput from "@core/components/layout/partilas/BaseInput";
-import BaseButton from "@core/components/layout/partilas/BaseButton";
+import BaseStatusButton from "@core/components/layout/partilas/BaseStatusButton";
 import {BaseStore} from "@core/stores/base-store";
+import BaseButton from "@core/components/layout/partilas/BaseButton";
 
 interface BaseFieldProps {
     fieldId: string;
@@ -34,7 +35,7 @@ interface BaseFieldProps {
  * - The `handleBlur` and `handleChange` prop allows overriding default behaviour on field blur and change respectively.
  *
  * @see BaseFieldProps
- * @see BaseButton
+ * @see BaseStatusButton
  * @see BaseButtonWithConfirmation
  * @see BaseCheckbox
  * @see BaseFileInput
@@ -45,11 +46,6 @@ interface BaseFieldProps {
  */
 const BaseField = observer((props: BaseFieldProps) => {
     const {fieldId, store, handleChange, handleBlur, hardDisable, hardTyping} = props;
-
-    const field = store.fields[fieldId];
-    if (!field) {
-        return null;
-    }
 
     // #region Actions
     const onChange = useCallback(
@@ -72,6 +68,11 @@ const BaseField = observer((props: BaseFieldProps) => {
         [handleBlur]
     );
     // #endregion Actions
+
+    const field = store.fields[fieldId];
+    if (!field) {
+        return null;
+    }
 
     const isDisable = field.isDisabled || hardDisable;
     const type = hardTyping || field.fieldType
@@ -121,9 +122,9 @@ const BaseField = observer((props: BaseFieldProps) => {
                     hardDisable={isDisable}
                 />
             );
-        case BaseFieldTypesEnum.Button:
+        case BaseFieldTypesEnum.StatusButton:
             return (
-                <BaseButton
+                <BaseStatusButton
                     field={field}
                     handleChange={onChange}
                     handleBlur={onBlur}
@@ -145,6 +146,15 @@ const BaseField = observer((props: BaseFieldProps) => {
                   field={field}
                   handleChange={onChange}
                   hardDisable={hardDisable}
+                />
+            );
+        case BaseFieldTypesEnum.Button:
+            return (
+                <BaseButton
+                    field={field}
+                    handleChange={onChange}
+                    handleBlur={onBlur}
+                    hardDisable={hardDisable}
                 />
             );
         default:

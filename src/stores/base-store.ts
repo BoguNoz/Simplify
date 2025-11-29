@@ -172,6 +172,7 @@ export abstract class BaseStore {
             }
 
             if (field.fieldType === BaseFieldTypeEnum.Button
+                || field.fieldType === BaseFieldTypeEnum.StatusButton
                 || field.fieldType ===  BaseFieldTypeEnum.ButtonWithConfirmation
                 || field.fieldType === BaseFieldTypeEnum.Toggle
             ) {
