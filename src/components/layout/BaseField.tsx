@@ -1,6 +1,5 @@
-import BaseFieldModel from "@core/models/base-field-model";
-import FormFieldTypesEnum from "@core/enums/base-field-type-enum";
-import React from "react";
+import BaseFieldTypesEnum from "@core/enums/base-field-type-enum";
+import React, {useCallback} from "react";
 import BaseSelector from "@core/components/layout/partilas/BaseSelector";
 import BaseFieldTypeEnum from "@core/enums/base-field-type-enum";
 import {observer} from "mobx-react-lite";
@@ -11,12 +10,14 @@ import BaseFileInput from "@core/components/layout/partilas/BaseFileInput";
 import BaseSwitch from "@core/components/layout/partilas/BaseSwitch";
 import BaseInput from "@core/components/layout/partilas/BaseInput";
 import BaseButton from "@core/components/layout/partilas/BaseButton";
+import {BaseStore} from "@core/stores/base-store";
 
 interface BaseFieldProps {
-    field: BaseFieldModel
+    fieldId: string;
+    store: BaseStore;
 
-    handleBlur: (fieldId: string) => void;
-    handleChange: (fieldId: string, value: any) => void;
+    handleBlur?: (fieldId: string) => void;
+    handleChange?: (fieldId: string, value: any) => void;
 
     hardDisable?: boolean;
     hardTyping?: BaseFieldTypeEnum;
@@ -27,9 +28,10 @@ interface BaseFieldProps {
  * based on the {@link BaseFieldModel} configuration.
  *
  * @remarks
- * - This component supports all base field types defined in {@link FormFieldTypesEnum}.
+ * - This component supports all base field types defined in {@link BaseFieldTypesEnum}.
  * - The `hardDisable` prop allows external forcing of the disabled state, overriding the field's own state.
  * - The `hardTyping` prop allows overriding the field type for special cases.
+ * - The `handleBlur` and `handleChange` prop allows overriding default behaviour on field blur and change respectively.
  *
  * @see BaseFieldProps
  * @see BaseButton
@@ -41,80 +43,107 @@ interface BaseFieldProps {
  * @see BaseSwitch
  * @see BaseToggle
  */
-const BaseField: React.FC<BaseFieldProps> = observer((props) => {
-    const {field, handleChange, handleBlur, hardDisable, hardTyping} = props;
+const BaseField = observer((props: BaseFieldProps) => {
+    const {fieldId, store, handleChange, handleBlur, hardDisable, hardTyping} = props;
+
+    const field = store.fields[fieldId];
+    if (!field) {
+        return null;
+    }
+
+    // #region Actions
+    const onChange = useCallback(
+        async (fieldId: string, value: any) => {
+            if (handleChange) {
+                await handleChange(fieldId, value);
+            } else {
+                await store.setFieldValue(fieldId, value);
+            }
+        },
+        [handleChange]
+    );
+
+    const onBlur = useCallback(
+        async (fieldId: string) => {
+            if (handleBlur) {
+                await handleBlur(fieldId);
+            }
+        },
+        [handleBlur]
+    );
+    // #endregion Actions
 
     const isDisable = field.isDisabled || hardDisable;
     const type = hardTyping || field.fieldType
 
     switch (type) {
-        case FormFieldTypesEnum.Input:
+        case BaseFieldTypesEnum.Input:
             return (
                <BaseInput
                    field={field}
-                   handleChange={handleChange}
-                   handleBlur={handleBlur}
+                   handleChange={onChange}
+                   handleBlur={onBlur}
                    hardDisable={hardDisable}
                />
             );
-        case FormFieldTypesEnum.FileInput:
+        case BaseFieldTypesEnum.FileInput:
             return (
                 <BaseFileInput
                     field={field}
-                    handleChange={handleChange}
+                    handleChange={onChange}
                     hardDisable={hardDisable}
                 />
             );
-        case FormFieldTypesEnum.CheckBox:
+        case BaseFieldTypesEnum.CheckBox:
             return (
                <BaseCheckbox
                    field={field}
-                   handleChange={handleChange}
-                   handleBlur={handleBlur}
+                   handleChange={onChange}
+                   handleBlur={onBlur}
                    hardDisable={hardDisable}
                />
             );
-        case FormFieldTypesEnum.Switch:
+        case BaseFieldTypesEnum.Switch:
             return (
                 <BaseSwitch
                     field={field}
-                    handleChange={handleChange}
-                    handleBlur={handleBlur}
+                    handleChange={onChange}
+                    handleBlur={onBlur}
                     hardDisable={hardDisable}
                 />
             );
-        case FormFieldTypesEnum.Select:
+        case BaseFieldTypesEnum.Select:
             return (
                 <BaseSelector
                     field={field}
-                    handleChange={e => {handleChange(field.id, e)}}
-                    handleBlur={() => handleBlur(field.id)}
+                    handleChange={e => {onChange(field.id, e)}}
+                    handleBlur={() => onBlur(field.id)}
                     hardDisable={isDisable}
                 />
             );
-        case FormFieldTypesEnum.Button:
+        case BaseFieldTypesEnum.Button:
             return (
                 <BaseButton
                     field={field}
-                    handleChange={handleChange}
-                    handleBlur={handleBlur}
+                    handleChange={onChange}
+                    handleBlur={onBlur}
                     hardDisable={hardDisable}
                 />
             );
-        case FormFieldTypesEnum.ButtonWithConfirmation:
+        case BaseFieldTypesEnum.ButtonWithConfirmation:
             return (
                 <BaseButtonWithConfirmation
                     field={field}
-                    handleChange={handleChange}
-                    handleBlur={handleBlur}
+                    handleChange={onChange}
+                    handleBlur={onBlur}
                     hardDisable={hardDisable}
                 />
             );
-        case FormFieldTypesEnum.Toggle:
+        case BaseFieldTypesEnum.Toggle:
             return (
                 <BaseToggle
                   field={field}
-                  handleChange={handleChange}
+                  handleChange={onChange}
                   hardDisable={hardDisable}
                 />
             );

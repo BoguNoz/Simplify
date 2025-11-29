@@ -1,6 +1,6 @@
 import {observer} from "mobx-react-lite";
 import {useEffect, useRef} from "react";
-import {baseContainerInitializationSetup} from "@core/stores/utils/composite-store-utils";
+import {baseCompositeInitializationSetup} from "@core/stores/utils/composite-store-utils";
 import {BaseCompositeStore} from "@core/stores/base-composite-store";
 import {BaseStore} from "@core/stores/base-store";
 
@@ -38,7 +38,7 @@ const composite = (Component: any) => {
             storeRef.current = compositeStore
 
             const initialization = async (id: string, cStore: BaseCompositeStore, fStore: BaseStore) => {
-                await baseContainerInitializationSetup(id, cStore, fStore)
+                await baseCompositeInitializationSetup(id, cStore, fStore)
             }
 
             initialization(compositeId, compositeStore, store);

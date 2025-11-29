@@ -71,14 +71,3 @@ export const mockFields = buildFields(fields);
 // #region StoreMock
 await mockStore.initializeFields(mockFields);
 // #endregion StoreMock
-
-// #region FormMocks
-export const mockHandleBlur = async (fieldId: string) => {
-    mockStore.validateField(fieldId);
-};
-
-export const mockHandleChange = async (fieldId: string, value: any) => {
-    await mockStore.setFieldValue(fieldId, value);
-    mockStore.validateField(fieldId); 
-};
-// #endregion FormMocks

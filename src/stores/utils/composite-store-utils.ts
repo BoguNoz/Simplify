@@ -8,7 +8,7 @@ import {BaseCompositeStore} from "../base-composite-store";
  * @param {BaseCompositeStore} compositeStore - The composite store instance to register.
  * @param {BaseStore} store - The parent field store where the composite will be registered.
  */
-export const baseContainerInitializationSetup = async (compositeId: string, compositeStore: BaseCompositeStore, store: BaseStore) => {
+export const baseCompositeInitializationSetup = async (compositeId: string, compositeStore: BaseCompositeStore, store: BaseStore) => {
     compositeStore.registerStore(compositeId, store);
     await compositeStore.initializeFields(compositeId);
 }

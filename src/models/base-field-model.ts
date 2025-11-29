@@ -72,6 +72,15 @@ export default interface BaseFieldModel {
 
     /**
      * Field label displayed in the UI.
+     *
+     * @example
+     * ```ts
+     * field.send.label = Send // for icon
+     * ```
+     *
+     * ```ts
+     * field.send.label = "Send" // for text
+     * ```
      */
     label: string | ElementType;
 

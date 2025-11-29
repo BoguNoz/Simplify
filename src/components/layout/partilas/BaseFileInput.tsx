@@ -27,7 +27,7 @@ interface BaseFileInputProps {
  * @see BaseFieldModel
  * @see BaseFileInputProps
  */
-const BaseFileInput: React.FC<BaseFileInputProps> = observer((props) => {
+const BaseFileInput = observer((props: BaseFileInputProps) => {
     const {field, handleChange, hardDisable} = props;
 
     const isDisabled = hardDisable || field.isDisabled;

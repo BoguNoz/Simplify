@@ -29,7 +29,7 @@ interface BaseInputProps {
  * @see BaseFieldModel
  * @see BaseFieldModel.addit
  */
-const BaseInput: React.FC<BaseInputProps> = observer((props) => {
+const BaseInput = observer((props: BaseInputProps) => {
     const {field, handleChange, handleBlur, hardDisable} = props;
     
     const isDisabled = hardDisable || field.isDisabled;

@@ -3,8 +3,6 @@ import {action} from "storybook/actions";
 import {
     mockBaseRegisteredFields,
     mockFields,
-    mockHandleBlur,
-    mockHandleChange
 } from "@core/components/mocks/base-field-mocks";
 import BaseToggle from "@core/components/layout/partilas/BaseToggle";
 
@@ -26,7 +24,6 @@ const field = mockFields.find(bf => bf.id === mockBaseRegisteredFields.baseToggl
 export const Default: Story = {
     args: {
         field: field,
-        handleChange: mockHandleChange,
         hardDisable: false,
     },
 };

@@ -25,7 +25,7 @@ interface SelectorFieldProps {
  * @see SelectorFieldProps
  * @see BaseFieldModel.dataSource
  */
-const BaseSelector: React.FC<SelectorFieldProps> = observer((props) => {
+const BaseSelector = observer((props: SelectorFieldProps) => {
     const [options, setOptions] = useState<Record<string, string>>({});
 
     const {field, handleChange, handleBlur, hardDisable} = props;

@@ -26,7 +26,7 @@ interface BaseSwitchProps {
  * @see BaseFieldModel
  * @see BaseSwitchProps
  */
-const BaseSwitch: React.FC<BaseSwitchProps> = observer((props) => {
+const BaseSwitch = observer((props: BaseSwitchProps) => {
     const {field, handleChange, handleBlur, hardDisable} = props;
 
     const isDisabled = hardDisable || field.isDisabled;

@@ -53,5 +53,13 @@ export default {
 
         baseToggleLabel: "Base Toggle",
         baseToggleDescription: "A reusable two-state button that can be either on or off.",
+
+        buttonGroupComposite: {
+            archiveLabel: "Archive",
+            archiveDescription: "Archive description mock",
+
+            registryLabel: "Registry",
+            registryDescription: "Registry description mock",
+        }
     },
 }

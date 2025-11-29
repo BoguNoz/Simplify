@@ -20,10 +20,10 @@ export interface BaseSectionModel {
     /**
      * The display label of the section, used for UI representation.
      */
-    label: string;
+    label?: string;
 
     /**
      * A short description of the section, explaining its purpose or contents.
      */
-    description: string;
+    description?: string;
 }

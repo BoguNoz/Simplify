@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useCallback} from "react";
 import { observer } from "mobx-react-lite";
 import {BaseStore} from "@core/stores/base-store";
 import BaseFieldTypeEnum from "@core/enums/base-field-type-enum";
@@ -15,8 +15,8 @@ interface FormFieldProps {
     fieldId: string;
     store: BaseStore;
 
-    handleBlur: (fieldId: string) => void;
-    handleChange: (fieldId: string, value: any) => void;
+    handleBlur?: (fieldId: string) => void;
+    handleChange?: (fieldId: string, value: any) => void;
 
     hardDisable?: boolean;
     hardTyping?: BaseFieldTypeEnum;
@@ -28,16 +28,45 @@ interface FormFieldProps {
  * 
  * @remarks
  * - Possible variants `default`, `secondary`, `ghost`, `outline`.
- * 
+ * - This component supports all base field types defined in {@link BaseFieldTypesEnum}.
+ * - The `hardDisable` prop allows external forcing of the disabled state, overriding the field's own state.
+ * - The `hardTyping` prop allows overriding the field type for special cases.
+ - The `handleBlur` and `handleChange` prop allows overriding default behaviour on field blur and change respectively.
+ *
  * @see FormFieldProps
  */
-const FormField: React.FC<FormFieldProps> = observer((props) => {
+const FormField = observer((props: FormFieldProps) => {
     const {fieldId, store, handleChange, handleBlur, hardDisable, hardTyping} = props;
 
     const field = store.fields[fieldId];
     if (!field || !field.render) {
-        return null
-    };
+        return null;
+    }
+
+    // #region Actions
+    const onChange = useCallback(
+        async (fieldId: string, value: any) => {
+            if (handleChange) {
+                await handleChange(fieldId, value);
+            } else {
+                await store.setFieldValue(fieldId, value);
+                store.validateField(fieldId);
+            }
+        },
+        [handleChange]
+    );
+
+    const onBlur = useCallback(
+        async (fieldId: string) => {
+            if (handleBlur) {
+                await handleBlur(fieldId);
+            } else {
+                store.validateField(fieldId);
+            }
+        },
+        [handleBlur]
+    );
+    // #endregion Actions
 
     const isValid = field.state.status === "valid";
     const isDisabled = field.isDisabled || hardDisable;
@@ -88,9 +117,10 @@ const FormField: React.FC<FormFieldProps> = observer((props) => {
                 </div>
                 <AlertTitle  className="flex flex-col gap-1 w-full">
                     <BaseField
-                        field={field}
-                        handleChange={handleChange}
-                        handleBlur={handleBlur}
+                        fieldId={fieldId}
+                        store={store}
+                        handleChange={onChange}
+                        handleBlur={onBlur}
                         hardDisable={hardDisable}
                         hardTyping={hardTyping}
                     />

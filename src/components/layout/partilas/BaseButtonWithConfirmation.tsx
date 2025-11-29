@@ -33,7 +33,7 @@ interface BaseButtonWithConfirmationProps {
  * @see BaseFieldModel
  * @see BaseButtonWithConfirmationProps
  */
-const BaseButtonWithConfirmation: React.FC<BaseButtonWithConfirmationProps> = observer((props) => {
+const BaseButtonWithConfirmation = observer((props: BaseButtonWithConfirmationProps) => {
     const { field, hardDisable, handleChange, handleBlur } = props;
 
     const [confirming, setConfirming] = useState(false);

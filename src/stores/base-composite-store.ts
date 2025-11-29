@@ -21,20 +21,7 @@ import {observable, runInAction} from "mobx";
  *
  *     constructor() {
  *         super();
- *
- *         makeObservable(this, {
- *             composites: observable,
- *             stores: observable,
- *             renderedComposites: observable,
- *
- *             initializeComposite: action,
- *             initializeFields: action,
- *             renderComposite: action,
- *             setRendering: action,
- *             registerStore: action,
- *             getStore: action,
- *             invokeCompositeDeconstructor: action,
- *         });
+ *         autoRegister(this)
  *     }
  * }
  *
@@ -55,6 +42,7 @@ import {observable, runInAction} from "mobx";
  * @see BaseCompositeStore.registerStore
  * @see BaseCompositeStore.getStore
  * @see BaseCompositeStore.invokeCompositeDeconstructor
+ * @see autoRegister
  */
 export abstract class BaseCompositeStore {
     composites: Record<string, BaseCompositeModel> = {};

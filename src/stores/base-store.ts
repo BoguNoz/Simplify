@@ -28,20 +28,7 @@ import BaseFieldTypesEnum from "@core/enums/base-field-type-enum";
  *
  *     constructor() {
  *         super();
- *
- *         makeObservable(this, {
- *             fields: observable,
- *             operations: observable,
- *             reverseDeps: observable,
- *
- *             initializeFields: action,
- *             invokeDeconstructor: action,
- *             setFieldValue: action,
- *             setFieldAdditValue: action,
- *             setFieldState: action,
- *             addValidators: action,
- *             setFieldEditability: action,
- *         });
+*          autoRegister(this);
  *     }
  *}
  *
@@ -65,6 +52,7 @@ import BaseFieldTypesEnum from "@core/enums/base-field-type-enum";
  * @see BaseStore.addValidators
  * @see BaseStore.validateField
  * @see BaseStore.validateSpecifyFields
+ * @see autoRegister
  */
 export abstract class BaseStore {
     fields: Record<string, BaseFieldModel> = {};

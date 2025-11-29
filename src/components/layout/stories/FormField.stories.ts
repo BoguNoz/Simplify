@@ -1,10 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import {
     mockBaseRegisteredFields,
-    mockHandleBlur,
-    mockHandleChange
 } from "@core/components/mocks/base-field-mocks";
-import FormField from "@core/components/layout/form/FormField";
+import FormField from "@core/components/layout/FormField";
 import {mockStore} from "@core/components/mocks/mock-store";
 
 
@@ -25,8 +23,6 @@ export const Button: Story = {
     args: {
         fieldId: mockBaseRegisteredFields.baseButton,
         store: mockStore,
-        handleChange: mockHandleChange,
-        handleBlur: mockHandleBlur,
         hardDisable: false,
     },
 };
@@ -38,8 +34,6 @@ export const ButtonWithConfirm: Story = {
     args: {
         fieldId: mockBaseRegisteredFields.baseButtonWithConfirm,
         store: mockStore,
-        handleChange: mockHandleChange,
-        handleBlur: mockHandleBlur,
         hardDisable: false,
     },
 };
@@ -51,8 +45,6 @@ export const Checkbox: Story = {
     args: {
         fieldId: mockBaseRegisteredFields.baseCheckbox,
         store: mockStore,
-        handleChange: mockHandleChange,
-        handleBlur: mockHandleBlur,
         hardDisable: false,
     },
 };
@@ -64,8 +56,6 @@ export const FileInput: Story = {
     args: {
         fieldId: mockBaseRegisteredFields.baseFileInput,
         store: mockStore,
-        handleChange: mockHandleChange,
-        handleBlur: mockHandleBlur,
         hardDisable: false,
     },
 };
@@ -77,8 +67,6 @@ export const Input: Story = {
     args: {
         fieldId: mockBaseRegisteredFields.baseInput,
         store: mockStore,
-        handleChange: mockHandleChange,
-        handleBlur: mockHandleBlur,
         hardDisable: false,
     },
 };
@@ -90,8 +78,6 @@ export const Selector: Story = {
     args: {
         fieldId: mockBaseRegisteredFields.baseSelector,
         store: mockStore,
-        handleChange: mockHandleChange,
-        handleBlur: mockHandleBlur,
         hardDisable: false,
     },
 };
@@ -103,8 +89,6 @@ export const Switch: Story = {
     args: {
         fieldId: mockBaseRegisteredFields.baseSwitch,
         store: mockStore,
-        handleChange: mockHandleChange,
-        handleBlur: mockHandleBlur,
         hardDisable: false,
     },
 };
@@ -116,8 +100,6 @@ export const Toggle: Story = {
     args: {
         fieldId: mockBaseRegisteredFields.baseToggle,
         store: mockStore,
-        handleChange: mockHandleChange,
-        handleBlur: mockHandleBlur,
         hardDisable: false,
     },
 };

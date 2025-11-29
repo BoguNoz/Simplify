@@ -24,7 +24,7 @@ interface BaseToggleProps {
  * @see BaseFieldModel
  * @see BaseToggleProps
  */
-const BaseToggle: React.FC<BaseToggleProps> = observer((props) => {
+const BaseToggle = observer((props: BaseToggleProps) => {
     const {field, handleChange, hardDisable} = props;
 
     const isDisabled = hardDisable || field.isDisabled;

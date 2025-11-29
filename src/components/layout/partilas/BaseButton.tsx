@@ -29,7 +29,7 @@ interface BaseButtonProps {
  * @see BaseFieldModel
  * @see BaseButtonProps
  */
-const BaseButton: React.FC<BaseButtonProps> = observer((props) => {
+const BaseButton = observer((props: BaseButtonProps) => {
     const {field, handleChange, handleBlur, hardDisable} = props;
 
     const isDisabled = hardDisable || field.isDisabled;
