@@ -1,12 +1,5 @@
-// #region components/layout/form/wrappers
-export * from "@core/components/layout/form/wrappers/BaseValidatorBox"
-// #endregion components/layout/form/wrappers
-
-// #region components/layout/form/partials
-// #endregion components/layout/form/partials
-
 // #region components/layout/form
-export * from "@core/components/layout/form/BaseFormField"
+export * from "@core/components/layout/form/FormField"
 // #endregion components/layout/form
 
 // #region components/layout/partials

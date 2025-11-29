@@ -11,7 +11,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircleXmark} from "@fortawesome/free-regular-svg-icons";
 import {faTriangleExclamation} from "@fortawesome/free-solid-svg-icons";
 
-interface BaseFormFieldProps {
+interface FormFieldProps {
     fieldId: string;
     store: BaseStore;
 
@@ -29,9 +29,9 @@ interface BaseFormFieldProps {
  * @remarks
  * - Possible variants `default`, `secondary`, `ghost`, `outline`.
  * 
- * @see BaseFormFieldProps
+ * @see FormFieldProps
  */
-const BaseFormField: React.FC<BaseFormFieldProps> = observer((props) => {
+const FormField: React.FC<FormFieldProps> = observer((props) => {
     const {fieldId, store, handleChange, handleBlur, hardDisable, hardTyping} = props;
 
     const field = store.fields[fieldId];
@@ -179,4 +179,4 @@ const ValidatorBox = observer(({ field }: { field: BaseFieldModel}) => {
     );
 });
 
-export default BaseFormField;
+export default FormField;

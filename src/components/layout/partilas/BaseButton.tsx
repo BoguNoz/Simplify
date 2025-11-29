@@ -38,7 +38,7 @@ const BaseButton: React.FC<BaseButtonProps> = observer((props) => {
     return (
         <div className="flex justify-end">
             <Tooltip>
-                <TooltipTrigger>
+                <TooltipTrigger asChild>
                     <div className="inline-flex items-center">
                         <ProccesStatus field={field} />
                         <Button

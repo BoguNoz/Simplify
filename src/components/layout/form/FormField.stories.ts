@@ -4,20 +4,20 @@ import {
     mockHandleBlur,
     mockHandleChange
 } from "@core/components/mocks/base-field-mocks";
-import BaseFormField from "@core/components/layout/form/BaseFormField";
+import FormField from "@core/components/layout/form/FormField";
 import {mockStore} from "@core/components/mocks/mock-store";
 
 
-const meta: Meta<typeof BaseFormField> = {
-    title: "form/BaseFormField",
-    component: BaseFormField,
+const meta: Meta<typeof FormField> = {
+    title: "form/FormField",
+    component: FormField,
     parameters: {
         layout: "centered",
     },
 };
 export default meta;
 
-type Story = StoryObj<typeof BaseFormField>;
+type Story = StoryObj<typeof FormField>;
 
 
 // #region Button

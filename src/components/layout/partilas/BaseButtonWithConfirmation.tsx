@@ -53,7 +53,7 @@ const BaseButtonWithConfirmation: React.FC<BaseButtonWithConfirmationProps> = ob
         return (
             <div onClick={() => setConfirming(true)} className="cursor-pointer">
                 <Tooltip>
-                    <TooltipTrigger>
+                    <TooltipTrigger asChild>
                         <Button
                             className={field.style}
                             disabled={isDisabled}

@@ -1,5 +1,5 @@
 import {observer} from "mobx-react-lite";
-import {useEffect} from "react";
+import {useEffect, useRef} from "react";
 import {baseContainerInitializationSetup} from "@core/stores/utils/composite-store-utils";
 import {BaseCompositeStore} from "@core/stores/base-composite-store";
 import {BaseStore} from "@core/stores/base-store";
@@ -25,8 +25,8 @@ import {BaseStore} from "@core/stores/base-store";
  * @param {React.FC<any>} Component - The React component to be wrapped.
  * @returns {React.FC<any>} The wrapped, MobX-observed component with automatic initialization logic.
  */
-const composite = (Component) => {
-    const Wrapped = (props) => {
+const composite = (Component: any) => {
+    const Wrapped = (props: any) => {
 
         const storeRef = useRef<BaseCompositeStore | null>(null);
         const idRef = useRef<string>("");
