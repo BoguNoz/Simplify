@@ -38,11 +38,6 @@ interface FormFieldProps {
 const FormField = observer((props: FormFieldProps) => {
     const {fieldId, store, handleChange, handleBlur, hardDisable, hardTyping} = props;
 
-    const field = store.fields[fieldId];
-    if (!field || !field.render) {
-        return null;
-    }
-
     // #region Actions
     const onChange = useCallback(
         async (fieldId: string, value: any) => {
@@ -67,6 +62,11 @@ const FormField = observer((props: FormFieldProps) => {
         [handleBlur]
     );
     // #endregion Actions
+
+    const field = store.fields[fieldId];
+    if (!field || !field.render) {
+        return null;
+    }
 
     const isValid = field.state.status === "valid";
     const isDisabled = field.isDisabled || hardDisable;

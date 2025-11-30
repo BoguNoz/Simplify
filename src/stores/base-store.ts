@@ -218,26 +218,9 @@ export abstract class BaseStore {
      *
      * @returns {ValidatorResponse[]} The list of validation results.
      */
-    public validateField = (id: string): ValidatorResponse[] => {
+    public validateField = (id: string) => {
         this._registry.registerChange(() => this._validateField(id));
     };
-
-    /** Validates a specific list of fields.
-     *
-     * @param {string[]} ids - The IDs of the fields to validate.
-     *
-     * @returns {Promise<boolean>} True if all fields are valid, otherwise false.
-     */
-    public validateSpecifyFields = async (ids: string[]): Promise<boolean> => {
-        let result = true
-        for (const id of ids) {
-            const validationResult = this.validateField(id);
-            if (validationResult.some(v => !v.isValid && !v.isWarning)) {
-                result = false;
-            }
-        }
-        return result;
-    }
 
     /**
      * Returns the current value of a field.
@@ -351,12 +334,11 @@ export abstract class BaseStore {
         }
     }
 
-    protected _validateField = (id: string): ValidatorResponse[] => {
+    protected _validateField = (id: string) => {
         const field = this.fields[id];
 
         if (field.isDisabled || !field.render || field.excluded) {
             field.state.status = "valid";
-            return [{ isValid: true, isWarning: false, message: "" }] as ValidatorResponse[];
         }
 
         const results = [];
@@ -370,13 +352,8 @@ export abstract class BaseStore {
         field.state.validationResult = results;
         if (results.length > 0) {
             field.state.status = results.some(v => v.isWarning) ? "warning" : "error";
-
-
-            return results;
         }
         field.state.status = "valid";
-
-        return [{ isValid: true, isWarning: false, message: "" }] as ValidatorResponse[];
     };
     // #endregion Logic
 }

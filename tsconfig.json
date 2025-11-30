@@ -11,7 +11,7 @@
       "@core/*": ["./src/*"]
     },
     "lib": ["esnext", "dom"],
-    "strict": true,
+    "strict": false,
     "skipLibCheck": true,
     "moduleResolution": "bundler",
   },

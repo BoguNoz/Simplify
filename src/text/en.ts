@@ -60,6 +60,41 @@ export default {
 
             registryLabel: "Registry",
             registryDescription: "Registry description mock",
+        },
+
+        form: {
+            cameraMetadata: {
+                sectionTitle: "Instrumentation and Environmental Parameters",
+                sectionDescription: "This section gathers all camera hardware repository, sensor calibration constants, and environmental conditions needed to perform accurate lock-in thermography corrections and temperature computations.",
+
+                profileSelectorLabel: "Camera Profile",
+                profileSelectorDescription: "Chose file with predefined profile to auto-populate all camera and environmental repository",
+
+                profileSwitchLabel: "Use New Profile",
+
+                resolutionXLabel: "Detector Width Resolution (px)",
+                resolutionXDescription: "Number of pixels along the detector’s vertical axis. Defines the width of all frames.",
+
+                resolutionYLabel: "Detector Height Resolution (px)",
+                resolutionYDescription: "Number of pixels across the detector’s horizontal axis. Defines the height of all frames.",
+
+                detectorSpectralRangeMinLabel: "Spectral Range Minimum (μm)",
+                detectorSpectralRangeMinDescription: "Shortest wavelength (in micrometers) that the detector can reliably sense.",
+
+                detectorSpectralRangeMaxLabel: "Spectral Range Maximum (μm)",
+                detectorSpectralRangeMaxDescription: "Longest wavelength (in micrometers) that the detector can reliably sense.",
+
+                flatFieldCorrectionMatrixLabel: "Flat‑Field Correction Matrix",
+                flatFieldCorrectionMatrixDescription: "Per‑pixel gain factors used to even out non‑uniform detector response. Accepted formats: .txt, .json, .tiff, .dat",
+
+                darkFrameImageLabel: "Dark‑Frame Image",
+                darkFrameImageDescription: "Per‑pixel dark current offsets, captured with no incident light. Accepted formats: .txt, .json, .tiff, .dat",
+                sensorGainLabel: "Sensor Gain",
+                sensorGainDescription: "Conversion factor that scales raw sensor values (e.g. grayscale or digital counts) into radiometric units (W/m²). Adjust this so that the output temperature range matches expected physical values (e.g. 20–80°C).",
+
+                sensorOffsetLabel: "Sensor Offset",
+                sensorOffsetDescription: "Baseline radiometric power corresponding to zero input from the sensor. Used to shift the entire radiometric scale upward, typically to account for dark signal or detector bias.",
+            },
         }
     },
 }

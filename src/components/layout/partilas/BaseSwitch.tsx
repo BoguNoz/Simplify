@@ -39,8 +39,8 @@ const BaseSwitch = observer((props: BaseSwitchProps) => {
                     className={field.style}
                     disabled={isDisabled}
                     checked={field.value}
-                    onCheckedChange={c => handleChange(field.id, c)}
-                    onBlur={() => handleBlur(field.id)}
+                    onCheckedChange={c => handleChange?.(field.id, c)}
+                    onBlur={() => handleBlur?.(field.id)}
                 />
             </div>
             <Footer field={field} />

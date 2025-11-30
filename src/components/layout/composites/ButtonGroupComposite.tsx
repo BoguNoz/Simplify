@@ -38,6 +38,7 @@ interface ButtonGroupCompositeProps {
  *
  * @see BaseField
  * @see composite()
+ * @see ButtonGroupCompositeProps
  */
 const ButtonGroupComposite = composite((props: ButtonGroupCompositeProps) => {
     const {compositeId, compositeStore, store, handleBlur, handleChange} = props;
@@ -46,8 +47,6 @@ const ButtonGroupComposite = composite((props: ButtonGroupCompositeProps) => {
     if (!composite) {
         return <></>;
     }
-
-    console.warn(composite);
 
     return (
         <ButtonGroup>

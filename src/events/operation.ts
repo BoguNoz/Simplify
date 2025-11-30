@@ -42,7 +42,7 @@ export type BaseOperationFn = (target?: any, store?: BaseStore, value?: any,) =>
  *
  * @see BaseOperationFn
  */
-export const toggleRendering = (targetIds: string[], store: BaseStore, value: any): BaseOperationFn => {
+export const toggleRendering = (targetIds: string[], store: BaseStore, value?: any): BaseOperationFn => {
     return () => {
         targetIds.forEach((id) => {
             const field = store.fields[id];
@@ -71,7 +71,7 @@ export const toggleRendering = (targetIds: string[], store: BaseStore, value: an
  * 
  * @see BaseOperationFn
  */
-export const setFieldValue = (targetId: string, store: BaseStore, value: any): BaseOperationFn => {
+export const setFieldValue = (targetId: string, store: BaseStore, value?: any): BaseOperationFn => {
     return () => {
         store.setFieldValue(targetId, value);
     }
