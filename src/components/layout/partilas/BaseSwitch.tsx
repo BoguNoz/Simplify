@@ -32,7 +32,13 @@ const BaseSwitch = observer((props: BaseSwitchProps) => {
     const isDisabled = hardDisable || field.isDisabled;
 
     return (
-        <div className="flex items-center justify-between p-3">
+        <div
+            className={
+                field.variant == "outline"
+                    ? "flex items-center p-3"
+                    : "flex items-center justify-between p-3"
+            }
+        >
            <Header field={field} />
             <div className="mr-3 mt-1.5">
                 <Switch

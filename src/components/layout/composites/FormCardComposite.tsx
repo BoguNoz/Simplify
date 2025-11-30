@@ -28,12 +28,12 @@ const FormCardComposite = composite((props: FormCardCompositeProps) => {
     }
 
     const width = cardWidth ?? 650;
-    const height = cardHeight ? `[${cardHeight}px]`: "[100%]";
+    const height = cardHeight ? `${cardHeight}px` : "850px";
     const style = `w-[${width}px] h-${height} flex flex-col`;
 
     return (
-        <Card className={style}>
-            <FormHeader
+        <Card style={{ width: `${width}px`, height }} className="flex flex-col">
+        <FormHeader
                 section={composite.sections[0]}
             />
             <FormBody
