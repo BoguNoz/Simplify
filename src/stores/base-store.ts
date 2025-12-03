@@ -352,6 +352,7 @@ export abstract class BaseStore {
         field.state.validationResult = results;
         if (results.length > 0) {
             field.state.status = results.some(v => v.isWarning) ? "warning" : "error";
+            return;
         }
         field.state.status = "valid";
     };
