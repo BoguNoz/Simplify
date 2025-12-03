@@ -53,7 +53,6 @@ const BaseField = observer((props: BaseFieldProps) => {
             if (handleChange) {
                 await handleChange(fieldId, value);
             } else {
-                console.warn(value);
                 await store.setFieldValue(fieldId, value);
             }
         },

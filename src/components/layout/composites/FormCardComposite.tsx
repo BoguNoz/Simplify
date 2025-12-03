@@ -33,7 +33,7 @@ const FormCardComposite = composite((props: FormCardCompositeProps) => {
 
     return (
         <Card style={{ width: `${width}px`, height }} className="flex flex-col">
-        <FormHeader
+            <FormHeader
                 section={composite.sections[0]}
             />
             <FormBody
@@ -65,6 +65,7 @@ const FormBody = observer(({section, store, handleBlur, handleChange}:
             <CardContent className="space-y-2">
                 {section.fieldsIds.map(fieldId => (
                     <FormField
+                        key={fieldId}
                         fieldId={fieldId}
                         store={store}
                         handleBlur={handleBlur}
