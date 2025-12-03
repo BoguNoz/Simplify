@@ -47,6 +47,8 @@ export function createCompositesPlaceholders<
             sections: [],
             renderFn: undefined,
             render: false,
+            mode: "page",
+            size: "xl",
             deconstructor: () => {},
         };
 
@@ -82,4 +84,30 @@ export function buildComposites<T extends string>(
     configs: Record<T, Partial<BaseCompositeModel>>
 ): BaseCompositeModel[] {
     return Object.values(configs) as BaseCompositeModel[];
+}
+
+export const modeToProcentage = (mode: string) => {
+    switch (mode) {
+        case "vertical-window": return [50, 80];  
+        case "square-window": return [80, 80];
+        case "horizontal-window": return [80, 50];
+        default: return [100, 100];
+    };
+}
+
+export const sizeToProcentage = (size: string) => {
+    switch (size) {
+        case "s": return 0.3;
+        case "l": return 0.8;
+        case "xl": return 1;
+        default: return 0.5
+    };
+}
+
+export const getCompositeDemension = (mode: string, size: string) => { 
+    const demensions = modeToProcentage(mode);
+    demensions[0] *= sizeToProcentage(size);
+    demensions[1] *= sizeToProcentage(size);
+
+    return demensions;
 }

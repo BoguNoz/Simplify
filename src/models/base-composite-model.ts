@@ -76,6 +76,37 @@ export default interface BaseCompositeModel {
     render: boolean;
 
     /**
+     * Defines how the composite should be rendered.
+     *
+     * @remarks
+     * The rendering mode controls the layout behavior of the composite.
+     * Different modes may change how fields, sections, and child composites
+     * are arranged in the UI.
+     *
+     * Available modes:
+     * - `page` – Standard full-page layout.
+     * - `square-window` – Compact, centered container with equal width and height.
+     * - `horizontal-window` – A horizontally oriented layout, useful for wide content.
+     * - `vertical-window` – A vertically oriented layout, optimal for stacked content.
+     */
+    mode: "page" | "square-window" | "horizontal-window" | "vertical-window";
+
+    /**
+     * Controls the visual size of the composite.
+     *
+     * @remarks
+     * This property defines the layout footprint of the composite.  
+     * It can be used to adjust spacing, wrapper dimensions, typography scale,
+     * or the general density of the UI.
+     *
+     * - `"s"` – Small, compact layout (tight spacing, minimal footprint).
+     * - `"m"` – Medium, default layout.
+     * - `"l"` – Large layout with more spacing and breathing room.
+     * - `"xl"` – Extra-large layout, often used for full-page or wide-screen displays.
+     */
+    size: "s" | "m" | "l" | "xl";   
+
+    /**
      * Cleanup function that executes when the composite is destroyed or unmounted.
      *
      * @remarks
