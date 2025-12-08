@@ -14,25 +14,20 @@ interface FormCardCompositeProps {
 
     handleBlur?: (fieldId: string) => void;
     handleChange?: (fieldId: string, value: any) => void;
-
-    cardWidth: number;
-    cardHeight: number;
 }
 
 const FormCardComposite = composite((props: FormCardCompositeProps) => {
-    const {compositeId, compositeStore, store, handleBlur, handleChange, cardWidth, cardHeight} = props;
+    const {compositeId, compositeStore, store, handleBlur, handleChange} = props;
 
     const composite = compositeStore.composites[compositeId];
     if (!composite) {
         return <></>;
     }
 
-    const width = cardWidth ?? 650;
-    const height = cardHeight ? `${cardHeight}px` : "850px";
-    const style = `w-[${width}px] h-${height} flex flex-col`;
+    const dimensions = compositeStore.getCompositeDimensions(compositeId)
 
     return (
-        <Card style={{ width: `${width}px`, height }} className="flex flex-col">
+        <Card style={{ width: `${dimensions[0]}px`, height: `${dimensions[1]}px` }} className="flex flex-col">
             <FormHeader
                 section={composite.sections[0]}
             />
@@ -44,7 +39,6 @@ const FormCardComposite = composite((props: FormCardCompositeProps) => {
             />
         </Card>
     );
-
 });
 
 const FormHeader = observer(({section}: {section: BaseSectionModel}) => {

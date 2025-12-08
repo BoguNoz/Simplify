@@ -31,12 +31,12 @@ export const Default: Story = {
 // #endregion Mock
 const text = lang()
 
-const composites = createCompositesPlaceholders({ toolbar: "formCard" });
+const composites = createCompositesPlaceholders({ formCard: "formCard" });
 
-composites.toolbar.render = true;
-composites.toolbar.renderFn = () => true;
-composites.toolbar.fields = formMock;
-composites.toolbar.sections = [
+composites.formCard.render = true;
+composites.formCard.renderFn = () => true;
+composites.formCard.fields = formMock;
+composites.formCard.sections = [
     {
         id: "cameraMetadataRegisteredFields",
         fieldsIds: Object.values(cameraMetadataRegisteredFields),
@@ -44,7 +44,8 @@ composites.toolbar.sections = [
         description: text.mock.form.cameraMetadata.sectionDescription,
 
     } as BaseSectionModel,
-]
+];
+composites.formCard.mode = "vertical-window";
 
 const composite = buildComposites(composites);
 

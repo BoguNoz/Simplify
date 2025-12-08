@@ -2,6 +2,7 @@ import { isNullOrUndefined } from "@core/lib/utils";
 import BaseCompositeModel from "@core/models/base-composite-model";
 import {BaseStore} from "@core/stores/base-store";
 import {observable, runInAction} from "mobx";
+import {modeToPercentage, sizeToPercentage} from "@core/models/utils/base-composite-model-utils";
 
 /**
  * Abstract base class that manages a collection of composites and their corresponding field stores.
@@ -43,6 +44,7 @@ import {observable, runInAction} from "mobx";
  * @see BaseCompositeStore.getStore
  * @see BaseCompositeStore.invokeCompositeDeconstructor
  * @see autoRegister
+ * @see getCompositeDimensions
  */
 export abstract class BaseCompositeStore {
     composites: Record<string, BaseCompositeModel> = {};
@@ -126,6 +128,42 @@ export abstract class BaseCompositeStore {
     getStore = (id: string): BaseStore => this.stores[id];
 
     /**
+     * Calculates the final pixel dimensions for a composite.
+     *
+     * @remarks
+     * The dimension is computed in two steps:
+     *
+     * 1. Base width and height percentages are derived from the composite `mode`
+     *    using {@link modeToPercentage}.
+     *
+     * 2. Both dimensions are additionally scaled using the composite `size`
+     *    via {@link sizeToPercentage}.
+     *
+     * The final values are then converted from percentages to **absolute pixel sizes**
+     * based on the current viewport dimensions (`window.innerWidth` and `window.innerHeight`).
+     *
+     * This ensures that composites have consistent physical size on screen,
+     * independent of scrollable content or layout changes.
+     *
+     * @param compositeId - Identifier of the composite whose dimensions will be computed.
+     * @returns A tuple `[widthPx, heightPx]` containing the final pixel dimensions.
+     */
+    getCompositeDimensions = (compositeId: string) => {
+        const composite = this.composites[compositeId];
+
+        const viewportWidth = window.innerWidth;
+        const viewportHeight = window.innerHeight;
+
+        const [w, h] = modeToPercentage(composite.mode);
+        const sizeFactor = sizeToPercentage(composite.size);
+
+        return [
+            viewportWidth * (w / 100) * sizeFactor,
+            viewportHeight * (h / 100) * sizeFactor
+        ];
+    }
+
+    /**
      * Invokes the deconstructor for a specific composite and all of its fields.
      * 
      * @remarks
@@ -162,7 +200,6 @@ export abstract class BaseCompositeStore {
         if (free) {
             delete this.composites[id];
         }
-        
     }
 }
 
