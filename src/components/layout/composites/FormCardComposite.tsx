@@ -79,8 +79,8 @@ const FormHeader = observer(({section}: {section: BaseSectionModel}) => {
 const FormBody = observer(({section, store, handleBlur, handleChange}:
    {section: BaseSectionModel, store: BaseStore, handleBlur?: (fieldId: string) => void,  handleChange?: (fieldId: string, value: any) => void}) => {
     return (
-        <ScrollArea className="flex-1 overflow-auto">
-            <CardContent className="space-y-2">
+        <ScrollArea className="flex-1 overflow-auto w-full">
+            <CardContent className="space-y-2 w-full">
                 {section.fieldsIds.map(fieldId => (
                     <FormField
                         key={fieldId}

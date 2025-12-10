@@ -50,6 +50,7 @@ export abstract class BaseCompositeStore {
     composites: Record<string, BaseCompositeModel> = {};
     stores: Record<string, BaseStore> = {};
     renderedComposites = observable.map<string, boolean>();
+    parents: Record<string, string> = {};
 
     /**
      * Initializes all composites based on their configuration.
@@ -59,13 +60,25 @@ export abstract class BaseCompositeStore {
      *  
      * @param {BaseCompositeModel[]} composites - List of composites configurations
      */
-    initializeComposite = (composites: BaseCompositeModel[]): void =>  {
+    public initializeComposite = (composites: BaseCompositeModel[]): void =>  {
         composites.forEach((composite: BaseCompositeModel) => {
             runInAction(() => {
                 this.composites[composite.id] = composite;
                 this.renderedComposites.set(composite.id, composite.render);
             });
-        })
+        });
+
+        // TODO move dis to another function + add partial management to composite wrapper
+       /* composites.forEach((composite: BaseCompositeModel) => {
+            if (!composite.isPartial) {
+                runInAction(() => {
+                    composite.partials.forEach((partialId: string) => {
+                        this.parents[partialId] = composite.id;
+                        this.composites[partialId].isPartial = true;
+                    })
+                })
+            }
+        });*/
     }
 
     /**
@@ -73,7 +86,7 @@ export abstract class BaseCompositeStore {
      * 
      * @param {string} id - The ID of the composite.
      */
-    initializeFields = async (id: string): Promise<void> => {
+    public initializeFields = async (id: string): Promise<void> => {
         const composite = this.composites[id];
         const store = this.stores[id];
         await store.initializeFields(composite.fields);
@@ -85,7 +98,7 @@ export abstract class BaseCompositeStore {
      * @param {string} id - The ID of the composite.
      * @returns {boolean} `true` if the composite should be rendered otherwise `false`.
      */
-    renderComposite = (id: string): boolean => {
+    public renderComposite = (id: string): boolean => {
         return this.renderedComposites.get(id)!;
     }
 
@@ -99,7 +112,7 @@ export abstract class BaseCompositeStore {
      * @param {string} id - The ID of the composite.
      * @param {boolean} [state] - The desired render state. If omitted, the state is determined automatically.
      */
-    setRendering = (id: string, state?: boolean): void => {
+    public setRendering = (id: string, state?: boolean): void => {
         runInAction(() => {
             if (isNullOrUndefined(state)) {
                 this.composites[id].render = this.composites[id].renderFn(this, this.stores[id]);
@@ -129,7 +142,7 @@ export abstract class BaseCompositeStore {
      * @param {string} id - The ID of the composite.
      * @returns {BaseStore} The store instance linked to the composite.
      */
-    getStore = (id: string): BaseStore => this.stores[id];
+    public getStore = (id: string): BaseStore => this.stores[id];
 
     /**
      * Calculates the final pixel dimensions for a composite.
@@ -151,7 +164,7 @@ export abstract class BaseCompositeStore {
      * @param compositeId - Identifier of the composite whose dimensions will be computed.
      * @returns A tuple `[widthPx, heightPx]` containing the final pixel dimensions.
      */
-    getCompositeDimensions = (compositeId: string) => {
+    public getCompositeDimensions = (compositeId: string) => {
         const composite = this.composites[compositeId];
 
         const viewportWidth = window.innerWidth;
@@ -187,7 +200,7 @@ export abstract class BaseCompositeStore {
      *
      * @see invokeDeconstructor
      */
-    invokeCompositeDeconstructor = async (id: string, free: boolean, ...args: any[]) => {
+    public invokeCompositeDeconstructor = async (id: string, free: boolean, ...args: any[]) => {
         if (!Object.keys(this.composites).includes(id)) {
             return;
         }

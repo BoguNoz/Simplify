@@ -106,11 +106,11 @@ const FormField = observer((props: FormFieldProps) => {
     // #endregion Variables
 
     return (
-        <div className="p-2">
+        <div className="p-2 w-full">
             <Alert
                 variant={variant()}
                 status={status()}
-                className="relative"
+                className="relative w-full"
             >
                 <div className="absolute top-2 right-2">
                    <InfoSymbol field={field} hardDisable={hardDisable} />

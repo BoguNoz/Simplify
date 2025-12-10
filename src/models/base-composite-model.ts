@@ -15,17 +15,23 @@ export default interface BaseCompositeModel {
      * Indicates whether the composite is a *partial composite*.
      *
      * @remarks
+     * ##### IMPORTANT
+     * - **Partial composite will inherit some behaviour from the parent.**
+     * - **This flag is automatically added by parent composite.**
+     *
+     * ##### GOOD To KNOW
      * - A **partial composite** is a specialized composite that exists as a
      *   fragment of a larger parent composite.
      * - Partial composites are used to break down complex UI structures into smaller,
      *   reusable segments.
      * - Partial composites **should not contain child composites**. They may contain only fields.
      * - Typically used for grouping logical parts of a form without representing a standalone component.
+     *
      */
     isPartial: boolean;
 
     /**
-     * A list of *partial composites* that belong to this composite.
+     * A list of *partial composites ids* that belong to this composite.
      *
      * @remarks
      * - Partials are smaller, reusable composite fragments that form sections
@@ -38,7 +44,7 @@ export default interface BaseCompositeModel {
      *
      * @see isPartial
      */
-    partials: BaseCompositeModel[];
+    partials: string[];
 
     /**
      * A list of field configurations that belong to this composite.
@@ -98,8 +104,11 @@ export default interface BaseCompositeModel {
      * This numeric value determines how much the composite should scale relative
      * to its base dimensions. The value acts as a multiplicative factor:
      *
+     * @example
+     * ```ts
      * size = 0.5  // Composite occupies half of its default size
      * size = 1.4  // Composite is scaled up by 40%
+     * ```
      */
     size: number;
 

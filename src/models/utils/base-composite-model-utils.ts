@@ -45,6 +45,8 @@ export function createCompositesPlaceholders<
             id: registeredFields[key],
             fields: [],
             sections: [],
+            isPartial: false,
+            partials: [],
             renderFn: undefined,
             render: false,
             mode: "page",
