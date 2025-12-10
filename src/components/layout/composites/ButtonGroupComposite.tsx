@@ -7,26 +7,24 @@ import {observer} from "mobx-react-lite";
 import BaseField from "@core/components/layout/BaseField";
 import BaseFieldTypesEnum from "@core/enums/base-field-type-enum";
 import {Button} from "@core/components/ui/button";
-import BaseStatusButton from "@core/components/layout/partilas/BaseStatusButton";
+import {BaseCompositeInterface} from "@core/components/layout/composites/interfaces/BaseCompositeInterface";
 
-interface ButtonGroupCompositeProps {
-    compositeId: string;
-    compositeStore: BaseCompositeStore;
-    store: BaseStore;
-
-    handleBlur?: (fieldId: string) => void;
-    handleChange?: (fieldId: string, value: any) => void;
-}
+interface ButtonGroupCompositeProps extends BaseCompositeInterface { }
 
 /**
  * A composite renderer for grouped buttons.
  *
  * @remarks
- * - This composite arranges its sections and fields into nested <ButtonGroup> layouts.
- * - Each section becomes a horizontal group of buttons.
- * - Each field inside a section is rendered using the polymorphic <BaseField> engine.
- * - Ideal for toolbars, action panels, segmented button controls and switcher layouts.
- * - **Important** in order for composite to work optimally do not forgot to add `section.id` to all sections.
+ * This composite transforms each section into a `<ButtonGroup>` and each field
+ * inside the section into a clickable button rendered through the polymorphic
+ * `<BaseField>` engine.
+ *
+ * ### Key characteristics
+ * - Each section maps to a horizontally grouped button strip.
+ * - Each field is rendered as a button using `BaseField` with `hardTyping="Button"`.
+ * - Supports MobX reactivity through `observer`.
+ * - Designed for toolbars, segmented controls, toggle groups, action rows,
+ *   and scenarios where fields represent actions rather than inputs.
  *
  * @example
  * // Render
@@ -37,7 +35,7 @@ interface ButtonGroupCompositeProps {
  * />
  *
  * @see BaseField
- * @see composite()
+ * @see composite
  * @see ButtonGroupCompositeProps
  */
 const ButtonGroupComposite = composite((props: ButtonGroupCompositeProps) => {

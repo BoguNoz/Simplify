@@ -6,16 +6,40 @@ import {BaseSectionModel} from "@core/models/partials/base-section-model";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@core/components/ui/card";
 import {ScrollArea} from "@core/components/ui/scroll-area";
 import FormField from "@core/components/layout/FormField";
+import {BaseCompositeInterface} from "@core/components/layout/composites/interfaces/BaseCompositeInterface";
 
-interface FormCardCompositeProps {
-    compositeId: string;
-    compositeStore: BaseCompositeStore;
-    store: BaseStore;
+interface FormCardCompositeProps extends BaseCompositeInterface { }
 
-    handleBlur?: (fieldId: string) => void;
-    handleChange?: (fieldId: string, value: any) => void;
-}
-
+/**
+ * A card-based, single section ,composite renderer for form layouts.
+ *
+ * @remarks
+ * This composite allows rendering a form inside a styled `<Card>` layout.
+ * It uses the composite engine to read sections/fields and automatically
+ * build a card with:
+ *
+ * - **Header** — displays title & description from the first section.
+ * - **Body** — scrollable list of form fields (`<FormField>`).
+ *
+ * This makes it ideal for:
+ * - modal forms,
+ * - detail/edit panels,
+ * - card-based property inspectors,
+ * - dashboard side panels.
+ *
+ * @example
+ * ```tsx
+ * <FormCardComposite
+ *   compositeId="userForm"
+ *   compositeStore={compositeStore}
+ *   store={store}
+ * />
+ * ```
+ *
+ * @see BaseCompositeStore
+ * @see BaseStore
+ * @see FormField
+ */
 const FormCardComposite = composite((props: FormCardCompositeProps) => {
     const {compositeId, compositeStore, store, handleBlur, handleChange} = props;
 

@@ -20,7 +20,7 @@ import {BaseStore} from "@core/stores/base-store";
  * @remarks
  * - This wrapper executes composite initialization only once, when the component
  * is first mounted. It extracts the required parameters from the component's props.
- * - This wrapper menages component rendering using composite `renderFn`
+ * - This wrapper manages component rendering using composite `renderFn`
  *
  * @param {React.FC<any>} Component - The React component to be wrapped.
  * @returns {React.FC<any>} The wrapped, MobX-observed component with automatic initialization logic.

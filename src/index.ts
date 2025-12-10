@@ -88,5 +88,9 @@ export * from "@core/stores/base-store"
 // #endregion stores
 
 // #region engine
-export * from "@core/engine/auto-register"
+export * from "@core/engine/composite"
 // #region engine
+
+// #region engine/stores
+export * from "@core/engine/stores/auto-register"
+// #region engine/stores

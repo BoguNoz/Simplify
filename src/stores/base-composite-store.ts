@@ -2,7 +2,7 @@ import { isNullOrUndefined } from "@core/lib/utils";
 import BaseCompositeModel from "@core/models/base-composite-model";
 import {BaseStore} from "@core/stores/base-store";
 import {observable, runInAction} from "mobx";
-import {modeToPercentage, sizeToPercentage} from "@core/models/utils/base-composite-model-utils";
+import {modeToPercentage} from "@core/models/utils/base-composite-model-utils";
 
 /**
  * Abstract base class that manages a collection of composites and their corresponding field stores.
@@ -61,15 +61,17 @@ export abstract class BaseCompositeStore {
      */
     initializeComposite = (composites: BaseCompositeModel[]): void =>  {
         composites.forEach((composite: BaseCompositeModel) => {
-            this.composites[composite.id] = composite;
-            this.renderedComposites.set(composite.id, composite.render);
+            runInAction(() => {
+                this.composites[composite.id] = composite;
+                this.renderedComposites.set(composite.id, composite.render);
+            });
         })
     }
 
     /**
      * Invokes initialization of fields within a composite.
      * 
-     * @param {string} id - The ID of he composite.
+     * @param {string} id - The ID of the composite.
      */
     initializeFields = async (id: string): Promise<void> => {
         const composite = this.composites[id];
@@ -116,7 +118,9 @@ export abstract class BaseCompositeStore {
      * @param {BaseStore} store - The store instance to register.
      */
     registerStore = (id: string, store: BaseStore): void => {
-        this.stores[id] = store;
+        runInAction(() => {
+            this.stores[id] = store;
+        });
     }
 
     /**
@@ -136,8 +140,7 @@ export abstract class BaseCompositeStore {
      * 1. Base width and height percentages are derived from the composite `mode`
      *    using {@link modeToPercentage}.
      *
-     * 2. Both dimensions are additionally scaled using the composite `size`
-     *    via {@link sizeToPercentage}.
+     * 2. Both dimensions are additionally scaled using the composite `size`.
      *
      * The final values are then converted from percentages to **absolute pixel sizes**
      * based on the current viewport dimensions (`window.innerWidth` and `window.innerHeight`).
@@ -155,7 +158,7 @@ export abstract class BaseCompositeStore {
         const viewportHeight = window.innerHeight;
 
         const [w, h] = modeToPercentage(composite.mode);
-        const sizeFactor = sizeToPercentage(composite.size);
+        const sizeFactor = composite.size;
 
         return [
             viewportWidth * (w / 100) * sizeFactor,

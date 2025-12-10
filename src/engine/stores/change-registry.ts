@@ -75,7 +75,7 @@ export class ChangeRegistry {
         })
     }
 
-    /** Fulushes the queue of registerded changes. */
+    /** Flushes the queue of registered changes. */
     private flush = async (): Promise<void> => {
         if (!this.queue.length) {
             return;

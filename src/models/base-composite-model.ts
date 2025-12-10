@@ -92,19 +92,16 @@ export default interface BaseCompositeModel {
     mode: "page" | "square-window" | "horizontal-window" | "vertical-window";
 
     /**
-     * Controls the visual size of the composite.
+     * Controls the visual scaling factor of the composite.
      *
      * @remarks
-     * This property defines the layout footprint of the composite.  
-     * It can be used to adjust spacing, wrapper dimensions, typography scale,
-     * or the general density of the UI.
+     * This numeric value determines how much the composite should scale relative
+     * to its base dimensions. The value acts as a multiplicative factor:
      *
-     * - `"s"` – Small, compact layout (tight spacing, minimal footprint).
-     * - `"m"` – Medium, default layout.
-     * - `"l"` – Large layout with more spacing and breathing room.
-     * - `"xl"` – Extra-large layout, often used for full-page or wide-screen displays.
+     * size = 0.5  // Composite occupies half of its default size
+     * size = 1.4  // Composite is scaled up by 40%
      */
-    size: "s" | "m" | "l" | "xl";   
+    size: number;
 
     /**
      * Cleanup function that executes when the composite is destroyed or unmounted.

@@ -84,7 +84,7 @@ export const isEmpty = (store: BaseStore, value: any, id: string): ValidatorResp
     }
 
     return {
-        isValid: !isNullEmptyFalseOrUndefined(value),
+        isValid: !isNullEmptyFalseOrUndefined(value) && (value as string).match(/^ *$/) === null,
         isWarning: false,
         message: text.errorMessages.isEmpty,
     };
