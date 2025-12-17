@@ -2,7 +2,7 @@ import { isNullOrUndefined } from "@core/lib/utils";
 import BaseCompositeModel from "@core/models/base-composite-model";
 import {BaseStore} from "@core/stores/base-store";
 import {observable, runInAction} from "mobx";
-import {modeToPercentage} from "@core/lib/base-composite-model-utils";
+import {computeCompositeSize, modeToPercentage} from "@core/lib/base-composite-model-utils";
 
 /**
  * Abstract base class that manages a collection of composites and their corresponding field registres.
@@ -154,17 +154,11 @@ export abstract class BaseCompositeStore {
      */
     public getCompositeDimensions = (compositeId: string) => {
         const composite = this.composites[compositeId];
+        if (!composite) {
+            return null;
+        }
 
-        const viewportWidth = window.innerWidth;
-        const viewportHeight = window.innerHeight;
-
-        const [w, h] = modeToPercentage(composite.mode);
-        const sizeFactor = composite.size;
-
-        return [
-            viewportWidth * (w / 100) * sizeFactor,
-            viewportHeight * (h / 100) * sizeFactor
-        ];
+        return computeCompositeSize(composite.mode, composite.size)
     }
 
     /**

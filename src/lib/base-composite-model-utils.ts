@@ -119,3 +119,15 @@ export const modeToPercentage = (mode: string) => {
         default: return [100, 100];
     }
 };
+
+export const computeCompositeSize = (mode: string, sizeFactor: number) => {
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+
+    const [w, h] = modeToPercentage(mode);
+
+    return [
+        viewportWidth * (w / 100) * sizeFactor,
+        viewportHeight * (h / 100) * sizeFactor
+    ];
+}
