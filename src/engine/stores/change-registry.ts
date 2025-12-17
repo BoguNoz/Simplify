@@ -26,8 +26,10 @@ export class ChangeRegistry {
      * @remarks
      * - This cancels any scheduled automatic flush and runs all queued
      * changes immediately inside a single `MobX.runInAction` call.
+     *
+     * @readonly
      */
-    forceFlush= async (): Promise<void> => {
+    public readonly forceFlush= async (): Promise<void> => {
         if (this.timer) {
             clearTimeout(this.timer);
             this.timer = null;
@@ -49,8 +51,10 @@ export class ChangeRegistry {
      *   formStore.fields["username"].value = "Alice";
      * });
      * ```
+     *
+     * @readonly
      */
-    registerChange = (fn: () => void | Promise<void>): void => {
+    public readonly registerChange = (fn: () => void | Promise<void>): void => {
         this.queue.push(fn);
         this.scheduleFlush();
     }

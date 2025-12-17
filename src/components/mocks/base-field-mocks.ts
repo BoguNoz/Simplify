@@ -1,4 +1,4 @@
-import {buildFields, createFieldPlaceholders} from "@core/models/utils/base-model-utils";
+import {buildFields, createFieldPlaceholders} from "@core/lib/base-model-utils";
 import {lang} from "@core/text/utils/lang";
 import BaseFieldTypesEnum from "@core/enums/base-field-type-enum";
 import {mockStore} from "@core/components/mocks/mock-store";

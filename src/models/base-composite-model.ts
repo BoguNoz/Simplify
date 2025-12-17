@@ -1,6 +1,7 @@
 import BaseFieldModel from "@core/models/base-field-model";
 import {BaseRenderFn} from "@core/events/render";
 import {BaseSectionModel} from "@core/models/partials/base-section-model";
+import InheritanceModel from "@core/models/inheritance-model";
 
 /**
  * Represents a composite model that groups related fields and defines its rendering behavior.
@@ -10,25 +11,6 @@ export default interface BaseCompositeModel {
      * The unique identifier of the composite.
      */
     id: string;
-
-    /**
-     * Indicates whether the composite is a *partial composite*.
-     *
-     * @remarks
-     * ##### IMPORTANT
-     * - **Partial composite will inherit some behaviour from the parent.**
-     * - **This flag is automatically added by parent composite.**
-     *
-     * ##### GOOD To KNOW
-     * - A **partial composite** is a specialized composite that exists as a
-     *   fragment of a larger parent composite.
-     * - Partial composites are used to break down complex UI structures into smaller,
-     *   reusable segments.
-     * - Partial composites **should not contain child composites**. They may contain only fields.
-     * - Typically used for grouping logical parts of a form without representing a standalone component.
-     *
-     */
-    isPartial: boolean;
 
     /**
      * A list of *partial composites ids* that belong to this composite.
@@ -42,7 +24,6 @@ export default interface BaseCompositeModel {
      *   without duplicating configuration logic.
      * - Partials inherit the parent composite's lifecycle, including initialization and teardown.
      *
-     * @see isPartial
      */
     partials: string[];
 

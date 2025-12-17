@@ -65,8 +65,8 @@ export * from "@core/local-storage/utils/local-storage-utils"
 // #rendegion local-storage/utils
 
 // #region models/utils
-export * from "@core/models/utils/base-model-utils"
-export * from "@core/models/utils/base-composite-model-utils"
+export * from "@core/lib/base-model-utils"
+export * from "@core/lib/base-composite-model-utils"
 // #rendegion models/utils
 
 // #region models

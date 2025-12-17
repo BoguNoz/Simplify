@@ -1,5 +1,5 @@
 import {lang} from "@core/text/utils/lang";
-import {buildFields, createFieldPlaceholders} from "@core/models/utils/base-model-utils";
+import {buildFields, createFieldPlaceholders} from "@core/lib/base-model-utils";
 import BaseFieldTypesEnum from "@core/enums/base-field-type-enum";
 import {mockStore} from "@core/components/mocks/mock-store";
 import {toggleRendering} from "@core/events/operation";
