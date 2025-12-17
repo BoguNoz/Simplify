@@ -78,19 +78,19 @@ export * from "@core/models/base-field-model"
 export * from "@core/service/base-service"
 // #endregion service
 
-// #region stores/utils
+// #region registres/utils
 export * from "@core/stores/utils/composite-store-utils"
-// #endregion stores/utils
+// #endregion registres/utils
 
-// #region stores
+// #region registres
 export * from "@core/stores/base-composite-store"
 export * from "@core/stores/base-store"
-// #endregion stores
+// #endregion registres
 
 // #region engine
 export * from "@core/engine/composite"
 // #region engine
 
-// #region engine/stores
-export * from "@core/engine/stores/auto-register"
-// #region engine/stores
+// #region engine/registres
+export * from "@core/engine/registres/auto-register"
+// #region engine/registres

@@ -5,7 +5,7 @@ import {observable, runInAction} from "mobx";
 import {modeToPercentage} from "@core/lib/base-composite-model-utils";
 
 /**
- * Abstract base class that manages a collection of composites and their corresponding field stores.
+ * Abstract base class that manages a collection of composites and their corresponding field registres.
  *
  * @remarks
  * The {@link BaseCompositeStore} acts as a coordinator between multiple {@link BaseStore} instances,
@@ -18,7 +18,7 @@ import {modeToPercentage} from "@core/lib/base-composite-model-utils";
  * // Example base implementation:
  * export class CompositeStore extends BaseCompositeStore {
  *     composites: Record<string, BaseCompositeModel> = {};
- *     stores: Record<string, BaseStore> = {}
+ *     registres: Record<string, BaseStore> = {}
  *
  *     constructor() {
  *         super();
@@ -67,18 +67,6 @@ export abstract class BaseCompositeStore {
                 this.renderedComposites.set(composite.id, composite.render);
             });
         });
-
-        // TODO move dis to another function + add partial management to composite wrapper
-       /* composites.forEach((composite: BaseCompositeModel) => {
-            if (!composite.isPartial) {
-                runInAction(() => {
-                    composite.partials.forEach((partialId: string) => {
-                        this.parents[partialId] = composite.id;
-                        this.composites[partialId].isPartial = true;
-                    })
-                })
-            }
-        });*/
     }
 
     /**
@@ -188,7 +176,7 @@ export abstract class BaseCompositeStore {
      * belonging to the composite.
      * 
      * - If the `free` parameter is set to `true`, both the composite and its fields
-     * are removed from their respective stores after deconstruction.
+     * are removed from their respective registres after deconstruction.
      * 
      * - If any of the composite's fields require arguments for their deconstructors,
      * make sure to invoke those field deconstructors manually beforehand.

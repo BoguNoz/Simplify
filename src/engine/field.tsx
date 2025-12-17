@@ -1,0 +1,33 @@
+import {useEffect, useRef} from "react";
+import {BaseStore} from "@core/stores/base-store";
+import MetadataModel from "@core/models/metadata-model";
+import {getMetadata} from "@core/lib/metadata-model-utils";
+import {observer} from "mobx-react-lite";
+
+// TODO BN Zrobic ten sam mechanizm metadanych w coposite wrapper
+const field = (Component: any) => {
+    const Wrapped = (props: any) => {
+        const storeRef = useRef<BaseStore | null>(null);
+        const idRef = useRef<string>("");
+        const methodRef = useRef<MetadataModel | null>(null);
+
+        useEffect(() => {
+            const {fieldId, store, parent} = props;
+
+            idRef.current = fieldId;
+            storeRef.current = store
+
+            methodRef.current = getMetadata(parent);
+
+        },[]);
+
+        return (
+            <Component
+                {...props}
+                __metadata={methodRef.current}
+            />
+        );
+    }
+
+    return observer(Wrapped);
+}

@@ -10,17 +10,7 @@ import BaseFieldModel from "@core/models/base-field-model";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircleXmark} from "@fortawesome/free-regular-svg-icons";
 import {faTriangleExclamation} from "@fortawesome/free-solid-svg-icons";
-
-interface FormFieldProps {
-    fieldId: string;
-    store: BaseStore;
-
-    handleBlur?: (fieldId: string) => void;
-    handleChange?: (fieldId: string, value: any) => void;
-
-    hardDisable?: boolean;
-    hardTyping?: BaseFieldTypeEnum;
-}
+import {BaseFieldInterface} from "@core/models/base-field-interface";
 
 /**
  * A form wrapper for the polymorphic field component {@link BaseField},
@@ -35,7 +25,7 @@ interface FormFieldProps {
  *
  * @see FormFieldProps
  */
-const FormField = observer((props: FormFieldProps) => {
+const FormField = observer((props: BaseFieldInterface) => {
     const {fieldId, store, handleChange, handleBlur, hardDisable, hardTyping} = props;
 
     // #region Actions

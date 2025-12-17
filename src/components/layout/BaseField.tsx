@@ -12,17 +12,7 @@ import BaseInput from "@core/components/layout/partilas/BaseInput";
 import BaseStatusButton from "@core/components/layout/partilas/BaseStatusButton";
 import {BaseStore} from "@core/stores/base-store";
 import BaseButton from "@core/components/layout/partilas/BaseButton";
-
-interface BaseFieldProps {
-    fieldId: string;
-    store: BaseStore;
-
-    handleBlur?: (fieldId: string) => void;
-    handleChange?: (fieldId: string, value: any) => void;
-
-    hardDisable?: boolean;
-    hardTyping?: BaseFieldTypeEnum;
-}
+import {BaseFieldInterface} from "@core/models/base-field-interface";
 
 /**
  * A polymorphic field component that dynamically renders the appropriate input type
@@ -44,7 +34,7 @@ interface BaseFieldProps {
  * @see BaseSwitch
  * @see BaseToggle
  */
-const BaseField = observer((props: BaseFieldProps) => {
+const BaseField = observer((props: BaseFieldInterface) => {
     const {fieldId, store, handleChange, handleBlur, hardDisable, hardTyping} = props;
 
     // #region Actions

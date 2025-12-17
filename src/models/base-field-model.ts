@@ -105,24 +105,6 @@ export default interface BaseFieldModel {
     variant: "default" | "outline" | "ghost" | "destructive" | "secondary" | "link";
 
     /**
-     * Explicit width of the field in pixels.
-     *
-     * @remarks
-     * When set to `null`, the width remains **non-static** and is fully
-     * controlled by the layout system (e.g. flex, grid, or parent container).
-     */
-    width: number | null;
-
-    /**
-     * Explicit height of the field in pixels.
-     *
-     * @remarks
-     * When set to `null`, the height remains **non-static** and is fully
-     * controlled by the layout system (e.g. flex, grid, or parent container).
-     */
-    height: number | null;
-
-    /**
      * List of validator functions executed when validating the field.
      *
      * @remarks

@@ -7,7 +7,7 @@ import {observer} from "mobx-react-lite";
 import BaseField from "@core/components/layout/BaseField";
 import BaseFieldTypesEnum from "@core/enums/base-field-type-enum";
 import {Button} from "@core/components/ui/button";
-import {BaseCompositeInterface} from "@core/components/layout/composites/interfaces/BaseCompositeInterface";
+import {BaseCompositeInterface} from "@core/models/base-composite-interface";
 
 interface ButtonGroupCompositeProps extends BaseCompositeInterface { }
 

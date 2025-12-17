@@ -4,7 +4,7 @@ import {reaction, runInAction} from "mobx";
 import {BaseValidatorFn, isEmpty, ValidatorResponse} from "@core/events/validator";
 import {BaseDependencyFn} from "@core/events/dependency";
 import {isNullEmptyFalseOrUndefined, isNullOrUndefined} from "@core/lib/utils";
-import {ChangeRegistry} from "@core/engine/stores/change-registry";
+import {ChangeRegistry} from "@core/engine/registres/change-registry";
 import BaseFieldTypeEnum from "@core/enums/base-field-type-enum";
 import BaseFieldTypesEnum from "@core/enums/base-field-type-enum";
 
@@ -59,10 +59,10 @@ export abstract class BaseStore {
     fields: Record<string, BaseFieldModel> = {};
     operations: Record<string, BaseOperationFn[]> = {};
     reverseDeps: Record<string, Record<string, BaseDependencyFn[]>> = {};
-    private readonly _registry: ChangeRegistry;
+    private readonly _changeRegistry: ChangeRegistry;
 
     constructor() {
-        this._registry = new ChangeRegistry();
+        this._changeRegistry = new ChangeRegistry();
     }
 
 
@@ -82,7 +82,7 @@ export abstract class BaseStore {
      * @readonly
      */
     public readonly setFieldValue = (id: string, value: any) => {
-        this._registry.registerChange(() => this._setFieldValue(id, value));
+        this._changeRegistry.registerChange(() => this._setFieldValue(id, value));
     }
 
     /**
@@ -99,7 +99,7 @@ export abstract class BaseStore {
      * @readonly
      */
     public readonly setFieldAdditValue = (id: string, addit: string, value: any): void => {
-        this._registry.registerChange(() => this._setFieldAdditValue(id, addit, value));
+        this._changeRegistry.registerChange(() => this._setFieldAdditValue(id, addit, value));
     }
 
     /**
@@ -114,7 +114,7 @@ export abstract class BaseStore {
      * @readonly
      */
     public readonly setFieldState = (id: string, status: "error" | "valid" | "warning" | "pending"): void => {
-        this._registry.registerChange(() => this._setFieldState(id, status));
+        this._changeRegistry.registerChange(() => this._setFieldState(id, status));
     }
 
     /**
@@ -129,7 +129,7 @@ export abstract class BaseStore {
      * @readonly
      */
     public readonly setFieldEditability = (id: string, isEditable: boolean): void => {
-        this._registry.registerChange(() => this._setFieldEditability(id, isEditable));
+        this._changeRegistry.registerChange(() => this._setFieldEditability(id, isEditable));
     }
 
     /**
@@ -149,7 +149,7 @@ export abstract class BaseStore {
      * @readonly
      */
     public readonly setFieldExcluded = (id: string, excluded: boolean): void => {
-        this._registry.registerChange(() => this._setFieldExcluded(id, excluded));
+        this._changeRegistry.registerChange(() => this._setFieldExcluded(id, excluded));
     }
 
     /**
@@ -168,7 +168,7 @@ export abstract class BaseStore {
      * @readonly
      */
     public readonly invokeDeconstructor = async (id: string, free: boolean, ...args: any[]): Promise<void> => {
-        this._registry.registerChange(() => this._invokeDeconstructor(id, free, ...args));
+        this._changeRegistry.registerChange(() => this._invokeDeconstructor(id, free, ...args));
     }
 
     /**
@@ -242,7 +242,7 @@ export abstract class BaseStore {
      * @returns {ValidatorResponse[]} The list of validation results.
      */
     public validateField = (id: string) => {
-        this._registry.registerChange(() => this._validateField(id));
+        this._changeRegistry.registerChange(() => this._validateField(id));
     };
 
     /**
@@ -252,7 +252,7 @@ export abstract class BaseStore {
      *
      * @returns {any} The field's current assigned value.
      */
-    public getFieldValue = (id: string): any => this.fields[id]?.value;
+    public readonly getFieldValue = (id: string): any => this.fields[id]?.value;
 
     /**
      * Retrieves data from the data source function defined for a field.
@@ -265,7 +265,7 @@ export abstract class BaseStore {
      *
      * @returns {Promise<any>} A promise resolving to the field's data source value.
      */
-    public getDataSource = async (id: string, ...args: any[]): Promise<any> => await this.fields[id].dataSource(...args);
+    public readonly getDataSource = async (id: string, ...args: any[]): Promise<any> => await this.fields[id].dataSource(...args);
 
     /**
      * Adds new validators to a field, avoiding duplicates.

@@ -10,7 +10,7 @@ import { makeObservable, observable, action } from "mobx";
  * - All prototype methods are annotated as `action`.
  *
  * This removes the need to manually call `makeObservable` with explicit annotations
- * for each field and method, reducing boilerplate in your MobX stores.
+ * for each field and method, reducing boilerplate in your MobX registres.
  *
  *
  * @param store - The store instance to automatically register with MobX.

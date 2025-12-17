@@ -6,7 +6,7 @@ import {BaseSectionModel} from "@core/models/partials/base-section-model";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@core/components/ui/card";
 import {ScrollArea} from "@core/components/ui/scroll-area";
 import FormField from "@core/components/layout/FormField";
-import {BaseCompositeInterface} from "@core/components/layout/composites/interfaces/BaseCompositeInterface";
+import {BaseCompositeInterface} from "@core/models/base-composite-interface";
 
 interface FormCardCompositeProps extends BaseCompositeInterface { }
 
