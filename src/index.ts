@@ -49,8 +49,8 @@ export * from "@core/components/ui/tooltip"
 // #endregion components/ui
 
 // #region enums
-export * from "@core/enums/base-field-type-enum"
-export * from "@core/enums/base-response-type-enum"
+export * from "@core/models/enums/base-field-type-enum"
+export * from "@core/models/enums/base-response-type-enum"
 // #endregion enums
 
 // #region events
@@ -61,7 +61,7 @@ export * from "@core/events/validator"
 // #endregion events
 
 // #region local-storage/utils
-export * from "@core/local-storage/utils/local-storage-utils"
+export * from "@core/engine/local-storage/utils/local-storage-utils"
 // #rendegion local-storage/utils
 
 // #region models/utils
@@ -74,9 +74,9 @@ export * from "@core/models/base-composite-model"
 export * from "@core/models/base-field-model"
 // #rendegion models
 
-// #region service
-export * from "@core/service/base-service"
-// #endregion service
+// #region services
+export * from "@core/services/base-service"
+// #endregion services
 
 // #region registres/utils
 export * from "@core/stores/utils/composite-store-utils"
@@ -88,7 +88,7 @@ export * from "@core/stores/base-store"
 // #endregion registres
 
 // #region engine
-export * from "@core/engine/composite"
+export * from "@core/engine/components/composite"
 // #region engine
 
 // #region engine/registres

@@ -1,13 +1,13 @@
 import type {Meta, StoryObj} from "@storybook/react";
 import ButtonGroupComposite from "@core/components/layout/composites/ButtonGroupComposite";
-import {mockStore} from "@core/components/mocks/mock-store";
+import {mockStore} from "@core/components/stories/mock-store";
 import {buildComposites, createCompositesPlaceholders} from "@core/lib/base-composite-model-utils";
 import {buildFields, createFieldPlaceholders} from "@core/lib/base-model-utils";
 import {lang} from "@core/text/utils/lang";
-import BaseFieldTypesEnum from "@core/enums/base-field-type-enum";
+import BaseFieldTypesEnum from "@core/models/enums/base-field-type-enum";
 import {ArrowLeft, ArrowRight} from "lucide-react";
 import {BaseSectionModel} from "@core/models/partials/base-section-model";
-import {mockCompositeStore} from "@core/components/mocks/mock-composite-store";
+import {mockCompositeStore} from "@core/components/stories/mock-composite-store";
 
 const meta: Meta<typeof ButtonGroupComposite> = {
     title: "composites/ButtonGroupComposite",

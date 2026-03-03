@@ -1,4 +1,4 @@
-import BaseFieldTypesEnum from "@core/enums/base-field-type-enum";
+import BaseFieldTypesEnum from "@core/models/enums/base-field-type-enum";
 import React, {useCallback} from "react";
 import BaseSelector from "@core/components/layout/partilas/BaseSelector";
 import {observer} from "mobx-react-lite";

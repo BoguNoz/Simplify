@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import {
     mockBaseRegisteredFields,
-} from "@core/components/mocks/base-field-mocks";
+} from "@core/components/stories/base-field-mocks";
 import FormField from "@core/components/layout/FormField";
-import {mockStore} from "@core/components/mocks/mock-store";
+import {mockStore} from "@core/components/stories/mock-store";
 
 
 const meta: Meta<typeof FormField> = {

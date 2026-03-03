@@ -5,8 +5,8 @@ import {BaseValidatorFn, isEmpty, ValidatorResponse} from "@core/events/validato
 import {BaseDependencyFn} from "@core/events/dependency";
 import {isNullEmptyFalseOrUndefined, isNullOrUndefined} from "@core/lib/utils";
 import {ChangeRegistry} from "@core/engine/registres/change-registry";
-import BaseFieldTypeEnum from "@core/enums/base-field-type-enum";
-import BaseFieldTypesEnum from "@core/enums/base-field-type-enum";
+import BaseFieldTypeEnum from "@core/models/enums/base-field-type-enum";
+import BaseFieldTypesEnum from "@core/models/enums/base-field-type-enum";
 
 /**
  * Abstract base class that provides a reactive, signal-like state management layer using MobX.

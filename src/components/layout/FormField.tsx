@@ -1,7 +1,7 @@
 import React, {useCallback} from "react";
 import { observer } from "mobx-react-lite";
 import {BaseStore} from "@core/stores/base-store";
-import BaseFieldTypeEnum from "@core/enums/base-field-type-enum";
+import BaseFieldTypeEnum from "@core/models/enums/base-field-type-enum";
 import {Alert, AlertDescription, AlertTitle} from "@core/components/ui/alert";
 import BaseField from "@core/components/layout/BaseField";
 import {AlertCircle, AlertTriangle, CheckCircle, CircleOff, Link} from "lucide-react";
@@ -11,7 +11,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircleXmark} from "@fortawesome/free-regular-svg-icons";
 import {faTriangleExclamation} from "@fortawesome/free-solid-svg-icons";
 import {BaseFieldInterface} from "@core/models/base-field-interface";
-import {useMetadata} from "@core/engine/metadata-context";
+import {useMetadata} from "@core/engine/components/metadata-context";
 import MetadataModel from "@core/models/metadata-model";
 
 /**

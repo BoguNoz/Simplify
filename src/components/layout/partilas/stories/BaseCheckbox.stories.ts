@@ -3,7 +3,7 @@ import {action} from "storybook/actions";
 import {
     mockBaseRegisteredFields,
     mockFields,
-} from "@core/components/mocks/base-field-mocks";
+} from "@core/components/stories/base-field-mocks";
 import BaseCheckbox from "@core/components/layout/partilas/BaseCheckbox";
 
 

@@ -1,7 +1,7 @@
 import {lang} from "@core/text/utils/lang";
 import {buildFields, createFieldPlaceholders} from "@core/lib/base-model-utils";
-import BaseFieldTypesEnum from "@core/enums/base-field-type-enum";
-import {mockStore} from "@core/components/mocks/mock-store";
+import BaseFieldTypesEnum from "@core/models/enums/base-field-type-enum";
+import {mockStore} from "@core/components/stories/mock-store";
 import {toggleRendering} from "@core/events/operation";
 import {isInteger, isNumber, isPositive} from "@core/events/validator";
 import {BaseStore} from "@core/stores/base-store";

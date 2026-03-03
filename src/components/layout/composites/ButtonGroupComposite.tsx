@@ -1,11 +1,11 @@
 import {BaseCompositeStore} from "@core/stores/base-composite-store";
 import {BaseStore} from "@core/stores/base-store";
 
-import composite from "@core/engine/composite";
+import composite from "@core/engine/components/composite";
 import {ButtonGroup} from "@core/components/ui/button-group";
 import {observer} from "mobx-react-lite";
 import BaseField from "@core/components/layout/BaseField";
-import BaseFieldTypesEnum from "@core/enums/base-field-type-enum";
+import BaseFieldTypesEnum from "@core/models/enums/base-field-type-enum";
 import {Button} from "@core/components/ui/button";
 import {BaseCompositeInterface} from "@core/models/base-composite-interface";
 

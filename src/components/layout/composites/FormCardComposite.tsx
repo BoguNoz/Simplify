@@ -1,5 +1,5 @@
 import {BaseStore} from "@core/stores/base-store";
-import composite from "@core/engine/composite";
+import composite from "@core/engine/components/composite";
 import {observer} from "mobx-react-lite";
 import {BaseSectionModel} from "@core/models/partials/base-section-model";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@core/components/ui/card";
@@ -7,7 +7,7 @@ import {ScrollArea} from "@core/components/ui/scroll-area";
 import FormField from "@core/components/layout/FormField";
 import {BaseCompositeInterface} from "@core/models/base-composite-interface";
 import MetadataModel from "@core/models/metadata-model";
-import {MetadataContext, useMetadata } from "@core/engine/metadata-context";
+import {MetadataContext, useMetadata } from "@core/engine/components/metadata-context";
 
 interface FormCardCompositeProps extends BaseCompositeInterface { }
 

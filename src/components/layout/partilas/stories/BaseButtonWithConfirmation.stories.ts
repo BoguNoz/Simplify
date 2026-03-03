@@ -4,7 +4,7 @@ import {action} from "storybook/actions";
 import {
     mockBaseRegisteredFields,
     mockFields,
-} from "@core/components/mocks/base-field-mocks";
+} from "@core/components/stories/base-field-mocks";
 
 
 const meta: Meta<typeof BaseButtonWithConfirmation> = {

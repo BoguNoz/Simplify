@@ -1,5 +1,5 @@
 import {BaseStore} from "@core/stores/base-store";
-import BaseFieldTypeEnum from "@core/enums/base-field-type-enum";
+import BaseFieldTypeEnum from "@core/models/enums/base-field-type-enum";
 
 export interface BaseFieldInterface {
     fieldId: string;

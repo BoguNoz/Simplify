@@ -2,7 +2,7 @@ import type {Meta, StoryObj} from "@storybook/react";
 import {
     mockBaseRegisteredFields,
     mockFields,
-} from "@core/components/mocks/base-field-mocks";
+} from "@core/components/stories/base-field-mocks";
 import BaseStatusButton from "../BaseStatusButton";
 import {Send} from "lucide-react";
 

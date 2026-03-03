@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import {mockBaseRegisteredFields, mockFields} from "@core/components/mocks/base-field-mocks";
+import {mockBaseRegisteredFields, mockFields} from "@core/components/stories/base-field-mocks";
 import BaseSelector from "@core/components/layout/partilas/BaseSelector";
 
 

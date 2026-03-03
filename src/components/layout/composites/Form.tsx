@@ -1,5 +1,5 @@
 import {BaseCompositeInterface} from "@core/models/base-composite-interface";
-import composite from "@core/engine/composite";
+import composite from "@core/engine/components/composite";
 
 interface FormProps extends BaseCompositeInterface { }
 
