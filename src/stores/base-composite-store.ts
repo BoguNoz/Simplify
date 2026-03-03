@@ -2,7 +2,6 @@ import { isNullOrUndefined } from "@core/lib/utils";
 import BaseCompositeModel from "@core/models/base-composite-model";
 import {BaseStore} from "@core/stores/base-store";
 import {observable, runInAction} from "mobx";
-import {computeCompositeSize, modeToPercentage} from "@core/lib/base-composite-model-utils";
 
 /**
  * Abstract base class that manages a collection of composites and their corresponding field registres.
@@ -44,13 +43,11 @@ import {computeCompositeSize, modeToPercentage} from "@core/lib/base-composite-m
  * @see BaseCompositeStore.getStore
  * @see BaseCompositeStore.invokeCompositeDeconstructor
  * @see autoRegister
- * @see getCompositeDimensions
  */
 export abstract class BaseCompositeStore {
     composites: Record<string, BaseCompositeModel> = {};
     stores: Record<string, BaseStore> = {};
     renderedComposites = observable.map<string, boolean>();
-    parents: Record<string, string> = {};
 
     /**
      * Initializes all composites based on their configuration.
@@ -131,35 +128,6 @@ export abstract class BaseCompositeStore {
      * @returns {BaseStore} The store instance linked to the composite.
      */
     public getStore = (id: string): BaseStore => this.stores[id];
-
-    /**
-     * Calculates the final pixel dimensions for a composite.
-     *
-     * @remarks
-     * The dimension is computed in two steps:
-     *
-     * 1. Base width and height percentages are derived from the composite `mode`
-     *    using {@link modeToPercentage}.
-     *
-     * 2. Both dimensions are additionally scaled using the composite `size`.
-     *
-     * The final values are then converted from percentages to **absolute pixel sizes**
-     * based on the current viewport dimensions (`window.innerWidth` and `window.innerHeight`).
-     *
-     * This ensures that composites have consistent physical size on screen,
-     * independent of scrollable content or layout changes.
-     *
-     * @param compositeId - Identifier of the composite whose dimensions will be computed.
-     * @returns A tuple `[widthPx, heightPx]` containing the final pixel dimensions.
-     */
-    public getCompositeDimensions = (compositeId: string) => {
-        const composite = this.composites[compositeId];
-        if (!composite) {
-            return null;
-        }
-
-        return computeCompositeSize(composite.mode, composite.size)
-    }
 
     /**
      * Invokes the deconstructor for a specific composite and all of its fields.

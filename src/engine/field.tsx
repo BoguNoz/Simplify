@@ -10,7 +10,6 @@ const field = (Component: any) => {
     const Wrapped = (props: any) => {
         const storeRef = useRef<BaseStore | null>(null);
         const idRef = useRef<string>("");
-        const methodRef = useRef<MetadataModel | null>(null);
 
         useEffect(() => {
             const {fieldId, store, parent} = props;
@@ -18,14 +17,12 @@ const field = (Component: any) => {
             idRef.current = fieldId;
             storeRef.current = store
 
-            methodRef.current = getMetadata(parent);
 
         },[]);
 
         return (
             <Component
                 {...props}
-                __metadata={methodRef.current}
             />
         );
     }

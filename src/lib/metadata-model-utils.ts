@@ -1,8 +1,10 @@
-import BaseCompositeModel from "@core/models/base-composite-model";
 import MetadataModel from "@core/models/metadata-model";
 import {computeCompositeSize, modeToPercentage} from "@core/lib/base-composite-model-utils";
+import {BaseCompositeStore} from "@core/stores/base-composite-store";
 
-export const getMetadata = (composite: BaseCompositeModel): MetadataModel => {
+export const getMetadata = (compositeId: string, compositeStore: BaseCompositeStore): MetadataModel => {
+
+    const composite = compositeStore.composites[compositeId];
 
    const size = computeCompositeSize(composite.mode, composite.size)
     return  {

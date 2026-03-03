@@ -3,6 +3,8 @@ import {useEffect, useRef} from "react";
 import {baseCompositeInitializationSetup} from "@core/stores/utils/composite-store-utils";
 import {BaseCompositeStore} from "@core/stores/base-composite-store";
 import {BaseStore} from "@core/stores/base-store";
+import MetadataModel from "@core/models/metadata-model";
+import {getMetadata} from "@core/lib/metadata-model-utils";
 
 /**
  * A higher-order component (HOC) that wraps a React component with MobX's `observer`
@@ -30,6 +32,7 @@ const composite = (Component: any) => {
 
         const storeRef = useRef<BaseCompositeStore | null>(null);
         const idRef = useRef<string>("");
+        const methodRef = useRef<MetadataModel | null>(null);
 
         useEffect(() => {
             const { compositeId, compositeStore, store } = props;
@@ -42,13 +45,18 @@ const composite = (Component: any) => {
             }
 
             initialization(compositeId, compositeStore, store);
+
+            methodRef.current = getMetadata(compositeId, compositeStore);
         }, []);
 
         if (storeRef.current?.renderComposite(idRef.current)) {
             return <></>;
         }
 
-        return <Component {...props} />
+        return <Component
+            {...props}
+            __metadata={methodRef.current}
+        />
     }
 
     return observer(Wrapped);

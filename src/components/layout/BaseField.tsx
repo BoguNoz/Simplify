@@ -1,7 +1,6 @@
 import BaseFieldTypesEnum from "@core/enums/base-field-type-enum";
 import React, {useCallback} from "react";
 import BaseSelector from "@core/components/layout/partilas/BaseSelector";
-import BaseFieldTypeEnum from "@core/enums/base-field-type-enum";
 import {observer} from "mobx-react-lite";
 import BaseButtonWithConfirmation from "@core/components/layout/partilas/BaseButtonWithConfirmation";
 import BaseToggle from "@core/components/layout/partilas/BaseToggle";
@@ -10,7 +9,6 @@ import BaseFileInput from "@core/components/layout/partilas/BaseFileInput";
 import BaseSwitch from "@core/components/layout/partilas/BaseSwitch";
 import BaseInput from "@core/components/layout/partilas/BaseInput";
 import BaseStatusButton from "@core/components/layout/partilas/BaseStatusButton";
-import {BaseStore} from "@core/stores/base-store";
 import BaseButton from "@core/components/layout/partilas/BaseButton";
 import {BaseFieldInterface} from "@core/models/base-field-interface";
 

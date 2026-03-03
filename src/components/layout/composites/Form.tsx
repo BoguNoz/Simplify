@@ -11,7 +11,6 @@ const Form = composite((props: FormProps) => {
         return <></>;
     }
 
-    const dimensions = compositeStore.getCompositeDimensions(compositeId)
 
 
 });

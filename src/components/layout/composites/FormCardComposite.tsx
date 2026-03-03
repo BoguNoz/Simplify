@@ -1,4 +1,3 @@
-import {BaseCompositeStore} from "@core/stores/base-composite-store";
 import {BaseStore} from "@core/stores/base-store";
 import composite from "@core/engine/composite";
 import {observer} from "mobx-react-lite";
@@ -7,6 +6,7 @@ import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@core/c
 import {ScrollArea} from "@core/components/ui/scroll-area";
 import FormField from "@core/components/layout/FormField";
 import {BaseCompositeInterface} from "@core/models/base-composite-interface";
+import MetadataModel from "@core/models/metadata-model";
 
 interface FormCardCompositeProps extends BaseCompositeInterface { }
 
@@ -40,18 +40,17 @@ interface FormCardCompositeProps extends BaseCompositeInterface { }
  * @see BaseStore
  * @see FormField
  */
-const FormCardComposite = composite((props: FormCardCompositeProps) => {
-    const {compositeId, compositeStore, store, handleBlur, handleChange} = props;
+const FormCardComposite = composite((props: FormCardCompositeProps & { __metadata?: MetadataModel }) => {
+    const {compositeId, compositeStore, store, handleBlur, handleChange, __metadata} = props;
 
     const composite = compositeStore.composites[compositeId];
     if (!composite) {
         return <></>;
     }
 
-    const dimensions = compositeStore.getCompositeDimensions(compositeId)
 
     return (
-        <Card style={{ width: `${dimensions[0]}px`, height: `${dimensions[1]}px` }} className="flex flex-col">
+        <Card style={{ width: `${__metadata?.width}px`, height: `${__metadata?.height}px` }} className="flex flex-col">
             <FormHeader
                 section={composite.sections[0]}
             />
