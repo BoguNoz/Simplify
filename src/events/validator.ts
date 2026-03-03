@@ -73,15 +73,6 @@ export type BaseValidatorFn = (store: BaseStore, value: any, id: string) => Vali
  * @see BaseValidatorFn
  */
 export const isEmpty = (store: BaseStore, value: any, id: string): ValidatorResponse => {
-    const isRequired = id ? store.fields[id]?.isRequired : true;
-
-    if (!isRequired) {
-        return {
-            isValid: true,
-            isWarning: false,
-            message: "",
-        };
-    }
 
     return {
         isValid: !isNullEmptyFalseOrUndefined(value) && (value as string).match(/^ *$/) === null,

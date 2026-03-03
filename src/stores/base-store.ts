@@ -283,7 +283,7 @@ export abstract class BaseStore {
             !field.validators?.includes(v)
         );
 
-        field.validators = [...(field.validators || []), ...newValidators];
+        field.validators = [...newValidators, ...(field.validators || [])];
     };
 
     /**
