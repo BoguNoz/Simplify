@@ -11,6 +11,8 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircleXmark} from "@fortawesome/free-regular-svg-icons";
 import {faTriangleExclamation} from "@fortawesome/free-solid-svg-icons";
 import {BaseFieldInterface} from "@core/models/base-field-interface";
+import {useMetadata} from "@core/engine/metadata-context";
+import MetadataModel from "@core/models/metadata-model";
 
 /**
  * A form wrapper for the polymorphic field component {@link BaseField},
@@ -27,6 +29,8 @@ import {BaseFieldInterface} from "@core/models/base-field-interface";
  */
 const FormField = observer((props: BaseFieldInterface) => {
     const {fieldId, store, handleChange, handleBlur, hardDisable, hardTyping} = props;
+
+    const metadata = useMetadata() || {} as MetadataModel;
 
     // #region Actions
     const onChange = useCallback(
@@ -96,7 +100,7 @@ const FormField = observer((props: BaseFieldInterface) => {
     // #endregion Variables
 
     return (
-        <div className="p-2 w-full">
+        <div style={{ width: `${metadata.width * 0.90}px` }} className="p-2">
             <Alert
                 variant={variant()}
                 status={status()}
@@ -105,6 +109,7 @@ const FormField = observer((props: BaseFieldInterface) => {
                 <div className="absolute top-2 right-2">
                    <InfoSymbol field={field} hardDisable={hardDisable} />
                 </div>
+
                 <AlertTitle  className="flex flex-col gap-1 w-full">
                     <BaseField
                         fieldId={fieldId}

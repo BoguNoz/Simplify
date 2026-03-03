@@ -131,3 +131,10 @@ export const computeCompositeSize = (mode: string, sizeFactor: number) => {
         viewportHeight * (h / 100) * sizeFactor
     ];
 }
+
+export const recomputeCompositeSize = (width: number, height: number) => {
+    return [
+        width * 0.85,
+        height * 0.85
+    ]
+}

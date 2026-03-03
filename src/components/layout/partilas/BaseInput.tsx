@@ -35,7 +35,7 @@ const BaseInput = observer((props: BaseInputProps) => {
     const isDisabled = hardDisable || field.isDisabled;
 
     return (
-        <div>
+        <div className="w-full">
             <Header field={field} />
             <div className="flex items-center gap-2">
                 <Input

@@ -6,9 +6,9 @@ export const getMetadata = (compositeId: string, compositeStore: BaseCompositeSt
 
     const composite = compositeStore.composites[compositeId];
 
-   const size = computeCompositeSize(composite.mode, composite.size)
+   const size = computeCompositeSize(composite.mode , composite.size)
     return  {
-        parentId: composite.id,
+        parentId: composite.parentId,
         width: size[0],
         height: size[1],
     } as MetadataModel;

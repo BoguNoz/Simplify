@@ -53,7 +53,7 @@ const BaseSelector = observer((props: SelectorFieldProps) => {
         <div className="p-3">
             <Select onValueChange={handleChange}>
                 <SelectTrigger
-                    className={field.style + " w-[500px]"}
+                    className={field.style + " w-2/3"}
                     onBlur={handleBlur}
                     disabled={field.isDisabled || hardDisable}
                 >

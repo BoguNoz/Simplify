@@ -7,6 +7,7 @@ import {ScrollArea} from "@core/components/ui/scroll-area";
 import FormField from "@core/components/layout/FormField";
 import {BaseCompositeInterface} from "@core/models/base-composite-interface";
 import MetadataModel from "@core/models/metadata-model";
+import {MetadataContext, useMetadata } from "@core/engine/metadata-context";
 
 interface FormCardCompositeProps extends BaseCompositeInterface { }
 
@@ -40,17 +41,18 @@ interface FormCardCompositeProps extends BaseCompositeInterface { }
  * @see BaseStore
  * @see FormField
  */
-const FormCardComposite = composite((props: FormCardCompositeProps & { __metadata?: MetadataModel }) => {
-    const {compositeId, compositeStore, store, handleBlur, handleChange, __metadata} = props;
+const FormCardComposite = composite((props: FormCardCompositeProps) => {
+    const {compositeId, compositeStore, store, handleBlur, handleChange} = props;
+
+    const metadata = useMetadata() ?? {} as MetadataModel;
 
     const composite = compositeStore.composites[compositeId];
     if (!composite) {
         return <></>;
     }
 
-
     return (
-        <Card style={{ width: `${__metadata?.width}px`, height: `${__metadata?.height}px` }} className="flex flex-col">
+        <Card style={{ width: `${metadata.width}px`, height: `${metadata.height}px` }} className="flex flex-col">
             <FormHeader
                 section={composite.sections[0]}
             />
@@ -59,6 +61,7 @@ const FormCardComposite = composite((props: FormCardCompositeProps & { __metadat
                 store={store}
                 handleBlur={handleBlur}
                 handleChange={handleChange}
+                metadata={metadata}
             />
         </Card>
     );
@@ -75,19 +78,20 @@ const FormHeader = observer(({section}: {section: BaseSectionModel}) => {
     );
 });
 
-const FormBody = observer(({section, store, handleBlur, handleChange}:
-   {section: BaseSectionModel, store: BaseStore, handleBlur?: (fieldId: string) => void,  handleChange?: (fieldId: string, value: any) => void}) => {
+const FormBody = observer(({section, store, handleBlur, handleChange, metadata}:
+   {section: BaseSectionModel, store: BaseStore, handleBlur?: (fieldId: string) => void,  handleChange?: (fieldId: string, value: any) => void, metadata: MetadataModel}) => {
     return (
         <ScrollArea className="flex-1 overflow-auto w-full">
             <CardContent className="space-y-2 w-full">
                 {section.fieldsIds.map(fieldId => (
-                    <FormField
-                        key={fieldId}
-                        fieldId={fieldId}
-                        store={store}
-                        handleBlur={handleBlur}
-                        handleChange={handleChange}
-                    />
+                    <MetadataContext.Provider value={metadata} key={fieldId}>
+                        <FormField
+                            fieldId={fieldId}
+                            store={store}
+                            handleBlur={handleBlur}
+                            handleChange={handleChange}
+                        />
+                    </MetadataContext.Provider>
                 ))}
             </CardContent>
         </ScrollArea>
