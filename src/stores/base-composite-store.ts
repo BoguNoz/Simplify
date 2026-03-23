@@ -2,6 +2,7 @@ import { isNullOrUndefined } from "@core/lib/utils";
 import BaseCompositeModel from "@core/models/base-composite-model";
 import {BaseStore} from "@core/stores/base-store";
 import {observable, runInAction} from "mobx";
+import {partial} from "lodash";
 
 /**
  * Abstract base class that manages a collection of composites and their corresponding field registres.

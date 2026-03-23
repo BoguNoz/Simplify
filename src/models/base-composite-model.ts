@@ -27,9 +27,6 @@ export default interface BaseCompositeModel {
      */
     partials: string[];
 
-    // TODO Dokumnetacja i obsłużenie
-    parentId: string;
-
     /**
      * A list of field configurations that belong to this composite.
      *
