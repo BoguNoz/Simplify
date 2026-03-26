@@ -1,5 +1,5 @@
 import BaseFieldModel from "@core/models/base-field-model";
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {observer} from "mobx-react-lite";
 import {Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue} from "@core/components/ui/select";
 
@@ -29,8 +29,6 @@ const BaseSelector = observer((props: SelectorFieldProps) => {
     const [options, setOptions] = useState<Record<string, string>>({});
 
     const {field, handleChange, handleBlur, hardDisable} = props;
-
-    const isDisabled = hardDisable || field.isDisabled;
 
     // #region Variants
     const isPrimary = field.variant === "default" || field.variant === "secondary";

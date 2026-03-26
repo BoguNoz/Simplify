@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import {action} from "storybook/actions";
 import {
     mockBaseRegisteredFields,
     mockFields,

@@ -1,4 +1,3 @@
-import {BaseCompositeStore} from "@core/stores/base-composite-store";
 import {BaseStore} from "@core/stores/base-store";
 
 import composite from "@core/engine/components/composite";

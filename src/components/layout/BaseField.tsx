@@ -1,5 +1,5 @@
 import BaseFieldTypesEnum from "@core/models/enums/base-field-type-enum";
-import React, {useCallback} from "react";
+import {useCallback} from "react";
 import BaseSelector from "@core/components/layout/partilas/BaseSelector";
 import {observer} from "mobx-react-lite";
 import BaseButtonWithConfirmation from "@core/components/layout/partilas/BaseButtonWithConfirmation";

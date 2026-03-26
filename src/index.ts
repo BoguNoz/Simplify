@@ -1,96 +1,39 @@
-// #region components/layout/composites
-export * from "@core/components/layout/composites/ButtonGroupComposite"
-// #endregion components/layout/composites
+// src/index.ts
+// ────────────────────────────────────────────────
+// CORE / ENGINE / STORES / MODELS / UTILS
+// ────────────────────────────────────────────────
 
-// #region components/layout/partials
-export * from "@core/components/layout/partilas/BaseStatusButton"
-export * from "@core/components/layout/partilas/BaseButtonWithConfirmation"
-export * from "@core/components/layout/partilas/BaseCheckbox"
-export * from "@core/components/layout/partilas/BaseFileInput"
-export * from "@core/components/layout/partilas/BaseInput"
-export * from "@core/components/layout/partilas/BaseSelector"
-export * from "@core/components/layout/partilas/BaseSwitch"
-export * from "@core/components/layout/partilas/BaseToggle"
-// #endregion components/layout/partials
+// Engine + auto-register
+export * from "./engine/components/composite";
+export * from "./engine/components/metadata-context";
+export * from "./engine/registres/auto-register";
+export * from "./engine/registres/change-registry";
 
-// #region components/layout/
-export * from "@core/components/layout/BaseField"
-export * from "@core/components/layout/FormField"
+// Stores
+export * from "./stores/base-composite-store";
+export * from "./stores/base-store";
+export * from "./stores/utils/composite-store-utils";
 
-// #endregion components/layout/
+// Models + Enums
+export * from "./models/base-composite-interface";
+export * from "./models/base-composite-model";
+export * from "./models/base-field-interface"
+export * from "./models/base-field-model";
+export * from "./models/metadata-model";
+export * from "./models/enums/base-field-type-enum";
+export * from "./models/enums/base-response-type-enum";
 
-// #region components/ui
-export * from "@core/components/ui/accordion"
-export * from "@core/components/ui/alert"
-export * from "@core/components/ui/aspect-ratio"
-export * from "@core/components/ui/badge"
-export * from "@core/components/ui/button"
-export * from "@core/components/ui/card"
-export * from "@core/components/ui/carousel"
-export * from "@core/components/ui/checkbox"
-export * from "@core/components/ui/collapsible"
-export * from "@core/components/ui/dialog"
-export * from "@core/components/ui/form"
-export * from "@core/components/ui/input"
-export * from "@core/components/ui/input-otp"
-export * from "@core/components/ui/label"
-export * from "@core/components/ui/responsive"
-export * from "@core/components/ui/scroll-area"
-export * from "@core/components/ui/select"
-export * from "@core/components/ui/separator"
-export * from "@core/components/ui/sheet"
-export * from "@core/components/ui/sidebar"
-export * from "@core/components/ui/skeleton"
-export * from "@core/components/ui/sonner"
-export * from "@core/components/ui/switch"
-export * from "@core/components/ui/tabs"
-export * from "@core/components/ui/toggle"
-export * from "@core/components/ui/tooltip"
-// #endregion components/ui
+// Utils & helpers
+export * from "./lib/base-model-utils";
+export * from "./lib/base-composite-model-utils";
+export * from "./lib/metadata-model-utils";
+export * from "./lib/local-storage/utils/local-storage-utils";
 
-// #region enums
-export * from "@core/models/enums/base-field-type-enum"
-export * from "@core/models/enums/base-response-type-enum"
-// #endregion enums
+// Events
+export * from "./events/dependency";
+export * from "./events/operation";
+export * from "./events/render";
+export * from "./events/validator";
 
-// #region events
-export * from "@core/events/dependency"
-export * from "@core/events/operation"
-export * from "@core/events/render"
-export * from "@core/events/validator"
-// #endregion events
-
-// #region local-storage/utils
-export * from "@core/engine/local-storage/utils/local-storage-utils"
-// #rendegion local-storage/utils
-
-// #region models/utils
-export * from "@core/lib/base-model-utils"
-export * from "@core/lib/base-composite-model-utils"
-// #rendegion models/utils
-
-// #region models
-export * from "@core/models/base-composite-model"
-export * from "@core/models/base-field-model"
-// #rendegion models
-
-// #region services
-export * from "@core/services/base-service"
-// #endregion services
-
-// #region registres/utils
-export * from "@core/stores/utils/composite-store-utils"
-// #endregion registres/utils
-
-// #region registres
-export * from "@core/stores/base-composite-store"
-export * from "@core/stores/base-store"
-// #endregion registres
-
-// #region engine
-export * from "@core/engine/components/composite"
-// #region engine
-
-// #region engine/registres
-export * from "@core/engine/registres/auto-register"
-// #region engine/registres
+// Services
+export * from "./services/base-service";
