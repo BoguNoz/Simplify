@@ -23,12 +23,10 @@ const fields = createFieldPlaceholders(mockBaseRegisteredFields, text.mock);
 
 // #region BaseStatusButton
 fields.baseButton.fieldType = BaseFieldTypesEnum.StatusButton;
-fields.baseButton.isRequired = true;
 // #endregion BaseStatusButton
 
 // #region BaseButtonWithConfirm
 fields.baseButtonWithConfirm.fieldType = BaseFieldTypesEnum.ButtonWithConfirmation;
-fields.baseButtonWithConfirm.isRequired = true;
 // #endregion BaseButtonWithConfirm
 
 // #region BaseCheckbox
@@ -38,19 +36,16 @@ fields.baseCheckbox.variant = "outline";
 
 // #region BaseFileInput
 fields.baseFileInput.fieldType = BaseFieldTypesEnum.FileInput;
-fields.baseFileInput.isRequired = true;
 // #endregion BaseFileInput
 
 // #region BaseInput
 fields.baseInput.fieldType = BaseFieldTypesEnum.Input;
-fields.baseInput.isRequired = true;
 fields.baseInput.validators = [isInteger]
 fields.baseInput.addit!.placeholder = text.mock.baseInputPlaceholder;
 // #endregion BaseInput
 
 // #region BaseSelector
 fields.baseSelector.fieldType = BaseFieldTypesEnum.Select;
-fields.baseSelector.isRequired = true;
 fields.baseSelector.dataSource = () => {
     return text.mock.baseSelectorOptions;
 }
@@ -58,12 +53,10 @@ fields.baseSelector.dataSource = () => {
 
 // #region BaseSwitch
 fields.baseSwitch.fieldType = BaseFieldTypesEnum.Switch;
-fields.baseSwitch.isRequired = true;
 // #endregion BaseSwitch
 
 // #region BaseToggle
 fields.baseToggle.fieldType = BaseFieldTypesEnum.Toggle;
-fields.baseToggle.isRequired = true;
 // #endregion BaseToggle
 
 export const mockFields = buildFields(fields);

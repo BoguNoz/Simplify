@@ -73,7 +73,6 @@ export type BaseValidatorFn = (store: BaseStore, value: any, id: string) => Vali
  * @see BaseValidatorFn
  */
 export const isEmpty = (store: BaseStore, value: any, id: string): ValidatorResponse => {
-
     return {
         isValid: !isNullEmptyFalseOrUndefined(value) && (value as string).match(/^ *$/) === null,
         isWarning: false,
