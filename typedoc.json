@@ -1,0 +1,18 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": ["./src"],
+  "out": "docs",
+  "plugin": ["typedoc-plugin-markdown"],
+  "skipErrorChecking": true,
+  "readme": "none",
+  "name": "Simplify",
+  "exclude": [
+    "**/*.stories.ts",
+    "**/*.test.ts",
+    "**/*.spec.ts",
+    "**/*.mock.ts"
+  ],
+  "excludeInternal": false,
+  "hideGenerator": true,
+  "treatWarningsAsErrors": false
+}

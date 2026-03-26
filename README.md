@@ -70,7 +70,9 @@ When any piece of data changes, MobX triggers only the necessary re-renders, so 
 The declarative schema is parsed into this reactive state at initialization, meaning you rarely write imperative code. 
 As a result, your app logic lives alongside your data definitions (not tangled in UI code), echoing the idea of separating logic and UI to reduce complexity.
 
+## Documentation
 
+**[📖 Open_documentation](./docs/README.md)**
 
 
 
