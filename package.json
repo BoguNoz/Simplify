@@ -1,15 +1,62 @@
 {
-  "name": "frontned",
-  "private": true,
-  "version": "0.0.0",
+  "name": "@bogunoz/simplify",
+  "version": "0.1.0",
+  "description": "Reactive form engine & modular UI components – MobX powered, Tailwind + Radix + Shadcn inspired",
+  "author": "Bogusław Nozdryń",
+  "license": "GPL-3.0 license",
   "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc --noEmitOnError false && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
+  },
+  "main": "./dist/cjs/index.cjs",
+  "module": "./dist/esm/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/esm/index.mjs",
+      "require": "./dist/cjs/index.cjs"
+    },
+    "./ui/*": {
+      "types": "./dist/components/ui/*.d.ts",
+      "import": "./dist/esm/components/ui/*/index.mjs",
+      "require": "./dist/cjs/components/ui/*/index.cjs"
+    },
+    "./layout/*": {
+      "types": "./dist/components/layout/*.d.ts",
+      "import": "./dist/esm/components/layout/*/index.mjs",
+      "require": "./dist/cjs/components/layout/*/index.cjs"
+    },
+    "./engine": {
+      "types": "./dist/engine/index.d.ts",
+      "import": "./dist/esm/engine/index.mjs",
+      "require": "./dist/cjs/engine/index.cjs"
+    },
+    "./stores": {
+      "types": "./dist/stores/index.d.ts",
+      "import": "./dist/esm/stores/index.mjs",
+      "require": "./dist/cjs/stores/index.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "components.json"
+  ],
+  "peerDependencies": {
+    "mobx": "^6.12.0",
+    "mobx-react-lite": "^4.0.7",
+    "react": "^18.2.0 || ^19.0.0-rc",
+    "react-dom": "^18.2.0 || ^19.0.0-rc"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -29,8 +76,8 @@
     "@radix-ui/react-label": "^2.1.4",
     "@radix-ui/react-scroll-area": "^1.2.6",
     "@radix-ui/react-select": "^2.2.2",
-    "@radix-ui/react-separator": "^1.1.7",
-    "@radix-ui/react-slot": "^1.2.3",
+    "@radix-ui/react-separator": "^1.1.8",
+    "@radix-ui/react-slot": "^1.2.4",
     "@radix-ui/react-switch": "^1.2.2",
     "@radix-ui/react-tabs": "^1.1.9",
     "@radix-ui/react-toggle": "^1.1.9",

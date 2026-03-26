@@ -1,5 +1,5 @@
 import {BaseDependencyModel} from "@core/models/partials/base-dependency-model";
-import BaseFieldTypesEnum from "@core/enums/base-field-type-enum";
+import BaseFieldTypesEnum from "@core/models/enums/base-field-type-enum";
 import {BaseValidatorFn} from "@core/events/validator";
 import {BaseOperationFn} from "@core/events/operation";
 import {ElementType} from "react";
@@ -19,6 +19,11 @@ export default interface BaseFieldModel {
      * Unique field identifier.
      */
     id: string;
+
+    /**
+     * Unique parent identifier.
+     */
+    parentId: string;
 
     /**
      * Defines the field type (e.g. input, select, checkbox, etc.).
@@ -72,6 +77,15 @@ export default interface BaseFieldModel {
 
     /**
      * Field label displayed in the UI.
+     *
+     * @example
+     * ```ts
+     * field.send.label = Send // for icon
+     * ```
+     *
+     * ```ts
+     * field.send.label = "Send" // for text
+     * ```
      */
     label: string | ElementType;
 

@@ -1,12 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import BaseButtonWithConfirmation from "@core/components/layout/partilas/BaseButtonWithConfirmation";
-import {action} from "storybook/actions";
 import {
     mockBaseRegisteredFields,
     mockFields,
-    mockHandleBlur,
-    mockHandleChange
-} from "@core/components/mocks/base-field-mocks";
+} from "@core/components/stories/base-field-mocks";
 
 
 const meta: Meta<typeof BaseButtonWithConfirmation> = {
@@ -26,8 +23,6 @@ const field = mockFields.find(bf => bf.id === mockBaseRegisteredFields.baseButto
 export const Default: Story = {
     args: {
         field: field,
-        handleChange: mockHandleChange,
-        handleBlur: mockHandleBlur,
         hardDisable: false,
     },
 };

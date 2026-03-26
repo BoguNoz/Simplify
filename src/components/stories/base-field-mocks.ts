@@ -1,7 +1,7 @@
-import {buildFields, createFieldPlaceholders} from "@core/models/utils/base-model-utils";
+import {buildFields, createFieldPlaceholders} from "@core/lib/base-model-utils";
 import {lang} from "@core/text/utils/lang";
-import BaseFieldTypesEnum from "@core/enums/base-field-type-enum";
-import {mockStore} from "@core/components/mocks/mock-store";
+import BaseFieldTypesEnum from "@core/models/enums/base-field-type-enum";
+import {mockStore} from "@core/components/stories/mock-store";
 import {isInteger} from "@core/events/validator";
 
 
@@ -21,10 +21,10 @@ const text = lang();
 const fields = createFieldPlaceholders(mockBaseRegisteredFields, text.mock);
 // #endregion Initialization
 
-// #region BaseButton
-fields.baseButton.fieldType = BaseFieldTypesEnum.Button;
+// #region BaseStatusButton
+fields.baseButton.fieldType = BaseFieldTypesEnum.StatusButton;
 fields.baseButton.isRequired = true;
-// #endregion BaseButton
+// #endregion BaseStatusButton
 
 // #region BaseButtonWithConfirm
 fields.baseButtonWithConfirm.fieldType = BaseFieldTypesEnum.ButtonWithConfirmation;
@@ -71,14 +71,3 @@ export const mockFields = buildFields(fields);
 // #region StoreMock
 await mockStore.initializeFields(mockFields);
 // #endregion StoreMock
-
-// #region FormMocks
-export const mockHandleBlur = async (fieldId: string) => {
-    mockStore.validateField(fieldId);
-};
-
-export const mockHandleChange = async (fieldId: string, value: any) => {
-    await mockStore.setFieldValue(fieldId, value);
-    mockStore.validateField(fieldId); 
-};
-// #endregion FormMocks

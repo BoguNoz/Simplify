@@ -1,7 +1,7 @@
-import React from "react";
+import {useCallback} from "react";
 import { observer } from "mobx-react-lite";
 import {BaseStore} from "@core/stores/base-store";
-import BaseFieldTypeEnum from "@core/enums/base-field-type-enum";
+import BaseFieldTypeEnum from "@core/models/enums/base-field-type-enum";
 import {Alert, AlertDescription, AlertTitle} from "@core/components/ui/alert";
 import BaseField from "@core/components/layout/BaseField";
 import {AlertCircle, AlertTriangle, CheckCircle, CircleOff, Link} from "lucide-react";
@@ -10,17 +10,9 @@ import BaseFieldModel from "@core/models/base-field-model";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircleXmark} from "@fortawesome/free-regular-svg-icons";
 import {faTriangleExclamation} from "@fortawesome/free-solid-svg-icons";
-
-interface BaseFormFieldProps {
-    fieldId: string;
-    store: BaseStore;
-
-    handleBlur: (fieldId: string) => void;
-    handleChange: (fieldId: string, value: any) => void;
-
-    hardDisable?: boolean;
-    hardTyping?: BaseFieldTypeEnum;
-}
+import {BaseFieldInterface} from "@core/models/base-field-interface";
+import {useMetadata} from "@core/engine/components/metadata-context";
+import MetadataModel from "@core/models/metadata-model";
 
 /**
  * A form wrapper for the polymorphic field component {@link BaseField},
@@ -28,14 +20,47 @@ interface BaseFormFieldProps {
  * 
  * @remarks
  * - Possible variants `default`, `secondary`, `ghost`, `outline`.
- * 
- * @see BaseFormFieldProps
+ * - This component supports all base field types defined in {@link BaseFieldTypesEnum}.
+ * - The `hardDisable` prop allows external forcing of the disabled state, overriding the field's own state.
+ * - The `hardTyping` prop allows overriding the field type for special cases.
+ - The `handleBlur` and `handleChange` prop allows overriding default behaviour on field blur and change respectively.
+ *
+ * @see FormFieldProps
  */
-const BaseFormField: React.FC<BaseFormFieldProps> = observer((props) => {
+const FormField = observer((props: BaseFieldInterface) => {
     const {fieldId, store, handleChange, handleBlur, hardDisable, hardTyping} = props;
 
+    const metadata = useMetadata() || {} as MetadataModel;
+
+    // #region Actions
+    const onChange = useCallback(
+        async (fieldId: string, value: any) => {
+            if (handleChange) {
+                await handleChange(fieldId, value);
+            } else {
+                await store.setFieldValue(fieldId, value);
+                store.validateField(fieldId);
+            }
+        },
+        [handleChange]
+    );
+
+    const onBlur = useCallback(
+        async (fieldId: string) => {
+            if (handleBlur) {
+                await handleBlur(fieldId);
+            } else {
+                store.validateField(fieldId);
+            }
+        },
+        [handleBlur]
+    );
+    // #endregion Actions
+
     const field = store.fields[fieldId];
-    if (!field || !field.render) return null;
+    if (!field || !field.render) {
+        return null;
+    }
 
     const isValid = field.state.status === "valid";
     const isDisabled = field.isDisabled || hardDisable;
@@ -75,20 +100,22 @@ const BaseFormField: React.FC<BaseFormFieldProps> = observer((props) => {
     // #endregion Variables
 
     return (
-        <div className="p-2">
+        <div style={{ width: `${metadata.width * 0.90}px` }} className="p-2">
             <Alert
                 variant={variant()}
                 status={status()}
-                className="relative"
+                className="relative w-full"
             >
                 <div className="absolute top-2 right-2">
                    <InfoSymbol field={field} hardDisable={hardDisable} />
                 </div>
+
                 <AlertTitle  className="flex flex-col gap-1 w-full">
                     <BaseField
-                        field={field}
-                        handleChange={handleChange}
-                        handleBlur={handleBlur}
+                        fieldId={fieldId}
+                        store={store}
+                        handleChange={onChange}
+                        handleBlur={onBlur}
                         hardDisable={hardDisable}
                         hardTyping={hardTyping}
                     />
@@ -177,4 +204,4 @@ const ValidatorBox = observer(({ field }: { field: BaseFieldModel}) => {
     );
 });
 
-export default BaseFormField;
+export default FormField;

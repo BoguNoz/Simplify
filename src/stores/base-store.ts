@@ -1,12 +1,12 @@
 import BaseFieldModel from "@core/models/base-field-model";
 import {BaseOperationFn} from "@core/events/operation";
 import {reaction, runInAction} from "mobx";
-import {BaseValidatorFn, isEmpty, ValidatorResponse} from "@core/events/validator";
+import {BaseValidatorFn, isEmpty} from "@core/events/validator";
 import {BaseDependencyFn} from "@core/events/dependency";
-import {isNullEmptyFalseOrUndefined, isNullOrUndefined} from "@core/lib/utils";
-import {ChangeRegistry} from "@core/engine/change-registry";
-import BaseFieldTypeEnum from "@core/enums/base-field-type-enum";
-import BaseFieldTypesEnum from "@core/enums/base-field-type-enum";
+import {isNullEmptyFalseOrUndefined} from "@core/lib/utils";
+import {ChangeRegistry} from "@core/engine/registres/change-registry";
+import BaseFieldTypeEnum from "@core/models/enums/base-field-type-enum";
+import BaseFieldTypesEnum from "@core/models/enums/base-field-type-enum";
 
 /**
  * Abstract base class that provides a reactive, signal-like state management layer using MobX.
@@ -28,20 +28,7 @@ import BaseFieldTypesEnum from "@core/enums/base-field-type-enum";
  *
  *     constructor() {
  *         super();
- *
- *         makeObservable(this, {
- *             fields: observable,
- *             operations: observable,
- *             reverseDeps: observable,
- *
- *             initializeFields: action,
- *             invokeDeconstructor: action,
- *             setFieldValue: action,
- *             setFieldAdditValue: action,
- *             setFieldState: action,
- *             addValidators: action,
- *             setFieldEditability: action,
- *         });
+*          autoRegister(this);
  *     }
  *}
  *
@@ -65,15 +52,17 @@ import BaseFieldTypesEnum from "@core/enums/base-field-type-enum";
  * @see BaseStore.addValidators
  * @see BaseStore.validateField
  * @see BaseStore.validateSpecifyFields
+ * @see BaseStore.setFieldExcluded
+ * @see autoRegister
  */
 export abstract class BaseStore {
     fields: Record<string, BaseFieldModel> = {};
     operations: Record<string, BaseOperationFn[]> = {};
     reverseDeps: Record<string, Record<string, BaseDependencyFn[]>> = {};
-    private readonly _registry: ChangeRegistry;
+    private readonly _changeRegistry: ChangeRegistry;
 
     constructor() {
-        this._registry = new ChangeRegistry();
+        this._changeRegistry = new ChangeRegistry();
     }
 
 
@@ -93,7 +82,7 @@ export abstract class BaseStore {
      * @readonly
      */
     public readonly setFieldValue = (id: string, value: any) => {
-        this._registry.registerChange(() => this._setFieldValue(id, value));
+        this._changeRegistry.registerChange(() => this._setFieldValue(id, value));
     }
 
     /**
@@ -110,7 +99,7 @@ export abstract class BaseStore {
      * @readonly
      */
     public readonly setFieldAdditValue = (id: string, addit: string, value: any): void => {
-        this._registry.registerChange(() => this._setFieldAdditValue(id, addit, value));
+        this._changeRegistry.registerChange(() => this._setFieldAdditValue(id, addit, value));
     }
 
     /**
@@ -125,7 +114,7 @@ export abstract class BaseStore {
      * @readonly
      */
     public readonly setFieldState = (id: string, status: "error" | "valid" | "warning" | "pending"): void => {
-        this._registry.registerChange(() => this._setFieldState(id, status));
+        this._changeRegistry.registerChange(() => this._setFieldState(id, status));
     }
 
     /**
@@ -140,7 +129,27 @@ export abstract class BaseStore {
      * @readonly
      */
     public readonly setFieldEditability = (id: string, isEditable: boolean): void => {
-        this._registry.registerChange(() => this._setFieldEditability(id, isEditable));
+        this._changeRegistry.registerChange(() => this._setFieldEditability(id, isEditable));
+    }
+
+    /**
+     * Updates the `excluded` state of a field.
+     *
+     * @remarks
+     * This method toggles whether a field should be considered in form
+     * processing, rendering, validation, or dependency evaluation.
+     *
+     * - If the field does not exist in the store, the update is skipped.
+     * - MobX reactions will be triggered automatically since the field is observable.
+     * - To change behavior of this method override {@link _setFieldExcluded} private method
+     *
+     * @param id - Unique identifier of the target field.
+     * @param excluded - `true` to exclude the field, `false` to include it.
+     *
+     * @readonly
+     */
+    public readonly setFieldExcluded = (id: string, excluded: boolean): void => {
+        this._changeRegistry.registerChange(() => this._setFieldExcluded(id, excluded));
     }
 
     /**
@@ -159,7 +168,7 @@ export abstract class BaseStore {
      * @readonly
      */
     public readonly invokeDeconstructor = async (id: string, free: boolean, ...args: any[]): Promise<void> => {
-        this._registry.registerChange(() => this._invokeDeconstructor(id, free, ...args));
+        this._changeRegistry.registerChange(() => this._invokeDeconstructor(id, free, ...args));
     }
 
     /**
@@ -173,40 +182,43 @@ export abstract class BaseStore {
      *
      * @param {BaseFieldModel[]} fields - List of fields configurations.
      */
-    public initializeFields = async (fields: BaseFieldModel[]): Promise<void> => {
+    public readonly initializeFields = async (fields: BaseFieldModel[]): Promise<void> => {
         for (const field of fields) {
-            this.fields[field.id] = field;
-            this.reverseDeps[field.id] = {};
 
-            const value = await this.getDataSource(field.id);
-            if (!isNullEmptyFalseOrUndefined(value) && field.fieldType !== BaseFieldTypesEnum.Select) {
-                this.fields[field.id].value = value;
-            }
+            await runInAction(async () => {
+                this.fields[field.id] = field;
+                this.reverseDeps[field.id] = {};
 
-            if (field.fieldType === BaseFieldTypeEnum.Button
-                || field.fieldType ===  BaseFieldTypeEnum.ButtonWithConfirmation
-                || field.fieldType === BaseFieldTypeEnum.Toggle
-            ) {
-                this.fields[field.id].excluded = true;
-            }
+                const value = await this.getDataSource(field.id);
+                if (!isNullEmptyFalseOrUndefined(value) && field.fieldType !== BaseFieldTypesEnum.Select) {
+                    this.fields[field.id] = value;
+                }
 
-            if (field.validators?.length) {
-                this.addValidators(field.id, field.validators);
-            }
+                if (field.fieldType === BaseFieldTypeEnum.Button
+                    || field.fieldType === BaseFieldTypeEnum.StatusButton
+                    || field.fieldType === BaseFieldTypeEnum.ButtonWithConfirmation
+                    || field.fieldType === BaseFieldTypeEnum.Toggle
+                ) {
+                    this.fields[field.id].excluded = true;
+                }
 
-            if (field.isRequired) {
-                this.addValidators(field.id, [isEmpty]);
-            }
+                if (field.validators?.length) {
+                    this.addValidators(field.id, field.validators);
+                }
 
-            if (field.operations?.length) {
-                this.operations[field.id] = [...field.operations];
-            }
+                if (field.isRequired) {
+                    this.addValidators(field.id, [isEmpty]);
+                }
 
-            field.dependencies.forEach(f => {
-                this.reverseDeps[f.fieldId][field.id] = f.events;
+                if (field.operations?.length) {
+                    this.operations[field.id] = [...field.operations];
+                }
+
+                field.dependencies.forEach(f => {
+                    this.reverseDeps[f.fieldId][field.id] = f.events;
+                });
             });
-
-        };
+        }
 
         Object.keys(this.fields).forEach(id => {
             reaction(
@@ -229,26 +241,9 @@ export abstract class BaseStore {
      *
      * @returns {ValidatorResponse[]} The list of validation results.
      */
-    public validateField = (id: string): ValidatorResponse[] => {
-        this._registry.registerChange(() => this._validateField(id));
+    public validateField = (id: string) => {
+        this._changeRegistry.registerChange(() => this._validateField(id));
     };
-
-    /** Validates a specific list of fields.
-     *
-     * @param {string[]} ids - The IDs of the fields to validate.
-     *
-     * @returns {Promise<boolean>} True if all fields are valid, otherwise false.
-     */
-    public validateSpecifyFields = async (ids: string[]): Promise<boolean> => {
-        let result = true
-        for (const id of ids) {
-            const validationResult = this.validateField(id);
-            if (validationResult.some(v => !v.isValid && !v.isWarning)) {
-                result = false;
-            }
-        }
-        return result;
-    }
 
     /**
      * Returns the current value of a field.
@@ -257,7 +252,7 @@ export abstract class BaseStore {
      *
      * @returns {any} The field's current assigned value.
      */
-    public getFieldValue = (id: string): any => this.fields[id]?.value;
+    public readonly getFieldValue = (id: string): any => this.fields[id]?.value;
 
     /**
      * Retrieves data from the data source function defined for a field.
@@ -270,7 +265,7 @@ export abstract class BaseStore {
      *
      * @returns {Promise<any>} A promise resolving to the field's data source value.
      */
-    public getDataSource = async (id: string, ...args: any[]): Promise<any> => await this.fields[id].dataSource(...args);
+    public readonly getDataSource = async (id: string, ...args: any[]): Promise<any> => await this.fields[id].dataSource(...args);
 
     /**
      * Adds new validators to a field, avoiding duplicates.
@@ -288,7 +283,7 @@ export abstract class BaseStore {
             !field.validators?.includes(v)
         );
 
-        field.validators = [...(field.validators || []), ...newValidators];
+        field.validators = [...newValidators, ...(field.validators || [])];
     };
 
     /**
@@ -351,6 +346,11 @@ export abstract class BaseStore {
         field.isDisabled = !isEditable;
     }
 
+    protected _setFieldExcluded = (id: string, excluded: boolean): void => {
+        const field = this.fields[id];
+        field.excluded = excluded;
+    }
+
     protected _invokeDeconstructor = async (id: string, free: boolean, ...args: any[]): Promise<void> => {
         if (!Object.keys(this.fields).includes(id)) {
             return;
@@ -362,12 +362,11 @@ export abstract class BaseStore {
         }
     }
 
-    protected _validateField = (id: string): ValidatorResponse[] => {
+    protected _validateField = (id: string) => {
         const field = this.fields[id];
 
         if (field.isDisabled || !field.render || field.excluded) {
             field.state.status = "valid";
-            return [{ isValid: true, isWarning: false, message: "" }] as ValidatorResponse[];
         }
 
         const results = [];
@@ -381,13 +380,9 @@ export abstract class BaseStore {
         field.state.validationResult = results;
         if (results.length > 0) {
             field.state.status = results.some(v => v.isWarning) ? "warning" : "error";
-
-
-            return results;
+            return;
         }
         field.state.status = "valid";
-
-        return [{ isValid: true, isWarning: false, message: "" }] as ValidatorResponse[];
     };
     // #endregion Logic
 }

@@ -1,6 +1,6 @@
 import localforage from "localforage";
 
 export const lf = localforage.createInstance({
-    name: "my-app",
-    storeName: "app-store",
+    name: "simplify-engine-local-storage",
+    storeName: "simplify-engine-store",
 });

@@ -1,8 +1,6 @@
 import BaseFieldModel from "@core/models/base-field-model";
 import {observer} from "mobx-react-lite";
-import React from "react";
 import {Input} from "@core/components/ui/input";
-import {Toggle} from "@core/components/ui/toggle";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@core/components/ui/tooltip";
 import {isNullEmptyFalseOrUndefined} from "@core/lib/utils";
 import {Info} from "lucide-react";
@@ -27,7 +25,7 @@ interface BaseFileInputProps {
  * @see BaseFieldModel
  * @see BaseFileInputProps
  */
-const BaseFileInput: React.FC<BaseFileInputProps> = observer((props) => {
+const BaseFileInput = observer((props: BaseFileInputProps) => {
     const {field, handleChange, hardDisable} = props;
 
     const isDisabled = hardDisable || field.isDisabled;

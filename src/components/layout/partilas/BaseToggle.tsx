@@ -1,6 +1,5 @@
 import BaseFieldModel from "@core/models/base-field-model";
 import {observer} from "mobx-react-lite";
-import React from "react";
 import {Toggle} from "@core/components/ui/toggle";
 
 
@@ -24,7 +23,7 @@ interface BaseToggleProps {
  * @see BaseFieldModel
  * @see BaseToggleProps
  */
-const BaseToggle: React.FC<BaseToggleProps> = observer((props) => {
+const BaseToggle = observer((props: BaseToggleProps) => {
     const {field, handleChange, hardDisable} = props;
 
     const isDisabled = hardDisable || field.isDisabled;

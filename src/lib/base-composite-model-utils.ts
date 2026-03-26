@@ -1,4 +1,4 @@
-import BaseCompositeModel from "../base-composite-model";
+import BaseCompositeModel from "../models/base-composite-model";
 
 type KeyMirror<T extends string> = {
     [K in T]: K;
@@ -45,8 +45,11 @@ export function createCompositesPlaceholders<
             id: registeredFields[key],
             fields: [],
             sections: [],
+            partials: [],
             renderFn: undefined,
             render: false,
+            mode: "page",
+            size: 1,
             deconstructor: () => {},
         };
 
@@ -82,4 +85,56 @@ export function buildComposites<T extends string>(
     configs: Record<T, Partial<BaseCompositeModel>>
 ): BaseCompositeModel[] {
     return Object.values(configs) as BaseCompositeModel[];
+}
+
+/**
+ * Returns the base width and height percentages for a composite layout mode.
+ *
+ * @remarks
+ * Each mode defines a preset layout footprint expressed as `[width%, height%]`.
+ * These values represent how much of the available viewport space the composite
+ * should occupy before any additional scaling (e.g., via the `size` factor).
+ *
+ * Layout modes:
+ * - `"vertical-window"` – Tall and narrow layout (50% width × 90% height)
+ * - `"square-window"` – Balanced, square-like layout (80% × 80%)
+ * - `"horizontal-window"` – Wide and shorter layout (90% × 60%)
+ * - *default* – Full-size layout (100% × 100%)
+ *
+ * The returned percentages are intended to be multiplied by viewport dimensions
+ * to compute actual pixel sizes.
+ *
+ * @param mode - The composite's layout mode.
+ * @returns A tuple `[widthPercentage, heightPercentage]`.
+ *
+ * @example
+ * modeToPercentage("square-window"); // [80, 80]
+ * modeToPercentage("unknown");       // [100, 100]
+ */
+export const modeToPercentage = (mode: string) => {
+    switch (mode) {
+        case "vertical-window": return [50, 90];
+        case "square-window": return [80, 80];
+        case "horizontal-window": return [90, 60];
+        default: return [100, 100];
+    }
+};
+
+export const computeCompositeSize = (mode: string, sizeFactor: number) => {
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+
+    const [w, h] = modeToPercentage(mode);
+
+    return [
+        viewportWidth * (w / 100) * sizeFactor,
+        viewportHeight * (h / 100) * sizeFactor
+    ];
+}
+
+export const recomputeCompositeSize = (width: number, height: number) => {
+    return [
+        width * 0.85,
+        height * 0.85
+    ]
 }

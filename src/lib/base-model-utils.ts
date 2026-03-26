@@ -1,5 +1,5 @@
-import BaseFieldModel from "../base-field-model";
-import BaseFieldTypesEnum from "@core/enums/base-field-type-enum";
+import BaseFieldModel from "../models/base-field-model";
+import BaseFieldTypesEnum from "@core/models/enums/base-field-type-enum";
 
 
 type KeyMirror<T extends string> = {
@@ -53,6 +53,7 @@ export function createFieldPlaceholders<
 
         acc[key] = {
             id: registeredFields[key],
+            parentId: "",
             label: translations[labelKey] ?? "",
             description: translations[descriptionKey] ?? "",
             isDisabled: false,
@@ -67,6 +68,8 @@ export function createFieldPlaceholders<
             dependencies: [],
             style: "",
             variant: "default",
+            width: null,
+            height: null,
             state: {
                 status: "unknown",
                 validationResult: [],

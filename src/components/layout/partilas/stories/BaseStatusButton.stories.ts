@@ -1,24 +1,21 @@
 import type {Meta, StoryObj} from "@storybook/react";
-import {action} from "storybook/actions";
 import {
     mockBaseRegisteredFields,
     mockFields,
-    mockHandleBlur,
-    mockHandleChange
-} from "@core/components/mocks/base-field-mocks";
-import BaseButton from "../BaseButton";
+} from "@core/components/stories/base-field-mocks";
+import BaseStatusButton from "../BaseStatusButton";
 import {Send} from "lucide-react";
 
-const meta: Meta<typeof BaseButton> = {
-    title: "partials/BaseButton",
-    component: BaseButton,
+const meta: Meta<typeof BaseStatusButton> = {
+    title: "partials/BaseStatusButton",
+    component: BaseStatusButton,
     parameters: {
         layout: "centered",
     },
 };
 export default meta;
 
-type Story = StoryObj<typeof BaseButton>;
+type Story = StoryObj<typeof BaseStatusButton>;
 
 const field = mockFields.find(bf => bf.id === mockBaseRegisteredFields.baseButton)!;
 
@@ -26,8 +23,6 @@ const field = mockFields.find(bf => bf.id === mockBaseRegisteredFields.baseButto
 export const Default: Story = {
     args: {
         field: field,
-        handleChange: mockHandleChange,
-        handleBlur: mockHandleBlur,
         hardDisable: false,
     },
 };

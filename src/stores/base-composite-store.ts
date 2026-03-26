@@ -2,9 +2,10 @@ import { isNullOrUndefined } from "@core/lib/utils";
 import BaseCompositeModel from "@core/models/base-composite-model";
 import {BaseStore} from "@core/stores/base-store";
 import {observable, runInAction} from "mobx";
+import {partial} from "lodash";
 
 /**
- * Abstract base class that manages a collection of composites and their corresponding field stores.
+ * Abstract base class that manages a collection of composites and their corresponding field registres.
  *
  * @remarks
  * The {@link BaseCompositeStore} acts as a coordinator between multiple {@link BaseStore} instances,
@@ -17,24 +18,11 @@ import {observable, runInAction} from "mobx";
  * // Example base implementation:
  * export class CompositeStore extends BaseCompositeStore {
  *     composites: Record<string, BaseCompositeModel> = {};
- *     stores: Record<string, BaseStore> = {}
+ *     registres: Record<string, BaseStore> = {}
  *
  *     constructor() {
  *         super();
- *
- *         makeObservable(this, {
- *             composites: observable,
- *             stores: observable,
- *             renderedComposites: observable,
- *
- *             initializeComposite: action,
- *             initializeFields: action,
- *             renderComposite: action,
- *             setRendering: action,
- *             registerStore: action,
- *             getStore: action,
- *             invokeCompositeDeconstructor: action,
- *         });
+ *         autoRegister(this)
  *     }
  * }
  *
@@ -55,6 +43,7 @@ import {observable, runInAction} from "mobx";
  * @see BaseCompositeStore.registerStore
  * @see BaseCompositeStore.getStore
  * @see BaseCompositeStore.invokeCompositeDeconstructor
+ * @see autoRegister
  */
 export abstract class BaseCompositeStore {
     composites: Record<string, BaseCompositeModel> = {};
@@ -69,19 +58,21 @@ export abstract class BaseCompositeStore {
      *  
      * @param {BaseCompositeModel[]} composites - List of composites configurations
      */
-    initializeComposite = (composites: BaseCompositeModel[]): void =>  {
+    public initializeComposite = (composites: BaseCompositeModel[]): void =>  {
         composites.forEach((composite: BaseCompositeModel) => {
-            this.composites[composite.id] = composite;
-            this.renderedComposites.set(composite.id, composite.render);
-        })
+            runInAction(() => {
+                this.composites[composite.id] = composite;
+                this.renderedComposites.set(composite.id, composite.render);
+            });
+        });
     }
 
     /**
      * Invokes initialization of fields within a composite.
      * 
-     * @param {string} id - The ID of he composite.
+     * @param {string} id - The ID of the composite.
      */
-    initializeFields = async (id: string): Promise<void> => {
+    public initializeFields = async (id: string): Promise<void> => {
         const composite = this.composites[id];
         const store = this.stores[id];
         await store.initializeFields(composite.fields);
@@ -93,7 +84,7 @@ export abstract class BaseCompositeStore {
      * @param {string} id - The ID of the composite.
      * @returns {boolean} `true` if the composite should be rendered otherwise `false`.
      */
-    renderComposite = (id: string): boolean => {
+    public renderComposite = (id: string): boolean => {
         return this.renderedComposites.get(id)!;
     }
 
@@ -107,7 +98,7 @@ export abstract class BaseCompositeStore {
      * @param {string} id - The ID of the composite.
      * @param {boolean} [state] - The desired render state. If omitted, the state is determined automatically.
      */
-    setRendering = (id: string, state?: boolean): void => {
+    public setRendering = (id: string, state?: boolean): void => {
         runInAction(() => {
             if (isNullOrUndefined(state)) {
                 this.composites[id].render = this.composites[id].renderFn(this, this.stores[id]);
@@ -126,7 +117,9 @@ export abstract class BaseCompositeStore {
      * @param {BaseStore} store - The store instance to register.
      */
     registerStore = (id: string, store: BaseStore): void => {
-        this.stores[id] = store;
+        runInAction(() => {
+            this.stores[id] = store;
+        });
     }
 
     /**
@@ -135,7 +128,7 @@ export abstract class BaseCompositeStore {
      * @param {string} id - The ID of the composite.
      * @returns {BaseStore} The store instance linked to the composite.
      */
-    getStore = (id: string): BaseStore => this.stores[id];
+    public getStore = (id: string): BaseStore => this.stores[id];
 
     /**
      * Invokes the deconstructor for a specific composite and all of its fields.
@@ -146,7 +139,7 @@ export abstract class BaseCompositeStore {
      * belonging to the composite.
      * 
      * - If the `free` parameter is set to `true`, both the composite and its fields
-     * are removed from their respective stores after deconstruction.
+     * are removed from their respective registres after deconstruction.
      * 
      * - If any of the composite's fields require arguments for their deconstructors,
      * make sure to invoke those field deconstructors manually beforehand.
@@ -158,7 +151,7 @@ export abstract class BaseCompositeStore {
      *
      * @see invokeDeconstructor
      */
-    invokeCompositeDeconstructor = async (id: string, free: boolean, ...args: any[]) => {
+    public invokeCompositeDeconstructor = async (id: string, free: boolean, ...args: any[]) => {
         if (!Object.keys(this.composites).includes(id)) {
             return;
         }
@@ -174,7 +167,6 @@ export abstract class BaseCompositeStore {
         if (free) {
             delete this.composites[id];
         }
-        
     }
 }
 

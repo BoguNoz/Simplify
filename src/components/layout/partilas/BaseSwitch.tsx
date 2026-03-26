@@ -1,6 +1,5 @@
 import BaseFieldModel from "@core/models/base-field-model";
 import {observer} from "mobx-react-lite";
-import React from "react";
 import {Switch} from "@core/components/ui/switch";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@core/components/ui/tooltip";
 import {isNullEmptyFalseOrUndefined} from "@core/lib/utils";
@@ -26,21 +25,27 @@ interface BaseSwitchProps {
  * @see BaseFieldModel
  * @see BaseSwitchProps
  */
-const BaseSwitch: React.FC<BaseSwitchProps> = observer((props) => {
+const BaseSwitch = observer((props: BaseSwitchProps) => {
     const {field, handleChange, handleBlur, hardDisable} = props;
 
     const isDisabled = hardDisable || field.isDisabled;
 
     return (
-        <div className="flex items-center justify-between p-3">
+        <div
+            className={
+                field.variant == "outline"
+                    ? "flex items-center p-3"
+                    : "flex items-center justify-between p-3"
+            }
+        >
            <Header field={field} />
             <div className="mr-3 mt-1.5">
                 <Switch
                     className={field.style}
                     disabled={isDisabled}
                     checked={field.value}
-                    onCheckedChange={c => handleChange(field.id, c)}
-                    onBlur={() => handleBlur(field.id)}
+                    onCheckedChange={c => handleChange?.(field.id, c)}
+                    onBlur={() => handleBlur?.(field.id)}
                 />
             </div>
             <Footer field={field} />

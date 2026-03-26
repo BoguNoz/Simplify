@@ -2,7 +2,7 @@ import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, VariantProps } from "class-variance-authority"
 import { PanelLeftIcon } from "lucide-react"
-import { useIsMobile } from "@core/hooks/use-mobile"
+import { useIsMobile } from "@core/engine/use-mobile"
 import { cn } from "@core/lib/utils"
 import { Button } from "./button"
 import { Input } from "./input"
@@ -107,7 +107,7 @@ function SidebarProvider({
   }, [toggleSidebar])
 
   // We add a state so that we can do data-state="expanded" or "collapsed".
-  // This makes it easier to style the sidebar with Tailwind stores.
+  // This makes it easier to style the sidebar with Tailwind registres.
   const state = open ? "expanded" : "collapsed"
 
   const contextValue = React.useMemo<SidebarContextProps>(

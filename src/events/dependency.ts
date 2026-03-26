@@ -1,4 +1,4 @@
-import {BaseStore} from "../stores/base-store";
+import {BaseStore} from "@core/stores/base-store";
 import {isNullEmptyFalseOrUndefined} from "@core/lib/utils";
 
 /**

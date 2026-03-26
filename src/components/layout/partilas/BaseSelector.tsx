@@ -1,5 +1,5 @@
 import BaseFieldModel from "@core/models/base-field-model";
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {observer} from "mobx-react-lite";
 import {Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue} from "@core/components/ui/select";
 
@@ -25,12 +25,10 @@ interface SelectorFieldProps {
  * @see SelectorFieldProps
  * @see BaseFieldModel.dataSource
  */
-const BaseSelector: React.FC<SelectorFieldProps> = observer((props) => {
+const BaseSelector = observer((props: SelectorFieldProps) => {
     const [options, setOptions] = useState<Record<string, string>>({});
 
     const {field, handleChange, handleBlur, hardDisable} = props;
-
-    const isDisabled = hardDisable || field.isDisabled;
 
     // #region Variants
     const isPrimary = field.variant === "default" || field.variant === "secondary";
@@ -53,7 +51,7 @@ const BaseSelector: React.FC<SelectorFieldProps> = observer((props) => {
         <div className="p-3">
             <Select onValueChange={handleChange}>
                 <SelectTrigger
-                    className={field.style + " w-[500px]"}
+                    className={field.style + " w-2/3"}
                     onBlur={handleBlur}
                     disabled={field.isDisabled || hardDisable}
                 >

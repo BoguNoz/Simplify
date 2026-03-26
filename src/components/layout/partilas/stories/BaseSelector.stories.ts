@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import {action} from "storybook/actions";
-import {mockBaseRegisteredFields, mockFields} from "@core/components/mocks/base-field-mocks";
+import {mockBaseRegisteredFields, mockFields} from "@core/components/stories/base-field-mocks";
 import BaseSelector from "@core/components/layout/partilas/BaseSelector";
 
 
@@ -21,8 +20,6 @@ const field = mockFields.find(bf => bf.id === mockBaseRegisteredFields.baseSelec
 export const Default: Story = {
     args: {
         field: field,
-        handleChange: action("handleChange"),
-        handleBlur: action("handleBlur"),
         hardDisable: false,
     },
 };

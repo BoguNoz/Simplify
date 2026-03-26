@@ -1,11 +1,9 @@
 import BaseFieldModel from "@core/models/base-field-model";
 import {observer} from "mobx-react-lite";
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {Button} from "@core/components/ui/button";
 import {Check, X} from "lucide-react";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@core/components/ui/tooltip";
-import {Spinner} from "@core/components/ui/spiner";
-import {IconExclamationCircle} from "@tabler/icons-react";
 import {isNullEmptyFalseOrUndefined} from "@core/lib/utils";
 
 
@@ -33,7 +31,7 @@ interface BaseButtonWithConfirmationProps {
  * @see BaseFieldModel
  * @see BaseButtonWithConfirmationProps
  */
-const BaseButtonWithConfirmation: React.FC<BaseButtonWithConfirmationProps> = observer((props) => {
+const BaseButtonWithConfirmation = observer((props: BaseButtonWithConfirmationProps) => {
     const { field, hardDisable, handleChange, handleBlur } = props;
 
     const [confirming, setConfirming] = useState(false);
@@ -53,7 +51,7 @@ const BaseButtonWithConfirmation: React.FC<BaseButtonWithConfirmationProps> = ob
         return (
             <div onClick={() => setConfirming(true)} className="cursor-pointer">
                 <Tooltip>
-                    <TooltipTrigger>
+                    <TooltipTrigger asChild>
                         <Button
                             className={field.style}
                             disabled={isDisabled}
