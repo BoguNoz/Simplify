@@ -68,8 +68,6 @@ export function createFieldPlaceholders<
             dependencies: [],
             style: "",
             variant: "default",
-            width: null,
-            height: null,
             state: {
                 status: "unknown",
                 validationResult: [],

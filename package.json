@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmitOnError false && vite build",
+    "build": "tsc -p tsconfig.build.json --noEmitOnError false",
     "lint": "eslint .",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",

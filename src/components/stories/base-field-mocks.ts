@@ -18,6 +18,7 @@ export const mockBaseRegisteredFields = {
 }
 
 const text = lang();
+// @ts-ignore
 const fields = createFieldPlaceholders(mockBaseRegisteredFields, text.mock);
 // #endregion Initialization
 

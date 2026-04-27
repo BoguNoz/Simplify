@@ -7,7 +7,7 @@ import {lang} from "@core/text/utils/lang";
 import BaseFieldTypesEnum from "@core/models/enums/base-field-type-enum";
 import {ArrowLeft, ArrowRight} from "lucide-react";
 import {BaseSectionModel} from "@core/models/partials/base-section-model";
-import {mockCompositeStore} from "@core/components/stories/mock-composite-store";
+import {mockCompositeStore} from "@core/components/stories/composites/mock-composite-store";
 
 const meta: Meta<typeof ButtonGroupComposite> = {
     title: "composites/ButtonGroupComposite",
