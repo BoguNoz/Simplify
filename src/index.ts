@@ -4,36 +4,19 @@
 // ────────────────────────────────────────────────
 
 // Engine + auto-register
-export * from "./engine/components/composite";
-export * from "./engine/components/metadata-context";
-export * from "./engine/registres/auto-register";
-export * from "./engine/registres/change-registry";
+export * from "./engine/index"
 
 // Stores
-export * from "./stores/base-composite-store";
-export * from "./stores/base-store";
-export * from "./stores/utils/composite-store-utils";
+export * from "./stores/index"
 
 // Models + Enums
-export * from "./models/base-composite-interface";
-export * from "./models/base-composite-model";
-export * from "./models/base-field-interface"
-export * from "./models/base-field-model";
-export * from "./models/metadata-model";
-export * from "./models/enums/base-field-type-enum";
-export * from "./models/enums/base-response-type-enum";
+export * from "./models/index"
 
 // Utils & helpers
-export * from "./lib/base-model-utils";
-export * from "./lib/base-composite-model-utils";
-export * from "./lib/metadata-model-utils";
-export * from "./lib/local-storage/utils/local-storage-utils";
+export * from "./lib/index"
 
 // Events
-export * from "./events/dependency";
-export * from "./events/operation";
-export * from "./events/render";
-export * from "./events/validator";
+export * from "./events/index"
 
 // Services
-export * from "./services/base-service";
+export * from "./services/index"

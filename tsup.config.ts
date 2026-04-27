@@ -9,7 +9,7 @@ export default defineConfig({
         layout: "src/components/layout/index.ts",
     },
     format: ["esm", "cjs"],
-    dts: true,
+    dts: false,
     outDir: "dist",
     clean: true,
     splitting: false,
