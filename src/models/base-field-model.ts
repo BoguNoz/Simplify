@@ -14,7 +14,7 @@ import {BaseStatusModel} from "@core/models/partials/base-status-model";
  * behavior through MobX observables, allowing changes to propagate automatically.
  *
  */
-export default interface BaseFieldModel {
+export interface BaseFieldModel {
     /**
      * Unique field identifier.
      */
