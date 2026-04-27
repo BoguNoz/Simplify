@@ -22,28 +22,32 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/esm/index.mjs",
-      "require": "./dist/cjs/index.cjs"
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.cjs.js"
     },
+
     "./ui/*": {
-      "types": "./dist/components/ui/*.d.ts",
-      "import": "./dist/esm/components/ui/*/index.mjs",
-      "require": "./dist/cjs/components/ui/*/index.cjs"
+      "types": "./dist/components/ui/*/index.d.ts",
+      "import": "./dist/components/ui/*/index.js",
+      "require": "./dist/components/ui/*/index.cjs.js"
     },
+
     "./layout/*": {
-      "types": "./dist/components/layout/*.d.ts",
-      "import": "./dist/esm/components/layout/*/index.mjs",
-      "require": "./dist/cjs/components/layout/*/index.cjs"
+      "types": "./dist/components/layout/*/index.d.ts",
+      "import": "./dist/components/layout/*/index.js",
+      "require": "./dist/components/layout/*/index.cjs.js"
     },
+
     "./engine": {
       "types": "./dist/engine/index.d.ts",
-      "import": "./dist/esm/engine/index.mjs",
-      "require": "./dist/cjs/engine/index.cjs"
+      "import": "./dist/engine/index.es.js",
+      "require": "./dist/engine/index.cjs.js"
     },
+
     "./stores": {
       "types": "./dist/stores/index.d.ts",
-      "import": "./dist/esm/stores/index.mjs",
-      "require": "./dist/cjs/stores/index.cjs"
+      "import": "./dist/stores/index.es.js",
+      "require": "./dist/stores/index.cjs.js"
     }
   },
   "files": [
