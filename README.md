@@ -72,7 +72,7 @@ As a result, your app logic lives alongside your data definitions (not tangled i
 
 ## Documentation
 
-**[📖 Open_documentation](./docs/README.md)**
+**[📖 Open_documentation ](./docs/README.md)**
 
 
 

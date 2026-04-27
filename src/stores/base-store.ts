@@ -41,19 +41,6 @@ import BaseFieldTypesEnum from "@core/models/enums/base-field-type-enum";
  * ```
  *
  * @abstract
- * @see BaseStore.initializeFields
- * @see BaseStore.getDataSource
- * @see BaseStore.invokeDeconstructor
- * @see BaseStore.getFieldValue
- * @see BaseStore.setFieldValue
- * @see BaseStore.setFieldAdditValue
- * @see BaseStore.setFieldState
- * @see BaseStore.setFieldEditability
- * @see BaseStore.addValidators
- * @see BaseStore.validateField
- * @see BaseStore.validateSpecifyFields
- * @see BaseStore.setFieldExcluded
- * @see autoRegister
  */
 export abstract class BaseStore {
     fields: Record<string, BaseFieldModel> = {};
@@ -238,8 +225,6 @@ export abstract class BaseStore {
      * or value is not null or undefined or field is not excluded.
      * - Validation state is safe to the field `state`.
      * - To change behavior of this method override {@link _validateField} private method
-     *
-     * @returns {ValidatorResponse[]} The list of validation results.
      */
     public validateField = (id: string) => {
         this._changeRegistry.registerChange(() => this._validateField(id));
@@ -362,7 +347,7 @@ export abstract class BaseStore {
         }
     }
 
-    protected _validateField = (id: string) => {
+    protected _validateField = (id: string): void => {
         const field = this.fields[id];
 
         if (field.isDisabled || !field.render || field.excluded) {

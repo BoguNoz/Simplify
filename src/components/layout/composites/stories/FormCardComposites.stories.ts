@@ -2,8 +2,8 @@ import type {Meta, StoryObj} from "@storybook/react";
 import FormCardComposite from "@core/components/layout/composites/FormCardComposite";
 import {buildComposites, createCompositesPlaceholders} from "@core/lib/base-composite-model-utils";
 import {BaseSectionModel} from "@core/models/partials/base-section-model";
-import {mockCompositeStore} from "@core/components/stories/mock-composite-store";
-import {cameraMetadataRegisteredFields, formMock} from "@core/components/stories/form-mocks";
+import {mockCompositeStore} from "@core/components/stories/composites/mock-composite-store";
+import {cameraMetadataRegisteredFields, formMock} from "@core/components/stories/composites/form-mocks";
 import {mockStore} from "@core/components/stories/mock-store";
 import {lang} from "@core/text/utils/lang";
 
