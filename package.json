@@ -10,40 +10,40 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "tsup src/index.ts --format esm,cjs --dts --out-dir dist --clean",
+    "build": "tsup",
     "lint": "eslint .",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
-  "main": "dist/index.cjs.js",
-  "module": "dist/index.es.js",
+  "main": "dist/index.cjs",
+  "module": "dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.es.js",
-      "require": "./dist/index.cjs.js"
-    },
-    "./ui/*": {
-      "types": "./dist/components/ui/*/index.d.ts",
-      "import": "./dist/components/ui/*/index.js",
-      "require": "./dist/components/ui/*/index.cjs.js"
-    },
-    "./layout/*": {
-      "types": "./dist/components/layout/*/index.d.ts",
-      "import": "./dist/components/layout/*/index.js",
-      "require": "./dist/components/layout/*/index.cjs.js"
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
     },
     "./engine": {
-      "types": "./dist/engine/index.d.ts",
-      "import": "./dist/engine/index.es.js",
-      "require": "./dist/engine/index.cjs.js"
+      "types": "./dist/engine.d.ts",
+      "import": "./dist/engine.js",
+      "require": "./dist/engine.cjs"
     },
     "./stores": {
-      "types": "./dist/stores/index.d.ts",
-      "import": "./dist/stores/index.es.js",
-      "require": "./dist/stores/index.cjs.js"
+      "types": "./dist/stores.d.ts",
+      "import": "./dist/stores.js",
+      "require": "./dist/stores.cjs"
+    },
+    "./ui": {
+      "types": "./dist/ui.d.ts",
+      "import": "./dist/ui.js",
+      "require": "./dist/ui.cjs"
+    },
+    "./layout": {
+      "types": "./dist/layout.d.ts",
+      "import": "./dist/layout.js",
+      "require": "./dist/layout.cjs"
     }
   },
   "files": [
