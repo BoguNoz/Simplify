@@ -1,6 +1,6 @@
 {
   "name": "@bogunoz/simplify",
-  "version": "0.1.5",
+  "version": "0.1.4",
   "description": "Reactive form engine & modular UI components – MobX powered, Tailwind + Radix + Shadcn inspired",
   "author": "Bogusław Nozdryń",
   "license": "GPL-3.0 license",
@@ -10,7 +10,7 @@
   ],
   "scripts": {
     "dev": "vite",
-    "build": "tsup",
+    "build": "tsup src/index.ts --format esm,cjs --dts --out-dir dist --clean",
     "lint": "eslint .",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
