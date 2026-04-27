@@ -16,8 +16,8 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
-  "main": "./dist/cjs/index.cjs",
-  "module": "./dist/esm/index.mjs",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.es.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
