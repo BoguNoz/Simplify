@@ -1,9 +1,9 @@
 {
   "extends": "./tsconfig.app.json",
   "compilerOptions": {
+    "module": "ESNext",
+    "outDir": "dist/esm",
     "noEmit": false,
-    "emitDeclarationOnly": true,
-    "outDir": "./dist",
     "declaration": true,
     "declarationMap": true,
     "noUnusedLocals": false,
