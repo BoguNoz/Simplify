@@ -1,10 +1,10 @@
 import BaseFieldModel from "@core/models/base-field-model";
 import {observer} from "mobx-react-lite";
-import React from "react";
 import {Input} from "@core/components/ui/input";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@core/components/ui/tooltip";
 import {isNullEmptyFalseOrUndefined} from "@core/lib/utils";
 import {Info} from "lucide-react";
+import Footer from "@core/components/layout/partilas/Footer";
 
 interface BaseInputProps {
     field: BaseFieldModel;
@@ -96,16 +96,6 @@ const InfoLink = observer(({ field }: { field: BaseFieldModel }) => {
                 <label>{field.description}</label>
             </TooltipContent>
         </Tooltip>
-    );
-});
-
-const Footer = observer(({ field }: { field: BaseFieldModel }) => {
-    if (field.variant !== "default" && field.variant !== "secondary") return null;
-
-    return (
-        <p className="text-sm text-gray-400 font-light whitespace-normal break-word p-1">
-            {field.description}
-        </p>
     );
 });
 
