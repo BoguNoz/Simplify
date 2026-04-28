@@ -3,22 +3,21 @@ import composite from "@core/engine/components/composite";
 import {Button, Card, CardContent, Collapsible, CollapsibleContent, CollapsibleTrigger, ScrollArea, Separator} from "@core/components/ui";
 import {MetadataContext, useMetadata} from "@core/engine";
 import MetadataModel from "@core/models/metadata-model";
-import FormHeader from "@core/components/layout/composites/partials/FormHeader";
 import {BaseSectionModel} from "@core/models/partials/base-section-model";
 import {observer} from "mobx-react-lite";
 import {BaseCompositeSectionProps} from "@core/models/interfaces/base-composite-section-props";
 import FormField from "@core/components/layout/FormField";
 import {ChevronsUpDown} from "lucide-react";
 import React from "react";
+import {FormCardCompositeSectionType} from "@core/components/layout";
 
 interface SectionCardCompositeProps extends BaseCompositeInterface { }
 
-export enum SectionCardCompositeSectionType {
-    HEADER= "HEADER",
+export enum SectionCompositeSectionType {
     SECTION = "SECTION",
 }
 
-const SectionCardComposite = composite((props: SectionCardCompositeProps) => {
+const SectionComposite = composite((props: SectionCardCompositeProps) => {
     const {compositeId, compositeStore, store, handleBlur, handleChange} = props;
 
     const metadata = useMetadata() ?? {} as MetadataModel;
@@ -28,40 +27,22 @@ const SectionCardComposite = composite((props: SectionCardCompositeProps) => {
         return <></>;
     }
 
-    const sectionMap = composite.sections.reduce<Record<string, BaseSectionModel[]>>(
-        (acc, section) => {
-            if (!acc[section.type]) {
-                acc[section.type] = [];
-            }
-
-            acc[section.type].push(section);
-            return acc;
-        },
-        {}
+    const sectionMap = Object.fromEntries(
+        composite.sections.map(section => [section.type, section])
     );
 
-    const headers = sectionMap[SectionCardCompositeSectionType.HEADER] ?? [];
-    const sections = sectionMap[SectionCardCompositeSectionType.SECTION] ?? [];
+    const section= sectionMap[SectionCompositeSectionType.SECTION] ?? {} as BaseSectionModel;
 
     return (
-        <Card style={{ width: `${metadata.width}px`, height: `${metadata.height}px` }} className="flex flex-col">
-            <FormHeader
-                section={headers[0]}
+        <div  style={{ width: `${metadata.width}px`, height: `${metadata.height}px` }} className="flex flex-col">
+            <Section
+                section={section}
+                store={store}
+                handleBlur={handleBlur}
+                handleChange={handleChange}
+                metadata={metadata}
             />
-            <ScrollArea className="flex-1 overflow-auto w-full">
-                <CardContent className="space-y-2 w-full">
-                    {sections.map(section => (
-                        <Section
-                            section={section}
-                            store={store}
-                            handleBlur={handleBlur}
-                            handleChange={handleChange}
-                            metadata={metadata}
-                        />
-                    ))}
-                </CardContent>
-            </ScrollArea>
-        </Card>
+        </div>
     )
 });
 
@@ -127,5 +108,5 @@ const Section = observer(({ section, store, handleBlur, handleChange, metadata }
     );
 });
 
-export default SectionCardComposite;
+export default SectionComposite;
 
