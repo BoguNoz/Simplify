@@ -1,3 +1,5 @@
+import {BaseFieldModel} from "@core/models";
+
 /**
  * Represents a logical or visual section of a composite.
  * 
@@ -13,9 +15,12 @@ export interface BaseSectionModel {
     type: string;
 
     /**
-     * A list of field IDs that belong to this section.
+     * A list of field configurations that belong to this composite section.
+     *
+     * @remarks
+     * Each field is initialized and managed through the composite's associated {@link BaseStore}.
      */
-    fieldsIds: string[];
+    fields: BaseFieldModel[];
 
     /**
      * The display label of the section, used for UI representation.

@@ -24,7 +24,7 @@ type KeyMirror<T extends string> = {
  * - default field state
  * - default `dataSource` and `deconstructor` handlers
  *
- * This function is typically used when bootstrapping a form repository,
+ * This function is typically used when bootstrapping a partials repository,
  * allowing developers to define fields declaratively instead of manually creating every model.
  *
  * @param registeredFields - A key–mirror object mapping field names to their identifiers.
@@ -90,7 +90,7 @@ export function createFieldPlaceholders<
  * configuration dictionary into a list of fully usable field models.
  *
  * This array is usually passed to:
- * - a **form store**,
+ * - a **partials store**,
  * - or directly into UI rendering logic.
  *
  * Note: This function does not clone or validate the objects — it simply unwraps them.

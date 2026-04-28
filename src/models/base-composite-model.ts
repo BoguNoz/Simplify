@@ -16,7 +16,7 @@ export default interface BaseCompositeModel {
      * A list of *partial composites ids* that belong to this composite.
      *
      * @remarks
-     * - Partials are smaller, reusable composite fragments that form sections
+     * - Partials are smaller, reusable composite fragments that partials sections
      *   inside a larger composite.
      * - Unlike full composites, partials **cannot contain their own child composites** —
      *   they can only contain fields.
@@ -26,14 +26,6 @@ export default interface BaseCompositeModel {
      *
      */
     partials: string[];
-
-    /**
-     * A list of field configurations that belong to this composite.
-     *
-     * @remarks
-     * Each field is initialized and managed through the composite's associated {@link BaseStore}.
-     */
-    fields: BaseFieldModel[];
 
     /**
      * A record of sections in the composite.

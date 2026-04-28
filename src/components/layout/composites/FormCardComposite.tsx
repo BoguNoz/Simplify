@@ -1,22 +1,17 @@
-import {BaseStore} from "@core/stores/base-store";
 import composite from "@core/engine/components/composite";
-import {observer} from "mobx-react-lite";
 import {BaseSectionModel} from "@core/models/partials/base-section-model";
-import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@core/components/ui/card";
-import {ScrollArea} from "@core/components/ui/scroll-area";
-import FormField from "@core/components/layout/FormField";
-import {BaseCompositeInterface} from "@core/models/base-composite-interface";
+import {Card, CardContent} from "@core/components/ui/card";
+import {BaseCompositeInterface} from "@core/models/interfaces/base-composite-interface";
 import MetadataModel from "@core/models/metadata-model";
-import {MetadataContext, useMetadata } from "@core/engine/components/metadata-context";
+import {MetadataContext, useMetadata} from "@core/engine/components/metadata-context";
+import FormHeader from "@core/components/layout/composites/partials/FormHeader";
+import {observer} from "mobx-react-lite";
+import {BaseCompositeSectionProps} from "@core/models/interfaces/base-composite-section-props";
+import {ScrollArea, Separator} from "@core/components/ui";
+import FormField from "@core/components/layout/FormField";
+import React from "react";
 
 interface FormCardCompositeProps extends BaseCompositeInterface {}
-
-interface SectionProps {
-    section: BaseSectionModel,
-    store: BaseStore,
-    handleBlur?: (fieldId: string) => void,
-    handleChange?: (fieldId: string, value: any) => void, metadata: MetadataModel
-}
 
 export enum FormCardCompositeSectionType {
     HEADER= "HEADER",
@@ -24,15 +19,15 @@ export enum FormCardCompositeSectionType {
 }
 
 /**
- * A card-based, single section ,composite renderer for form layouts.
+ * A card-based, single section ,composite renderer for partials layouts.
  *
  * @remarks
- * This composite allows rendering a form inside a styled `<Card>` layout.
+ * This composite allows rendering a partials inside a styled `<Card>` layout.
  * It uses the composite engine to read sections/fields and automatically
  * build a card with:
  *
  * - **Header** — displays title & description from the first section. Section id:`FormCardCompositeSectionType.HEADER`.
- * - **Body** — scrollable list of form fields (`<FormField>`). Section id:`FormCardCompositeSectionType.BODY`.
+ * - **Body** — scrollable list of partials fields (`<FormField>`). Section id:`FormCardCompositeSectionType.BODY`.
  *
  * This makes it ideal for:
  * - modal forms,
@@ -94,25 +89,14 @@ const FormCardComposite = composite((props: FormCardCompositeProps) => {
     );
 });
 
-const FormHeader = observer(({section}: {section: BaseSectionModel}) => {
-    return !section.disable ? (
-        <CardHeader>
-            <CardTitle>{section.title}</CardTitle>
-            <CardDescription className="text-sm text-gray-400 font-light whitespace-normal break-words mr-10">
-                {section.description}
-            </CardDescription>
-        </CardHeader>
-    ) : null;
-});
-
-const FormBody = observer(({section, store, handleBlur, handleChange, metadata}: SectionProps) => {
+const FormBody = observer(({section, store, handleBlur, handleChange, metadata}: BaseCompositeSectionProps) => {
     return !section.disable ? (
         <ScrollArea className="flex-1 overflow-auto w-full">
             <CardContent className="space-y-2 w-full">
-                {section.fieldsIds.map(fieldId => (
-                    <MetadataContext.Provider value={metadata} key={fieldId}>
+                {section.fields.map(field => (
+                    <MetadataContext.Provider value={metadata} key={field.id}>
                         <FormField
-                            fieldId={fieldId}
+                            fieldId={field.id}
                             store={store}
                             handleBlur={handleBlur}
                             handleChange={handleChange}

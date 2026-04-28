@@ -1,27 +1,28 @@
 import type {Meta, StoryObj} from "@storybook/react";
-import FormCardComposite, {FormCardCompositeSectionType} from "@core/components/layout/composites/FormCardComposite";
-import {buildComposites, createCompositesPlaceholders} from "@core/lib/base-composite-model-utils";
-import {BaseSectionModel} from "@core/models/partials/base-section-model";
 import {mockCompositeStore} from "@core/components/stories/composites/mock-composite-store";
-import {formMock} from "@core/components/stories/composites/form-mocks";
 import {mockStore} from "@core/components/stories/mock-store";
+import SectionCardComposite, {SectionCardCompositeSectionType} from "../SectionCardComposite";
+import {buildComposites, createCompositesPlaceholders } from "@core/lib/base-composite-model-utils";
 import {lang} from "@core/text/utils/lang";
+import { BaseSectionModel } from "@core/models/partials/base-section-model";
+import {formMock} from "@core/components/stories/composites/form-mocks";
+import {sectionMock} from "@core/components/stories/composites/section-mock";
 
-const meta: Meta<typeof FormCardComposite> = {
-    title: "composites/FormCardComposite",
-    component: FormCardComposite,
+const meta: Meta<typeof SectionCardComposite> = {
+    title: "composites/SectionCardComposite",
+    component: SectionCardComposite,
     parameters: {
         layout: "centered",
     },
 };
 export default meta;
 
-type Story = StoryObj<typeof FormCardComposite>;
+type Story = StoryObj<typeof SectionCardComposite>;
 
 // #region Default
 export const Default: Story = {
     args: {
-        compositeId: "formCard",
+        compositeId: "sectionCard",
         compositeStore: mockCompositeStore,
         store: mockStore
     },
@@ -31,21 +32,23 @@ export const Default: Story = {
 // #endregion Mock
 const text = lang()
 
-const composites = createCompositesPlaceholders({ formCard: "formCard" });
+const composites = createCompositesPlaceholders({ formCard: "sectionCard" });
 
 composites.formCard.render = true;
 composites.formCard.renderFn = () => true;
 composites.formCard.sections = [
     {
-        type: FormCardCompositeSectionType.HEADER,
+        type: SectionCardCompositeSectionType.HEADER,
         title: text.mock.form.cameraMetadata.sectionTitle,
         description: text.mock.form.cameraMetadata.sectionDescription,
-        disable: false,
+        disable: true,
 
     } as BaseSectionModel,
     {
-        type: FormCardCompositeSectionType.BODY,
-        fields: formMock,
+        type: SectionCardCompositeSectionType.SECTION,
+        fields: sectionMock,
+        title: text.mock.form.cameraMetadata.sectionTitle,
+        description: text.mock.form.cameraMetadata.sectionDescription,
         disable: false,
 
     } as BaseSectionModel,

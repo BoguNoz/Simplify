@@ -15,13 +15,13 @@ export interface BaseCompositeInterface {
     compositeStore: BaseCompositeStore;
 
     /**
-     * The data store backing the fields inside the form.
+     * The data store backing the fields inside the partials.
      * Field values, validation states and actions are retrieved from here.
      */
     store: BaseStore;
 
     /**
-     * Optional blur handler for form fields.
+     * Optional blur handler for partials fields.
      * Useful for adding extra behaviour to the field.
      */
     handleBlur?: (fieldId: string) => void;

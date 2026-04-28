@@ -63,21 +63,20 @@ const composites = createCompositesPlaceholders({ toolbar: "toolbar" });
 
 composites.toolbar.render = true;
 composites.toolbar.renderFn = () => true;
-composites.toolbar.fields = fields;
 composites.toolbar.sections = [
     {
         type: "back",
-        fieldsIds: [buttonsIds.arrowLeft],
+        fields: [fields[0]],
 
     } as BaseSectionModel,
     {
         type: "folders",
-        fieldsIds: [buttonsIds.archive, buttonsIds.registry],
+        fields: [fields[1], fields[2]],
 
     } as BaseSectionModel,
     {
         type: "forward",
-        fieldsIds: [buttonsIds.arrowRight],
+        fields: [fields[3]],
 
     } as BaseSectionModel,
 ]
