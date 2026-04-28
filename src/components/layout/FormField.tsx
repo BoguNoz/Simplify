@@ -100,7 +100,7 @@ const FormField = observer((props: BaseFieldInterface) => {
     // #endregion Variables
 
     return (
-        <div style={{ width: `${metadata.width * 0.90}px` }} className="p-2">
+        <div style={{ width: `${metadata.width * 0.93}px` }} className="p-2">
             <Alert
                 variant={variant()}
                 status={status()}

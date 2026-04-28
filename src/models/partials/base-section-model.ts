@@ -8,9 +8,9 @@
  */
 export interface BaseSectionModel {
     /**
-     * The unique identifier of the section.
+     * The section type.
      */
-    id: string;
+    type: string;
 
     /**
      * A list of field IDs that belong to this section.
@@ -26,4 +26,9 @@ export interface BaseSectionModel {
      * A short description of the section, explaining its purpose or contents.
      */
     description?: string;
+
+    /**
+     *  Disable section
+     */
+    disable?: boolean;
 }

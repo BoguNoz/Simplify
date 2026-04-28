@@ -50,7 +50,7 @@ const ButtonGroupComposite = composite((props: ButtonGroupCompositeProps) => {
             {
                 composite.sections.map((section) => (
                     <SectionGroup
-                        key={section.id}
+                        key={section.type}
                         fieldIds={section.fieldsIds}
                         store={store}
                         handleBlur={handleBlur}

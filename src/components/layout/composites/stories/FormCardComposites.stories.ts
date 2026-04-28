@@ -1,5 +1,5 @@
 import type {Meta, StoryObj} from "@storybook/react";
-import FormCardComposite from "@core/components/layout/composites/FormCardComposite";
+import FormCardComposite, {FormCardCompositeSectionType} from "@core/components/layout/composites/FormCardComposite";
 import {buildComposites, createCompositesPlaceholders} from "@core/lib/base-composite-model-utils";
 import {BaseSectionModel} from "@core/models/partials/base-section-model";
 import {mockCompositeStore} from "@core/components/stories/composites/mock-composite-store";
@@ -38,10 +38,16 @@ composites.formCard.renderFn = () => true;
 composites.formCard.fields = formMock;
 composites.formCard.sections = [
     {
-        id: "cameraMetadataRegisteredFields",
-        fieldsIds: Object.values(cameraMetadataRegisteredFields),
+        type: FormCardCompositeSectionType.HEADER,
         title: text.mock.form.cameraMetadata.sectionTitle,
         description: text.mock.form.cameraMetadata.sectionDescription,
+        disable: false,
+
+    } as BaseSectionModel,
+    {
+        type: FormCardCompositeSectionType.BODY,
+        fieldsIds: Object.values(cameraMetadataRegisteredFields),
+        disable: false,
 
     } as BaseSectionModel,
 ];

@@ -66,17 +66,17 @@ composites.toolbar.renderFn = () => true;
 composites.toolbar.fields = fields;
 composites.toolbar.sections = [
     {
-        id: "back",
+        type: "back",
         fieldsIds: [buttonsIds.arrowLeft],
 
     } as BaseSectionModel,
     {
-        id: "folders",
+        type: "folders",
         fieldsIds: [buttonsIds.archive, buttonsIds.registry],
 
     } as BaseSectionModel,
     {
-        id: "forward",
+        type: "forward",
         fieldsIds: [buttonsIds.arrowRight],
 
     } as BaseSectionModel,

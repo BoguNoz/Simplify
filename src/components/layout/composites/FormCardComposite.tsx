@@ -9,7 +9,19 @@ import {BaseCompositeInterface} from "@core/models/base-composite-interface";
 import MetadataModel from "@core/models/metadata-model";
 import {MetadataContext, useMetadata } from "@core/engine/components/metadata-context";
 
-interface FormCardCompositeProps extends BaseCompositeInterface { }
+interface FormCardCompositeProps extends BaseCompositeInterface {}
+
+interface SectionProps {
+    section: BaseSectionModel,
+    store: BaseStore,
+    handleBlur?: (fieldId: string) => void,
+    handleChange?: (fieldId: string, value: any) => void, metadata: MetadataModel
+}
+
+export enum FormCardCompositeSectionType {
+    HEADER= "HEADER",
+    BODY = "BODY",
+}
 
 /**
  * A card-based, single section ,composite renderer for form layouts.
@@ -19,8 +31,8 @@ interface FormCardCompositeProps extends BaseCompositeInterface { }
  * It uses the composite engine to read sections/fields and automatically
  * build a card with:
  *
- * - **Header** — displays title & description from the first section.
- * - **Body** — scrollable list of form fields (`<FormField>`).
+ * - **Header** — displays title & description from the first section. Section id:`FormCardCompositeSectionType.HEADER`.
+ * - **Body** — scrollable list of form fields (`<FormField>`). Section id:`FormCardCompositeSectionType.BODY`.
  *
  * This makes it ideal for:
  * - modal forms,
@@ -29,6 +41,13 @@ interface FormCardCompositeProps extends BaseCompositeInterface { }
  * - dashboard side panels.
  *
  * @example
+ * ```tsx
+ * <FormCardComposite
+ *   compositeId="userForm"
+ *   compositeStore={compositeStore}
+ *   store={store}
+ * />
+ * ```
  * ```tsx
  * <FormCardComposite
  *   compositeId="userForm"
@@ -51,13 +70,21 @@ const FormCardComposite = composite((props: FormCardCompositeProps) => {
         return <></>;
     }
 
+    const sectionMap = Object.fromEntries(
+        composite.sections.map(section => [section.type, section])
+    );
+
+    const header = sectionMap[FormCardCompositeSectionType.HEADER] ?? {} as BaseSectionModel;
+    const body = sectionMap[FormCardCompositeSectionType.BODY] ?? {} as BaseSectionModel;
+
+
     return (
         <Card style={{ width: `${metadata.width}px`, height: `${metadata.height}px` }} className="flex flex-col">
             <FormHeader
-                section={composite.sections[0]}
+                section={header}
             />
             <FormBody
-                section={composite.sections[0]}
+                section={body}
                 store={store}
                 handleBlur={handleBlur}
                 handleChange={handleChange}
@@ -68,19 +95,18 @@ const FormCardComposite = composite((props: FormCardCompositeProps) => {
 });
 
 const FormHeader = observer(({section}: {section: BaseSectionModel}) => {
-    return (
+    return !section.disable ? (
         <CardHeader>
             <CardTitle>{section.title}</CardTitle>
             <CardDescription className="text-sm text-gray-400 font-light whitespace-normal break-words mr-10">
                 {section.description}
             </CardDescription>
         </CardHeader>
-    );
+    ) : null;
 });
 
-const FormBody = observer(({section, store, handleBlur, handleChange, metadata}:
-   {section: BaseSectionModel, store: BaseStore, handleBlur?: (fieldId: string) => void,  handleChange?: (fieldId: string, value: any) => void, metadata: MetadataModel}) => {
-    return (
+const FormBody = observer(({section, store, handleBlur, handleChange, metadata}: SectionProps) => {
+    return !section.disable ? (
         <ScrollArea className="flex-1 overflow-auto w-full">
             <CardContent className="space-y-2 w-full">
                 {section.fieldsIds.map(fieldId => (
@@ -95,7 +121,7 @@ const FormBody = observer(({section, store, handleBlur, handleChange, metadata}:
                 ))}
             </CardContent>
         </ScrollArea>
-    );
+    ) : null;
 });
 
 export default FormCardComposite;
