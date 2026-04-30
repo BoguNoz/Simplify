@@ -1,6 +1,6 @@
 import {BaseCompositeInterface} from "@core/models";
 import composite from "@core/engine/components/composite";
-import {Button, Card, CardContent, Collapsible, CollapsibleContent, CollapsibleTrigger, ScrollArea, Separator} from "@core/components/ui";
+import {Button, Collapsible, CollapsibleContent, CollapsibleTrigger, ScrollArea, Separator} from "@core/components/ui";
 import {MetadataContext, useMetadata} from "@core/engine";
 import MetadataModel from "@core/models/metadata-model";
 import {BaseSectionModel} from "@core/models/partials/base-section-model";
@@ -9,7 +9,6 @@ import {BaseCompositeSectionProps} from "@core/models/interfaces/base-composite-
 import FormField from "@core/components/layout/FormField";
 import {ChevronsUpDown} from "lucide-react";
 import React from "react";
-import {FormCardCompositeSectionType} from "@core/components/layout";
 
 interface SectionCardCompositeProps extends BaseCompositeInterface { }
 
@@ -17,6 +16,49 @@ export enum SectionCompositeSectionType {
     SECTION = "SECTION",
 }
 
+/**
+ * A collapsible section-based composite renderer for partial forms.
+ *
+ * @remarks
+ * This composite renders a single-section layout inside a collapsible UI container.
+ * It is designed for compact form groups where fields should be optionally hidden
+ * to save vertical space while keeping structure readable.
+ *
+ * It uses the composite engine to resolve sections and renders:
+ *
+ * - **Section** — a collapsible container with title, description, and fields.
+ *   Section id: `SectionCompositeSectionType.SECTION`.
+ *
+ * Each field is rendered using `<FormField>` and wrapped in a `MetadataContext`
+ * to dynamically scale layout based on container metadata.
+ *
+ * ### Key Features:
+ * - Collapsible UI (expand/collapse form group)
+ * - Scrollable field area (height constrained via metadata)
+ * - Automatic metadata scaling (width/height adaptation)
+ * - Section-level title and description rendering
+ *
+ * ### Use Cases:
+ * - grouped form sections (e.g. "Billing info", "Address", "Settings")
+ * - compact dashboards with expandable panels
+ * - configuration editors
+ * - side panels in admin tools
+ *
+ * @example
+ * ```tsx
+ * <SectionComposite
+ *   compositeId="userSettings"
+ *   compositeStore={compositeStore}
+ *   store={store}
+ * />
+ * ```
+ *
+ * @see BaseCompositeInterface
+ * @see BaseCompositeSectionProps
+ * @see BaseSectionModel
+ * @see FormField
+ * @see MetadataContext
+ */
 const SectionComposite = composite((props: SectionCardCompositeProps) => {
     const {compositeId, compositeStore, store, handleBlur, handleChange} = props;
 
@@ -34,7 +76,7 @@ const SectionComposite = composite((props: SectionCardCompositeProps) => {
     const section= sectionMap[SectionCompositeSectionType.SECTION] ?? {} as BaseSectionModel;
 
     return (
-        <div  style={{ width: `${metadata.width}px`, height: `${metadata.height}px` }} className="flex flex-col">
+        <div  style={{ width: `${metadata.width}px` }} className="flex flex-col">
             <Section
                 section={section}
                 store={store}
@@ -52,7 +94,7 @@ const Section = observer(({ section, store, handleBlur, handleChange, metadata }
 
     const sectionMetadata = {
         ...metadata,
-        width: metadata.width * 0.48,
+        width: metadata.width * 0.9,
     };
 
     return (
@@ -87,22 +129,24 @@ const Section = observer(({ section, store, handleBlur, handleChange, metadata }
 
             <Separator />
 
-            <CollapsibleContent className="px-5 py-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {section.fields.map(field => (
-                        <MetadataContext.Provider
-                            value={sectionMetadata}
-                            key={field.id}
-                        >
-                            <FormField
-                                fieldId={field.id}
-                                store={store}
-                                handleBlur={handleBlur}
-                                handleChange={handleChange}
-                            />
-                        </MetadataContext.Provider>
-                    ))}
-                </div>
+            <CollapsibleContent className="px-5 py-4 flex-1 overflow-hidden">
+                <ScrollArea style={{ height: `${metadata.height * 0.75}px` }} className="h-full w-full">
+                    <div className="flex flex-col items-center">
+                        {section.fields.map(field => (
+                            <MetadataContext.Provider
+                                value={sectionMetadata}
+                                key={field.id}
+                            >
+                                <FormField
+                                    fieldId={field.id}
+                                    store={store}
+                                    handleBlur={handleBlur}
+                                    handleChange={handleChange}
+                                />
+                            </MetadataContext.Provider>
+                        ))}
+                    </div>
+                </ScrollArea>
             </CollapsibleContent>
         </Collapsible>
     );

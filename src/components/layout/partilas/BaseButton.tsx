@@ -1,7 +1,6 @@
 import {observer} from "mobx-react-lite";
 import {Button} from "@core/components/ui/button";
-import React from "react";
-import BaseFieldModel from "@core/models/base-field-model";
+import {BaseFieldModel} from "@core/models";
 
 interface BaseRawButtonProps {
     field: BaseFieldModel;
