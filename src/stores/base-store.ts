@@ -250,7 +250,7 @@ export abstract class BaseStore {
      *
      * @returns {Promise<any>} A promise resolving to the field's data source value.
      */
-    public readonly getDataSource = async (id: string, ...args: any[]): Promise<any> => await this.fields[id].dataSource(...args);
+    public readonly getDataSource = async (id: string, ...args: any[]): Promise<any> => await this.fields[id]?.dataSource(...args);
 
     /**
      * Adds new validators to a field, avoiding duplicates.

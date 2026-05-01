@@ -1,10 +1,10 @@
-import BaseFieldModel from "@core/models/base-field-model";
 import {observer} from "mobx-react-lite";
 import {Input} from "@core/components/ui/input";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@core/components/ui/tooltip";
 import {isNullEmptyFalseOrUndefined} from "@core/lib/utils";
 import {Info} from "lucide-react";
 import Footer from "@core/components/layout/partilas/Footer";
+import {BaseFieldModel} from "@core/models";
 
 interface BaseInputProps {
     field: BaseFieldModel;

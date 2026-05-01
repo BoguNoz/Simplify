@@ -5,7 +5,6 @@ import SectionComposite, {SectionCompositeSectionType} from "../SectionComposite
 import {buildComposites, createCompositesPlaceholders } from "@core/lib/base-composite-model-utils";
 import {lang} from "@core/text/utils/lang";
 import { BaseSectionModel } from "@core/models/partials/base-section-model";
-import {formMock} from "@core/components/stories/composites/form-mocks";
 import {sectionMock} from "@core/components/stories/composites/section-mock";
 
 const meta: Meta<typeof SectionComposite> = {

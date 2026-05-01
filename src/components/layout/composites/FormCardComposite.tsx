@@ -4,7 +4,7 @@ import {Card, CardContent} from "@core/components/ui/card";
 import {BaseCompositeInterface} from "@core/models/interfaces/base-composite-interface";
 import MetadataModel from "@core/models/metadata-model";
 import {MetadataContext, useMetadata} from "@core/engine/components/metadata-context";
-import FormHeader from "@core/components/layout/composites/partials/FormHeader";
+import CompositeHeader from "@core/components/layout/composites/partials/CompositeHeader";
 import {observer} from "mobx-react-lite";
 import {BaseCompositeSectionProps} from "@core/models/interfaces/base-composite-section-props";
 import {ScrollArea, Separator} from "@core/components/ui";
@@ -75,7 +75,7 @@ const FormCardComposite = composite((props: FormCardCompositeProps) => {
 
     return (
         <Card style={{ width: `${metadata.width}px`, height: `${metadata.height}px` }} className="flex flex-col">
-            <FormHeader
+            <CompositeHeader
                 section={header}
             />
             <FormBody
