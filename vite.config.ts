@@ -32,7 +32,6 @@ export default defineConfig({
   resolve: {
     conditions: [
       "import",
-      "module",
       "browser",
       "development",
       "default"
