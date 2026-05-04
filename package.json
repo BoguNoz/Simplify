@@ -22,50 +22,63 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
       "module": "./dist/index.js",
+      "import": "./dist/index.js",
       "require": "./dist/index.cjs",
       "default": "./dist/index.js"
     },
     "./engine": {
       "types": "./dist/engine.d.ts",
-      "import": "./dist/engine.js",
       "module": "./dist/engine.js",
+      "import": "./dist/engine.js",
       "require": "./dist/engine.cjs",
       "default": "./dist/engine.js"
     },
     "./stores": {
       "types": "./dist/stores.d.ts",
+      "module": "./dist/stores.js",
       "import": "./dist/stores.js",
       "require": "./dist/stores.cjs",
       "default": "./dist/stores.js"
     },
     "./components": {
       "types": "./dist/components.d.ts",
+      "module": "./dist/components.js",
       "import": "./dist/components.js",
       "require": "./dist/components.cjs",
       "default": "./dist/components.js"
     },
+    "./layout": {
+      "types": "./dist/layout.d.ts",
+      "module": "./dist/layout.js",
+      "import": "./dist/layout.js",
+      "require": "./dist/layout.cjs",
+      "default": "./dist/layout.js"
+    },
     "./events": {
       "types": "./dist/events.d.ts",
+      "module": "./dist/events.js",
       "import": "./dist/events.js",
       "require": "./dist/events.cjs",
       "default": "./dist/events.js"
     },
     "./lib": {
       "types": "./dist/lib.d.ts",
+      "module": "./dist/lib.js",
       "import": "./dist/lib.js",
       "require": "./dist/lib.cjs",
       "default": "./dist/lib.js"
     },
     "./models": {
       "types": "./dist/models.d.ts",
+      "module": "./dist/models.js",
       "import": "./dist/models.js",
       "require": "./dist/models.cjs",
       "default": "./dist/models.js"
     },
     "./services": {
       "types": "./dist/services.d.ts",
+      "module": "./dist/services.js",
       "import": "./dist/services.js",
       "require": "./dist/services.cjs",
       "default": "./dist/services.js"
