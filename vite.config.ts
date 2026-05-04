@@ -30,8 +30,15 @@ export default defineConfig({
     },
   },
   resolve: {
-    alias: {
-      '@core': path.resolve(__dirname, './src'),
-    },
+    conditions: [
+      "import",
+      "module",
+      "browser",
+      "development",
+      "default"
+    ],
+  },
+  optimizeDeps: {
+    include: ['@bogunoz/simplify']
   },
 })

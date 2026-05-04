@@ -23,47 +23,58 @@
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "module": "./dist/index.js",
+      "require": "./dist/index.cjs",
+      "default": "./dist/index.js"
     },
     "./engine": {
       "types": "./dist/engine.d.ts",
       "import": "./dist/engine.js",
-      "require": "./dist/engine.cjs"
+      "module": "./dist/engine.js",
+      "require": "./dist/engine.cjs",
+      "default": "./dist/engine.js"
     },
     "./stores": {
       "types": "./dist/stores.d.ts",
       "import": "./dist/stores.js",
-      "require": "./dist/stores.cjs"
+      "require": "./dist/stores.cjs",
+      "default": "./dist/stores.js"
     },
     "./layout": {
       "types": "./dist/layout.d.ts",
       "import": "./dist/layout.js",
-      "require": "./dist/layout.cjs"
+      "require": "./dist/layout.cjs",
+      "default": "./dist/layout.js"
     },
     "./components": {
       "types": "./dist/components.d.ts",
       "import": "./dist/components.js",
-      "require": "./dist/components.cjs"
+      "require": "./dist/components.cjs",
+      "default": "./dist/components.js"
     },
     "./events": {
       "types": "./dist/events.d.ts",
       "import": "./dist/events.js",
-      "require": "./dist/events.cjs"
+      "require": "./dist/events.cjs",
+      "default": "./dist/events.js"
     },
     "./lib": {
       "types": "./dist/lib.d.ts",
       "import": "./dist/lib.js",
-      "require": "./dist/lib.cjs"
+      "require": "./dist/lib.cjs",
+      "default": "./dist/lib.js"
     },
     "./models": {
       "types": "./dist/models.d.ts",
       "import": "./dist/models.js",
-      "require": "./dist/models.cjs"
+      "require": "./dist/models.cjs",
+      "default": "./dist/models.js"
     },
     "./services": {
       "types": "./dist/services.d.ts",
       "import": "./dist/services.js",
-      "require": "./dist/services.cjs"
+      "require": "./dist/services.cjs",
+      "default": "./dist/services.js"
     }
   },
   "files": [
