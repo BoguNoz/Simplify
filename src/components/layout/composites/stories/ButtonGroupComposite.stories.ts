@@ -4,7 +4,7 @@ import {mockStore} from "@core/components/stories/mock-store";
 import {buildComposites, createCompositesPlaceholders} from "@core/lib/base-composite-model-utils";
 import {buildFields, createFieldPlaceholders} from "@core/lib/base-model-utils";
 import {lang} from "@core/lib/lang";
-import BaseFieldTypesEnum from "@core/models/enums/base-field-type-enum";
+import { BaseFieldTypesEnum } from "@core/models/enums/base-field-type-enum";
 import {ArrowLeft, ArrowRight} from "lucide-react";
 import {BaseSectionModel} from "@core/models/partials/base-section-model";
 import {mockCompositeStore} from "@core/components/stories/composites/mock-composite-store";
