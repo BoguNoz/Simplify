@@ -1,4 +1,4 @@
-enum BaseFieldTypesEnum {
+export enum BaseFieldTypesEnum {
     
     /**
      * @see createFieldPlaceholders
@@ -54,5 +54,3 @@ enum BaseFieldTypesEnum {
      */
     Toggle = "toggle",
 }
-
-export default BaseFieldTypesEnum;
