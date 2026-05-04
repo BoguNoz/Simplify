@@ -1,4 +1,4 @@
-import BaseFieldModel from "@core/models/base-field-model";
+import {BaseFieldModel} from "@core/models";
 import {useEffect, useState} from "react";
 import {observer} from "mobx-react-lite";
 import {Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue} from "@core/components/ui/select";

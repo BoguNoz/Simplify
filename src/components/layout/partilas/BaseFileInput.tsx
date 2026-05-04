@@ -1,4 +1,4 @@
-import BaseFieldModel from "@core/models/base-field-model";
+import {BaseFieldModel} from "@core/models";
 import {observer} from "mobx-react-lite";
 import {Input} from "@core/components/ui/input";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@core/components/ui/tooltip";

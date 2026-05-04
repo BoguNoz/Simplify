@@ -1,10 +1,10 @@
-import BaseFieldModel from "@core/models/base-field-model";
 import {observer} from "mobx-react-lite";
 import {useEffect, useState} from "react";
 import {Button} from "@core/components/ui/button";
 import {Check, X} from "lucide-react";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@core/components/ui/tooltip";
 import {isNullEmptyFalseOrUndefined} from "@core/lib/utils";
+import {BaseFieldModel} from "@core/models";
 
 
 interface BaseButtonWithConfirmationProps {

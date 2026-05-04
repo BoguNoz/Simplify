@@ -2,7 +2,6 @@ import { isNullOrUndefined } from "@core/lib/utils";
 import BaseCompositeModel from "@core/models/base-composite-model";
 import {BaseStore} from "@core/stores/base-store";
 import {observable, runInAction} from "mobx";
-import {partial} from "lodash";
 
 /**
  * Abstract base class that manages a collection of composites and their corresponding field registres.
@@ -162,11 +161,6 @@ export abstract class BaseCompositeStore {
         
         const composite = this.composites[id];
         await composite.deconstructor(args);
-
-        const fieldStore = this.getStore(id);
-        for (const f of composite.fields) {
-            await fieldStore.invokeDeconstructor(f.id, free);
-        }
 
         if (free) {
             delete this.composites[id];

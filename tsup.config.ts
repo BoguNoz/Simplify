@@ -5,7 +5,6 @@ export default defineConfig({
         index: "src/index.ts",
         engine: "src/engine/index.ts",
         stores: "src/stores/index.ts",
-        layout: "src/layout/index.ts",
         components: "src/components/index.ts",
         events: "src/events/index.ts",
         lib: "src/lib/index.ts",

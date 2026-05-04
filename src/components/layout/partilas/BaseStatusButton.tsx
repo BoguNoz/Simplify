@@ -1,4 +1,4 @@
-import BaseFieldModel from "@core/models/base-field-model";
+import {BaseFieldModel} from "@core/models";
 import {observer} from "mobx-react-lite";
 import {Spinner} from "@core/components/ui/spiner";
 import {IconAlertTriangle, IconExclamationCircle} from "@tabler/icons-react";

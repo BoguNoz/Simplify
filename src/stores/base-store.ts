@@ -1,4 +1,4 @@
-import BaseFieldModel from "@core/models/base-field-model";
+import {BaseFieldModel} from "@core/models";
 import {BaseOperationFn} from "@core/events/operation";
 import {reaction, runInAction} from "mobx";
 import {BaseValidatorFn, isEmpty} from "@core/events/validator";

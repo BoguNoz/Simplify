@@ -1,4 +1,4 @@
-import BaseFieldModel from "../models/base-field-model";
+import {BaseFieldModel} from "@core/models";
 import BaseFieldTypesEnum from "@core/models/enums/base-field-type-enum";
 
 

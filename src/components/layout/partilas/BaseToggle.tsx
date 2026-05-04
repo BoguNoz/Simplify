@@ -1,4 +1,4 @@
-import BaseFieldModel from "@core/models/base-field-model";
+import {BaseFieldModel} from "@core/models";
 import {observer} from "mobx-react-lite";
 import {Toggle} from "@core/components/ui/toggle";
 
