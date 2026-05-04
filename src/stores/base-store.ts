@@ -14,9 +14,9 @@ import BaseFieldTypesEnum from "@core/models/enums/base-field-type-enum";
  * @remarks
  * - Each field within the store acts as a reactive signal source.
  * When a field's value changes, all related operations and dependency functions are automatically triggered.
- * This enables dynamic form behavior, field validation, and dependency propagation with minimal boilerplate.
+ * This enables dynamic partials behavior, field validation, and dependency propagation with minimal boilerplate.
  *
- * - The class serves as the foundation for custom store implementations handling form state,
+ * - The class serves as the foundation for custom store implementations handling partials state,
  * validation, data sources, and inter-field logic.
  *
  * @example
@@ -123,7 +123,7 @@ export abstract class BaseStore {
      * Updates the `excluded` state of a field.
      *
      * @remarks
-     * This method toggles whether a field should be considered in form
+     * This method toggles whether a field should be considered in partials
      * processing, rendering, validation, or dependency evaluation.
      *
      * - If the field does not exist in the store, the update is skipped.
@@ -250,7 +250,7 @@ export abstract class BaseStore {
      *
      * @returns {Promise<any>} A promise resolving to the field's data source value.
      */
-    public readonly getDataSource = async (id: string, ...args: any[]): Promise<any> => await this.fields[id].dataSource(...args);
+    public readonly getDataSource = async (id: string, ...args: any[]): Promise<any> => await this.fields[id]?.dataSource(...args);
 
     /**
      * Adds new validators to a field, avoiding duplicates.

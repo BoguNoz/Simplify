@@ -6,16 +6,16 @@ import {Alert, AlertDescription, AlertTitle} from "@core/components/ui/alert";
 import BaseField from "@core/components/layout/BaseField";
 import {AlertCircle, AlertTriangle, CheckCircle, CircleOff, Link} from "lucide-react";
 import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@core/components/ui/collapsible";
-import BaseFieldModel from "@core/models/base-field-model";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircleXmark} from "@fortawesome/free-regular-svg-icons";
 import {faTriangleExclamation} from "@fortawesome/free-solid-svg-icons";
-import {BaseFieldInterface} from "@core/models/base-field-interface";
+import {BaseFieldInterface} from "@core/models/interfaces/base-field-interface";
 import {useMetadata} from "@core/engine/components/metadata-context";
 import MetadataModel from "@core/models/metadata-model";
+import {BaseFieldModel} from "@core/models";
 
 /**
- * A form wrapper for the polymorphic field component {@link BaseField},
+ * A partials wrapper for the polymorphic field component {@link BaseField},
  * which overlays validation messages and state for the field.
  * 
  * @remarks
@@ -100,7 +100,7 @@ const FormField = observer((props: BaseFieldInterface) => {
     // #endregion Variables
 
     return (
-        <div style={{ width: `${metadata.width * 0.90}px` }} className="p-2">
+        <div style={{ width: `${metadata.width * 0.93}px` }} className="p-2">
             <Alert
                 variant={variant()}
                 status={status()}

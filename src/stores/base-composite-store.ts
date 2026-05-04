@@ -75,7 +75,11 @@ export abstract class BaseCompositeStore {
     public initializeFields = async (id: string): Promise<void> => {
         const composite = this.composites[id];
         const store = this.stores[id];
-        await store.initializeFields(composite.fields);
+
+        const fields = composite.sections
+            .flatMap(section => section.fields)
+            .filter(field => !isNullOrUndefined(field));
+        await store.initializeFields(fields);
     }
 
     /**

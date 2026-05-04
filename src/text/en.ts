@@ -95,6 +95,11 @@ export default {
                 sensorOffsetLabel: "Sensor Offset",
                 sensorOffsetDescription: "Baseline radiometric power corresponding to zero input from the sensor. Used to shift the entire radiometric scale upward, typically to account for dark signal or detector bias.",
             },
+        },
+
+        charts: {
+            chartCardTitle: "Chart Composite",
+            chartCardDescription: "Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.",
         }
     },
 }

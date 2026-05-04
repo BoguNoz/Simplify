@@ -6,7 +6,8 @@ import {observer} from "mobx-react-lite";
 import BaseField from "@core/components/layout/BaseField";
 import BaseFieldTypesEnum from "@core/models/enums/base-field-type-enum";
 import {Button} from "@core/components/ui/button";
-import {BaseCompositeInterface} from "@core/models/base-composite-interface";
+import {BaseCompositeInterface} from "@core/models/interfaces/base-composite-interface";
+import {BaseFieldModel} from "@core/models";
 
 interface ButtonGroupCompositeProps extends BaseCompositeInterface { }
 
@@ -50,8 +51,8 @@ const ButtonGroupComposite = composite((props: ButtonGroupCompositeProps) => {
             {
                 composite.sections.map((section) => (
                     <SectionGroup
-                        key={section.id}
-                        fieldIds={section.fieldsIds}
+                        key={section.type}
+                        fields={section.fields}
                         store={store}
                         handleBlur={handleBlur}
                         handleChange={handleChange}
@@ -62,16 +63,16 @@ const ButtonGroupComposite = composite((props: ButtonGroupCompositeProps) => {
     );
 });
 
-const SectionGroup = observer(({ fieldIds, store, handleBlur, handleChange }:
-   {fieldIds: string[], store: BaseStore, handleBlur?: (fieldId: string) => void, handleChange?: (fieldId: string, value: any) => void }) => {
+const SectionGroup = observer(({ fields, store, handleBlur, handleChange }:
+   {fields: BaseFieldModel[], store: BaseStore, handleBlur?: (fieldId: string) => void, handleChange?: (fieldId: string, value: any) => void }) => {
 
     return (
         <ButtonGroup>
             {
-                fieldIds.map((fieldId) => (
+                fields.map((field) => (
                     <Item
-                        key={fieldId}
-                        fieldId={fieldId}
+                        key={field.id}
+                        fieldId={field.id}
                         store={store}
                         handleBlur={handleBlur}
                         handleChange={handleChange}

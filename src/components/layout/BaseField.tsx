@@ -10,7 +10,7 @@ import BaseSwitch from "@core/components/layout/partilas/BaseSwitch";
 import BaseInput from "@core/components/layout/partilas/BaseInput";
 import BaseStatusButton from "@core/components/layout/partilas/BaseStatusButton";
 import BaseButton from "@core/components/layout/partilas/BaseButton";
-import {BaseFieldInterface} from "@core/models/base-field-interface";
+import {BaseFieldInterface} from "@core/models/interfaces/base-field-interface";
 
 /**
  * A polymorphic field component that dynamically renders the appropriate input type

@@ -7,7 +7,7 @@ import {mockStore} from "@core/components/stories/mock-store";
 
 
 const meta: Meta<typeof FormField> = {
-    title: "form/FormField",
+    title: "partials/FormField",
     component: FormField,
     parameters: {
         layout: "centered",

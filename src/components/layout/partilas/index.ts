@@ -1,3 +1,5 @@
+export * from "./charts/index"
+
 export * from "./BaseButton";
 export * from "./BaseButtonWithConfirmation";
 export * from "./BaseCheckbox";
