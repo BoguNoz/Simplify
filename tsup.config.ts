@@ -5,15 +5,31 @@ export default defineConfig({
         index: "src/index.ts",
         engine: "src/engine/index.ts",
         stores: "src/stores/index.ts",
-        ui: "src/components/ui/index.ts",
-        layout: "src/components/layout/index.ts",
+        layout: "src/layout/index.ts",
+        components: "src/components/index.ts",
+        events: "src/events/index.ts",
+        lib: "src/lib/index.ts",
+        models: "src/models/index.ts",
+        services: "src/services/index.ts",
     },
+
     format: ["esm", "cjs"],
-    dts: false,
+    dts: true,
     outDir: "dist",
     clean: true,
+    sourcemap: true,
     splitting: false,
+
     outExtension: ({ format }) => ({
         js: format === "esm" ? ".js" : ".cjs",
     }),
+
+    external: [
+        "react",
+        "react-dom",
+        "mobx",
+        "mobx-react-lite",
+    ],
+
+    minify: false,
 });
