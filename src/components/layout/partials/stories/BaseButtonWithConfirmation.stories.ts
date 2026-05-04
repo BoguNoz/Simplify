@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import BaseButtonWithConfirmation from "@core/components/layout/partilas/BaseButtonWithConfirmation";
+import BaseButtonWithConfirmation from "@core/components/layout/partials/BaseButtonWithConfirmation";
 import {
     mockBaseRegisteredFields,
     mockFields,

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import {mockBaseRegisteredFields, mockFields} from "@core/components/stories/base-field-mocks";
-import BaseSelector from "@core/components/layout/partilas/BaseSelector";
+import BaseSelector from "@core/components/layout/partials/BaseSelector";
 
 
 const meta: Meta<typeof BaseSelector> = {

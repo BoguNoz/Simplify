@@ -1,24 +1,23 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import {action} from "storybook/actions";
 import {
     mockBaseRegisteredFields,
     mockFields,
 } from "@core/components/stories/base-field-mocks";
-import BaseCheckbox from "@core/components/layout/partilas/BaseCheckbox";
+import BaseFileInput from "@core/components/layout/partials/BaseFileInput";
 
 
-const meta: Meta<typeof BaseCheckbox> = {
-    title: "partials/BaseCheckbox",
-    component: BaseCheckbox,
+const meta: Meta<typeof BaseFileInput> = {
+    title: "partials/BaseFileInput",
+    component: BaseFileInput,
     parameters: {
         layout: "centered",
     },
 };
 export default meta;
 
-type Story = StoryObj<typeof BaseCheckbox>;
+type Story = StoryObj<typeof BaseFileInput>;
 
-const field = mockFields.find(bf => bf.id === mockBaseRegisteredFields.baseCheckbox)!;
+const field = mockFields.find(bf => bf.id === mockBaseRegisteredFields.baseFileInput)!;
 
 // #region Default
 export const Default: Story = {

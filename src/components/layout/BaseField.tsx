@@ -1,15 +1,15 @@
 import BaseFieldTypesEnum from "@core/models/enums/base-field-type-enum";
 import {useCallback} from "react";
-import BaseSelector from "@core/components/layout/partilas/BaseSelector";
+import BaseSelector from "@core/components/layout/partials/BaseSelector";
 import {observer} from "mobx-react-lite";
-import BaseButtonWithConfirmation from "@core/components/layout/partilas/BaseButtonWithConfirmation";
-import BaseToggle from "@core/components/layout/partilas/BaseToggle";
-import BaseCheckbox from "@core/components/layout/partilas/BaseCheckbox";
-import BaseFileInput from "@core/components/layout/partilas/BaseFileInput";
-import BaseSwitch from "@core/components/layout/partilas/BaseSwitch";
-import BaseInput from "@core/components/layout/partilas/BaseInput";
-import BaseStatusButton from "@core/components/layout/partilas/BaseStatusButton";
-import BaseButton from "@core/components/layout/partilas/BaseButton";
+import BaseButtonWithConfirmation from "@core/components/layout/partials/BaseButtonWithConfirmation";
+import BaseToggle from "@core/components/layout/partials/BaseToggle";
+import BaseCheckbox from "@core/components/layout/partials/BaseCheckbox";
+import BaseFileInput from "@core/components/layout/partials/BaseFileInput";
+import BaseSwitch from "@core/components/layout/partials/BaseSwitch";
+import BaseInput from "@core/components/layout/partials/BaseInput";
+import BaseStatusButton from "@core/components/layout/partials/BaseStatusButton";
+import BaseButton from "@core/components/layout/partials/BaseButton";
 import {BaseFieldInterface} from "@core/models/interfaces/base-field-interface";
 
 /**

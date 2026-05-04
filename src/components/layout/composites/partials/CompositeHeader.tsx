@@ -1,6 +1,6 @@
 import {observer} from "mobx-react-lite";
 import {BaseSectionModel} from "@core/models/partials/base-section-model";
-import {CardDescription, CardHeader, CardTitle, Separator} from "@core/components/ui";
+import {CardHeader, CardTitle, Separator} from "@core/components/ui";
 
 const CompositeHeader = observer(({section}: {section: BaseSectionModel}) => {
     return !section.disable ? (

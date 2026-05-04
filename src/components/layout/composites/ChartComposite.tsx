@@ -6,7 +6,7 @@ import CompositeHeader from "@core/components/layout/composites/partials/Composi
 import {Card, CardContent} from "@core/components/ui";
 import {BaseSectionModel} from "@core/models/partials/base-section-model";
 import {useEffect, useState} from "react";
-import LineChart from "../partilas/charts/LineChart";
+import LineChart from "@core/components/layout/partials/charts/LineChart";
 import {observer} from "mobx-react-lite";
 
 interface ChartCompositeProps extends BaseCompositeInterface {

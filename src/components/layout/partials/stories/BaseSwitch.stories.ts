@@ -3,21 +3,21 @@ import {
     mockBaseRegisteredFields,
     mockFields,
 } from "@core/components/stories/base-field-mocks";
-import BaseInput from "@core/components/layout/partilas/BaseInput";
+import BaseSwitch from "@core/components/layout/partials/BaseSwitch";
 
 
-const meta: Meta<typeof BaseInput> = {
-    title: "partials/BaseInput",
-    component: BaseInput,
+const meta: Meta<typeof BaseSwitch> = {
+    title: "partials/BaseSwitch",
+    component: BaseSwitch,
     parameters: {
         layout: "centered",
     },
 };
 export default meta;
 
-type Story = StoryObj<typeof BaseInput>;
+type Story = StoryObj<typeof BaseSwitch>;
 
-const field = mockFields.find(bf => bf.id === mockBaseRegisteredFields.baseInput)!;
+const field = mockFields.find(bf => bf.id === mockBaseRegisteredFields.baseSwitch)!;
 
 // #region Default
 export const Default: Story = {
