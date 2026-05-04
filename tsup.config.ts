@@ -12,7 +12,7 @@ export default defineConfig({
         services: "src/services/index.ts",
     },
 
-    dts: false,
+    dts: true,
     format: ["esm", "cjs"],
     outDir: "dist",
     clean: true,

@@ -37,7 +37,4 @@ export default defineConfig({
       "default"
     ],
   },
-  optimizeDeps: {
-    include: ['@bogunoz/simplify']
-  },
 })

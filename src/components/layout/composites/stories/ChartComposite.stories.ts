@@ -40,18 +40,6 @@ const text = lang();
 // @ts-ignore
 const fields = createFieldPlaceholders(chartRegisteredFields, text.mock.charts);
 
-const generateSineData = (points = 200): [number, number][][] => {
-    const series: [number, number][] = [];
-
-    for (let i = 0; i < points; i++) {
-        const x = i * 0.1;
-        const y = Math.sin(x);
-        series.push([x, y]);
-    }
-
-    return [series];
-};
-
 const generateMultiSineData = (points = 200): [number, number][][] => {
     const sin: [number, number][] = [];
     const cos: [number, number][] = [];
