@@ -6,7 +6,7 @@
 
 # Interface: BaseFieldInterface
 
-Defined in: [src/models/base-field-interface.ts:4](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/models/base-field-interface.ts#L4)
+Defined in: [src/models/interfaces/base-field-interface.ts:4](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/models/interfaces/base-field-interface.ts#L4)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Defined in: [src/models/base-field-interface.ts:4](https://github.com/BoguNoz/Si
 
 > **fieldId**: `string`
 
-Defined in: [src/models/base-field-interface.ts:5](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/models/base-field-interface.ts#L5)
+Defined in: [src/models/interfaces/base-field-interface.ts:5](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/models/interfaces/base-field-interface.ts#L5)
 
 ***
 
@@ -22,7 +22,7 @@ Defined in: [src/models/base-field-interface.ts:5](https://github.com/BoguNoz/Si
 
 > `optional` **handleBlur?**: (`fieldId`) => `void`
 
-Defined in: [src/models/base-field-interface.ts:8](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/models/base-field-interface.ts#L8)
+Defined in: [src/models/interfaces/base-field-interface.ts:8](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/models/interfaces/base-field-interface.ts#L8)
 
 #### Parameters
 
@@ -40,7 +40,7 @@ Defined in: [src/models/base-field-interface.ts:8](https://github.com/BoguNoz/Si
 
 > `optional` **handleChange?**: (`fieldId`, `value`) => `void`
 
-Defined in: [src/models/base-field-interface.ts:9](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/models/base-field-interface.ts#L9)
+Defined in: [src/models/interfaces/base-field-interface.ts:9](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/models/interfaces/base-field-interface.ts#L9)
 
 #### Parameters
 
@@ -62,15 +62,15 @@ Defined in: [src/models/base-field-interface.ts:9](https://github.com/BoguNoz/Si
 
 > `optional` **hardDisable?**: `boolean`
 
-Defined in: [src/models/base-field-interface.ts:11](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/models/base-field-interface.ts#L11)
+Defined in: [src/models/interfaces/base-field-interface.ts:11](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/models/interfaces/base-field-interface.ts#L11)
 
 ***
 
 ### hardTyping?
 
-> `optional` **hardTyping?**: `BaseFieldTypesEnum`
+> `optional` **hardTyping?**: `any`
 
-Defined in: [src/models/base-field-interface.ts:12](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/models/base-field-interface.ts#L12)
+Defined in: [src/models/interfaces/base-field-interface.ts:12](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/models/interfaces/base-field-interface.ts#L12)
 
 ***
 
@@ -78,4 +78,4 @@ Defined in: [src/models/base-field-interface.ts:12](https://github.com/BoguNoz/S
 
 > **store**: [`BaseStore`](../classes/BaseStore.md)
 
-Defined in: [src/models/base-field-interface.ts:6](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/models/base-field-interface.ts#L6)
+Defined in: [src/models/interfaces/base-field-interface.ts:6](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/models/interfaces/base-field-interface.ts#L6)

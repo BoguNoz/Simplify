@@ -1,12 +1,10 @@
-import {BaseFieldModel} from "@core/models";
+import {BaseFieldModel, BaseFieldTypesEnum} from "@core/models";
 import {BaseOperationFn} from "@core/events/operation";
 import {reaction, runInAction} from "mobx";
 import {BaseValidatorFn, isEmpty} from "@core/events/validator";
 import {BaseDependencyFn} from "@core/events/dependency";
 import {isNullEmptyFalseOrUndefined} from "@core/lib/utils";
 import {ChangeRegistry} from "@core/engine/registres/change-registry";
-import BaseFieldTypeEnum from "@core/models/enums/base-field-type-enum";
-import BaseFieldTypesEnum from "@core/models/enums/base-field-type-enum";
 
 /**
  * Abstract base class that provides a reactive, signal-like state management layer using MobX.
@@ -181,10 +179,10 @@ export abstract class BaseStore {
                     this.fields[field.id] = value;
                 }
 
-                if (field.fieldType === BaseFieldTypeEnum.Button
-                    || field.fieldType === BaseFieldTypeEnum.StatusButton
-                    || field.fieldType === BaseFieldTypeEnum.ButtonWithConfirmation
-                    || field.fieldType === BaseFieldTypeEnum.Toggle
+                if (field.fieldType === BaseFieldTypesEnum.Button
+                    || field.fieldType === BaseFieldTypesEnum.StatusButton
+                    || field.fieldType === BaseFieldTypesEnum.ButtonWithConfirmation
+                    || field.fieldType === BaseFieldTypesEnum.Toggle
                 ) {
                     this.fields[field.id].excluded = true;
                 }

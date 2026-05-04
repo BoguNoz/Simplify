@@ -1,5 +1,5 @@
 import {BaseStore} from "@core/stores/base-store";
-import BaseFieldTypeEnum from "@core/models/enums/base-field-type-enum";
+import { BaseFieldTypesEnum } from "../enums/base-field-type-enum";
 
 export interface BaseFieldInterface {
     fieldId: string;
@@ -9,5 +9,5 @@ export interface BaseFieldInterface {
     handleChange?: (fieldId: string, value: any) => void;
 
     hardDisable?: boolean;
-    hardTyping?: BaseFieldTypeEnum;
+    hardTyping?: BaseFieldTypesEnum;
 }

@@ -4,10 +4,9 @@ import composite from "@core/engine/components/composite";
 import {ButtonGroup} from "@core/components/ui/button-group";
 import {observer} from "mobx-react-lite";
 import BaseField from "@core/components/layout/BaseField";
-import BaseFieldTypesEnum from "@core/models/enums/base-field-type-enum";
 import {Button} from "@core/components/ui/button";
 import {BaseCompositeInterface} from "@core/models/interfaces/base-composite-interface";
-import {BaseFieldModel} from "@core/models";
+import {BaseFieldModel, BaseFieldTypesEnum} from "@core/models";
 
 interface ButtonGroupCompositeProps extends BaseCompositeInterface { }
 

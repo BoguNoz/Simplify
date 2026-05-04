@@ -6,7 +6,7 @@
 
 # Abstract Class: BaseStore
 
-Defined in: [src/stores/base-store.ts:58](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/stores/base-store.ts#L58)
+Defined in: [src/stores/base-store.ts:43](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/stores/base-store.ts#L43)
 
 Abstract base class that provides a reactive, signal-like state management layer using MobX.
 
@@ -14,9 +14,9 @@ Abstract base class that provides a reactive, signal-like state management layer
 
 - Each field within the store acts as a reactive signal source.
 When a field's value changes, all related operations and dependency functions are automatically triggered.
-This enables dynamic form behavior, field validation, and dependency propagation with minimal boilerplate.
+This enables dynamic partials behavior, field validation, and dependency propagation with minimal boilerplate.
 
-- The class serves as the foundation for custom store implementations handling form state,
+- The class serves as the foundation for custom store implementations handling partials state,
 validation, data sources, and inter-field logic.
 
 ## Example
@@ -41,29 +41,13 @@ export const fieldStore = new FieldStore();
 await fieldStore.initializeFields(fields);
 ```
 
-## See
-
- - BaseStore.initializeFields
- - BaseStore.getDataSource
- - BaseStore.invokeDeconstructor
- - BaseStore.getFieldValue
- - BaseStore.setFieldValue
- - BaseStore.setFieldAdditValue
- - BaseStore.setFieldState
- - BaseStore.setFieldEditability
- - BaseStore.addValidators
- - BaseStore.validateField
- - BaseStore.validateSpecifyFields
- - BaseStore.setFieldExcluded
- - autoRegister
-
 ## Constructors
 
 ### Constructor
 
 > **new BaseStore**(): `BaseStore`
 
-Defined in: [src/stores/base-store.ts:64](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/stores/base-store.ts#L64)
+Defined in: [src/stores/base-store.ts:49](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/stores/base-store.ts#L49)
 
 #### Returns
 
@@ -73,9 +57,9 @@ Defined in: [src/stores/base-store.ts:64](https://github.com/BoguNoz/Simplify/bl
 
 ### fields
 
-> **fields**: `Record`\<`string`, `BaseFieldModel`\> = `{}`
+> **fields**: `Record`\<`string`, [`BaseFieldModel`](../interfaces/BaseFieldModel.md)\> = `{}`
 
-Defined in: [src/stores/base-store.ts:59](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/stores/base-store.ts#L59)
+Defined in: [src/stores/base-store.ts:44](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/stores/base-store.ts#L44)
 
 ***
 
@@ -83,7 +67,7 @@ Defined in: [src/stores/base-store.ts:59](https://github.com/BoguNoz/Simplify/bl
 
 > **operations**: `Record`\<`string`, [`BaseOperationFn`](../type-aliases/BaseOperationFn.md)[]\> = `{}`
 
-Defined in: [src/stores/base-store.ts:60](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/stores/base-store.ts#L60)
+Defined in: [src/stores/base-store.ts:45](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/stores/base-store.ts#L45)
 
 ***
 
@@ -91,7 +75,7 @@ Defined in: [src/stores/base-store.ts:60](https://github.com/BoguNoz/Simplify/bl
 
 > **reverseDeps**: `Record`\<`string`, `Record`\<`string`, [`BaseDependencyFn`](../type-aliases/BaseDependencyFn.md)[]\>\> = `{}`
 
-Defined in: [src/stores/base-store.ts:61](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/stores/base-store.ts#L61)
+Defined in: [src/stores/base-store.ts:46](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/stores/base-store.ts#L46)
 
 ## Methods
 
@@ -99,7 +83,7 @@ Defined in: [src/stores/base-store.ts:61](https://github.com/BoguNoz/Simplify/bl
 
 > `protected` **\_invokeDeconstructor**(`id`, `free`, ...`args`): `Promise`\<`void`\>
 
-Defined in: [src/stores/base-store.ts:354](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/stores/base-store.ts#L354)
+Defined in: [src/stores/base-store.ts:337](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/stores/base-store.ts#L337)
 
 #### Parameters
 
@@ -125,7 +109,7 @@ Defined in: [src/stores/base-store.ts:354](https://github.com/BoguNoz/Simplify/b
 
 > `protected` **\_setFieldAdditValue**(`id`, `addit`, `value`): `void`
 
-Defined in: [src/stores/base-store.ts:328](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/stores/base-store.ts#L328)
+Defined in: [src/stores/base-store.ts:311](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/stores/base-store.ts#L311)
 
 #### Parameters
 
@@ -151,7 +135,7 @@ Defined in: [src/stores/base-store.ts:328](https://github.com/BoguNoz/Simplify/b
 
 > `protected` **\_setFieldEditability**(`id`, `isEditable`): `void`
 
-Defined in: [src/stores/base-store.ts:344](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/stores/base-store.ts#L344)
+Defined in: [src/stores/base-store.ts:327](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/stores/base-store.ts#L327)
 
 #### Parameters
 
@@ -173,7 +157,7 @@ Defined in: [src/stores/base-store.ts:344](https://github.com/BoguNoz/Simplify/b
 
 > `protected` **\_setFieldExcluded**(`id`, `excluded`): `void`
 
-Defined in: [src/stores/base-store.ts:349](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/stores/base-store.ts#L349)
+Defined in: [src/stores/base-store.ts:332](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/stores/base-store.ts#L332)
 
 #### Parameters
 
@@ -195,7 +179,7 @@ Defined in: [src/stores/base-store.ts:349](https://github.com/BoguNoz/Simplify/b
 
 > `protected` **\_setFieldState**(`id`, `status`): `void`
 
-Defined in: [src/stores/base-store.ts:336](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/stores/base-store.ts#L336)
+Defined in: [src/stores/base-store.ts:319](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/stores/base-store.ts#L319)
 
 #### Parameters
 
@@ -217,7 +201,7 @@ Defined in: [src/stores/base-store.ts:336](https://github.com/BoguNoz/Simplify/b
 
 > `protected` **\_setFieldValue**(`id`, `value`): `Promise`\<`void`\>
 
-Defined in: [src/stores/base-store.ts:311](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/stores/base-store.ts#L311)
+Defined in: [src/stores/base-store.ts:294](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/stores/base-store.ts#L294)
 
 #### Parameters
 
@@ -239,7 +223,7 @@ Defined in: [src/stores/base-store.ts:311](https://github.com/BoguNoz/Simplify/b
 
 > `protected` **\_validateField**(`id`): `void`
 
-Defined in: [src/stores/base-store.ts:365](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/stores/base-store.ts#L365)
+Defined in: [src/stores/base-store.ts:348](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/stores/base-store.ts#L348)
 
 #### Parameters
 
@@ -257,7 +241,7 @@ Defined in: [src/stores/base-store.ts:365](https://github.com/BoguNoz/Simplify/b
 
 > **addValidators**(`id`, `validators`): `void`
 
-Defined in: [src/stores/base-store.ts:279](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/stores/base-store.ts#L279)
+Defined in: [src/stores/base-store.ts:262](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/stores/base-store.ts#L262)
 
 Adds new validators to a field, avoiding duplicates.
 
@@ -289,7 +273,7 @@ The list of validator functions to add.
 
 > `readonly` **getDataSource**(`id`, ...`args`): `Promise`\<`any`\>
 
-Defined in: [src/stores/base-store.ts:268](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/stores/base-store.ts#L268)
+Defined in: [src/stores/base-store.ts:251](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/stores/base-store.ts#L251)
 
 Retrieves data from the data source function defined for a field.
 
@@ -323,7 +307,7 @@ A promise resolving to the field's data source value.
 
 > `readonly` **getFieldValue**(`id`): `any`
 
-Defined in: [src/stores/base-store.ts:255](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/stores/base-store.ts#L255)
+Defined in: [src/stores/base-store.ts:238](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/stores/base-store.ts#L238)
 
 Returns the current value of a field.
 
@@ -347,7 +331,7 @@ The field's current assigned value.
 
 > `readonly` **initializeFields**(`fields`): `Promise`\<`void`\>
 
-Defined in: [src/stores/base-store.ts:185](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/stores/base-store.ts#L185)
+Defined in: [src/stores/base-store.ts:170](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/stores/base-store.ts#L170)
 
 Initializes all fields based on their configuration.
 
@@ -355,7 +339,7 @@ Initializes all fields based on their configuration.
 
 ##### fields
 
-`BaseFieldModel`[]
+[`BaseFieldModel`](../interfaces/BaseFieldModel.md)[]
 
 List of fields configurations.
 
@@ -376,7 +360,7 @@ List of fields configurations.
 
 > `readonly` **invokeDeconstructor**(`id`, `free`, ...`args`): `Promise`\<`void`\>
 
-Defined in: [src/stores/base-store.ts:170](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/stores/base-store.ts#L170)
+Defined in: [src/stores/base-store.ts:155](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/stores/base-store.ts#L155)
 
 Invokes the deconstructor function defined for the specified field.
 
@@ -417,7 +401,7 @@ Optional arguments passed to the deconstructor function.
 
 > `readonly` **setFieldAdditValue**(`id`, `addit`, `value`): `void`
 
-Defined in: [src/stores/base-store.ts:101](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/stores/base-store.ts#L101)
+Defined in: [src/stores/base-store.ts:86](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/stores/base-store.ts#L86)
 
 Sets an additional (auxiliary) value for a field.
 
@@ -456,7 +440,7 @@ The value to assign.
 
 > `readonly` **setFieldEditability**(`id`, `isEditable`): `void`
 
-Defined in: [src/stores/base-store.ts:131](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/stores/base-store.ts#L131)
+Defined in: [src/stores/base-store.ts:116](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/stores/base-store.ts#L116)
 
 Sets whether the field is editable or not.
 
@@ -488,7 +472,7 @@ Whether the field is editable or not.
 
 > `readonly` **setFieldExcluded**(`id`, `excluded`): `void`
 
-Defined in: [src/stores/base-store.ts:151](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/stores/base-store.ts#L151)
+Defined in: [src/stores/base-store.ts:136](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/stores/base-store.ts#L136)
 
 Updates the `excluded` state of a field.
 
@@ -512,7 +496,7 @@ Unique identifier of the target field.
 
 #### Remarks
 
-This method toggles whether a field should be considered in form
+This method toggles whether a field should be considered in partials
 processing, rendering, validation, or dependency evaluation.
 
 - If the field does not exist in the store, the update is skipped.
@@ -525,7 +509,7 @@ processing, rendering, validation, or dependency evaluation.
 
 > `readonly` **setFieldState**(`id`, `status`): `void`
 
-Defined in: [src/stores/base-store.ts:116](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/stores/base-store.ts#L116)
+Defined in: [src/stores/base-store.ts:101](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/stores/base-store.ts#L101)
 
 Updates the field's state.
 
@@ -557,7 +541,7 @@ The new status of the field.
 
 > `readonly` **setFieldValue**(`id`, `value`): `void`
 
-Defined in: [src/stores/base-store.ts:84](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/stores/base-store.ts#L84)
+Defined in: [src/stores/base-store.ts:69](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/stores/base-store.ts#L69)
 
 Sets a field's value and executes all associated functions.
 
@@ -591,7 +575,7 @@ The new value to assign.
 
 > **updateDependents**(`changedId`): `Promise`\<`void`\>
 
-Defined in: [src/stores/base-store.ts:298](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/stores/base-store.ts#L298)
+Defined in: [src/stores/base-store.ts:281](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/stores/base-store.ts#L281)
 
 Invokes all dependency functions
 
@@ -618,7 +602,7 @@ The ID of the field whose value has changed.
 
 > **validateField**(`id`): `void`
 
-Defined in: [src/stores/base-store.ts:244](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/stores/base-store.ts#L244)
+Defined in: [src/stores/base-store.ts:227](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/stores/base-store.ts#L227)
 
 Runs validation for a specific field.
 
@@ -633,8 +617,6 @@ The ID of the field.
 #### Returns
 
 `void`
-
-The list of validation results.
 
 #### Remarks
 

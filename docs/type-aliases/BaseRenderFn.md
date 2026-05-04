@@ -8,7 +8,7 @@
 
 > **BaseRenderFn** = (`store`, `fieldStore`) => `boolean`
 
-Defined in: [src/events/render.ts:25](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/events/render.ts#L25)
+Defined in: [src/events/render.ts:25](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/events/render.ts#L25)
 
 Represents a render condition function for a composite.
 

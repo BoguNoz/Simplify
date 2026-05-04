@@ -8,4 +8,4 @@
 
 > `const` **MetadataContext**: `Context`\<`MetadataModel` \| `null`\>
 
-Defined in: [src/engine/components/metadata-context.tsx:4](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/engine/components/metadata-context.tsx#L4)
+Defined in: [src/engine/components/metadata-context.tsx:4](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/engine/components/metadata-context.tsx#L4)

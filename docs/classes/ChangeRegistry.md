@@ -6,7 +6,7 @@
 
 # Class: ChangeRegistry
 
-Defined in: [src/engine/registres/change-registry.ts:11](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/engine/registres/change-registry.ts#L11)
+Defined in: [src/engine/registres/change-registry.ts:11](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/engine/registres/change-registry.ts#L11)
 
 A registry for batching reactive changes in a controlled, debounced manner.
 
@@ -22,7 +22,7 @@ This helps prevent unnecessary recomputations and improves performance in highly
 
 > **new ChangeRegistry**(`delay?`): `ChangeRegistry`
 
-Defined in: [src/engine/registres/change-registry.ts:18](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/engine/registres/change-registry.ts#L18)
+Defined in: [src/engine/registres/change-registry.ts:18](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/engine/registres/change-registry.ts#L18)
 
 #### Parameters
 
@@ -40,7 +40,7 @@ Defined in: [src/engine/registres/change-registry.ts:18](https://github.com/Bogu
 
 > `readonly` **forceFlush**(): `Promise`\<`void`\>
 
-Defined in: [src/engine/registres/change-registry.ts:32](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/engine/registres/change-registry.ts#L32)
+Defined in: [src/engine/registres/change-registry.ts:32](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/engine/registres/change-registry.ts#L32)
 
 Forces immediate execution of all pending queued changes.
 
@@ -59,7 +59,7 @@ changes immediately inside a single `MobX.runInAction` call.
 
 > `readonly` **registerChange**(`fn`): `void`
 
-Defined in: [src/engine/registres/change-registry.ts:57](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/engine/registres/change-registry.ts#L57)
+Defined in: [src/engine/registres/change-registry.ts:57](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/engine/registres/change-registry.ts#L57)
 
 Registers a reactive change callback to be executed in the next flush cycle.
 

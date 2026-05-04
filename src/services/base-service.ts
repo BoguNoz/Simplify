@@ -1,4 +1,4 @@
-import BaseResponseTypeEnum from "@core/models/enums/base-response-type-enum";
+import { BaseResponseTypeEnum } from "@core/models/enums/base-response-type-enum";
 
 export interface RequestOptions extends RequestInit {
     responseType?: BaseResponseTypeEnum;

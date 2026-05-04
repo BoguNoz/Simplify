@@ -6,7 +6,7 @@
 
 # Abstract Class: BaseCompositeStore
 
-Defined in: [src/stores/base-composite-store.ts:48](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/stores/base-composite-store.ts#L48)
+Defined in: [src/stores/base-composite-store.ts:47](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/stores/base-composite-store.ts#L47)
 
 Abstract base class that manages a collection of composites and their corresponding field registres.
 
@@ -67,7 +67,7 @@ await compositeStore.initializeFields(compositeId);
 
 > **composites**: `Record`\<`string`, `BaseCompositeModel`\> = `{}`
 
-Defined in: [src/stores/base-composite-store.ts:49](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/stores/base-composite-store.ts#L49)
+Defined in: [src/stores/base-composite-store.ts:48](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/stores/base-composite-store.ts#L48)
 
 ***
 
@@ -75,7 +75,7 @@ Defined in: [src/stores/base-composite-store.ts:49](https://github.com/BoguNoz/S
 
 > **renderedComposites**: `ObservableMap`\<`string`, `boolean`\>
 
-Defined in: [src/stores/base-composite-store.ts:51](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/stores/base-composite-store.ts#L51)
+Defined in: [src/stores/base-composite-store.ts:50](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/stores/base-composite-store.ts#L50)
 
 ***
 
@@ -83,7 +83,7 @@ Defined in: [src/stores/base-composite-store.ts:51](https://github.com/BoguNoz/S
 
 > **stores**: `Record`\<`string`, [`BaseStore`](BaseStore.md)\> = `{}`
 
-Defined in: [src/stores/base-composite-store.ts:50](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/stores/base-composite-store.ts#L50)
+Defined in: [src/stores/base-composite-store.ts:49](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/stores/base-composite-store.ts#L49)
 
 ## Methods
 
@@ -91,7 +91,7 @@ Defined in: [src/stores/base-composite-store.ts:50](https://github.com/BoguNoz/S
 
 > **getStore**(`id`): [`BaseStore`](BaseStore.md)
 
-Defined in: [src/stores/base-composite-store.ts:131](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/stores/base-composite-store.ts#L131)
+Defined in: [src/stores/base-composite-store.ts:134](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/stores/base-composite-store.ts#L134)
 
 Retrieves the store associated with the specified composite.
 
@@ -115,7 +115,7 @@ The store instance linked to the composite.
 
 > **initializeComposite**(`composites`): `void`
 
-Defined in: [src/stores/base-composite-store.ts:61](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/stores/base-composite-store.ts#L61)
+Defined in: [src/stores/base-composite-store.ts:60](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/stores/base-composite-store.ts#L60)
 
 Initializes all composites based on their configuration.
 
@@ -141,7 +141,7 @@ List of composites configurations
 
 > **initializeFields**(`id`): `Promise`\<`void`\>
 
-Defined in: [src/stores/base-composite-store.ts:75](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/stores/base-composite-store.ts#L75)
+Defined in: [src/stores/base-composite-store.ts:74](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/stores/base-composite-store.ts#L74)
 
 Invokes initialization of fields within a composite.
 
@@ -163,7 +163,7 @@ The ID of the composite.
 
 > **invokeCompositeDeconstructor**(`id`, `free`, ...`args`): `Promise`\<`void`\>
 
-Defined in: [src/stores/base-composite-store.ts:154](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/stores/base-composite-store.ts#L154)
+Defined in: [src/stores/base-composite-store.ts:157](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/stores/base-composite-store.ts#L157)
 
 Invokes the deconstructor for a specific composite and all of its fields.
 
@@ -213,7 +213,7 @@ invokeDeconstructor
 
 > **registerStore**(`id`, `store`): `void`
 
-Defined in: [src/stores/base-composite-store.ts:119](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/stores/base-composite-store.ts#L119)
+Defined in: [src/stores/base-composite-store.ts:122](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/stores/base-composite-store.ts#L122)
 
 Registers a store for the specified composite.
 
@@ -241,7 +241,7 @@ The store instance to register.
 
 > **renderComposite**(`id`): `boolean`
 
-Defined in: [src/stores/base-composite-store.ts:87](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/stores/base-composite-store.ts#L87)
+Defined in: [src/stores/base-composite-store.ts:90](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/stores/base-composite-store.ts#L90)
 
 Returns the render state of the composite.
 
@@ -265,7 +265,7 @@ The ID of the composite.
 
 > **setRendering**(`id`, `state?`): `void`
 
-Defined in: [src/stores/base-composite-store.ts:101](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/stores/base-composite-store.ts#L101)
+Defined in: [src/stores/base-composite-store.ts:104](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/stores/base-composite-store.ts#L104)
 
 Sets the render state of a composite.
 

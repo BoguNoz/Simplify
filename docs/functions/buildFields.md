@@ -6,9 +6,9 @@
 
 # Function: buildFields()
 
-> **buildFields**\<`T`\>(`configs`): `BaseFieldModel`[]
+> **buildFields**\<`T`\>(`configs`): [`BaseFieldModel`](../interfaces/BaseFieldModel.md)[]
 
-Defined in: [src/lib/base-model-utils.ts:112](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/lib/base-model-utils.ts#L112)
+Defined in: [src/lib/base-model-utils.ts:109](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/lib/base-model-utils.ts#L109)
 
 Converts a configuration map into an array of `BaseFieldModel` objects.
 
@@ -24,13 +24,13 @@ Field keys (string literal union).
 
 ### configs
 
-`Record`\<`T`, `Partial`\<`BaseFieldModel`\>\>
+`Record`\<`T`, `Partial`\<[`BaseFieldModel`](../interfaces/BaseFieldModel.md)\>\>
 
 A map of partial or full `BaseFieldModel` configurations.
 
 ## Returns
 
-`BaseFieldModel`[]
+[`BaseFieldModel`](../interfaces/BaseFieldModel.md)[]
 
 An array of `BaseFieldModel` instances.
 
@@ -40,7 +40,7 @@ This function is typically used after `createFieldPlaceholders()` to transform t
 configuration dictionary into a list of fully usable field models.
 
 This array is usually passed to:
-- a **form store**,
+- a **partials store**,
 - or directly into UI rendering logic.
 
 Note: This function does not clone or validate the objects — it simply unwraps them.

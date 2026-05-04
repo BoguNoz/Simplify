@@ -8,7 +8,7 @@
 
 > **createCompositesPlaceholders**\<`T`, `M`\>(`registeredFields`): `Record`\<`T`, `Partial`\<`BaseCompositeModel`\>\>
 
-Defined in: [src/lib/base-composite-model-utils.ts:36](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/lib/base-composite-model-utils.ts#L36)
+Defined in: [src/lib/base-composite-model-utils.ts:36](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/lib/base-composite-model-utils.ts#L36)
 
 Creates placeholder composite configurations based on a registry of composite identifiers.
 

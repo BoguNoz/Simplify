@@ -8,7 +8,7 @@
 
 > **computeCompositeSize**(`mode`, `sizeFactor`): `number`[]
 
-Defined in: [src/lib/base-composite-model-utils.ts:123](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/lib/base-composite-model-utils.ts#L123)
+Defined in: [src/lib/base-composite-model-utils.ts:122](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/lib/base-composite-model-utils.ts#L122)
 
 ## Parameters
 

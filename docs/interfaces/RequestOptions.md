@@ -6,7 +6,7 @@
 
 # Interface: RequestOptions
 
-Defined in: [src/services/base-service.ts:3](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/services/base-service.ts#L3)
+Defined in: [src/services/base-service.ts:3](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/services/base-service.ts#L3)
 
 ## Extends
 
@@ -182,9 +182,9 @@ A referrer policy to set request's referrerPolicy.
 
 ### responseType?
 
-> `optional` **responseType?**: `BaseResponseTypeEnum`
+> `optional` **responseType?**: [`BaseResponseTypeEnum`](../enumerations/BaseResponseTypeEnum.md)
 
-Defined in: [src/services/base-service.ts:4](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/services/base-service.ts#L4)
+Defined in: [src/services/base-service.ts:4](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/services/base-service.ts#L4)
 
 ***
 

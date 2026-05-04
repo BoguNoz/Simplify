@@ -6,9 +6,9 @@
 
 # Function: createFieldPlaceholders()
 
-> **createFieldPlaceholders**\<`T`, `M`, `L`\>(`registeredFields`, `translations`): `Record`\<`T`, `Partial`\<`BaseFieldModel`\>\>
+> **createFieldPlaceholders**\<`T`, `M`, `L`\>(`registeredFields`, `translations`): `Record`\<`T`, `Partial`\<[`BaseFieldModel`](../interfaces/BaseFieldModel.md)\>\>
 
-Defined in: [src/lib/base-model-utils.ts:42](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/lib/base-model-utils.ts#L42)
+Defined in: [src/lib/base-model-utils.ts:41](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/lib/base-model-utils.ts#L41)
 
 Creates placeholder field configurations for a set of registered fields.
 
@@ -48,7 +48,7 @@ A dictionary mapping `${fieldKey}Label` and `${fieldKey}Description` to strings.
 
 ## Returns
 
-`Record`\<`T`, `Partial`\<`BaseFieldModel`\>\>
+`Record`\<`T`, `Partial`\<[`BaseFieldModel`](../interfaces/BaseFieldModel.md)\>\>
 
 A map of partial `BaseFieldModel` definitions indexed by field keys.
 
@@ -64,7 +64,7 @@ Each generated field receives a default `BaseFieldModel` structure including:
 - default field state
 - default `dataSource` and `deconstructor` handlers
 
-This function is typically used when bootstrapping a form repository,
+This function is typically used when bootstrapping a partials repository,
 allowing developers to define fields declaratively instead of manually creating every model.
 
 ## Example

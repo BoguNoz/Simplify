@@ -1,9 +1,9 @@
 import {BaseDependencyModel} from "@core/models/partials/base-dependency-model";
-import BaseFieldTypesEnum from "@core/models/enums/base-field-type-enum";
 import {BaseValidatorFn} from "@core/events/validator";
 import {BaseOperationFn} from "@core/events/operation";
 import {ElementType} from "react";
 import {BaseStatusModel} from "@core/models/partials/base-status-model";
+import {BaseFieldTypesEnum} from "@core/models/enums/base-field-type-enum";
 
 /**
  * Represents a single reactive field within the store.

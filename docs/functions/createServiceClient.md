@@ -8,7 +8,7 @@
 
 > **createServiceClient**(`baseUrl`): \<`T`\>(`endpoint`, `options`) => `Promise`\<`T`\>
 
-Defined in: [src/services/base-service.ts:37](https://github.com/BoguNoz/Simplify/blob/f26a848e000bf8e5948c0948c0a07286ae4b8d74/src/services/base-service.ts#L37)
+Defined in: [src/services/base-service.ts:37](https://github.com/BoguNoz/Simplify/blob/8927a5f295da2866c60fb7ecc046fc43733fcfc9/src/services/base-service.ts#L37)
 
 Creates a strongly-typed HTTP client for performing API requests.
 
@@ -29,7 +29,7 @@ A reusable `sendRequest` function that performs HTTP calls relative to the provi
 ## Remarks
 
 This utility wraps the native `fetch` API and supports multiple response types
-through the BaseResponseTypeEnum. It automatically merges default headers
+through the [BaseResponseTypeEnum](../enumerations/BaseResponseTypeEnum.md). It automatically merges default headers
 with any provided ones and handles error responses by throwing exceptions.
 
 ## Example

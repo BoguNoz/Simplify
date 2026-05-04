@@ -1,7 +1,6 @@
 import {useCallback} from "react";
 import { observer } from "mobx-react-lite";
 import {BaseStore} from "@core/stores/base-store";
-import BaseFieldTypeEnum from "@core/models/enums/base-field-type-enum";
 import {Alert, AlertDescription, AlertTitle} from "@core/components/ui/alert";
 import BaseField from "@core/components/layout/BaseField";
 import {AlertCircle, AlertTriangle, CheckCircle, CircleOff, Link} from "lucide-react";
@@ -12,7 +11,7 @@ import {faTriangleExclamation} from "@fortawesome/free-solid-svg-icons";
 import {BaseFieldInterface} from "@core/models/interfaces/base-field-interface";
 import {useMetadata} from "@core/engine/components/metadata-context";
 import MetadataModel from "@core/models/metadata-model";
-import {BaseFieldModel} from "@core/models";
+import {BaseFieldModel, BaseFieldTypesEnum} from "@core/models";
 
 /**
  * A partials wrapper for the polymorphic field component {@link BaseField},
@@ -152,7 +151,7 @@ const InfoSymbol = observer(({ field, hardDisable }: { field: BaseFieldModel, ha
 });
 
 const Dependencies = observer(({ field, store }: { field: BaseFieldModel, store: BaseStore }) => {
-    if (!field.isDisabled || field.fieldType === BaseFieldTypeEnum.Button) return null;
+    if (!field.isDisabled || field.fieldType === BaseFieldTypesEnum.Button) return null;
 
     const dependencies = field.dependencies.map(dep => {
         const field = store.fields[dep.fieldId];
