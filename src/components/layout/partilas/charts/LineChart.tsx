@@ -101,7 +101,7 @@ const LineChart = observer((props: BaseMultiLineChartProps) => {
                 margin: 8,
             },
             axisLine: {
-                lineStyle: { color: "#334155" }
+                lineStyle: { color: "#94a3b8" }
             },
             min: xAxisProps?.min,
             max: xAxisProps?.max,
@@ -116,9 +116,6 @@ const LineChart = observer((props: BaseMultiLineChartProps) => {
                 margin: 8,
             },
             axisLine: { show: false },
-            splitLine: {
-                lineStyle: { color: "#334155" }
-            },
             min: yAxisProps?.min,
             max: yAxisProps?.max,
         },
