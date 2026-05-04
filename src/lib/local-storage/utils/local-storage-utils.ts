@@ -1,5 +1,5 @@
 import { toast } from "sonner";
-import { lang } from "@core/text/utils/lang";
+import { lang } from "@core/lib/lang";
 import { lf } from "../storage";
 
 const text = lang();

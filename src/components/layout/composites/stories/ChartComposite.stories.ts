@@ -2,7 +2,7 @@ import type {Meta, StoryObj} from "@storybook/react";
 import {mockCompositeStore} from "@core/components/stories/composites/mock-composite-store";
 import {mockStore} from "@core/components/stories/mock-store";
 import ChartComposite, {ChartCompositeSectionType} from "@core/components/layout/composites/ChartComposite";
-import {lang} from "@core/text/utils/lang";
+import {lang} from "@core/lib/lang";
 import {buildComposites, buildFields, createCompositesPlaceholders, createFieldPlaceholders} from "@core/lib";
 import {BaseSectionModel} from "@core/models/partials/base-section-model";
 

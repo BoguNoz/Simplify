@@ -1,4 +1,4 @@
-import en from "../en";
+import en from "../text/en";
 
 export const languages = { en } ;
 export type LangKey = keyof typeof languages;

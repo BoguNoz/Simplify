@@ -1,5 +1,5 @@
 import {BaseStore} from "@core/stores/base-store";
-import {lang} from "@core/text/utils/lang";
+import {lang} from "@core/lib/lang";
 import {isNullEmptyFalseOrUndefined} from "@core/lib/utils";
 
 const text = lang();

@@ -5,7 +5,7 @@ import {BaseSectionModel} from "@core/models/partials/base-section-model";
 import {mockCompositeStore} from "@core/components/stories/composites/mock-composite-store";
 import {formMock} from "@core/components/stories/composites/form-mocks";
 import {mockStore} from "@core/components/stories/mock-store";
-import {lang} from "@core/text/utils/lang";
+import {lang} from "@core/lib/lang";
 
 const meta: Meta<typeof FormCardComposite> = {
     title: "composites/FormCardComposite",

@@ -1,4 +1,4 @@
-import {lang} from "@core/text/utils/lang";
+import {lang} from "@core/lib/lang";
 import {buildFields, createFieldPlaceholders} from "@core/lib/base-model-utils";
 import {isInteger, isNumber, isPositive} from "@core/events/validator";
 import {ifFieldRequire} from "@core/events/dependency";

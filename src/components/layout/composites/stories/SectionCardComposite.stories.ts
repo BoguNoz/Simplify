@@ -3,7 +3,7 @@ import {mockCompositeStore} from "@core/components/stories/composites/mock-compo
 import {mockStore} from "@core/components/stories/mock-store";
 import SectionComposite, {SectionCompositeSectionType} from "../SectionComposite";
 import {buildComposites, createCompositesPlaceholders } from "@core/lib/base-composite-model-utils";
-import {lang} from "@core/text/utils/lang";
+import {lang} from "@core/lib/lang";
 import { BaseSectionModel } from "@core/models/partials/base-section-model";
 import {sectionMock} from "@core/components/stories/composites/section-mock";
 
