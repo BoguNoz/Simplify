@@ -1,8 +1,7 @@
-import {BaseCompositeInterface} from "@core/models";
+import {BaseCompositeInterface, MetadataModel} from "@core/models";
 import composite from "@core/engine/components/composite";
 import {Button, Collapsible, CollapsibleContent, CollapsibleTrigger, ScrollArea, Separator} from "@core/components/ui";
 import {MetadataContext, useMetadata} from "@core/engine";
-import MetadataModel from "@core/models/metadata-model";
 import {BaseSectionModel} from "@core/models/partials/base-section-model";
 import {observer} from "mobx-react-lite";
 import {BaseCompositeSectionProps} from "@core/models/interfaces/base-composite-section-props";

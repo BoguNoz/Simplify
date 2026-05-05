@@ -2,14 +2,13 @@ import composite from "@core/engine/components/composite";
 import {BaseSectionModel} from "@core/models/partials/base-section-model";
 import {Card, CardContent} from "@core/components/ui/card";
 import {BaseCompositeInterface} from "@core/models/interfaces/base-composite-interface";
-import MetadataModel from "@core/models/metadata-model";
 import {MetadataContext, useMetadata} from "@core/engine/components/metadata-context";
 import CompositeHeader from "@core/components/layout/composites/partials/CompositeHeader";
 import {observer} from "mobx-react-lite";
 import {BaseCompositeSectionProps} from "@core/models/interfaces/base-composite-section-props";
-import {ScrollArea, Separator} from "@core/components/ui";
+import {ScrollArea} from "@core/components/ui";
 import FormField from "@core/components/layout/FormField";
-import React from "react";
+import {MetadataModel} from "@core/models";
 
 interface FormCardCompositeProps extends BaseCompositeInterface {}
 

@@ -3,10 +3,10 @@ import {useEffect, useRef, useState} from "react";
 import {baseCompositeInitializationSetup} from "@core/stores/utils/composite-store-utils";
 import {BaseCompositeStore} from "@core/stores/base-composite-store";
 import {BaseStore} from "@core/stores/base-store";
-import MetadataModel from "@core/models/metadata-model";
 import {getMetadata} from "@core/lib/metadata-model-utils";
 import { MetadataContext, useExistingMetadata } from "./metadata-context";
 import {recomputeCompositeSize} from "@core/lib/base-composite-model-utils";
+import { MetadataModel } from "@core/models";
 
 /**
  * A higher-order component (HOC) that wraps a React component with MobX's `observer`

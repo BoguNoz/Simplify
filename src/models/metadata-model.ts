@@ -1,4 +1,4 @@
-export default interface MetadataModel {
+export interface MetadataModel {
     width: number;
     height: number;
 }

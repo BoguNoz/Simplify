@@ -10,8 +10,7 @@ import {faCircleXmark} from "@fortawesome/free-regular-svg-icons";
 import {faTriangleExclamation} from "@fortawesome/free-solid-svg-icons";
 import {BaseFieldInterface} from "@core/models/interfaces/base-field-interface";
 import {useMetadata} from "@core/engine/components/metadata-context";
-import MetadataModel from "@core/models/metadata-model";
-import {BaseFieldModel, BaseFieldTypesEnum} from "@core/models";
+import {BaseFieldModel, BaseFieldTypesEnum, MetadataModel} from "@core/models";
 
 /**
  * A partials wrapper for the polymorphic field component {@link BaseField},

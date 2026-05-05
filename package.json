@@ -16,63 +16,49 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
-  "main": "dist/index.cjs",
-  "module": "dist/index.js",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
-      "require": "./dist/index.cjs",
-      "default": "./dist/index.js"
+      "require": "./dist/index.cjs"
     },
     "./engine": {
       "types": "./dist/engine.d.ts",
       "import": "./dist/engine.js",
-      "require": "./dist/engine.cjs",
-      "default": "./dist/engine.js"
+      "require": "./dist/engine.cjs"
     },
     "./stores": {
       "types": "./dist/stores.d.ts",
       "import": "./dist/stores.js",
-      "require": "./dist/stores.cjs",
-      "default": "./dist/stores.js"
+      "require": "./dist/stores.cjs"
     },
     "./components": {
       "types": "./dist/components.d.ts",
       "import": "./dist/components.js",
-      "require": "./dist/components.cjs",
-      "default": "./dist/components.js"
-    },
-    "./layout": {
-      "types": "./dist/layout.d.ts",
-      "import": "./dist/layout.js",
-      "require": "./dist/layout.cjs",
-      "default": "./dist/layout.js"
+      "require": "./dist/components.cjs"
     },
     "./events": {
       "types": "./dist/events.d.ts",
       "import": "./dist/events.js",
-      "require": "./dist/events.cjs",
-      "default": "./dist/events.js"
+      "require": "./dist/events.cjs"
     },
     "./lib": {
       "types": "./dist/lib.d.ts",
       "import": "./dist/lib.js",
-      "require": "./dist/lib.cjs",
-      "default": "./dist/lib.js"
+      "require": "./dist/lib.cjs"
     },
     "./models": {
       "types": "./dist/models.d.ts",
       "import": "./dist/models.js",
-      "require": "./dist/models.cjs",
-      "default": "./dist/models.js"
+      "require": "./dist/models.cjs"
     },
     "./services": {
       "types": "./dist/services.d.ts",
       "import": "./dist/services.js",
-      "require": "./dist/services.cjs",
-      "default": "./dist/services.js"
+      "require": "./dist/services.cjs"
     }
   },
   "files": [

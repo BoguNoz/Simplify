@@ -1,5 +1,5 @@
+import { MetadataModel } from "@core/models";
 import { createContext, useContext } from "react";
-import MetadataModel from "@core/models/metadata-model";
 
 export const MetadataContext = createContext<MetadataModel | null>(null);
 

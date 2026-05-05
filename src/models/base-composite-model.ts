@@ -4,7 +4,7 @@ import {BaseSectionModel} from "@core/models/partials/base-section-model";
 /**
  * Represents a composite model that groups related fields and defines its rendering behavior.
  */
-export default interface BaseCompositeModel {
+export interface BaseCompositeModel {
     /**
      * The unique identifier of the composite.
      */

@@ -1,7 +1,6 @@
-import {BaseCompositeInterface} from "@core/models";
+import {BaseCompositeInterface, MetadataModel} from "@core/models";
 import composite from "@core/engine/components/composite";
 import {useMetadata} from "@core/engine";
-import MetadataModel from "@core/models/metadata-model";
 import CompositeHeader from "@core/components/layout/composites/partials/CompositeHeader";
 import {Card, CardContent} from "@core/components/ui";
 import {BaseSectionModel} from "@core/models/partials/base-section-model";

@@ -1,5 +1,5 @@
 import { isNullOrUndefined } from "@core/lib/utils";
-import BaseCompositeModel from "@core/models/base-composite-model";
+import { BaseCompositeModel } from "@core/models";
 import {BaseStore} from "@core/stores/base-store";
 import {observable, runInAction} from "mobx";
 

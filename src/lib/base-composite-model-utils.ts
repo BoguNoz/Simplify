@@ -1,4 +1,4 @@
-import BaseCompositeModel from "../models/base-composite-model";
+import { BaseCompositeModel } from "@core/models";
 
 type KeyMirror<T extends string> = {
     [K in T]: K;
