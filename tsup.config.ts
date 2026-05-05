@@ -18,7 +18,8 @@ export default defineConfig({
     outDir: "dist",
     clean: true,
     sourcemap: true,
-    splitting: false,
+    splitting: true,
+    bundle: true,
 
     outExtension: ({ format }) => ({
         js: format === "esm" ? ".js" : ".cjs",

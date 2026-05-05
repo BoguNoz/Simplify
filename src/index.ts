@@ -1,3 +1,6 @@
+// Styles
+import "./index.css";
+
 // Components
 export * from "./components/index"
 
@@ -18,10 +21,6 @@ export * from "./services/index"
 
 // Stores
 export * from "./stores/index"
-
-// Styles
-import "./index.css";
-
 
 
 
