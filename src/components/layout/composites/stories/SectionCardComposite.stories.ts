@@ -1,7 +1,7 @@
 import type {Meta, StoryObj} from "@storybook/react";
 import {mockCompositeStore} from "@core/components/stories/composites/mock-composite-store";
 import {mockStore} from "@core/components/stories/mock-store";
-import SectionComposite, {SectionCompositeSectionType} from "../SectionComposite";
+import {SectionComposite, SectionCompositeSectionType} from "../SectionComposite";
 import {buildComposites, createCompositesPlaceholders } from "@core/lib/base-composite-model-utils";
 import {lang} from "@core/lib/lang";
 import { BaseSectionModel } from "@core/models/partials/base-section-model";

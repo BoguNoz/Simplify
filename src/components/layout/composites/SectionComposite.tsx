@@ -58,7 +58,7 @@ export enum SectionCompositeSectionType {
  * @see FormField
  * @see MetadataContext
  */
-export const SectionComposite = composite((props: SectionCardCompositeProps) => {
+const SectionComposite = composite((props: SectionCardCompositeProps) => {
     const {compositeId, compositeStore, store, handleBlur, handleChange} = props;
 
     const metadata = useMetadata() ?? {} as MetadataModel;
@@ -150,4 +150,6 @@ const Section = observer(({ section, store, handleBlur, handleChange, metadata }
         </Collapsible>
     );
 });
+
+export { SectionComposite };
 
