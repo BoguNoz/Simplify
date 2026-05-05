@@ -10,6 +10,7 @@ interface ChartCompositeProps extends BaseCompositeInterface {
     palette: string[];
     labels: string[];
 
+    hasBorder: boolean;
     legends?: boolean;
     smooth?: boolean;
     showSymbols?: boolean;
@@ -123,7 +124,7 @@ export enum ChartCompositeSectionType {
  */
 const ChartComposite= composite((props: ChartCompositeProps) => {
     const {compositeId, compositeStore, store, handleBlur, handleChange,
-        palette, labels, legends, smooth, showSymbols, grid, xAxis, yAxis, height, width} = props;
+        palette, labels, hasBorder, legends, smooth, showSymbols, grid, xAxis, yAxis, height, width} = props;
 
     const [data, setData] = useState<any>([]);
 
@@ -156,7 +157,11 @@ const ChartComposite= composite((props: ChartCompositeProps) => {
     });
 
     return (
-        <Card style={{ width: `${metadata.width}px`, height: `${metadata.height}px` }} className="flex flex-col">
+        <Card
+            style={{ width: `${metadata.width}px`, height: `${metadata.height}px` }}
+            className="flex flex-col"
+            hasBorder={hasBorder}
+        >
             <CompositeHeader
                 section={header}
             />
