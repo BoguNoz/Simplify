@@ -54,4 +54,4 @@ const BaseButton = observer((props: BaseRawButtonProps) => {
     )
 });
 
-export default BaseButton;
+export {BaseButton};

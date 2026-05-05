@@ -1,13 +1,13 @@
 import {BaseStore} from "@core/stores/base-store";
 
-import composite from "@core/engine/components/composite";
 import {ButtonGroup} from "@core/components/ui/button-group";
 import {observer} from "mobx-react-lite";
-import BaseField from "@core/components/layout/BaseField";
 import {Button} from "@core/components/ui/button";
 import {BaseCompositeInterface} from "@core/models/interfaces/base-composite-interface";
 import {BaseFieldModel} from "@core/models";
 import {BaseFieldTypesEnum} from "@core/models/enums/base-field-type-enum";
+import {composite} from "@core/engine";
+import {BaseField} from "@core/components";
 
 interface ButtonGroupCompositeProps extends BaseCompositeInterface { }
 
@@ -100,4 +100,4 @@ const Item = observer(({ fieldId, store, handleBlur, handleChange }:
     );
 });
 
-export default ButtonGroupComposite;
+export {ButtonGroupComposite};

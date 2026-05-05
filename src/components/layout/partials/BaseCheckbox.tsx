@@ -83,4 +83,4 @@ const Footer = observer(({ field }: { field: BaseFieldModel }) => {
     );
 });
 
-export default BaseCheckbox;
+export {BaseCheckbox};

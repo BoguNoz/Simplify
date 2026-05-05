@@ -2,7 +2,6 @@ import {useCallback} from "react";
 import { observer } from "mobx-react-lite";
 import {BaseStore} from "@core/stores/base-store";
 import {Alert, AlertDescription, AlertTitle} from "@core/components/ui/alert";
-import BaseField from "@core/components/layout/BaseField";
 import {AlertCircle, AlertTriangle, CheckCircle, CircleOff, Link} from "lucide-react";
 import {Collapsible, CollapsibleContent, CollapsibleTrigger} from "@core/components/ui/collapsible";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -11,6 +10,7 @@ import {faTriangleExclamation} from "@fortawesome/free-solid-svg-icons";
 import {BaseFieldInterface} from "@core/models/interfaces/base-field-interface";
 import {useMetadata} from "@core/engine/components/metadata-context";
 import {BaseFieldModel, BaseFieldTypesEnum, MetadataModel} from "@core/models";
+import {BaseField} from "@core/components";
 
 /**
  * A partials wrapper for the polymorphic field component {@link BaseField},
@@ -202,4 +202,4 @@ const ValidatorBox = observer(({ field }: { field: BaseFieldModel}) => {
     );
 });
 
-export default FormField;
+export {FormField};

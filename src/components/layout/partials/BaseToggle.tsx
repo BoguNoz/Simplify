@@ -45,4 +45,4 @@ const BaseToggle = observer((props: BaseToggleProps) => {
     )
 });
 
-export default  BaseToggle;
+export {BaseToggle};

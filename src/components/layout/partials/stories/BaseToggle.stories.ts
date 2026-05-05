@@ -3,7 +3,7 @@ import {
     mockBaseRegisteredFields,
     mockFields,
 } from "@core/components/stories/base-field-mocks";
-import BaseToggle from "@core/components/layout/partials/BaseToggle";
+import { BaseToggle } from "@core/components";
 
 
 const meta: Meta<typeof BaseToggle> = {

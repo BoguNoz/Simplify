@@ -1,13 +1,12 @@
 import {BaseCompositeInterface, MetadataModel} from "@core/models";
-import composite from "@core/engine/components/composite";
 import {Button, Collapsible, CollapsibleContent, CollapsibleTrigger, ScrollArea, Separator} from "@core/components/ui";
-import {MetadataContext, useMetadata} from "@core/engine";
+import {composite, MetadataContext, useMetadata} from "@core/engine";
 import {BaseSectionModel} from "@core/models/partials/base-section-model";
 import {observer} from "mobx-react-lite";
 import {BaseCompositeSectionProps} from "@core/models/interfaces/base-composite-section-props";
-import FormField from "@core/components/layout/FormField";
 import {ChevronsUpDown} from "lucide-react";
 import React from "react";
+import {FormField} from "@core/components";
 
 interface SectionCardCompositeProps extends BaseCompositeInterface { }
 
@@ -151,5 +150,5 @@ const Section = observer(({ section, store, handleBlur, handleChange, metadata }
     );
 });
 
-export { SectionComposite };
+export {SectionComposite};
 

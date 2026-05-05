@@ -4,7 +4,7 @@ import {Input} from "@core/components/ui/input";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@core/components/ui/tooltip";
 import {isNullEmptyFalseOrUndefined} from "@core/lib/utils";
 import {Info} from "lucide-react";
-import Footer from "@core/components/layout/partials/Footer";
+import {Footer} from "@core/components/layout/partials/Footer";
 
 interface BaseFileInputProps {
     field: BaseFieldModel;
@@ -93,4 +93,4 @@ const InfoLink = observer(({ field }: { field: BaseFieldModel }) => {
     );
 });
 
-export default BaseFileInput;
+export {BaseFileInput};

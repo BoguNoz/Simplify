@@ -89,4 +89,4 @@ const Footer = observer(({ field }: { field: BaseFieldModel }) => {
     );
 });
 
-export default  BaseSwitch;
+export {BaseSwitch};

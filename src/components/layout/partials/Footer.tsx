@@ -19,4 +19,4 @@ const Footer = observer(({ field }: { field: BaseFieldModel }) => {
     );
 });
 
-export default Footer;
+export {Footer};

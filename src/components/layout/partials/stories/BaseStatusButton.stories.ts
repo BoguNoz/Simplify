@@ -3,8 +3,8 @@ import {
     mockBaseRegisteredFields,
     mockFields,
 } from "@core/components/stories/base-field-mocks";
-import BaseStatusButton from "../BaseStatusButton";
 import {Send} from "lucide-react";
+import {BaseStatusButton} from "@core/components";
 
 const meta: Meta<typeof BaseStatusButton> = {
     title: "partials/BaseStatusButton",

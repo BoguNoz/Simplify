@@ -88,4 +88,4 @@ const BaseButtonWithConfirmation = observer((props: BaseButtonWithConfirmationPr
     }
 });
 
-export default BaseButtonWithConfirmation;
+export {BaseButtonWithConfirmation};

@@ -73,4 +73,4 @@ const composite = (Component: any) => {
     return observer(Wrapped);
 };
 
-export default composite;
+export {composite};

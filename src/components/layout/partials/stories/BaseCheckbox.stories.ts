@@ -1,10 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import {action} from "storybook/actions";
 import {
     mockBaseRegisteredFields,
     mockFields,
 } from "@core/components/stories/base-field-mocks";
-import BaseCheckbox from "@core/components/layout/partials/BaseCheckbox";
+import {BaseCheckbox} from "@core/components";
 
 
 const meta: Meta<typeof BaseCheckbox> = {

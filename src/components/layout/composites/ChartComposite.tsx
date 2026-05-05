@@ -1,12 +1,10 @@
 import {BaseCompositeInterface, MetadataModel} from "@core/models";
-import composite from "@core/engine/components/composite";
-import {useMetadata} from "@core/engine";
-import CompositeHeader from "@core/components/layout/composites/partials/CompositeHeader";
+import {composite, useMetadata} from "@core/engine";
 import {Card, CardContent} from "@core/components/ui";
 import {BaseSectionModel} from "@core/models/partials/base-section-model";
 import {useEffect, useState} from "react";
-import LineChart from "@core/components/layout/partials/charts/LineChart";
 import {observer} from "mobx-react-lite";
+import {CompositeHeader, LineChart} from "@core/components";
 
 interface ChartCompositeProps extends BaseCompositeInterface {
     palette: string[];
@@ -218,4 +216,4 @@ const LineChartCard = observer(({
     );
 });
 
-export default ChartComposite;
+export {ChartComposite};

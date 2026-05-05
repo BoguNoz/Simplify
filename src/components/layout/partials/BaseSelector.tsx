@@ -76,4 +76,4 @@ const BaseSelector = observer((props: SelectorFieldProps) => {
     );
 });
 
-export default BaseSelector;
+export {BaseSelector};

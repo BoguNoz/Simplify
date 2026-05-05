@@ -3,7 +3,7 @@ import {
     mockBaseRegisteredFields,
     mockFields,
 } from "@core/components/stories/base-field-mocks";
-import BaseSwitch from "@core/components/layout/partials/BaseSwitch";
+import {BaseSwitch} from "@core/components";
 
 
 const meta: Meta<typeof BaseSwitch> = {

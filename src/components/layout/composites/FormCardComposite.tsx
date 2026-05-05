@@ -1,14 +1,13 @@
-import composite from "@core/engine/components/composite";
 import {BaseSectionModel} from "@core/models/partials/base-section-model";
 import {Card, CardContent} from "@core/components/ui/card";
 import {BaseCompositeInterface} from "@core/models/interfaces/base-composite-interface";
 import {MetadataContext, useMetadata} from "@core/engine/components/metadata-context";
-import CompositeHeader from "@core/components/layout/composites/partials/CompositeHeader";
 import {observer} from "mobx-react-lite";
 import {BaseCompositeSectionProps} from "@core/models/interfaces/base-composite-section-props";
 import {ScrollArea} from "@core/components/ui";
-import FormField from "@core/components/layout/FormField";
 import {MetadataModel} from "@core/models";
+import {composite} from "@core/engine";
+import {CompositeHeader, FormField} from "@core/components";
 
 interface FormCardCompositeProps extends BaseCompositeInterface {}
 
@@ -107,4 +106,4 @@ const FormBody = observer(({section, store, handleBlur, handleChange, metadata}:
     ) : null;
 });
 
-export default FormCardComposite;
+export {FormCardComposite};

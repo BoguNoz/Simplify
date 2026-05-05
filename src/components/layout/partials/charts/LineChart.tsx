@@ -150,4 +150,4 @@ const LineChart = observer((props: BaseMultiLineChartProps) => {
     );
 });
 
-export default LineChart;
+export {LineChart};

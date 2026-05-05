@@ -1,16 +1,15 @@
 import {BaseFieldModel, BaseFieldTypesEnum} from "@core/models";
 import {useCallback} from "react";
-import BaseSelector from "@core/components/layout/partials/BaseSelector";
 import {observer} from "mobx-react-lite";
-import BaseButtonWithConfirmation from "@core/components/layout/partials/BaseButtonWithConfirmation";
-import BaseToggle from "@core/components/layout/partials/BaseToggle";
-import BaseCheckbox from "@core/components/layout/partials/BaseCheckbox";
-import BaseFileInput from "@core/components/layout/partials/BaseFileInput";
-import BaseSwitch from "@core/components/layout/partials/BaseSwitch";
-import BaseInput from "@core/components/layout/partials/BaseInput";
-import BaseStatusButton from "@core/components/layout/partials/BaseStatusButton";
-import BaseButton from "@core/components/layout/partials/BaseButton";
 import {BaseFieldInterface} from "@core/models/interfaces/base-field-interface";
+import {
+    BaseButton,
+    BaseButtonWithConfirmation,
+    BaseCheckbox,
+    BaseFileInput,
+    BaseInput,
+    BaseSelector, BaseStatusButton, BaseSwitch, BaseToggle
+} from "@core/components";
 
 /**
  * A polymorphic field component that dynamically renders the appropriate input type
@@ -150,5 +149,5 @@ const BaseField = observer((props: BaseFieldInterface) => {
     }
 });
 
-export default BaseField;
+export {BaseField};
 

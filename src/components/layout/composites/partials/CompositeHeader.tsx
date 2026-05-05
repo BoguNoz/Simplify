@@ -15,4 +15,4 @@ const CompositeHeader = observer(({section}: {section: BaseSectionModel}) => {
     ) : null;
 });
 
-export default CompositeHeader;
+export {CompositeHeader};

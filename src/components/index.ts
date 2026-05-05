@@ -33,7 +33,6 @@ export * from "./ui/carousel";
 export * from "./ui/checkbox";
 export * from "./ui/collapsible";
 export * from "./ui/dialog";
-export * from "./ui/form";
 export * from "./ui/input";
 export * from "./ui/input-otp";
 export * from "./ui/label";

@@ -3,7 +3,7 @@ import {
     mockBaseRegisteredFields,
     mockFields,
 } from "@core/components/stories/base-field-mocks";
-import BaseInput from "@core/components/layout/partials/BaseInput";
+import { BaseInput } from "@core/components";
 
 
 const meta: Meta<typeof BaseInput> = {

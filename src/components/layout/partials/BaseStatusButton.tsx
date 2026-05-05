@@ -82,4 +82,4 @@ const ProccesStatus = observer(({ field }: { field: BaseFieldModel }) => {
     );
 });
 
-export default BaseStatusButton;
+export {BaseStatusButton};
