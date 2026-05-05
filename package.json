@@ -59,7 +59,8 @@
       "types": "./dist/services.d.ts",
       "import": "./dist/services.js",
       "require": "./dist/services.cjs"
-    }
+    },
+    "./*": "./dist/*.js"
   },
   "files": [
     "dist",
