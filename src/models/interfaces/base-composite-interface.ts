@@ -1,7 +1,7 @@
 import {BaseCompositeStore} from "@core/stores/base-composite-store";
 import {BaseStore} from "@core/stores/base-store";
 
-export interface BaseCompositeInterface {
+interface BaseCompositeInterface {
     /**
      * The composite identifier used to load configuration
      * from {@link BaseCompositeStore.composites}.
@@ -32,3 +32,5 @@ export interface BaseCompositeInterface {
      */
     handleChange?: (fieldId: string, value: any) => void;
 }
+
+export {type BaseCompositeInterface}
