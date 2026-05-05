@@ -1,6 +1,7 @@
 import { defineConfig } from "tsup";
 
 export default defineConfig({
+    injectStyle: true,
     entry: {
         index: "src/index.ts",
         engine: "src/engine/index.ts",
@@ -29,6 +30,10 @@ export default defineConfig({
         "mobx",
         "mobx-react-lite",
     ],
+
+    loader: {
+        '.css': 'local-css',
+    },
 
     minify: false,
 });
