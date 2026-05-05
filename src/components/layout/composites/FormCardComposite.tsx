@@ -9,7 +9,9 @@ import {MetadataModel} from "@core/models";
 import {composite} from "@core/engine";
 import {CompositeHeader, FormField} from "@core/components";
 
-interface FormCardCompositeProps extends BaseCompositeInterface {}
+interface FormCardCompositeProps extends BaseCompositeInterface {
+    hasBorder?: boolean;
+}
 
 export enum FormCardCompositeSectionType {
     HEADER= "HEADER",
@@ -54,7 +56,7 @@ export enum FormCardCompositeSectionType {
  * @see FormField
  */
 const FormCardComposite = composite((props: FormCardCompositeProps) => {
-    const {compositeId, compositeStore, store, handleBlur, handleChange} = props;
+    const {compositeId, compositeStore, store, handleBlur, handleChange, hasBorder} = props;
 
     const metadata = useMetadata() ?? {} as MetadataModel;
 
@@ -72,7 +74,11 @@ const FormCardComposite = composite((props: FormCardCompositeProps) => {
 
 
     return (
-        <Card style={{ width: `${metadata.width}px`, height: `${metadata.height}px` }} className="flex flex-col">
+        <Card
+            style={{ width: `${metadata.width}px`, height: `${metadata.height}px` }}
+            className="flex flex-col"
+            hasBorder={hasBorder}
+        >
             <CompositeHeader
                 section={header}
             />
