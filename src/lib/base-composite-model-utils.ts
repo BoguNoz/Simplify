@@ -113,7 +113,7 @@ export function buildComposites<T extends string>(
 export const modeToPercentage = (mode: string) => {
     switch (mode) {
         case "vertical-window": return [50, 90];
-        case "square-window": return [50,50];
+        case "square-window": return [80, 80];
         case "horizontal-window": return [90, 60];
         default: return [100, 100];
     }
