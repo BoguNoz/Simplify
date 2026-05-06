@@ -22,7 +22,28 @@ const field = mockFields.find(bf => bf.id === mockBaseRegisteredFields.baseButto
 // #region Default
 export const Default: Story = {
     args: {
-        field: field,
+        field: {
+            "id": "baseButtonWithConfirm",
+            "parentId": "",
+            "label": "Base Button with Confirm",
+            "description": "A reusable button that requires user confirmation before executing an action. Displays a confirmation dialog inline instead of immediately performing the action.",
+            "isDisabled": false,
+            "isRequired": false,
+            "render": true,
+            "excluded": false,
+            "fieldType": "buttonWithConfirmation",
+            "validators": [],
+            "operations": [],
+            "addit": {},
+            "dependencies": [],
+            "style": "",
+            "variant": "default",
+
+            "state": {
+                "status": "error",
+                "validationResult": []
+            }
+        },
         hardDisable: false,
     },
 };

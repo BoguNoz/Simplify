@@ -23,6 +23,7 @@ interface BaseMultiLineChartProps {
         labelFormatter?: (value: number) => string;
         min?: number | 'dataMin';
         max?: number | 'dataMax';
+        log?: boolean;
     };
 
     yAxis?: {
@@ -92,7 +93,7 @@ const LineChart = observer((props: BaseMultiLineChartProps) => {
         },
 
         xAxis: {
-            type: "value",
+            type: xAxisProps?.log ? "log" : "value",
             axisLabel: {
                 show: xAxisProps?.showLabels ?? true,
                 formatter: xAxisProps?.labelFormatter ?? ((v: number) => v.toFixed(1)),
