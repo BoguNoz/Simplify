@@ -110,6 +110,7 @@ fields.flatFieldCorrectionMatrix.dependencies = [
     { fieldId: cameraMetadataRegisteredFields.resolutionX, events: [isFieldEditable]},
     { fieldId: cameraMetadataRegisteredFields.resolutionY, events: [isFieldEditable] },
 ];
+fields.flatFieldCorrectionMatrix.isRequired = true;
 // #endregion FlatField
 
 // #region DarkFrame

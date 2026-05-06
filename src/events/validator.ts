@@ -73,8 +73,25 @@ export type BaseValidatorFn = (store: BaseStore, value: any, id: string) => Vali
  * @see BaseValidatorFn
  */
 export const isEmpty = (store: BaseStore, value: any, id: string): ValidatorResponse => {
+    if (isNullEmptyFalseOrUndefined(value)) {
+        return {
+            isValid: false,
+            isWarning: false,
+            message: text.errorMessages.isEmpty,
+        };
+    }
+    let isValid = true;
+
+    if (value instanceof File) {
+        isValid = true;
+    } else if (typeof value === 'string') {
+        isValid = value.trim().length > 0;
+    } else if (Array.isArray(value)) {
+        isValid = value.length > 0;
+    }
+
     return {
-        isValid: !isNullEmptyFalseOrUndefined(value) && (value as string).match(/^ *$/) === null,
+        isValid,
         isWarning: false,
         message: text.errorMessages.isEmpty,
     };
