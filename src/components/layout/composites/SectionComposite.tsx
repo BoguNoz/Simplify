@@ -119,7 +119,7 @@ interface SectionProps extends BaseCompositeSectionProps {
 
 
 const Section = observer(({ section, store, handleBlur, handleChange, metadata, isClosed }: SectionProps) => {
-    const [isOpen, setIsOpen] = React.useState(isClosed);
+    const [isOpen, setIsOpen] = React.useState(!isClosed);
 
     const sectionMetadata = {
         ...metadata,

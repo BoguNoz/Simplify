@@ -23,7 +23,9 @@ export const Default: Story = {
     args: {
         compositeId: "sectionCard",
         compositeStore: mockCompositeStore,
-        store: mockStore
+        store: mockStore,
+        isClosed: false
+
     },
 };
 // #endregion Default
