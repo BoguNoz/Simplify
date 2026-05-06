@@ -83,6 +83,7 @@ const SectionComposite = composite((props: SectionCardCompositeProps) => {
                 handleBlur={handleBlur}
                 handleChange={handleChange}
                 metadata={metadata}
+                isClosed={isClosed}
             />
         </div>
     )
