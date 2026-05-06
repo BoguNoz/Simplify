@@ -3,7 +3,8 @@ export * from "./layout/composites/partials/CompositeHeader"
 export * from "./layout/composites/ButtonGroupComposite";
 export * from "./layout/composites/ChartComposite";
 export * from "./layout/composites/FormCardComposite";
-export * from "./layout/composites/SectionComposite"
+export * from "./layout/composites/SectionComposite";
+export * from "./layout/composites/SheetComposite"
 
 // Partials
 export * from "./layout/partials/charts/LineChart"

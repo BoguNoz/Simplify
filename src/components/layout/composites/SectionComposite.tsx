@@ -8,7 +8,9 @@ import {ChevronsUpDown} from "lucide-react";
 import React from "react";
 import {FormField} from "@core/components";
 
-interface SectionCardCompositeProps extends BaseCompositeInterface { }
+interface SectionCardCompositeProps extends BaseCompositeInterface {
+    isClosed?: boolean;
+}
 
 export enum SectionCompositeSectionType {
     SECTION = "SECTION",
@@ -58,7 +60,7 @@ export enum SectionCompositeSectionType {
  * @see MetadataContext
  */
 const SectionComposite = composite((props: SectionCardCompositeProps) => {
-    const {compositeId, compositeStore, store, handleBlur, handleChange} = props;
+    const {compositeId, compositeStore, store, handleBlur, handleChange, isClosed} = props;
 
     const metadata = useMetadata() ?? {} as MetadataModel;
 
@@ -86,9 +88,37 @@ const SectionComposite = composite((props: SectionCardCompositeProps) => {
     )
 });
 
+const SectionHeader = observer(({ section, store, handleBlur, handleChange, metadata } : BaseCompositeSectionProps) => {
+    return (
+        <div className="flex-1 min-w-0">
+            <h3 className="text-sm font-semibold">
+                {section.title}
+            </h3>
 
-const Section = observer(({ section, store, handleBlur, handleChange, metadata }: BaseCompositeSectionProps) => {
-    const [isOpen, setIsOpen] = React.useState(true);
+            {section.description && (
+                <p className="
+                            text-sm text-gray-400 font-light
+                            mr-10 whitespace-normal break-words
+                            /* Klasy odpowiedzialne za zawijanie: */
+                            line-clamp-2 overflow-hidden
+                            hover:line-clamp-none hover:overflow-visible
+                            transition-all duration-200
+                            cursor-default
+                        ">
+                    {section.description}
+                </p>
+            )}
+        </div>
+    )
+})
+
+interface SectionProps extends BaseCompositeSectionProps {
+    isClosed?: boolean;
+}
+
+
+const Section = observer(({ section, store, handleBlur, handleChange, metadata, isClosed }: SectionProps) => {
+    const [isOpen, setIsOpen] = React.useState(isClosed);
 
     const sectionMetadata = {
         ...metadata,
@@ -99,20 +129,16 @@ const Section = observer(({ section, store, handleBlur, handleChange, metadata }
         <Collapsible
             open={isOpen}
             onOpenChange={setIsOpen}
-            className="rounded-2xl border bg-white overflow-hidden"
+            className="rounded-2xl border bg-white"
         >
             <div className="flex items-start justify-between gap-4 px-5 py-4">
-                <div className="flex-1 min-w-0">
-                    <h3 className="text-sm font-semibold text-black">
-                        {section.title}
-                    </h3>
-
-                    {section.description && (
-                        <p className="text-sm text-gray-400 font-light whitespace-normal break-words mr-10">
-                            {section.description}
-                        </p>
-                    )}
-                </div>
+               <SectionHeader
+                   section={section}
+                   handleBlur={handleBlur}
+                   handleChange={handleChange}
+                   metadata={metadata}
+                   store={store}
+               />
 
                 <CollapsibleTrigger asChild>
                     <Button
@@ -120,31 +146,35 @@ const Section = observer(({ section, store, handleBlur, handleChange, metadata }
                         size="icon"
                         className="size-8 shrink-0 rounded-full"
                     >
-                        <ChevronsUpDown className="h-4 w-4" />
+                        <ChevronsUpDown className={`h-4 w-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
                     </Button>
                 </CollapsibleTrigger>
             </div>
 
-            <Separator />
-
-            <CollapsibleContent className="px-5 py-4 flex-1 overflow-hidden">
-                <ScrollArea style={{ height: `${metadata.height * 0.75}px` }} className="h-full w-full">
-                    <div className="flex flex-col items-center">
-                        {section.fields.map(field => (
-                            <MetadataContext.Provider
-                                value={sectionMetadata}
-                                key={field.id}
-                            >
-                                <FormField
-                                    fieldId={field.id}
-                                    store={store}
-                                    handleBlur={handleBlur}
-                                    handleChange={handleChange}
-                                />
-                            </MetadataContext.Provider>
-                        ))}
-                    </div>
-                </ScrollArea>
+            <CollapsibleContent className="overflow-hidden data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down">
+                <Separator />
+                <div className="px-5 py-4">
+                    <ScrollArea
+                        style={{ height: `${metadata.height * 0.75}px` }}
+                        className="h-full w-full"
+                    >
+                        <div className="flex flex-col items-center">
+                            {section.fields.map(field => (
+                                <MetadataContext.Provider
+                                    value={sectionMetadata}
+                                    key={field.id}
+                                >
+                                    <FormField
+                                        fieldId={field.id}
+                                        store={store}
+                                        handleBlur={handleBlur}
+                                        handleChange={handleChange}
+                                    />
+                                </MetadataContext.Provider>
+                            ))}
+                        </div>
+                    </ScrollArea>
+                </div>
             </CollapsibleContent>
         </Collapsible>
     );
