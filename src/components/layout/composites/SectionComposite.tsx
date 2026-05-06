@@ -118,63 +118,42 @@ interface SectionProps extends BaseCompositeSectionProps {
 }
 
 
+
 const Section = observer(({ section, store, handleBlur, handleChange, metadata, isClosed }: SectionProps) => {
     const [isOpen, setIsOpen] = React.useState(!isClosed);
 
-    const sectionMetadata = {
-        ...metadata,
-        width: metadata.width * 0.9,
-    };
-
     return (
-        <Collapsible
-            open={isOpen}
-            onOpenChange={setIsOpen}
-            className="rounded-2xl border bg-white"
-        >
+        <Collapsible open={isOpen} onOpenChange={setIsOpen} className="rounded-2xl border bg-white">
             <div className="flex items-start justify-between gap-4 px-5 py-4">
-               <SectionHeader
-                   section={section}
-                   handleBlur={handleBlur}
-                   handleChange={handleChange}
-                   metadata={metadata}
-                   store={store}
-               />
-
+                <SectionHeader
+                    section={section}
+                    store={store}
+                    handleBlur={handleBlur}
+                    handleChange={handleChange}
+                    metadata={metadata}
+                />
                 <CollapsibleTrigger asChild>
-                    <Button
-                        variant="ghost"
-                        size="icon"
-                        className="size-8 shrink-0 rounded-full"
-                    >
+                    <Button variant="ghost" size="icon" className="size-8 shrink-0 rounded-full">
                         <ChevronsUpDown className={`h-4 w-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
                     </Button>
                 </CollapsibleTrigger>
             </div>
 
-            <CollapsibleContent className="overflow-hidden data-[state=closed]:animate-collapsible-up data-[state=open]:animate-collapsible-down">
+            <CollapsibleContent className="overflow-hidden">
                 <Separator />
                 <div className="px-5 py-4">
-                    <ScrollArea
-                        style={{ height: `${metadata.height * 0.75}px` }}
-                        className="h-full w-full"
-                    >
-                        <div className="flex flex-col items-center">
-                            {section.fields.map(field => (
-                                <MetadataContext.Provider
-                                    value={sectionMetadata}
-                                    key={field.id}
-                                >
-                                    <FormField
-                                        fieldId={field.id}
-                                        store={store}
-                                        handleBlur={handleBlur}
-                                        handleChange={handleChange}
-                                    />
-                                </MetadataContext.Provider>
-                            ))}
-                        </div>
-                    </ScrollArea>
+                    <div className="flex flex-col items-center gap-4">
+                        {section.fields.map(field => (
+                            <MetadataContext.Provider value={metadata} key={field.id}>
+                                <FormField
+                                    fieldId={field.id}
+                                    store={store}
+                                    handleBlur={handleBlur}
+                                    handleChange={handleChange}
+                                />
+                            </MetadataContext.Provider>
+                        ))}
+                    </div>
                 </div>
             </CollapsibleContent>
         </Collapsible>

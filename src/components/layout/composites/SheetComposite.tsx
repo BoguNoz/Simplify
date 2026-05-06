@@ -24,47 +24,48 @@ export enum SheetCompositeSectionType {
 
 const SheetComposite = composite((props: SheetCompositeProps) => {
     const {compositeId, compositeStore, store, handleBlur, handleChange, children} = props;
-
     const metadata = useMetadata() ?? {} as MetadataModel;
 
     const composite = compositeStore.composites[compositeId];
-    if (!composite) {
-        return <></>;
-    }
+    if (!composite) return null;
 
     const sectionMap = Object.fromEntries(
         composite.sections.map(section => [section.type, section])
     );
-
     const header = sectionMap[SheetCompositeSectionType.HEADER] ?? {} as BaseSectionModel;
 
     return (
         <Sheet modal={false}>
             <ArrowLeft/>
-
             <SheetContent
                 side="left"
-                style={{ width: `${metadata.width}px` }}
-                className="transition-transform duration-300 ease-in-out"
+                className="transition-transform duration-300 ease-in-out p-0 overflow-hidden"
+                style={{
+                    width: `${metadata.width}px`,
+                    height: '100vh'
+                }}
             >
                 <ArrowRight/>
-                <PanelHeader
-                    section={header}
-                    handleBlur={handleBlur}
-                    handleChange={handleChange}
-                    metadata={metadata}
-                    store={store}
-                />
-                <ScrollArea className="h-full w-full">
-                    <MetadataContext.Provider
-                        value={metadata}
-                    >
-                        <div className="flex flex-col gap-4 px-8 pb-8 pt-4">
-                            {children}
-                        </div>
-                    </MetadataContext.Provider>
-                </ScrollArea>
 
+                <div className="flex flex-col h-full">
+                    <div className="shrink-0">
+                        <PanelHeader
+                            section={header}
+                            handleBlur={handleBlur}
+                            handleChange={handleChange}
+                            metadata={metadata}
+                            store={store}
+                        />
+                    </div>
+
+                    <ScrollArea className="flex-1 w-full min-h-0">
+                        <MetadataContext.Provider value={metadata}>
+                            <div className="flex flex-col gap-4 px-8 pb-8 pt-4">
+                                {children}
+                            </div>
+                        </MetadataContext.Provider>
+                    </ScrollArea>
+                </div>
             </SheetContent>
         </Sheet>
     );
