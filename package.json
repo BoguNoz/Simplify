@@ -1,6 +1,6 @@
 {
   "name": "@bogunoz/simplify",
-  "version": "0.2.12",
+  "version": "0.2.13",
   "description": "Reactive form engine & modular UI components – MobX powered, Tailwind + Radix + Shadcn inspired",
   "author": "Bogusław Nozdryń",
   "license": "GPL-3.0 license",
