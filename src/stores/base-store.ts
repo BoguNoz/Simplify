@@ -177,7 +177,7 @@ export abstract class BaseStore {
 
                 const value = await this.getDataSource(field.id);
                 if (!isNullEmptyFalseOrUndefined(value) && field.fieldType !== BaseFieldTypesEnum.Select) {
-                    this.fields[field.id] = value;
+                    this.fields[field.id].value = value;
                 }
 
                 if (field.fieldType === BaseFieldTypesEnum.Button
