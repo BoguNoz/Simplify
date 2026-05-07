@@ -1,5 +1,5 @@
 import {BaseFieldModel, BaseFieldTypesEnum} from "@core/models";
-import {useCallback} from "react";
+import {useCallback, useEffect} from "react";
 import {observer} from "mobx-react-lite";
 import {BaseFieldInterface} from "@core/models/interfaces/base-field-interface";
 import {
@@ -63,6 +63,28 @@ const BaseField = observer((props: BaseFieldInterface) => {
 
     const isDisable = field.isDisabled || hardDisable;
     const type = hardTyping || field.fieldType
+
+    useEffect(() => {
+        if (!field || typeof field.deconstructor !== 'function') return;
+
+        const refreshValue = async () => {
+            const newValue = await store.getDataSource(fieldId);
+
+            if (newValue !== undefined) {
+                store.setFieldValue(fieldId, newValue);
+            }
+        };
+
+        const unsubscribe = field.deconstructor(() => {
+            refreshValue();
+        }) as unknown;
+
+        return () => {
+            if (typeof unsubscribe === 'function') {
+                unsubscribe();
+            }
+        };
+    }, [fieldId, store, field]);
 
     switch (type) {
         case BaseFieldTypesEnum.Input:
