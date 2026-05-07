@@ -144,17 +144,26 @@ const ChartComposite= composite((props: ChartCompositeProps) => {
     const lineChart = sectionMap[ChartCompositeSectionType.LINE_CHART] ?? {} as BaseSectionModel;
 
     useEffect(() => {
+        const field = lineChart.fields?.[0];
+        if (!field || typeof field.deconstructor !== 'function') return;
+
         const fetchData = async () => {
-            const data = await store.getDataSource(lineChart.fields[0]?.id);
-            setData(data);
+            const result = await store.getDataSource(field.id);
+            setData(result);
         };
 
         fetchData();
 
-        const handleStorageChange = () => fetchData();
-        return lineChart.fields[0].deconstructor(handleStorageChange);
+        const unsubscribe = field.deconstructor(() => {
+            fetchData();
+        }) as unknown;
 
-    });
+        return () => {
+            if (typeof unsubscribe === 'function') {
+                unsubscribe();
+            }
+        };
+    }, [lineChart, store]);
 
     return (
         <Card

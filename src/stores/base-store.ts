@@ -44,6 +44,7 @@ export abstract class BaseStore {
     fields: Record<string, BaseFieldModel> = {};
     operations: Record<string, BaseOperationFn[]> = {};
     reverseDeps: Record<string, Record<string, BaseDependencyFn[]>> = {};
+    private _subscribers: Record<string, Set<() => void>> = {};
     private readonly _changeRegistry: ChangeRegistry;
 
     constructor() {
@@ -286,6 +287,51 @@ export abstract class BaseStore {
                 fn(targetId, changedId, this);
             });
         });
+    }
+
+    /**
+     * Registers a subscriber callback for a specific field.
+     *
+     * @remarks
+     * - This method allows external components or services to listen for manual change notifications.
+     * - It is particularly useful for triggering updates when a field's data source is updated asynchronously
+     *   from outside the standard `setFieldValue` flow.
+     * - The method returns a cleanup function that should be called to prevent memory leaks.
+     *
+     * @param id - The unique identifier of the field to subscribe to.
+     * @param callback - The function to execute when the field is notified of a change.
+     *
+     * @returns {() => void} A deconstructor function to remove the subscription.
+     *
+     * @readonly
+     */
+    public readonly subscribeToField = (id: string, callback: () => void): () => void => {
+        if (!this._subscribers[id]) {
+            this._subscribers[id] = new Set();
+        }
+        this._subscribers[id].add(callback);
+
+        return () => {
+            this._subscribers[id].delete(callback);
+        };
+    }
+
+    /**
+     * Manually notifies all subscribers registered to a specific field.
+     *
+     * @remarks
+     * - Triggers all callbacks registered via `subscribeToField`.
+     * - Use this method after updating external data (e.g., after a successful API fetch)
+     *   to force reactive components like charts or complex composites to refresh their data.
+     *
+     * @param id - The unique identifier of the field whose subscribers should be notified.
+     *
+     * @readonly
+     */
+    public readonly notifyFieldChanged = (id: string): void => {
+        if (this._subscribers[id]) {
+            this._subscribers[id].forEach(callback => callback());
+        }
     }
     // #endregion Facade
 
