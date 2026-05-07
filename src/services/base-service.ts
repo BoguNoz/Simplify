@@ -39,16 +39,12 @@ export const createServiceClient = (baseUrl: string) => {
         endpoint: string,
         options: RequestOptions = {}
     ): Promise<T> {
-        const defaultHeaders: HeadersInit = {
-            "Content-Type": "application/json",
-        };
-
         const isFormData = options.body instanceof FormData;
 
         const config: RequestInit = {
             ...options,
             headers: {
-                ...(!isFormData ? defaultHeaders : {}),
+                ...(!isFormData ? { "Content-Type": "application/json" } : {}),
                 ...(options.headers || {}),
             },
         };
