@@ -15,6 +15,7 @@ export const mockBaseRegisteredFields = {
     baseSelector: "baseSelector",
     baseSwitch: "baseSwitch",
     baseToggle: "baseToggle",
+    dataTable: "dataTable",
 }
 
 const text = lang();
@@ -59,6 +60,33 @@ fields.baseSwitch.fieldType = BaseFieldTypesEnum.Switch;
 // #region BaseToggle
 fields.baseToggle.fieldType = BaseFieldTypesEnum.Toggle;
 // #endregion BaseToggle
+
+
+// #region BaseDataTable
+fields.dataTable.fieldType = BaseFieldTypesEnum.DataTable;
+fields.dataTable.dataSource = () => {
+    return [
+        {
+            id: "1",
+            name: "John Doe",
+            age: 28,
+            email: "john.doe@mail.com",
+        },
+        {
+            id: "2",
+            name: "Anna Kowalska",
+            age: 34,
+            email: "anna.kowalska@mail.com",
+        },
+        {
+            id: "3",
+            name: "Piotr Nowak",
+            age: 41,
+            email: "piotr.nowak@mail.com",
+        },
+    ];
+}
+// #endregion BaseDataTable
 
 export const mockFields = buildFields(fields);
 

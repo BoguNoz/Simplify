@@ -21,6 +21,7 @@ export * from "./layout/partials/BaseToggle";
 // Layout
 export * from "./layout/BaseField";
 export * from "./layout/FormField";
+export * from "./layout/partials/BaseDataTable"
 
 // UI
 export * from "./ui/accordion";
@@ -47,6 +48,7 @@ export * from "./ui/skeleton";
 export * from "./ui/sonner";
 export * from "./ui/spiner";
 export * from "./ui/switch";
+export * from "./ui/tabs";
 export * from "./ui/tabs";
 export * from "./ui/toggle";
 export * from "./ui/tooltip";

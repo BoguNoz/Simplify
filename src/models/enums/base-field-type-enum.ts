@@ -53,4 +53,10 @@ export enum BaseFieldTypesEnum {
      * @see createFieldPlaceholders
      */
     Toggle = "toggle",
+
+    /**
+     * @see BaseDataTable
+     * @see createFieldPlaceholders
+     */
+    DataTable = "dataTable"
 }

@@ -122,7 +122,7 @@ export enum ChartCompositeSectionType {
  * @see LineChart
  * @see LineChartCard
  */
-const ChartComposite= composite((props: ChartCompositeProps) => {
+const ChartComposite = composite((props: ChartCompositeProps) => {
     const {compositeId, compositeStore, store, handleBlur, handleChange,
         palette, labels, hasBorder, legends, smooth, showSymbols, grid, xAxis, yAxis, height, width} = props;
 
